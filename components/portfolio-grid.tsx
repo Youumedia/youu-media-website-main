@@ -149,8 +149,6 @@ export function PortfolioGrid() {
                         
                         <div className="w-24 h-24 bg-gradient-to-r from-[#BE55FF] to-[#70BFFF] rounded-2xl flex items-center justify-center mb-4 shadow-2xl relative z-10">
                           <Play className="h-12 w-12 text-white ml-1" />
-                          {/* Glow effect */}
-                          <div className="absolute inset-0 bg-gradient-to-r from-[#BE55FF] to-[#70BFFF] rounded-2xl blur-lg opacity-70"></div>
                         </div>
                     </div>
                     <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
@@ -234,10 +232,8 @@ export function PortfolioGrid() {
                     </div>
                     
                     <div className="flex flex-col items-center justify-center relative z-10">
-                      <div className="w-14 h-14 bg-gradient-to-r from-[#BE55FF] to-[#70BFFF] rounded-xl flex items-center justify-center mb-3 group-hover:scale-110 transition-transform duration-300 shadow-xl relative">
+                      <div className="w-14 h-14 bg-gradient-to-r from-[#BE55FF] to-[#70BFFF] rounded-xl flex items-center justify-center mb-3 group-hover:scale-110 transition-transform duration-300 shadow-xl">
                         <Play className="h-7 w-7 text-white ml-1" />
-                        {/* Glow effect */}
-                        <div className="absolute inset-0 bg-gradient-to-r from-[#BE55FF] to-[#70BFFF] rounded-xl blur-md opacity-60 group-hover:opacity-80 transition-opacity"></div>
                       </div>
                       <p className="text-white/90 text-sm font-medium">Video Coming Soon</p>
                     </div>
