@@ -74,8 +74,8 @@ export function ServicesSection() {
             ];
             
             return (
-              <Card
-                key={index}
+            <Card
+              key={index}
                 className={`group hover:shadow-2xl transition-all duration-500 border-2 border-transparent hover:border-gradient-to-r hover:from-[#BE55FF] hover:to-[#70BFFF] ${cardGradients[index]} relative overflow-hidden`}
               >
                 {/* Decorative background pattern */}
@@ -83,7 +83,7 @@ export function ServicesSection() {
                   <div className="absolute top-4 right-4 w-20 h-20 bg-gradient-to-br from-[#BE55FF] to-[#70BFFF] rounded-full blur-xl"></div>
                   <div className="absolute bottom-4 left-4 w-16 h-16 bg-gradient-to-tr from-[#70BFFF] to-[#BE55FF] rounded-full blur-lg"></div>
                 </div>
-                
+
                 <CardContent className="p-8 relative z-10">
                   <div className="mb-6">
                     <div className="w-16 h-16 bg-gradient-to-r from-[#BE55FF] to-[#70BFFF] animate-gradient-x rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-xl relative">
@@ -96,15 +96,15 @@ export function ServicesSection() {
                   </div>
 
                   <ul className="space-y-3">
-                    {service.features.map((feature, idx) => (
+                  {service.features.map((feature, idx) => (
                       <li key={idx} className="flex items-center text-sm text-gray-700 group-hover:text-gray-900 transition-colors">
                         <div className="w-2 h-2 bg-gradient-to-r from-[#BE55FF] to-[#70BFFF] rounded-full mr-3 shadow-sm" />
                         <span className="font-medium">{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </CardContent>
-              </Card>
+                    </li>
+                  ))}
+                </ul>
+              </CardContent>
+            </Card>
             );
           })}
         </div>

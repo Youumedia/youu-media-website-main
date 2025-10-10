@@ -31,10 +31,10 @@ export default function PrivacyPolicyPage() {
                 <section className="mb-8">
                   <h2 className="text-2xl font-bold text-gray-900 mb-4">1. Introduction</h2>
                   <p className="text-gray-700 leading-relaxed mb-4">
-                    This Privacy Policy explains how Youu Media ("we", "us", "our") collects, uses, and protects your
-                    information when you visit our website, make an enquiry, or work with us. By using our services, you
-                    agree to the practices described here.
-                  </p>
+              This Privacy Policy explains how Youu Media ("we", "us", "our") collects, uses, and protects your
+              information when you visit our website, make an enquiry, or work with us. By using our services, you
+              agree to the practices described here.
+            </p>
                   <p className="text-gray-700 leading-relaxed">
                     We are committed to protecting your privacy and personal data in accordance with the UK GDPR and Data Protection Act 2018.
                   </p>
@@ -97,7 +97,7 @@ export default function PrivacyPolicyPage() {
                         <li>Plan and execute videography and photography projects</li>
                         <li>Process payments and manage billing</li>
                         <li>Deliver final content and handle revisions</li>
-                      </ul>
+            </ul>
                     </div>
                     
                     <div>
@@ -107,7 +107,7 @@ export default function PrivacyPolicyPage() {
                         <li>Manage freelancer applications and relationships</li>
                         <li>Send service-related communications</li>
                         <li>Analyze website usage and performance</li>
-                      </ul>
+            </ul>
                     </div>
                     
                     <div>
@@ -150,7 +150,7 @@ export default function PrivacyPolicyPage() {
                         <li><strong>Analytics Cookies:</strong> Help us understand how visitors use our website</li>
                         <li><strong>Marketing Cookies:</strong> Used to deliver relevant advertisements (with consent)</li>
                         <li><strong>Preference Cookies:</strong> Remember your settings and preferences</li>
-                      </ul>
+            </ul>
                     </div>
                     <p className="text-gray-700 leading-relaxed">
                       You can control cookies through your browser settings. Note that disabling certain cookies may affect website functionality.
@@ -322,14 +322,14 @@ export default function PrivacyPolicyPage() {
                         </p>
                         <p className="text-gray-700 leading-relaxed">
                           <strong>Response Time:</strong> Within 30 days
-                        </p>
-                      </div>
+            </p>
+          </div>
                     </div>
                     <p className="text-gray-700 leading-relaxed mt-4 text-sm">
                       You also have the right to lodge a complaint with the Information Commissioner's Office (ICO) if you believe we have not handled your data appropriately.
                     </p>
-                  </div>
-                </section>
+        </div>
+      </section>
               </div>
             </CardContent>
           </Card>

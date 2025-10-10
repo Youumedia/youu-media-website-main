@@ -62,8 +62,8 @@ export function PortfolioPreview() {
             ];
             
             return (
-              <Card
-                key={item.id}
+            <Card
+              key={item.id}
                 className={`group overflow-hidden hover:shadow-2xl transition-all duration-500 border-2 border-transparent hover:border-gradient-to-r hover:from-[#BE55FF] hover:to-[#70BFFF] ${portfolioGradients[index]} relative`}
               >
                 {/* Decorative background pattern */}
@@ -82,28 +82,26 @@ export function PortfolioPreview() {
                     </div>
                     
                     <div className="flex flex-col items-center justify-center relative z-10">
-                      <div className="w-20 h-20 bg-gradient-to-r from-[#BE55FF] to-[#70BFFF] rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-2xl relative">
+                      <div className="w-20 h-20 bg-gradient-to-r from-[#BE55FF] to-[#70BFFF] rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-2xl">
                         <Play className="h-10 w-10 text-white ml-1" />
-                        {/* Glow effect */}
-                        <div className="absolute inset-0 bg-gradient-to-r from-[#BE55FF] to-[#70BFFF] rounded-2xl blur-lg opacity-60 group-hover:opacity-80 transition-opacity"></div>
                       </div>
                       <p className="text-white/90 text-base font-medium">Video Coming Soon</p>
                     </div>
                   </div>
                   
                   <div className="absolute top-4 right-4 bg-black/80 backdrop-blur-md px-3 py-2 rounded-lg text-white text-sm font-medium border border-white/20">
-                    {item.duration}
-                  </div>
-                  <div className="absolute top-4 left-4 bg-gradient-to-r from-[#BE55FF] to-[#70BFFF] backdrop-blur-md px-4 py-2 rounded-full text-white text-sm font-semibold shadow-lg">
-                    {item.category}
-                  </div>
+                  {item.duration}
                 </div>
+                  <div className="absolute top-4 left-4 bg-gradient-to-r from-[#BE55FF] to-[#70BFFF] backdrop-blur-md px-4 py-2 rounded-full text-white text-sm font-semibold shadow-lg">
+                  {item.category}
+                </div>
+              </div>
 
                 <CardContent className="p-8 relative z-10">
                   <h3 className="text-2xl font-bold mb-4 group-hover:bg-gradient-to-r group-hover:from-[#BE55FF] group-hover:to-[#70BFFF] group-hover:bg-clip-text group-hover:text-transparent transition-colors bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">{item.title}</h3>
                   <p className="text-gray-700 text-base text-pretty leading-relaxed">{item.description}</p>
-                </CardContent>
-              </Card>
+              </CardContent>
+            </Card>
             );
           })}
         </div>
