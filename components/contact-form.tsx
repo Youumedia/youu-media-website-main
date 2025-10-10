@@ -34,7 +34,7 @@ export function ContactForm() {
   }
 
   return (
-    <Card className="border-2 border-transparent hover:border-gradient-to-r hover:from-[#BE55FF] hover:to-[#70BFFF] bg-gradient-to-br from-blue-200 via-blue-100 to-indigo-200 relative overflow-hidden shadow-xl">
+    <Card className="border-2 border-transparent hover:border-gradient-to-r hover:from-[#BE55FF] hover:to-[#70BFFF] bg-gradient-to-br from-blue-200 via-blue-100 to-indigo-200 relative overflow-hidden shadow-xl h-fit">
       {/* Decorative background pattern */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute top-8 right-8 w-32 h-32 bg-gradient-to-br from-[#BE55FF] to-[#70BFFF] rounded-full blur-2xl"></div>

@@ -81,40 +81,42 @@ export function ContactInfo() {
         </div>
       </div>
 
-      <div>
-        <h3 className="text-2xl font-bold mb-6 bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">Business Information</h3>
-        <div className="space-y-6">
-          {businessInfo.map((info, index) => (
-            <div key={index} className="flex items-start gap-4">
-              <div className="w-10 h-10 bg-gradient-to-r from-[#BE55FF] to-[#70BFFF] rounded-xl flex items-center justify-center shadow-md relative flex-shrink-0 mt-1">
-                <info.icon className="h-5 w-5 text-white" />
-                <div className="absolute inset-0 bg-gradient-to-r from-[#BE55FF] to-[#70BFFF] rounded-xl blur-sm opacity-40"></div>
+      <div className="grid lg:grid-cols-2 gap-8">
+        <div>
+          <h3 className="text-2xl font-bold mb-6 bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">Business Information</h3>
+          <div className="space-y-6">
+            {businessInfo.map((info, index) => (
+              <div key={index} className="flex items-start gap-4">
+                <div className="w-10 h-10 bg-gradient-to-r from-[#BE55FF] to-[#70BFFF] rounded-xl flex items-center justify-center shadow-md relative flex-shrink-0 mt-1">
+                  <info.icon className="h-5 w-5 text-white" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-[#BE55FF] to-[#70BFFF] rounded-xl blur-sm opacity-40"></div>
+                </div>
+                <div>
+                  <h4 className="font-bold text-lg mb-2 text-gray-900">{info.title}</h4>
+                  <p className="text-gray-700 whitespace-pre-line leading-relaxed">{info.content}</p>
+                </div>
               </div>
-              <div>
-                <h4 className="font-bold text-lg mb-2 text-gray-900">{info.title}</h4>
-                <p className="text-gray-700 whitespace-pre-line leading-relaxed">{info.content}</p>
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
 
-      <Card className="bg-gradient-to-br from-rose-200 via-pink-100 to-fuchsia-200 border-2 border-transparent hover:border-gradient-to-r hover:from-[#BE55FF] hover:to-[#70BFFF] relative overflow-hidden shadow-xl">
-        {/* Decorative background pattern */}
-        <div className="absolute inset-0 opacity-15">
-          <div className="absolute top-4 right-4 w-24 h-24 bg-gradient-to-br from-[#BE55FF] to-[#70BFFF] rounded-full blur-2xl"></div>
-          <div className="absolute bottom-4 left-4 w-20 h-20 bg-gradient-to-tr from-[#70BFFF] to-[#BE55FF] rounded-full blur-xl"></div>
-        </div>
-        
-        <CardContent className="p-8 relative z-10">
-          <h3 className="font-bold text-2xl mb-4 bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">Free Consultation</h3>
-          <p className="text-gray-700 mb-6 leading-relaxed text-lg">
-            Not sure which service is right for you? Schedule a free 30-minute consultation to discuss your project and
-            get expert recommendations.
-          </p>
-          <p className="font-bold bg-gradient-to-r from-[#BE55FF] to-[#70BFFF] bg-clip-text text-transparent">No obligation • Expert advice • Custom solutions</p>
-        </CardContent>
-      </Card>
+        <Card className="bg-gradient-to-br from-rose-200 via-pink-100 to-fuchsia-200 border-2 border-transparent hover:border-gradient-to-r hover:from-[#BE55FF] hover:to-[#70BFFF] relative overflow-hidden shadow-xl h-fit">
+          {/* Decorative background pattern */}
+          <div className="absolute inset-0 opacity-15">
+            <div className="absolute top-4 right-4 w-24 h-24 bg-gradient-to-br from-[#BE55FF] to-[#70BFFF] rounded-full blur-2xl"></div>
+            <div className="absolute bottom-4 left-4 w-20 h-20 bg-gradient-to-tr from-[#70BFFF] to-[#BE55FF] rounded-full blur-xl"></div>
+          </div>
+          
+          <CardContent className="p-8 relative z-10">
+            <h3 className="font-bold text-2xl mb-4 bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">Free Consultation</h3>
+            <p className="text-gray-700 mb-6 leading-relaxed text-lg">
+              Not sure which service is right for you? Schedule a free 30-minute consultation to discuss your project and
+              get expert recommendations.
+            </p>
+            <p className="font-bold bg-gradient-to-r from-[#BE55FF] to-[#70BFFF] bg-clip-text text-transparent">No obligation • Expert advice • Custom solutions</p>
+          </CardContent>
+        </Card>
+      </div>
     </div>
   )
 }
