@@ -106,13 +106,13 @@ This application was submitted through the Youu Media website.
       `
 
       // 3️⃣ Send email notification
-      const data = new FormData()
-      data.append("summary", emailContent)
-      formData.files.forEach((file) => data.append("files", file))
+      const emailFormData = new FormData()
+      emailFormData.append("summary", emailContent)
+      formData.files.forEach((file) => emailFormData.append("files", file))
 
       const res = await fetch("/api/send-application", {
         method: "POST",
-        body: data,
+        body: emailFormData,
       })
 
       if (!res.ok) {
