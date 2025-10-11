@@ -49,7 +49,7 @@ export function FreelancerApplicationForm() {
       console.log("Supabase Key:", process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ? "Set" : "Missing")
       
       // 1️⃣ Save to Supabase database
-      const { data, error } = await supabase.from("FreelancerApplications").insert([
+      const { data, error } = await supabase.from("freelancer_applications").insert([
         {
           full_name: formData.fullName,
           email: formData.email,
