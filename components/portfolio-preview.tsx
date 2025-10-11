@@ -57,8 +57,10 @@ export function PortfolioPreview() {
         <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-8 mb-12">
           {portfolioItems.map((item, index) => {
             const portfolioGradients = [
-              "bg-gradient-to-br from-blue-200 via-purple-100 to-pink-200",
-              "bg-gradient-to-br from-purple-200 via-pink-100 to-blue-200"
+              "bg-gradient-to-br from-purple-200 via-pink-100 to-blue-200",
+              "bg-gradient-to-br from-blue-200 via-indigo-100 to-purple-200",
+              "bg-gradient-to-br from-purple-200 via-pink-100 to-blue-200",
+              "bg-gradient-to-br from-blue-200 via-indigo-100 to-purple-200"
             ];
             
             return (
@@ -82,8 +84,10 @@ export function PortfolioPreview() {
                     </div>
                     
                     <div className="flex flex-col items-center justify-center relative z-10">
-                      <div className="w-20 h-20 bg-gradient-to-r from-[#BE55FF] to-[#70BFFF] rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-2xl">
+                      <div className="w-20 h-20 bg-gradient-to-r from-[#BE55FF] to-[#70BFFF] rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-2xl relative">
                         <Play className="h-10 w-10 text-white ml-1" />
+                        {/* Glow effect */}
+                        <div className="absolute inset-0 bg-gradient-to-r from-[#BE55FF] to-[#70BFFF] rounded-2xl blur-lg opacity-60 group-hover:opacity-80 transition-opacity"></div>
                       </div>
                       <p className="text-white/90 text-base font-medium">Video Coming Soon</p>
                     </div>
