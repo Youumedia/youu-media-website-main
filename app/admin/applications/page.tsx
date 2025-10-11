@@ -153,7 +153,7 @@ export default function AdminApplicationsPage() {
   }
 
   return (
-    <main className="min-h-screen bg-gray-50">
+    <main className="min-h-screen bg-slate-50">
       <Navigation />
       <div className="pt-20">
         <section className="py-16">

@@ -29,7 +29,7 @@ export default function SignUpPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4">
+    <div className="min-h-screen flex items-center justify-center px-4 bg-slate-50">
       <form onSubmit={handleSignUp} className="w-full max-w-md space-y-4">
         <div>
           <Label htmlFor="email">Email</Label>

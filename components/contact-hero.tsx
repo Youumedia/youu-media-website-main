@@ -1,6 +1,6 @@
 export function ContactHero() {
   return (
-    <section className="pt-24 pb-16 bg-gradient-to-br from-primary/5 via-background to-secondary/5">
+    <section className="pt-24 pb-16 bg-slate-50">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-balance">
           Let's Create Something

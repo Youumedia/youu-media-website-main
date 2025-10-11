@@ -47,7 +47,7 @@ export default function ProfilePage() {
   }
 
   return (
-    <main className="min-h-screen py-16 max-w-2xl mx-auto px-4">
+    <main className="min-h-screen py-16 max-w-2xl mx-auto px-4 bg-slate-50">
       {isDevMode() && (
         <div className="mb-4 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
           <p className="text-sm font-semibold text-yellow-800">🔧 Development Mode Active</p>

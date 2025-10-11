@@ -25,10 +25,9 @@ const stats = [
 
 export function StatsSection() {
   return (
-    <section className="pb-24 bg-gradient-to-br from-primary/5 via-background to-secondary/5">
+    <section className="pb-24 bg-slate-50">
       <div className="w-full h-3 bg-gradient-brand relative overflow-hidden mb-16">
         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-pulse"></div>
-        <div className="absolute inset-0 bg-gradient-brand animate-gradient-x"></div>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

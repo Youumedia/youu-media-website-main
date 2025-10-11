@@ -4,7 +4,8 @@ import Link from "next/link"
 
 export function CTASection() {
   return (
-    <section className="py-24 bg-gradient-to-r from-primary to-secondary">
+    <section className="py-24 bg-gradient-to-r from-primary to-secondary relative overflow-hidden">
+      <div className="absolute top-0 left-0 w-full h-3 bg-white/20 animate-gradient-x"></div>
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 text-balance">
           Ready to Create Something

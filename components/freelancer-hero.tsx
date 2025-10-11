@@ -27,7 +27,8 @@ const highlights = [
 
 export function FreelancerHero() {
   return (
-    <section className="pt-24 pb-16 bg-gradient-to-br from-primary/5 via-background to-secondary/5">
+    <section className="pt-24 pb-16 bg-slate-50 relative overflow-hidden">
+      <div className="absolute top-0 left-0 w-full h-3 bg-gradient-brand animate-gradient-x"></div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-balance">

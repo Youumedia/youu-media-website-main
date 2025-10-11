@@ -57,7 +57,8 @@ export function JobBoardBasic() {
   };
 
   return (
-    <section className="py-20 bg-white">
+    <section className="py-20 bg-slate-50 relative overflow-hidden">
+      <div className="absolute top-0 left-0 w-full h-3 bg-gradient-brand animate-gradient-x"></div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900">

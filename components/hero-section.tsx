@@ -6,7 +6,7 @@ import Link from "next/link"
 
 export function HeroSection() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-50 via-white to-blue-50">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-slate-50">
       {/* Enhanced animated background elements */}
       <div className="absolute inset-0 overflow-hidden">
         {/* Large primary blob - more prominent */}

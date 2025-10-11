@@ -72,7 +72,7 @@ export default async function DashboardPage() {
   }))
 
   return (
-    <main className="min-h-screen py-16 relative overflow-hidden bg-gradient-to-br from-slate-50 via-white to-blue-50">
+    <main className="min-h-screen py-16 relative overflow-hidden bg-slate-50">
       {/* Enhanced animated background elements */}
       <div className="absolute inset-0 overflow-hidden">
         {/* Large primary blob */}

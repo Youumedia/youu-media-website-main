@@ -11,7 +11,8 @@ const highlights = [
 
 export function ServicesHero() {
   return (
-    <section className="pt-24 pb-16 bg-gradient-to-br from-primary/5 via-background to-secondary/5">
+    <section className="pt-24 pb-16 bg-slate-50 relative overflow-hidden">
+      <div className="absolute top-0 left-0 w-full h-3 bg-gradient-brand animate-gradient-x"></div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div>

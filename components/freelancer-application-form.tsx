@@ -9,7 +9,7 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { useToast } from "@/hooks/use-toast"
-import { Users, Briefcase, Mail, Send } from "lucide-react"
+import { Users, Briefcase, Mail, Send, CheckCircle } from "lucide-react"
 import supabase from "@/lib/supabase"
 
 const availabilityOptions = ["Full-time", "Part-time", "Project-based", "Weekends only", "Flexible"]
@@ -17,6 +17,7 @@ const availabilityOptions = ["Full-time", "Part-time", "Project-based", "Weekend
 export function FreelancerApplicationForm() {
   const { toast } = useToast()
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitSuccess, setSubmitSuccess] = useState(false)
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -43,8 +44,12 @@ export function FreelancerApplicationForm() {
     setIsSubmitting(true)
 
     try {
+      console.log("Submitting form data:", formData)
+      console.log("Supabase URL:", process.env.NEXT_PUBLIC_SUPABASE_URL ? "Set" : "Missing")
+      console.log("Supabase Key:", process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ? "Set" : "Missing")
+      
       // 1️⃣ Save to Supabase database
-      const { error } = await supabase.from("FreelancerApplications").insert([
+      const { data, error } = await supabase.from("FreelancerApplications").insert([
         {
           full_name: formData.fullName,
           email: formData.email,
@@ -64,11 +69,13 @@ export function FreelancerApplicationForm() {
         console.error("Supabase insert error:", error.message)
         toast({
           title: "Error",
-          description: "Could not save application to the database.",
+          description: `Could not save application to the database: ${error.message}`,
           variant: "destructive",
         })
         return
       }
+      
+      console.log("Successfully saved to Supabase:", data)
 
       // 2️⃣ Build email content
       const emailContent = `
@@ -112,26 +119,30 @@ This application was submitted through the Youu Media website.
         throw new Error("Failed to submit application via email")
       }
 
-      // 4️⃣ Show success toast
+      // 4️⃣ Show success toast and update state
+      setSubmitSuccess(true)
       toast({
-        title: "Application submitted",
+        title: "Application submitted successfully!",
         description: "Thanks! We'll review your application and get back to you.",
       })
 
-      // 5️⃣ Reset form
-      setFormData({
-        fullName: "",
-        email: "",
-        phone: "",
-        portfolioLink: "",
-        skillsText: "",
-        availability: "",
-        experience: "",
-        aboutYou: "",
-        equipment: "",
-        rates: "",
-        files: [],
-      })
+      // 5️⃣ Reset form after a delay
+      setTimeout(() => {
+        setFormData({
+          fullName: "",
+          email: "",
+          phone: "",
+          portfolioLink: "",
+          skillsText: "",
+          availability: "",
+          experience: "",
+          aboutYou: "",
+          equipment: "",
+          rates: "",
+          files: [],
+        })
+        setSubmitSuccess(false)
+      }, 3000)
     } catch (error) {
       console.error("Application error:", error)
       toast({
@@ -145,7 +156,7 @@ This application was submitted through the Youu Media website.
   }
 
   return (
-    <section className="py-20 px-4">
+    <section className="py-20 px-4 bg-slate-50">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12">
@@ -322,10 +333,19 @@ This application was submitted through the Youu Media website.
                   type="submit"
                   size="lg"
                   disabled={isSubmitting}
-                  className="w-full bg-gradient-to-r from-[#70BFFF] to-[#BE55FF] animate-gradient-x hover:opacity-90 transition-opacity"
+                  className={`w-full transition-opacity ${
+                    submitSuccess 
+                      ? "bg-green-600 hover:bg-green-700" 
+                      : "bg-gradient-to-r from-[#70BFFF] to-[#BE55FF] animate-gradient-x hover:opacity-90"
+                  }`}
                 >
                   {isSubmitting ? (
                     "Submitting..."
+                  ) : submitSuccess ? (
+                    <>
+                      <CheckCircle className="mr-2 h-5 w-5" />
+                      Application Sent!
+                    </>
                   ) : (
                     <>
                       <Send className="mr-2 h-5 w-5" />

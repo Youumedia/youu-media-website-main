@@ -41,7 +41,7 @@ export default function SignInPage() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center px-4 relative overflow-hidden bg-gradient-to-br from-slate-50 via-white to-blue-50">
+    <div className="min-h-screen flex flex-col items-center justify-center px-4 relative overflow-hidden bg-slate-50">
       {/* Enhanced animated background elements */}
       <div className="absolute inset-0 overflow-hidden">
         {/* Large primary blob */}

@@ -45,7 +45,7 @@ const values = [
 
 export function ServicesSection() {
   return (
-    <section className="py-24 bg-muted/30 relative overflow-hidden">
+    <section className="py-24 bg-slate-50 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-r from-brandBlue/10 to-brandPurple/10 animate-gradient-x"></div>
 
       <div className="absolute top-0 left-0 w-full h-3 bg-gradient-brand animate-gradient-x"></div>

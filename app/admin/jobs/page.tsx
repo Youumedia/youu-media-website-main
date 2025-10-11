@@ -200,7 +200,7 @@ export default function AdminJobsPage() {
     <main className="min-h-screen">
       <Navigation />
       <div className="pt-20">
-        <section className="py-16 bg-gray-50">
+        <section className="py-16 bg-slate-50">
       <div className="container mx-auto px-4">
         {isDevMode() && (
           <div className="mb-6 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
