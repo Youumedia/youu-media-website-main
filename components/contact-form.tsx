@@ -22,11 +22,62 @@ export function ContactForm() {
     date: "",
     message: "",
   })
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle")
+  const [referenceNumber, setReferenceNumber] = useState("")
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // Handle form submission
-    console.log("Form submitted:", formData)
+    setIsSubmitting(true)
+    setSubmitStatus("idle")
+
+    try {
+      const response = await fetch("/api/projects", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          clientName: formData.name,
+          clientEmail: formData.email,
+          clientPhone: formData.phone,
+          projectName: formData.company ? `${formData.company} - ${formData.service}` : formData.service,
+          projectType: formData.service,
+          projectDescription: formData.message,
+          budgetRange: formData.budget,
+          expectedCompletionDate: formData.date,
+          requirements: [], // Can be expanded later
+          specialRequests: formData.message,
+          teamSize: 1 // Default, can be expanded later
+        }),
+      })
+
+      const result = await response.json()
+
+      if (response.ok && result.success) {
+        setSubmitStatus("success")
+        setReferenceNumber(result.project.referenceNumber)
+        
+        // Reset form
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          company: "",
+          service: "",
+          budget: "",
+          date: "",
+          message: "",
+        })
+      } else {
+        setSubmitStatus("error")
+      }
+    } catch (error) {
+      console.error("Form submission error:", error)
+      setSubmitStatus("error")
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const handleChange = (field: string, value: string) => {
@@ -161,10 +212,64 @@ export function ContactForm() {
             />
           </div>
 
-          <Button type="submit" size="lg" className="w-full group bg-gradient-to-r from-[#BE55FF] to-[#70BFFF] hover:opacity-90 text-white py-4 text-lg font-semibold rounded-xl shadow-xl">
-            <Send className="mr-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-            Send Project Inquiry
+          <Button 
+            type="submit" 
+            size="lg" 
+            disabled={isSubmitting}
+            className="w-full group bg-gradient-to-r from-[#BE55FF] to-[#70BFFF] hover:opacity-90 text-white py-4 text-lg font-semibold rounded-xl shadow-xl disabled:opacity-50"
+          >
+            {isSubmitting ? (
+              <>
+                <div className="mr-2 h-5 w-5 animate-spin rounded-full border-2 border-white border-t-transparent" />
+                Creating Project...
+              </>
+            ) : (
+              <>
+                <Send className="mr-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                Send Project Inquiry
+              </>
+            )}
           </Button>
+
+          {/* Success Message */}
+          {submitStatus === "success" && (
+            <div className="mt-6 p-4 bg-green-50 border border-green-200 rounded-lg">
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+                  <Send className="h-4 w-4 text-green-600" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-green-900">Project Created Successfully!</h3>
+                  <p className="text-green-700 text-sm mt-1">
+                    Your project has been created with reference number: 
+                    <span className="font-mono font-bold ml-2 bg-green-100 px-2 py-1 rounded">
+                      {referenceNumber}
+                    </span>
+                  </p>
+                  <p className="text-green-600 text-sm mt-2">
+                    Save this reference number to track your project status. You can check your project progress at any time using this number.
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Error Message */}
+          {submitStatus === "error" && (
+            <div className="mt-6 p-4 bg-red-50 border border-red-200 rounded-lg">
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center">
+                  <Send className="h-4 w-4 text-red-600" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-red-900">Submission Failed</h3>
+                  <p className="text-red-700 text-sm mt-1">
+                    There was an error creating your project. Please try again or contact us directly.
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
         </form>
       </CardContent>
     </Card>

@@ -31,6 +31,9 @@ export function Navigation() {
             <Link href="/freelancers" className="text-foreground hover:text-primary transition-colors">
               For Freelancers
             </Link>
+            <Link href="/check-status" className="text-foreground hover:text-primary transition-colors">
+              Check Project Status
+            </Link>
             <Link href="/signin" className="text-foreground hover:text-primary transition-colors">
               Sign In
             </Link>
@@ -81,6 +84,13 @@ export function Navigation() {
                 onClick={() => setIsOpen(false)}
               >
                 For Freelancers
+              </Link>
+              <Link
+                href="/check-status"
+                className="block px-3 py-2 text-foreground hover:text-primary transition-colors"
+                onClick={() => setIsOpen(false)}
+              >
+                Check Project Status
               </Link>
               <Link
                 href="/signin"
