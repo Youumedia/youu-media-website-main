@@ -8,7 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Calendar, MapPin, PoundSterling, Clock, Users, Upload, FileText, Image as ImageIcon, Video, Download, Eye } from "lucide-react"
+import { Calendar, MapPin, PoundSterling, Clock, Users, Upload, FileText, Image as ImageIcon, Video, Download, Eye, Home } from "lucide-react"
 
 type Job = {
   id: string
@@ -77,10 +77,10 @@ export default async function DashboardPage() {
       <div className="absolute inset-0 overflow-hidden">
         {/* Large primary blob */}
         <div className="absolute top-1/4 left-1/3 w-[32rem] h-[32rem] bg-gradient-to-br from-[#70BFFF]/40 to-[#BE55FF]/30 rounded-full blur-3xl animate-float-slow shadow-2xl" />
-        
+
         {/* Medium secondary blob */}
         <div className="absolute top-2/3 right-1/4 w-80 h-80 bg-gradient-to-tl from-[#BE55FF]/50 to-[#70BFFF]/40 rounded-full blur-2xl animate-float-medium shadow-xl" />
-        
+
         {/* Small accent blobs */}
         <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-gradient-to-r from-[#70BFFF]/35 to-[#BE55FF]/35 rounded-full blur-xl animate-float-fast shadow-lg" />
         <div className="absolute top-1/6 right-1/3 w-48 h-48 bg-gradient-to-bl from-[#BE55FF]/45 to-[#70BFFF]/35 rounded-full blur-lg animate-drift-slow shadow-lg" />
@@ -104,7 +104,15 @@ export default async function DashboardPage() {
         </div>
         
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-8 gap-4">
-          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Freelancer Dashboard</h1>
+          <div className="flex items-center gap-4">
+            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Dashboard</h1>
+            <Link href="/" className="text-gray-600 hover:text-gray-900 transition-colors">
+              <Button variant="outline" size="sm" className="bg-white border-gray-300 text-gray-900 hover:bg-gray-50">
+                <Home className="h-4 w-4 mr-2" />
+                Back to Site
+              </Button>
+            </Link>
+          </div>
           <div className="flex gap-3">
             <Link href="/profile">
               <Button variant="outline" className="text-sm bg-white border-gray-300 text-gray-900 hover:bg-gray-50">Profile</Button>
@@ -141,7 +149,7 @@ export default async function DashboardPage() {
               <p className="text-gray-600">Browse and apply to available freelance opportunities</p>
             </div>
 
-            <div className="grid lg:grid-cols-2 gap-8">
+        <div className="grid lg:grid-cols-2 gap-8">
               {list.map((job, index) => {
                 const dashboardGradients = [
                   "bg-gradient-to-br from-blue-200 via-blue-100 to-indigo-200",
@@ -165,43 +173,43 @@ export default async function DashboardPage() {
                           <div className="flex items-center gap-3 mb-4">
                             <Badge className="bg-gradient-to-r from-[#BE55FF] to-[#70BFFF] text-white px-3 py-1 shadow-sm">{job.type}</Badge>
                             <Badge className={`${urgencyColors[job.urgency]} px-3 py-1 font-semibold`}>{job.urgency} priority</Badge>
-                          </div>
-                        </div>
-                      </div>
+                    </div>
+                  </div>
+                </div>
                       <div className="grid grid-cols-2 gap-4 text-gray-700 font-medium">
                         <div className="flex items-center gap-2"><MapPin className="h-5 w-5 text-[#70BFFF]" /><span>{job.location}</span></div>
                         <div className="flex items-center gap-2"><Calendar className="h-5 w-5 text-[#70BFFF]" /><span>{job.date}</span></div>
                         <div className="flex items-center gap-2"><Clock className="h-5 w-5 text-[#70BFFF]" /><span>{job.duration}</span></div>
                         <div className="flex items-center gap-2"><PoundSterling className="h-5 w-5 text-[#70BFFF]" /><span>{job.budget}</span></div>
-                      </div>
-                    </CardHeader>
+                </div>
+              </CardHeader>
                     <CardContent className="relative z-10">
                       <p className="text-gray-700 mb-6 text-pretty leading-relaxed">{job.description}</p>
-                      {job.requirements?.length ? (
+                {job.requirements?.length ? (
                         <div className="mb-6">
                           <h4 className="font-bold mb-3 text-gray-900 text-lg">Requirements:</h4>
                           <ul className="text-gray-700 space-y-2">
-                            {job.requirements.map((req, i) => (
-                              <li key={i} className="flex items-center">
+                      {job.requirements.map((req, i) => (
+                        <li key={i} className="flex items-center">
                                 <div className="w-2 h-2 bg-gradient-to-r from-[#BE55FF] to-[#70BFFF] rounded-full mr-3 shadow-sm" />
                                 <span className="font-medium">{req}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      ) : null}
-                      <div className="flex items-center justify-between">
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ) : null}
+                <div className="flex items-center justify-between">
                         <div className="flex items-center gap-2 text-gray-700 font-medium">
                           <Users className="h-5 w-5 text-[#70BFFF]" />
-                          <span>Team size: {job.team_size}</span>
-                        </div>
-                        <form action="/api/applications" method="post">
-                          <input type="hidden" name="job_id" value={job.id} />
+                    <span>Team size: {job.team_size}</span>
+                  </div>
+                  <form action="/api/applications" method="post">
+                    <input type="hidden" name="job_id" value={job.id} />
                           <Button type="submit" className="bg-gradient-to-r from-[#BE55FF] to-[#70BFFF] hover:opacity-90 text-white px-6 py-3 font-semibold rounded-xl shadow-lg">Apply Now</Button>
-                        </form>
-                      </div>
-                    </CardContent>
-                  </Card>
+                  </form>
+                </div>
+              </CardContent>
+            </Card>
                 );
               })}
             </div>
@@ -442,7 +450,7 @@ export default async function DashboardPage() {
                   </div>
                 </CardContent>
               </Card>
-            </div>
+        </div>
           </TabsContent>
         </Tabs>
       </div>

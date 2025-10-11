@@ -30,6 +30,7 @@ export default function SignInPage() {
         setError(error.message)
         return
       }
+      // Automatically redirect to dashboard after successful sign in
       router.push("/dashboard")
     } catch (err) {
       setError("Authentication service is not available. Please check your configuration.")
