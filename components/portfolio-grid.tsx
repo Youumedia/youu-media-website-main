@@ -147,7 +147,7 @@ export function PortfolioGrid() {
                           <div className="absolute bottom-1/3 right-1/3 w-32 h-32 bg-gradient-to-l from-[#70BFFF] to-[#BE55FF] rounded-full blur-2xl animate-pulse"></div>
                         </div>
                         
-                        <div className="w-24 h-24 bg-gradient-to-r from-[#BE55FF] to-[#70BFFF] rounded-2xl flex items-center justify-center mb-4 shadow-2xl relative z-10">
+                        <div className="w-24 h-24 bg-gradient-to-r from-[#BE55FF] to-[#70BFFF] rounded-2xl flex items-center justify-center mb-4 shadow-2xl relative z-10 group-hover:opacity-0 transition-opacity duration-300">
                           <Play className="h-12 w-12 text-white ml-1" />
                         </div>
                     </div>
