@@ -1,171 +1,66 @@
-import { NextRequest, NextResponse } from "next/server"
-import { createSupabaseServerClient } from "@/lib/supabase"
+import { NextResponse } from "next/server";
 
-export async function POST(request: NextRequest) {
+export async function POST(req: Request) {
+  const body = await req.json();
+
   try {
-    const supabase = createSupabaseServerClient({
-      get: (name: string) => request.cookies.get(name),
-      set: (name, value, options) => {
-        // For server-side, we'll just return the response without setting cookies
-      },
-      remove: (name, options) => {
-        // For server-side, we'll just return the response without removing cookies
-      },
-    })
+    // Map form data to database column names
+    const projectData = {
+      client_name: body.clientName,
+      client_email: body.clientEmail,
+      client_phone: body.clientPhone,
+      project_name: body.projectName,
+      project_type: body.projectType,
+      project_description: body.projectDescription,
+      budget_range: body.budgetRange,
+      expected_completion_date: body.expectedCompletionDate,
+      requirements: body.requirements || [],
+      special_requests: body.specialRequests,
+      team_size: body.teamSize || 1,
+      status: "new",
+    };
 
-    const body = await request.json()
-    const {
-      clientName,
-      clientEmail,
-      clientPhone,
-      projectName,
-      projectType,
-      projectDescription,
-      location,
-      budgetRange,
-      expectedCompletionDate,
-      requirements,
-      specialRequests,
-      teamSize
-    } = body
-
-    // Validate required fields
-    if (!clientName || !clientEmail || !projectName || !projectType) {
-      return NextResponse.json(
-        { error: "Missing required fields" },
-        { status: 400 }
-      )
-    }
-
-    // Generate reference number
-    const { data: referenceNumber, error: refError } = await supabase
-      .rpc('generate_reference_number')
-
-    if (refError) {
-      console.error("Reference number generation error:", refError)
-      return NextResponse.json(
-        { error: "Failed to generate reference number" },
-        { status: 500 }
-      )
-    }
-
-    // Create the project
-    const { data: project, error } = await supabase
-      .from("projects")
-      .insert({
-        reference_number: referenceNumber,
-        client_name: clientName,
-        client_email: clientEmail,
-        client_phone: clientPhone,
-        project_name: projectName,
-        project_type: projectType,
-        project_description: projectDescription,
-        location: location,
-        budget_range: budgetRange,
-        expected_completion_date: expectedCompletionDate,
-        requirements: requirements,
-        special_requests: specialRequests,
-        team_size: teamSize,
-        current_status: 'quote_requested'
-      })
-      .select()
-      .single()
-
-    if (error) {
-      console.error("Database error:", error)
-      return NextResponse.json(
-        { error: "Failed to create project" },
-        { status: 500 }
-      )
-    }
-
-    // Send confirmation email (you can implement this later)
-    // await sendProjectConfirmationEmail(project)
-
-    return NextResponse.json({
-      success: true,
-      project: {
-        referenceNumber: project.reference_number,
-        clientName: project.client_name,
-        projectName: project.project_name,
-        currentStatus: project.current_status,
-        createdAt: project.created_at
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/project_inquiries?select=reference_number`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          apikey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+          Authorization: `Bearer ${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!}`,
+          Prefer: "return=representation",
+        },
+        body: JSON.stringify(projectData),
       }
-    })
+    );
 
-  } catch (error) {
-    console.error("API error:", error)
-    return NextResponse.json(
-      { error: "Internal server error" },
-      { status: 500 }
-    )
-  }
-}
-
-export async function GET(request: NextRequest) {
-  try {
-    const supabase = createSupabaseServerClient({
-      get: (name: string) => request.cookies.get(name),
-      set: (name, value, options) => {
-        // For server-side, we'll just return the response without setting cookies
-      },
-      remove: (name, options) => {
-        // For server-side, we'll just return the response without removing cookies
-      },
-    })
-
-    const { searchParams } = new URL(request.url)
-    const status = searchParams.get('status')
-    const limit = parseInt(searchParams.get('limit') || '50')
-    const offset = parseInt(searchParams.get('offset') || '0')
-
-    let query = supabase
-      .from("projects")
-      .select(`
-        id,
-        reference_number,
-        client_name,
-        project_name,
-        project_type,
-        current_status,
-        location,
-        budget_range,
-        start_date,
-        expected_completion_date,
-        created_at,
-        updated_at
-      `)
-      .order('created_at', { ascending: false })
-      .range(offset, offset + limit - 1)
-
-    if (status) {
-      query = query.eq('current_status', status)
-    }
-
-    const { data: projects, error } = await query
-
-    if (error) {
-      console.error("Database error:", error)
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error("Supabase error:", errorText);
       return NextResponse.json(
-        { error: "Failed to fetch projects" },
+        { error: "Failed to submit project", details: errorText },
         { status: 500 }
-      )
+      );
     }
 
-    return NextResponse.json({
-      projects: projects || [],
-      pagination: {
-        limit,
-        offset,
-        hasMore: (projects || []).length === limit
-      }
-    })
+    const result = await response.json();
+    const project = result[0];
 
-  } catch (error) {
-    console.error("API error:", error)
     return NextResponse.json(
-      { error: "Internal server error" },
+      {
+        success: true,
+        message: "Project inquiry submitted successfully!",
+        project: {
+          referenceNumber: project.reference_number,
+        },
+      },
+      { status: 200 }
+    );
+  } catch (err) {
+    console.error("Server error:", err);
+    return NextResponse.json(
+      { error: "Internal server error", details: String(err) },
       { status: 500 }
-    )
+    );
   }
 }

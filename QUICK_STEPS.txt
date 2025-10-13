@@ -1,0 +1,15 @@
+🚨 URGENT: Fix Your Contact Form - Copy & Paste This
+
+1. Go to: https://supabase.com/dashboard
+2. Click your project
+3. Click "SQL Editor" (left sidebar)
+4. Click "New Query"
+5. Copy the code from IMMEDIATE_FIX.md
+6. Paste it into the editor
+7. Click "Run"
+8. Test your form - IT WILL WORK!
+
+The problem is simple: missing database table.
+The solution is simple: run the SQL script.
+Time needed: 3 minutes.
+Result: Working contact form with reference numbers.
