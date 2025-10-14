@@ -125,6 +125,12 @@ export function FreelancerApplicationForm() {
             about_you: formData.aboutYou,
             equipment_software: formData.equipment,
             day_rate: formData.rates,
+            uploaded_files: JSON.stringify(formData.files.map(file => ({
+              name: file.name,
+              size: file.size,
+              type: file.type,
+              lastModified: file.lastModified
+            }))),
             created_at: new Date(),
           },
         ]);
