@@ -112,7 +112,7 @@ export function FreelancerApplicationForm() {
 
       // 1️⃣ Save to Supabase database
       const { data, error } = await supabase
-        .from("freelancer_applications")
+        .from("FreelancerApplications")
         .insert([
           {
             full_name: formData.fullName,
