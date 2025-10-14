@@ -194,8 +194,36 @@ This application was submitted through the Youu Media website.
   };
 
   return (
-    <section className="py-20 px-4">
-      <div className="max-w-4xl mx-auto">
+    <>
+      <style jsx>{`
+        /* Intense rotating gradient border */
+        @keyframes rotate-border {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+        
+        .rotating-border {
+          animation: rotate-border 3s linear infinite;
+        }
+        
+        .border-glow {
+          filter: drop-shadow(0 0 20px rgba(147, 51, 234, 0.5)) 
+                  drop-shadow(0 0 40px rgba(59, 130, 246, 0.5));
+        }
+        
+        .bg-gradient-conic {
+          background: conic-gradient(
+            from 0deg,
+            #9333ea 0deg,
+            #3b82f6 90deg,
+            #9333ea 180deg,
+            #3b82f6 270deg,
+            #9333ea 360deg
+          );
+        }
+      `}</style>
+      <section className="py-20 px-4">
+        <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12">
           <div className="relative">
@@ -222,9 +250,9 @@ This application was submitted through the Youu Media website.
         </div>
 
         {/* Application Form */}
-        <div className="relative p-[9px] rounded-lg overflow-hidden">
-          {/* Animated gradient border - rich purple to blue */}
-          <div className="absolute inset-0 bg-gradient-to-r from-purple-600 via-blue-600 via-purple-500 via-blue-500 to-purple-600 bg-[length:300%_300%] animate-gradient-x rounded-lg"></div>
+        <div className="relative p-[9px] rounded-lg overflow-hidden border-glow">
+          {/* Intense rotating gradient border beam */}
+          <div className="absolute inset-0 bg-gradient-conic from-purple-600 via-blue-600 via-purple-600 via-blue-600 to-purple-600 rounded-lg rotating-border"></div>
           
           <Card className="border-0 shadow-lg relative bg-white">
             <CardHeader className="text-center">
@@ -519,5 +547,6 @@ This application was submitted through the Youu Media website.
         </div>
       </div>
     </section>
+    </>
   );
 }
