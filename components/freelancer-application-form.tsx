@@ -196,30 +196,35 @@ This application was submitted through the Youu Media website.
   return (
     <>
       <style jsx>{`
-        /* Intense rotating gradient border */
-        @keyframes rotate-border {
-          0% { transform: rotate(0deg); }
-          100% { transform: rotate(360deg); }
+        /* Moving gradient border - fully connected with multiple colors */
+        @keyframes gradient-flow {
+          0% { background-position: 0% 0%; }
+          100% { background-position: 200% 0%; }
         }
         
-        .rotating-border {
-          animation: rotate-border 3s linear infinite;
+        .moving-gradient-border {
+          background: linear-gradient(
+            90deg,
+            #9333ea 0%, 
+            #3b82f6 10%, 
+            #9333ea 20%, 
+            #3b82f6 30%, 
+            #9333ea 40%, 
+            #3b82f6 50%, 
+            #9333ea 60%, 
+            #3b82f6 70%, 
+            #9333ea 80%, 
+            #3b82f6 90%, 
+            #9333ea 100%
+          );
+          background-size: 200% 100%;
+          animation: gradient-flow 3s linear infinite;
         }
         
         .border-glow {
-          filter: drop-shadow(0 0 20px rgba(147, 51, 234, 0.5)) 
-                  drop-shadow(0 0 40px rgba(59, 130, 246, 0.5));
-        }
-        
-        .bg-gradient-conic {
-          background: conic-gradient(
-            from 0deg,
-            #9333ea 0deg,
-            #3b82f6 90deg,
-            #9333ea 180deg,
-            #3b82f6 270deg,
-            #9333ea 360deg
-          );
+          filter: drop-shadow(0 0 20px rgba(147, 51, 234, 0.6)) 
+                  drop-shadow(0 0 40px rgba(59, 130, 246, 0.6))
+                  drop-shadow(0 0 60px rgba(147, 51, 234, 0.4));
         }
       `}</style>
       <section className="py-20 px-4">
@@ -251,8 +256,8 @@ This application was submitted through the Youu Media website.
 
         {/* Application Form */}
         <div className="relative p-[9px] rounded-lg overflow-hidden border-glow">
-          {/* Intense rotating gradient border beam */}
-          <div className="absolute inset-0 bg-gradient-conic from-purple-600 via-blue-600 via-purple-600 via-blue-600 to-purple-600 rounded-lg rotating-border"></div>
+          {/* Intense moving gradient border - fully connected */}
+          <div className="absolute inset-0 rounded-lg moving-gradient-border"></div>
           
           <Card className="border-0 shadow-lg relative bg-white">
             <CardHeader className="text-center">
