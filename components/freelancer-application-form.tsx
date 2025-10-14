@@ -210,26 +210,26 @@ This application was submitted through the Youu Media website.
         .moving-gradient-border {
           background: linear-gradient(
             90deg,
-            #9333ea 0%,
-            #3b82f6 10%,
-            #9333ea 20%,
-            #3b82f6 30%,
-            #9333ea 40%,
-            #3b82f6 50%,
-            #9333ea 60%,
-            #3b82f6 70%,
-            #9333ea 80%,
-            #3b82f6 90%,
-            #9333ea 100%
+            #a855f7 0%, 
+            #60a5fa 10%, 
+            #a855f7 20%, 
+            #60a5fa 30%, 
+            #a855f7 40%, 
+            #60a5fa 50%, 
+            #a855f7 60%, 
+            #60a5fa 70%, 
+            #a855f7 80%, 
+            #60a5fa 90%, 
+            #a855f7 100%
           );
           background-size: 200% 100%;
           animation: gradient-flow 3s linear infinite;
         }
 
         .border-glow {
-          filter: drop-shadow(0 0 20px rgba(147, 51, 234, 0.6))
-            drop-shadow(0 0 40px rgba(59, 130, 246, 0.6))
-            drop-shadow(0 0 60px rgba(147, 51, 234, 0.4));
+          filter: drop-shadow(0 0 20px rgba(168, 85, 247, 0.6))
+            drop-shadow(0 0 40px rgba(96, 165, 250, 0.6))
+            drop-shadow(0 0 60px rgba(168, 85, 247, 0.4));
         }
       `}</style>
       <section className="py-20 px-4">
