@@ -327,7 +327,15 @@ This application was submitted through the Youu Media website.
               <div className="pt-6">
                 <div className="space-y-2 mb-6">
                   <Label htmlFor="files">Upload Best Portfolio Pieces (optional)</Label>
-                  <Input id="files" type="file" multiple onChange={handleFilesChange} />
+                  <p className="text-sm text-muted-foreground mb-2">
+                    You can select multiple files (videos, images, PDFs, etc.)
+                  </p>
+                  <Input id="files" type="file" multiple onChange={handleFilesChange} accept="image/*,video/*,.pdf" />
+                  {formData.files.length > 0 && (
+                    <p className="text-sm text-green-600 mt-2">
+                      ✓ {formData.files.length} file{formData.files.length !== 1 ? 's' : ''} selected
+                    </p>
+                  )}
                 </div>
                 <Button
                   type="submit"
