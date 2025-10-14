@@ -5,38 +5,21 @@ export const runtime = "nodejs"
 
 export async function POST(request: NextRequest) {
   try {
-    const formData = await request.formData()
-
-    const fullName = String(formData.get("fullName") || "")
-    const email = String(formData.get("email") || "")
-    const phone = String(formData.get("phone") || "")
-    const portfolioLink = String(formData.get("portfolioLink") || "")
-    const skillsText = String(formData.get("skillsText") || "")
-    const availability = String(formData.get("availability") || "")
-    const experience = String(formData.get("experience") || "")
-    const aboutYou = String(formData.get("aboutYou") || "")
-    const equipment = String(formData.get("equipment") || "")
-    const rates = String(formData.get("rates") || "")
-    const summary = String(formData.get("summary") || "")
-
-    const files = formData.getAll("files") as File[]
+    const body = await request.json()
+    const { summary, files } = body
 
     // Attempt email via Resend if RESEND_API_KEY is set; otherwise fallback to console
     const toEmail = "Contact@youumedia.com"
 
-    const attachments: Array<{ filename: string; content: string; contentType?: string }> = []
-    for (const file of files) {
-      const arrayBuffer = await file.arrayBuffer()
-      const base64Content = Buffer.from(arrayBuffer).toString("base64")
-      attachments.push({ filename: file.name, content: base64Content, contentType: file.type })
-    }
+    // Extract name from summary for subject line
+    const nameMatch = summary.match(/Name: (.+)/);
+    const fullName = nameMatch ? nameMatch[1] : "Unknown";
 
     const payload = {
       to: toEmail,
       subject: `New Freelancer Application - ${fullName}`,
-      text: summary,
-      attachments,
-      reply_to: email || undefined,
+      text: summary + (files && files.length > 0 ? `\n\nFiles mentioned: ${files.map((f: any) => `${f.name} (${f.type}, ${(f.size / 1024 / 1024).toFixed(2)}MB)`).join(', ')}` : ''),
+      reply_to: undefined,
     }
 
     if (process.env.RESEND_API_KEY) {
@@ -51,11 +34,6 @@ export async function POST(request: NextRequest) {
           to: [payload.to],
           subject: payload.subject,
           text: payload.text,
-          attachments: payload.attachments.map((a) => ({
-            filename: a.filename,
-            content: a.content,
-            content_type: a.contentType,
-          })),
           reply_to: payload.reply_to,
         }),
       })
@@ -68,9 +46,8 @@ export async function POST(request: NextRequest) {
     } else {
       console.log("Application (email fallback):", {
         to: toEmail,
-        subject: `New Freelancer Application - ${fullName}`,
-        text: summary,
-        attachments: attachments.map((a) => ({ filename: a.filename, contentType: a.contentType })),
+        subject: payload.subject,
+        text: payload.text,
       })
     }
 

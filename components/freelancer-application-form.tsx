@@ -170,27 +170,22 @@ ${formData.rates}
 This application was submitted through the Youu Media website.
       `;
 
-      // 3️⃣ Send email notification
+      // 3️⃣ Send email notification (without files for speed)
       setUploadProgress(60);
       
-      // Check total file size
-      const totalFileSize = formData.files.reduce((sum, file) => sum + file.size, 0);
-      const maxTotalSize = 25 * 1024 * 1024; // 25MB total limit
-      
-      const emailFormData = new FormData();
-      emailFormData.append("summary", emailContent);
-      
-      if (totalFileSize > maxTotalSize) {
-        // Skip files if too large
-        emailFormData.append("summary", emailContent + "\n\nNote: Files were too large to attach and have been skipped.");
-      } else {
-        // Include files
-        formData.files.forEach((file) => emailFormData.append("files", file));
-      }
-
       const res = await fetch("/api/send-application", {
         method: "POST",
-        body: emailFormData,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          summary: emailContent,
+          files: formData.files.map(file => ({
+            name: file.name,
+            size: file.size,
+            type: file.type
+          }))
+        }),
       });
 
       if (!res.ok) {
