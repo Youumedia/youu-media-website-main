@@ -109,10 +109,17 @@ export function FreelancerApplicationForm() {
         "Supabase Key:",
         process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ? "Set" : "Missing"
       );
+      console.log("Files to save:", formData.files);
+      console.log("Files JSON:", JSON.stringify(formData.files.map(file => ({
+        name: file.name,
+        size: file.size,
+        type: file.type,
+        lastModified: file.lastModified
+      }))));
 
       // 1️⃣ Save to Supabase database
       const { data, error } = await supabase
-        .from("FreelancerApplications")
+        .from("freelancer_applications")
         .insert([
           {
             full_name: formData.fullName,
