@@ -212,7 +212,7 @@ This application was submitted through the Youu Media website.
               <h1 className="text-4xl md:text-5xl font-bold mb-4">
                 Join the Youu Media Creative Team
               </h1>
-              <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+              <p className="text-xl text-white max-w-2xl mx-auto">
                 Are you a talented creative professional? We're always looking
                 for skilled freelancers to join our network and work on exciting
                 projects.
