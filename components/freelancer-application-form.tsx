@@ -238,7 +238,7 @@ This application was submitted through the Youu Media website.
                 <div className="relative">
                   <div className="absolute inset-0 bg-gradient-to-r from-[#70BFFF] to-[#BE55FF] animate-gradient-x rounded-full"></div>
                   <div className="relative bg-white rounded-full p-4">
-                    <Users className="h-8 w-8 text-primary" />
+                    <Image src="/images/youu-main-logo.png" alt="Youu Media" width={32} height={32} className="w-8 h-8" />
                   </div>
                 </div>
               </div>
