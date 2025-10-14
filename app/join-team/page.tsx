@@ -24,8 +24,8 @@ export default function JoinTeamPage() {
         /* Subtle moving gradient grid */
         .moving-grid {
           background-image: 
-            linear-gradient(rgba(147, 51, 234, 0.03) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(59, 130, 246, 0.03) 1px, transparent 1px);
+            linear-gradient(rgba(147, 51, 234, 0.08) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(59, 130, 246, 0.08) 1px, transparent 1px);
           background-size: 50px 50px;
           animation: grid-move 20s linear infinite;
         }
