@@ -32,10 +32,20 @@ export function FreelancerApplicationForm() {
     files: [] as File[],
   })
 
-  // Handle file upload
+  // Handle file upload - append new files to existing ones
   const handleFilesChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedFiles = Array.from(e.target.files || [])
-    setFormData((prev) => ({ ...prev, files: selectedFiles }))
+    const newFiles = Array.from(e.target.files || [])
+    setFormData((prev) => ({ ...prev, files: [...prev.files, ...newFiles] }))
+    // Clear the input so the same file can be selected again if needed
+    e.target.value = ''
+  }
+
+  // Remove a specific file
+  const handleRemoveFile = (index: number) => {
+    setFormData((prev) => ({
+      ...prev,
+      files: prev.files.filter((_, i) => i !== index)
+    }))
   }
 
   // Handle form submit
@@ -328,13 +338,29 @@ This application was submitted through the Youu Media website.
                 <div className="space-y-2 mb-6">
                   <Label htmlFor="files">Upload Best Portfolio Pieces (optional)</Label>
                   <p className="text-sm text-muted-foreground mb-2">
-                    You can select multiple files (videos, images, PDFs, etc.)
+                    You can select multiple files (videos, images, PDFs, etc.). Click "Choose Files" multiple times to add more.
                   </p>
                   <Input id="files" type="file" multiple onChange={handleFilesChange} accept="image/*,video/*,.pdf" />
                   {formData.files.length > 0 && (
-                    <p className="text-sm text-green-600 mt-2">
-                      ✓ {formData.files.length} file{formData.files.length !== 1 ? 's' : ''} selected
-                    </p>
+                    <div className="mt-3 space-y-2">
+                      <p className="text-sm font-medium text-green-600">
+                        ✓ {formData.files.length} file{formData.files.length !== 1 ? 's' : ''} selected:
+                      </p>
+                      <ul className="space-y-1">
+                        {formData.files.map((file, index) => (
+                          <li key={index} className="flex items-center justify-between text-sm bg-gray-50 p-2 rounded">
+                            <span className="truncate flex-1">{file.name}</span>
+                            <button
+                              type="button"
+                              onClick={() => handleRemoveFile(index)}
+                              className="ml-2 text-red-500 hover:text-red-700 font-medium"
+                            >
+                              ✕
+                            </button>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   )}
                 </div>
                 <Button
