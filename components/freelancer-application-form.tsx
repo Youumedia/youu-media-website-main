@@ -37,6 +37,7 @@ export function FreelancerApplicationForm() {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState(0);
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -54,6 +55,30 @@ export function FreelancerApplicationForm() {
   // Handle file upload - append new files to existing ones
   const handleFilesChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newFiles = Array.from(e.target.files || []);
+    
+    // Validate file sizes (max 10MB per file)
+    const maxSize = 10 * 1024 * 1024; // 10MB
+    const oversizedFiles = newFiles.filter(file => file.size > maxSize);
+    
+    if (oversizedFiles.length > 0) {
+      toast({
+        title: "File too large",
+        description: `Some files exceed 10MB limit. Please compress them or choose smaller files.`,
+        variant: "destructive",
+      });
+      return;
+    }
+    
+    // Limit total files to 5
+    if (formData.files.length + newFiles.length > 5) {
+      toast({
+        title: "Too many files",
+        description: "Maximum 5 files allowed. Please remove some files first.",
+        variant: "destructive",
+      });
+      return;
+    }
+    
     setFormData((prev) => ({ ...prev, files: [...prev.files, ...newFiles] }));
     // Clear the input so the same file can be selected again if needed
     e.target.value = "";
@@ -71,9 +96,11 @@ export function FreelancerApplicationForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setUploadProgress(0);
 
     try {
       console.log("Submitting form data:", formData);
+      setUploadProgress(10);
       console.log(
         "Supabase URL:",
         process.env.NEXT_PUBLIC_SUPABASE_URL ? "Set" : "Missing"
@@ -113,6 +140,7 @@ export function FreelancerApplicationForm() {
       }
 
       console.log("Successfully saved to Supabase:", data);
+      setUploadProgress(40);
 
       // 2️⃣ Build email content
       const emailContent = `
@@ -143,9 +171,22 @@ This application was submitted through the Youu Media website.
       `;
 
       // 3️⃣ Send email notification
+      setUploadProgress(60);
+      
+      // Check total file size
+      const totalFileSize = formData.files.reduce((sum, file) => sum + file.size, 0);
+      const maxTotalSize = 25 * 1024 * 1024; // 25MB total limit
+      
       const emailFormData = new FormData();
       emailFormData.append("summary", emailContent);
-      formData.files.forEach((file) => emailFormData.append("files", file));
+      
+      if (totalFileSize > maxTotalSize) {
+        // Skip files if too large
+        emailFormData.append("summary", emailContent + "\n\nNote: Files were too large to attach and have been skipped.");
+      } else {
+        // Include files
+        formData.files.forEach((file) => emailFormData.append("files", file));
+      }
 
       const res = await fetch("/api/send-application", {
         method: "POST",
@@ -155,8 +196,11 @@ This application was submitted through the Youu Media website.
       if (!res.ok) {
         throw new Error("Failed to submit application via email");
       }
+      
+      setUploadProgress(90);
 
       // 4️⃣ Show success toast and update state
+      setUploadProgress(100);
       setSubmitSuccess(true);
       toast({
         title: "Application submitted successfully!",
@@ -180,6 +224,7 @@ This application was submitted through the Youu Media website.
           files: [],
         });
         setSubmitSuccess(false);
+        setUploadProgress(0);
       }, 3000);
     } catch (error) {
       console.error("Application error:", error);
@@ -189,6 +234,7 @@ This application was submitted through the Youu Media website.
           "There was an issue submitting your application. Please try again.",
         variant: "destructive",
       });
+      setUploadProgress(0);
     } finally {
       setIsSubmitting(false);
     }
@@ -473,8 +519,8 @@ This application was submitted through the Youu Media website.
                         Upload Best Portfolio Pieces (optional)
                       </Label>
                       <p className="text-sm text-muted-foreground mb-2">
-                        You can select multiple files (videos, images, PDFs,
-                        etc.). Click "Choose Files" multiple times to add more.
+                        You can select multiple files (videos, images, PDFs, etc.). 
+                        Max 5 files, 10MB each. Click "Choose Files" multiple times to add more.
                       </p>
                       <Input
                         id="files"
@@ -522,7 +568,10 @@ This application was submitted through the Youu Media website.
                       }`}
                     >
                       {isSubmitting ? (
-                        "Submitting..."
+                        <>
+                          <div className="mr-2 h-4 w-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                          {uploadProgress > 0 ? `Submitting... ${uploadProgress}%` : "Submitting..."}
+                        </>
                       ) : submitSuccess ? (
                         <>
                           <CheckCircle className="mr-2 h-5 w-5" />
