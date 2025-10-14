@@ -6,7 +6,7 @@ import { FreelancerApplicationForm } from "@/components/freelancer-application-f
 
 export default function JoinTeamPage() {
   return (
-    <main className="min-h-screen relative bg-gradient-to-br from-blue-500 via-blue-400 to-cyan-400">
+    <main className="min-h-screen relative bg-white">
       <Navigation />
       
       {/* Main content */}

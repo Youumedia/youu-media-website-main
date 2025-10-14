@@ -209,10 +209,10 @@ This application was submitted through the Youu Media website.
                   </div>
                 </div>
               </div>
-              <h1 className="text-4xl md:text-5xl font-bold mb-4">
+              <h1 className="text-4xl md:text-5xl font-bold mb-4 text-black">
                 Join the Youu Media Creative Team
               </h1>
-              <p className="text-xl text-white max-w-2xl mx-auto">
+              <p className="text-xl text-black max-w-2xl mx-auto">
                 Are you a talented creative professional? We're always looking
                 for skilled freelancers to join our network and work on exciting
                 projects.
@@ -222,15 +222,11 @@ This application was submitted through the Youu Media website.
         </div>
 
         {/* Application Form */}
-        <div className="relative">
-          {/* LED glow effect - multiple layers */}
-          <div className="absolute -inset-1 bg-white rounded-lg blur-sm opacity-75"></div>
-          <div className="absolute -inset-2 bg-white rounded-lg blur-md opacity-60"></div>
-          <div className="absolute -inset-4 bg-white rounded-xl blur-lg opacity-50"></div>
-          <div className="absolute -inset-6 bg-white rounded-2xl blur-xl opacity-40"></div>
-          <div className="absolute -inset-8 bg-white rounded-3xl blur-2xl opacity-30"></div>
+        <div className="relative p-[3px] rounded-lg overflow-hidden">
+          {/* Animated gradient border - rich purple to blue */}
+          <div className="absolute inset-0 bg-gradient-to-r from-purple-600 via-blue-600 via-purple-500 via-blue-500 to-purple-600 bg-[length:300%_300%] animate-gradient-x rounded-lg"></div>
           
-          <Card className="border-border/50 shadow-lg relative">
+          <Card className="border-0 shadow-lg relative bg-white">
             <CardHeader className="text-center">
               <CardTitle className="flex items-center justify-center gap-2 text-2xl">
                 <Briefcase className="h-6 w-6 text-primary" />
