@@ -547,7 +547,7 @@ This application was submitted through the Youu Media website.
 
         {/* What to Expect */}
         <div className="mt-12 text-center">
-          <Card className="border-blue-400/50 border-2">
+          <Card className="border-blue-400/50 border-2 bg-white">
               <CardContent className="p-8">
                 <Mail className="h-12 w-12 text-primary mx-auto mb-4" />
                 <h3 className="text-xl font-semibold mb-3">
