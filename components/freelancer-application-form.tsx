@@ -194,7 +194,7 @@ This application was submitted through the Youu Media website.
   };
 
   return (
-    <section className="py-20 px-4 bg-slate-50">
+    <section className="py-20 px-4">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12">
@@ -222,7 +222,15 @@ This application was submitted through the Youu Media website.
         </div>
 
         {/* Application Form */}
-        <Card className="border-border/50 shadow-lg">
+        <div className="relative">
+          {/* LED glow effect - multiple layers */}
+          <div className="absolute -inset-1 bg-white rounded-lg blur-sm opacity-75"></div>
+          <div className="absolute -inset-2 bg-white rounded-lg blur-md opacity-60"></div>
+          <div className="absolute -inset-4 bg-white rounded-xl blur-lg opacity-50"></div>
+          <div className="absolute -inset-6 bg-white rounded-2xl blur-xl opacity-40"></div>
+          <div className="absolute -inset-8 bg-white rounded-3xl blur-2xl opacity-30"></div>
+          
+          <Card className="border-border/50 shadow-lg relative">
             <CardHeader className="text-center">
               <CardTitle className="flex items-center justify-center gap-2 text-2xl">
                 <Briefcase className="h-6 w-6 text-primary" />
@@ -496,6 +504,7 @@ This application was submitted through the Youu Media website.
                </form>
              </CardContent>
            </Card>
+        </div>
 
         {/* What to Expect */}
         <div className="mt-12 text-center">
