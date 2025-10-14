@@ -222,7 +222,7 @@ This application was submitted through the Youu Media website.
         </div>
 
         {/* Application Form */}
-        <div className="relative p-[3px] rounded-lg overflow-hidden">
+        <div className="relative p-[9px] rounded-lg overflow-hidden">
           {/* Animated gradient border - rich purple to blue */}
           <div className="absolute inset-0 bg-gradient-to-r from-purple-600 via-blue-600 via-purple-500 via-blue-500 to-purple-600 bg-[length:300%_300%] animate-gradient-x rounded-lg"></div>
           
