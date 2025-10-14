@@ -236,12 +236,7 @@ This application was submitted through the Youu Media website.
             <div className="absolute inset-0 bg-gradient-to-r from-[#70BFFF] to-[#BE55FF] animate-gradient-x opacity-20 blur-3xl"></div>
             <div className="relative">
               <div className="flex items-center justify-center mb-6">
-                <div className="relative">
-                  <div className="absolute inset-0 bg-gradient-to-r from-[#70BFFF] to-[#BE55FF] animate-gradient-x rounded-full"></div>
-                  <div className="relative bg-white rounded-full p-4">
-                    <Image src="/images/youu-main-logo.png" alt="Youu Media" width={32} height={32} className="w-8 h-8" />
-                  </div>
-                </div>
+                <Image src="/images/youu-main-logo.png" alt="Youu Media" width={80} height={80} className="w-20 h-20" />
               </div>
               <h1 className="text-4xl md:text-5xl font-bold mb-4 text-black">
                 Join the Youu Media Creative Team
