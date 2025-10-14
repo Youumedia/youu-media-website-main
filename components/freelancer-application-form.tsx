@@ -222,15 +222,7 @@ This application was submitted through the Youu Media website.
         </div>
 
         {/* Application Form */}
-        <div className="relative group">
-          {/* Gradient background layer - professional four-corner glow */}
-          <div className="absolute -inset-2 rounded-xl opacity-60 blur-3xl bg-gradient-to-br from-emerald-500 via-emerald-200/30 to-transparent"></div>
-          <div className="absolute -inset-2 rounded-xl opacity-60 blur-3xl bg-gradient-to-bl from-purple-500 via-purple-200/30 to-transparent"></div>
-          <div className="absolute -inset-2 rounded-xl opacity-60 blur-3xl bg-gradient-to-tr from-rose-500 via-rose-200/30 to-transparent"></div>
-          <div className="absolute -inset-2 rounded-xl opacity-60 blur-3xl bg-gradient-to-tl from-blue-500 via-blue-200/30 to-transparent"></div>
-
-          {/* Main card with white background for readability */}
-          <Card className="border-border/50 shadow-2xl relative bg-white/98 backdrop-blur-sm">
+        <Card className="border-border/50 shadow-lg">
             <CardHeader className="text-center">
               <CardTitle className="flex items-center justify-center gap-2 text-2xl">
                 <Briefcase className="h-6 w-6 text-primary" />
@@ -501,10 +493,9 @@ This application was submitted through the Youu Media website.
                     Youu Media regarding freelance opportunities.
                   </p>
                 </div>
-              </form>
-            </CardContent>
-          </Card>
-        </div>
+               </form>
+             </CardContent>
+           </Card>
 
         {/* What to Expect */}
         <div className="mt-12 text-center">
