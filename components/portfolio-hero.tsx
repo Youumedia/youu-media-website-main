@@ -26,8 +26,7 @@ export function PortfolioHero() {
             </Button>
             <Button
               size="lg"
-              variant="outline"
-              className="group bg-transparent"
+              className="group bg-gradient-to-r from-[#BE55FF] to-[#70BFFF] hover:opacity-90 text-white border-0"
             >
               <Filter className="mr-2 h-5 w-5" />
               Filter by Category

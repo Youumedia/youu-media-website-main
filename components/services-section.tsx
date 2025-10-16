@@ -55,8 +55,6 @@ const values = [
 export function ServicesSection() {
   return (
     <section className="py-24 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-r from-brandBlue/10 to-brandPurple/10 animate-gradient-x"></div>
-
       <div className="absolute top-0 left-0 w-full h-3 bg-gradient-brand animate-gradient-x"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -87,12 +85,6 @@ export function ServicesSection() {
                 key={index}
                 className={`group hover:shadow-2xl transition-all duration-500 border-2 border-transparent hover:border-gradient-to-r hover:from-[#BE55FF] hover:to-[#70BFFF] ${cardGradients[index]} relative overflow-hidden`}
               >
-                {/* Decorative background pattern */}
-                <div className="absolute inset-0 opacity-10">
-                  <div className="absolute top-4 right-4 w-20 h-20 bg-gradient-to-br from-[#BE55FF] to-[#70BFFF] rounded-full blur-xl"></div>
-                  <div className="absolute bottom-4 left-4 w-16 h-16 bg-gradient-to-tr from-[#70BFFF] to-[#BE55FF] rounded-full blur-lg"></div>
-                </div>
-
                 <CardContent className="p-8 relative z-10">
                   <div className="mb-6">
                     <div className="w-16 h-16 bg-gradient-to-r from-[#BE55FF] to-[#70BFFF] animate-gradient-x rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-xl relative">
@@ -155,11 +147,6 @@ export function ServicesSection() {
 
             return (
               <div key={index} className="text-center group relative">
-                {/* Background glow */}
-                <div
-                  className={`absolute inset-0 bg-gradient-to-br ${valueColors[index].bg} rounded-2xl blur-xl opacity-30 group-hover:opacity-50 transition-opacity duration-500`}
-                ></div>
-
                 <div className="relative z-10 p-6 rounded-2xl bg-white/80 backdrop-blur-sm border border-white/50">
                   <div
                     className={`w-20 h-20 bg-gradient-to-br ${valueColors[index].icon} rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform shadow-lg relative`}

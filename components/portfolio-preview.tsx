@@ -70,7 +70,7 @@ export function PortfolioPreview() {
           <h2 className="text-3xl md:text-4xl font-bold text-balance text-gray-900">
             Our{" "}
             <span className="bg-gradient-to-r from-[#BE55FF] to-[#70BFFF] bg-clip-text text-transparent">
-              Latest Work (UPDATED - 6 ITEMS)
+              Latest Work
             </span>
           </h2>
           <p className="mt-4 text-lg text-gray-700 max-w-2xl mx-auto text-pretty">
