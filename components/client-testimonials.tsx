@@ -1,5 +1,5 @@
-import { Card, CardContent } from "@/components/ui/card"
-import { Star, Quote } from "lucide-react"
+import { Card, CardContent } from "@/components/ui/card";
+import { Star, Quote } from "lucide-react";
 
 const testimonials = [
   {
@@ -42,11 +42,11 @@ const testimonials = [
     rating: 5,
     project: "Photography",
   },
-]
+];
 
 export function ClientTestimonials() {
   return (
-    <section className="py-24 bg-slate-50">
+    <section className="py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-balance">
@@ -56,7 +56,8 @@ export function ClientTestimonials() {
             </span>
           </h2>
           <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto text-pretty">
-            Don't just take our word for it. Here's what our clients have to say about working with Youu Media.
+            Don't just take our word for it. Here's what our clients have to say
+            about working with Youu Media.
           </p>
         </div>
 
@@ -66,9 +67,9 @@ export function ClientTestimonials() {
               "bg-gradient-to-br from-blue-200 via-blue-100 to-indigo-200",
               "bg-gradient-to-br from-purple-200 via-purple-100 to-pink-200",
               "bg-gradient-to-br from-emerald-200 via-green-100 to-teal-200",
-              "bg-gradient-to-br from-orange-200 via-amber-100 to-yellow-200"
+              "bg-gradient-to-br from-orange-200 via-amber-100 to-yellow-200",
             ];
-            
+
             return (
               <Card
                 key={testimonial.id}
@@ -79,28 +80,37 @@ export function ClientTestimonials() {
                   <div className="absolute top-4 right-4 w-20 h-20 bg-gradient-to-br from-[#BE55FF] to-[#70BFFF] rounded-full blur-xl"></div>
                   <div className="absolute bottom-4 left-4 w-16 h-16 bg-gradient-to-tr from-[#70BFFF] to-[#BE55FF] rounded-full blur-lg"></div>
                 </div>
-                
+
                 <CardContent className="p-8 relative z-10">
                   <div className="flex items-start justify-between mb-6">
                     <Quote className="h-10 w-10 text-[#70BFFF]/60" />
                     <div className="flex items-center gap-1">
                       {[...Array(testimonial.rating)].map((_, i) => (
-                        <Star key={i} className="h-5 w-5 fill-yellow-400 text-yellow-400 drop-shadow-sm" />
+                        <Star
+                          key={i}
+                          className="h-5 w-5 fill-yellow-400 text-yellow-400 drop-shadow-sm"
+                        />
                       ))}
                     </div>
                   </div>
 
-                  <p className="text-gray-700 mb-8 text-pretty leading-relaxed text-lg italic">"{testimonial.content}"</p>
+                  <p className="text-gray-700 mb-8 text-pretty leading-relaxed text-lg italic">
+                    "{testimonial.content}"
+                  </p>
 
                   <div className="flex items-center justify-between">
                     <div>
-                      <h4 className="font-bold text-xl bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">{testimonial.name}</h4>
+                      <h4 className="font-bold text-xl bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
+                        {testimonial.name}
+                      </h4>
                       <p className="text-gray-600 font-medium">
                         {testimonial.role} at {testimonial.company}
                       </p>
                     </div>
                     <div className="text-right">
-                      <div className="text-sm bg-gradient-to-r from-[#BE55FF] to-[#70BFFF] bg-clip-text text-transparent font-semibold">{testimonial.project}</div>
+                      <div className="text-sm bg-gradient-to-r from-[#BE55FF] to-[#70BFFF] bg-clip-text text-transparent font-semibold">
+                        {testimonial.project}
+                      </div>
                     </div>
                   </div>
                 </CardContent>
@@ -111,16 +121,28 @@ export function ClientTestimonials() {
 
         {/* Trust Indicators */}
         <div className="mt-20 text-center">
-          <p className="text-gray-600 mb-10 text-lg font-medium">Trusted by leading brands and individuals</p>
+          <p className="text-gray-600 mb-10 text-lg font-medium">
+            Trusted by leading brands and individuals
+          </p>
           <div className="flex flex-wrap justify-center items-center gap-12 opacity-70">
-            <div className="text-xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">InnovateTech</div>
-            <div className="text-xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">Global Corp</div>
-            <div className="text-xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">Luxury Weddings Co.</div>
-            <div className="text-xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">Artisan Bistro</div>
-            <div className="text-xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">Enterprise Solutions</div>
+            <div className="text-xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
+              InnovateTech
+            </div>
+            <div className="text-xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
+              Global Corp
+            </div>
+            <div className="text-xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
+              Luxury Weddings Co.
+            </div>
+            <div className="text-xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
+              Artisan Bistro
+            </div>
+            <div className="text-xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
+              Enterprise Solutions
+            </div>
           </div>
         </div>
       </div>
     </section>
-  )
+  );
 }

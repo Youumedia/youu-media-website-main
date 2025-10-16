@@ -55,11 +55,16 @@ export function FreelancerApplicationForm() {
   // Handle file upload - append new files to existing ones
   const handleFilesChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newFiles = Array.from(e.target.files || []);
-    
+    console.log("📎 Files selected:", newFiles.length, "files");
+    console.log(
+      "📎 File details:",
+      newFiles.map((f) => ({ name: f.name, size: f.size, type: f.type }))
+    );
+
     // Validate file sizes (max 10MB per file)
     const maxSize = 10 * 1024 * 1024; // 10MB
-    const oversizedFiles = newFiles.filter(file => file.size > maxSize);
-    
+    const oversizedFiles = newFiles.filter((file) => file.size > maxSize);
+
     if (oversizedFiles.length > 0) {
       toast({
         title: "File too large",
@@ -68,7 +73,7 @@ export function FreelancerApplicationForm() {
       });
       return;
     }
-    
+
     // Limit total files to 5
     if (formData.files.length + newFiles.length > 5) {
       toast({
@@ -78,8 +83,20 @@ export function FreelancerApplicationForm() {
       });
       return;
     }
-    
-    setFormData((prev) => ({ ...prev, files: [...prev.files, ...newFiles] }));
+
+    setFormData((prev) => {
+      const updatedFiles = [...prev.files, ...newFiles];
+      console.log("📎 Total files after adding:", updatedFiles.length);
+      return { ...prev, files: updatedFiles };
+    });
+
+    toast({
+      title: "Files added!",
+      description: `${newFiles.length} file${
+        newFiles.length !== 1 ? "s" : ""
+      } added. Total: ${formData.files.length + newFiles.length}`,
+    });
+
     // Clear the input so the same file can be selected again if needed
     e.target.value = "";
   };
@@ -110,16 +127,21 @@ export function FreelancerApplicationForm() {
         process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ? "Set" : "Missing"
       );
       console.log("Files to save:", formData.files);
-      console.log("Files JSON:", JSON.stringify(formData.files.map(file => ({
-        name: file.name,
-        size: file.size,
-        type: file.type,
-        lastModified: file.lastModified
-      }))));
+      console.log(
+        "Files JSON:",
+        JSON.stringify(
+          formData.files.map((file) => ({
+            name: file.name,
+            size: file.size,
+            type: file.type,
+            lastModified: file.lastModified,
+          }))
+        )
+      );
 
       // 1️⃣ Save to Supabase database
       const { data, error } = await supabase
-        .from("freelancer_applications")
+        .from("FreelancerApplications")
         .insert([
           {
             full_name: formData.fullName,
@@ -132,12 +154,14 @@ export function FreelancerApplicationForm() {
             about_you: formData.aboutYou,
             equipment_software: formData.equipment,
             day_rate: formData.rates,
-            uploaded_files: JSON.stringify(formData.files.map(file => ({
-              name: file.name,
-              size: file.size,
-              type: file.type,
-              lastModified: file.lastModified
-            }))),
+            uploaded_files: JSON.stringify(
+              formData.files.map((file) => ({
+                name: file.name,
+                size: file.size,
+                type: file.type,
+                lastModified: file.lastModified,
+              }))
+            ),
             created_at: new Date(),
           },
         ]);
@@ -185,7 +209,7 @@ This application was submitted through the Youu Media website.
 
       // 3️⃣ Send email notification (without files for speed)
       setUploadProgress(60);
-      
+
       const res = await fetch("/api/send-application", {
         method: "POST",
         headers: {
@@ -193,18 +217,18 @@ This application was submitted through the Youu Media website.
         },
         body: JSON.stringify({
           summary: emailContent,
-          files: formData.files.map(file => ({
+          files: formData.files.map((file) => ({
             name: file.name,
             size: file.size,
-            type: file.type
-          }))
+            type: file.type,
+          })),
         }),
       });
 
       if (!res.ok) {
         throw new Error("Failed to submit application via email");
       }
-      
+
       setUploadProgress(90);
 
       // 4️⃣ Show success toast and update state
@@ -264,16 +288,16 @@ This application was submitted through the Youu Media website.
         .moving-gradient-border {
           background: linear-gradient(
             90deg,
-            #a855f7 0%, 
-            #60a5fa 10%, 
-            #a855f7 20%, 
-            #60a5fa 30%, 
-            #a855f7 40%, 
-            #60a5fa 50%, 
-            #a855f7 60%, 
-            #60a5fa 70%, 
-            #a855f7 80%, 
-            #60a5fa 90%, 
+            #a855f7 0%,
+            #60a5fa 10%,
+            #a855f7 20%,
+            #60a5fa 30%,
+            #a855f7 40%,
+            #60a5fa 50%,
+            #a855f7 60%,
+            #60a5fa 70%,
+            #a855f7 80%,
+            #60a5fa 90%,
             #a855f7 100%
           );
           background-size: 200% 100%;
@@ -527,8 +551,9 @@ This application was submitted through the Youu Media website.
                         Upload Best Portfolio Pieces (optional)
                       </Label>
                       <p className="text-sm text-muted-foreground mb-2">
-                        You can select multiple files (videos, images, PDFs, etc.). 
-                        Max 5 files, 10MB each. Click "Choose Files" multiple times to add more.
+                        You can select multiple files (videos, images, PDFs,
+                        etc.). Max 5 files, 10MB each. Click "Choose Files"
+                        multiple times to add more.
                       </p>
                       <Input
                         id="files"
@@ -578,7 +603,9 @@ This application was submitted through the Youu Media website.
                       {isSubmitting ? (
                         <>
                           <div className="mr-2 h-4 w-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                          {uploadProgress > 0 ? `Submitting... ${uploadProgress}%` : "Submitting..."}
+                          {uploadProgress > 0
+                            ? `Submitting... ${uploadProgress}%`
+                            : "Submitting..."}
                         </>
                       ) : submitSuccess ? (
                         <>
@@ -602,9 +629,9 @@ This application was submitted through the Youu Media website.
             </Card>
           </div>
 
-        {/* What to Expect */}
-        <div className="mt-12 text-center">
-          <Card className="border-blue-400/50 border-2 bg-white">
+          {/* What to Expect */}
+          <div className="mt-12 text-center">
+            <Card className="border-blue-400/50 border-2 bg-white">
               <CardContent className="p-8">
                 <Mail className="h-12 w-12 text-primary mx-auto mb-4" />
                 <h3 className="text-xl font-semibold mb-3">

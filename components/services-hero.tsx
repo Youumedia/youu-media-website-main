@@ -1,31 +1,34 @@
-import { Button } from "@/components/ui/button"
-import { ArrowRight, CheckCircle } from "lucide-react"
-import Link from "next/link"
+import { Button } from "@/components/ui/button";
+import { ArrowRight, CheckCircle } from "lucide-react";
+import Link from "next/link";
 
 const highlights = [
   "Cinematic quality guaranteed",
   "Professional team coordination",
   "Fast turnaround times",
   "Transparent pricing",
-]
+];
 
 export function ServicesHero() {
   return (
-    <section className="pt-24 pb-16 bg-slate-50 relative overflow-hidden">
+    <section className="pt-24 pb-16 relative overflow-hidden">
       <div className="absolute top-0 left-0 w-full h-3 bg-gradient-brand animate-gradient-x"></div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-balance">
               Premium{" "}
-              <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Creative</span>
+              <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                Creative
+              </span>
               <br />
               <span className="text-foreground">Services</span>
             </h1>
 
             <p className="mt-6 text-lg md:text-xl text-muted-foreground max-w-2xl text-pretty">
-              From intimate weddings to corporate campaigns, we deliver cinematic quality that elevates your story and
-              leaves a lasting impact.
+              From intimate weddings to corporate campaigns, we deliver
+              cinematic quality that elevates your story and leaves a lasting
+              impact.
             </p>
 
             <ul className="mt-8 space-y-3">
@@ -77,5 +80,5 @@ export function ServicesHero() {
         </div>
       </div>
     </section>
-  )
+  );
 }

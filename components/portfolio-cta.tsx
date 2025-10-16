@@ -1,10 +1,10 @@
-import { Button } from "@/components/ui/button"
-import { ArrowRight, MessageCircle } from "lucide-react"
-import Link from "next/link"
+import { Button } from "@/components/ui/button";
+import { ArrowRight, MessageCircle } from "lucide-react";
+import Link from "next/link";
 
 export function PortfolioCTA() {
   return (
-    <section className="py-24 bg-slate-50">
+    <section className="py-24">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-balance">
           Ready to Create Your
@@ -15,8 +15,8 @@ export function PortfolioCTA() {
         </h2>
 
         <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto text-pretty">
-          Let's discuss your vision and create something that captures your story with the same cinematic quality you
-          see in our portfolio.
+          Let's discuss your vision and create something that captures your
+          story with the same cinematic quality you see in our portfolio.
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -27,7 +27,12 @@ export function PortfolioCTA() {
             </Link>
           </Button>
 
-          <Button size="lg" variant="outline" asChild className="group bg-transparent">
+          <Button
+            size="lg"
+            variant="outline"
+            asChild
+            className="group bg-transparent"
+          >
             <Link href="/contact">
               <MessageCircle className="mr-2 h-5 w-5" />
               Discuss Your Vision
@@ -40,5 +45,5 @@ export function PortfolioCTA() {
         </div>
       </div>
     </section>
-  )
+  );
 }
