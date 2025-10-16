@@ -55,7 +55,7 @@ export function FreelancerApplicationForm() {
   // Handle file upload - append new files to existing ones
   const handleFilesChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newFiles = Array.from(e.target.files || []);
-nn    console.log("📎 Files selected:", newFiles.length, "files");
+    console.log("📎 Files selected:", newFiles.length, "files");
     console.log(
       "📎 File details:",
       newFiles.map((f) => ({ name: f.name, size: f.size, type: f.type }))

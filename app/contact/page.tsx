@@ -1,11 +1,11 @@
+"use client";
+
 import { Navigation } from "@/components/navigation";
 import { ContactHero } from "@/components/contact-hero";
 import { ContactForm } from "@/components/contact-form";
 import { ContactConsultation } from "@/components/contact-consultation";
 import { ContactInfo } from "@/components/contact-info";
 import { Footer } from "@/components/footer";
-
-("use client");
 
 export default function ContactPage() {
   return (

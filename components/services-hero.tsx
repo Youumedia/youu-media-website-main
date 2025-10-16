@@ -47,7 +47,11 @@ export function ServicesHero() {
                   <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </Button>
-              <Button size="lg" variant="outline" asChild>
+              <Button
+                size="lg"
+                asChild
+                className="bg-gradient-to-r from-[#BE55FF] to-[#70BFFF] hover:opacity-90 text-white border-0"
+              >
                 <Link href="#pricing">View Pricing</Link>
               </Button>
             </div>

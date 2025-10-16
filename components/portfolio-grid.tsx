@@ -319,7 +319,10 @@ export function PortfolioGrid() {
 
         {/* Load More */}
         <div className="text-center mt-12">
-          <Button variant="outline" size="lg">
+          <Button
+            size="lg"
+            className="bg-gradient-to-r from-[#BE55FF] to-[#70BFFF] hover:opacity-90 text-white border-0"
+          >
             Load More Projects
           </Button>
         </div>

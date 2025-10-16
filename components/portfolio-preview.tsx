@@ -146,9 +146,8 @@ export function PortfolioPreview() {
         <div className="text-center">
           <Button
             size="lg"
-            variant="outline"
             asChild
-            className="group bg-transparent"
+            className="group bg-gradient-to-r from-[#BE55FF] to-[#70BFFF] hover:opacity-90 text-white border-0"
           >
             <Link href="/portfolio">
               View Full Portfolio
