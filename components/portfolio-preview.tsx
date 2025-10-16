@@ -63,7 +63,7 @@ const portfolioItems = [
 export function PortfolioPreview() {
   console.log("PortfolioPreview rendered with", portfolioItems.length, "items");
   return (
-    <section className="py-24 relative overflow-hidden bg-slate-50">
+    <section className="py-24 relative overflow-hidden">
       <div className="absolute top-0 left-0 w-full h-3 bg-gradient-brand animate-gradient-x"></div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">

@@ -10,6 +10,9 @@ import { Footer } from "@/components/footer";
 export default function ServicesPage() {
   return (
     <main className="min-h-screen relative bg-white overflow-hidden">
+      {/* Top gradient line */}
+      <div className="absolute top-0 left-0 w-full h-3 bg-gradient-brand animate-gradient-x"></div>
+      
       <Navigation />
 
       {/* Subtle Moving Grid Background */}
@@ -27,15 +30,15 @@ export default function ServicesPage() {
 
       {/* Background Grid Styles */}
       <style jsx>{`
-        /* Subtle moving gradient grid */
+        /* Subtle moving purple grid */
         .moving-grid {
           background-image: linear-gradient(
-              rgba(147, 51, 234, 0.08) 1px,
+              rgba(147, 51, 234, 0.12) 1px,
               transparent 1px
             ),
             linear-gradient(
               90deg,
-              rgba(59, 130, 246, 0.08) 1px,
+              rgba(147, 51, 234, 0.12) 1px,
               transparent 1px
             );
           background-size: 50px 50px;

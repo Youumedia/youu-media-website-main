@@ -11,8 +11,13 @@ export function JobBoardBasic() {
       date: "March 15, 2024",
       duration: "8 hours",
       pay: "£800-1200",
-      description: "Seeking experienced wedding videographer for high-end ceremony and reception. Multi-camera setup required.",
-      requirements: ["5+ years experience", "Own equipment", "Portfolio required"],
+      description:
+        "Seeking experienced wedding videographer for high-end ceremony and reception. Multi-camera setup required.",
+      requirements: [
+        "5+ years experience",
+        "Own equipment",
+        "Portfolio required",
+      ],
       teamSize: "2-3 people",
     },
     {
@@ -24,8 +29,13 @@ export function JobBoardBasic() {
       date: "March 20, 2024",
       duration: "3-5 days",
       pay: "£1500-2000",
-      description: "Edit corporate brand film with motion graphics and color grading. Fast turnaround needed.",
-      requirements: ["Adobe Premiere Pro", "After Effects", "Color grading experience"],
+      description:
+        "Edit corporate brand film with motion graphics and color grading. Fast turnaround needed.",
+      requirements: [
+        "Adobe Premiere Pro",
+        "After Effects",
+        "Color grading experience",
+      ],
       teamSize: "1 person",
     },
     {
@@ -37,8 +47,13 @@ export function JobBoardBasic() {
       date: "March 25, 2024",
       duration: "4 hours",
       pay: "£600-900",
-      description: "Product photography for tech startup launch. Studio setup with professional lighting and high-res delivery required.",
-      requirements: ["Professional studio lighting", "High-resolution camera", "Product styling experience"],
+      description:
+        "Product photography for tech startup launch. Studio setup with professional lighting and high-res delivery required.",
+      requirements: [
+        "Professional studio lighting",
+        "High-resolution camera",
+        "Product styling experience",
+      ],
       teamSize: "1-2 people",
     },
   ];
@@ -57,7 +72,7 @@ export function JobBoardBasic() {
   };
 
   return (
-    <section className="py-20 bg-slate-50 relative overflow-hidden">
+    <section className="py-20 relative overflow-hidden">
       <div className="absolute top-0 left-0 w-full h-3 bg-gradient-brand animate-gradient-x"></div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
@@ -65,21 +80,31 @@ export function JobBoardBasic() {
             Example <span className="text-[#70BFFF]">Opportunities</span>
           </h2>
           <p className="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
-            Discover exciting freelance opportunities. Apply to join our team to see real job postings and start applying!
+            Discover exciting freelance opportunities. Apply to join our team to
+            see real job postings and start applying!
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
           {opportunities.map((job) => (
-            <div key={job.id} className="bg-[#E8F4FD] rounded-xl shadow-sm border border-[#70BFFF]/20 hover:shadow-md transition-all duration-300">
+            <div
+              key={job.id}
+              className="bg-[#E8F4FD] rounded-xl shadow-sm border border-[#70BFFF]/20 hover:shadow-md transition-all duration-300"
+            >
               <div className="p-6">
                 <div className="flex justify-between items-start mb-4">
-                  <h3 className="text-2xl font-bold text-gray-900">{job.title}</h3>
+                  <h3 className="text-2xl font-bold text-gray-900">
+                    {job.title}
+                  </h3>
                   <div className="flex space-x-2">
                     <span className="bg-[#BE55FF] text-white text-xs font-semibold px-3 py-1 rounded-full">
                       {job.category}
                     </span>
-                    <span className={`${getPriorityClasses(job.priority)} text-xs font-semibold px-3 py-1 rounded-full`}>
+                    <span
+                      className={`${getPriorityClasses(
+                        job.priority
+                      )} text-xs font-semibold px-3 py-1 rounded-full`}
+                    >
                       {job.priority} priority
                     </span>
                   </div>
@@ -87,22 +112,28 @@ export function JobBoardBasic() {
 
                 <div className="grid grid-cols-2 gap-y-2 text-gray-700 text-sm mb-6">
                   <div className="flex items-center">
-                    <MapPin className="h-4 w-4 mr-2 text-[#70BFFF]" /> {job.location}
+                    <MapPin className="h-4 w-4 mr-2 text-[#70BFFF]" />{" "}
+                    {job.location}
                   </div>
                   <div className="flex items-center">
-                    <Calendar className="h-4 w-4 mr-2 text-[#70BFFF]" /> {job.date}
+                    <Calendar className="h-4 w-4 mr-2 text-[#70BFFF]" />{" "}
+                    {job.date}
                   </div>
                   <div className="flex items-center">
-                    <Clock className="h-4 w-4 mr-2 text-[#70BFFF]" /> {job.duration}
+                    <Clock className="h-4 w-4 mr-2 text-[#70BFFF]" />{" "}
+                    {job.duration}
                   </div>
                   <div className="flex items-center">
-                    <DollarSign className="h-4 w-4 mr-2 text-[#70BFFF]" /> {job.pay}
+                    <DollarSign className="h-4 w-4 mr-2 text-[#70BFFF]" />{" "}
+                    {job.pay}
                   </div>
                 </div>
 
                 <p className="text-gray-700 mb-4">{job.description}</p>
 
-                <h4 className="font-semibold text-gray-800 mb-2">Requirements:</h4>
+                <h4 className="font-semibold text-gray-800 mb-2">
+                  Requirements:
+                </h4>
                 <ul className="list-disc list-inside text-gray-700 text-sm mb-6">
                   {job.requirements.map((req, idx) => (
                     <li key={idx}>{req}</li>
@@ -110,11 +141,15 @@ export function JobBoardBasic() {
                 </ul>
 
                 <div className="flex items-center text-gray-700 text-sm mb-6">
-                  <Users className="h-4 w-4 mr-2 text-[#70BFFF]" /> Team size: {job.teamSize}
+                  <Users className="h-4 w-4 mr-2 text-[#70BFFF]" /> Team size:{" "}
+                  {job.teamSize}
                 </div>
 
                 <div className="text-right">
-                  <a href="/join-team" className="inline-block bg-[#70BFFF] text-white font-semibold py-2.5 px-6 rounded-lg hover:bg-[#70BFFF]/90 transition-colors duration-300 shadow-sm">
+                  <a
+                    href="/join-team"
+                    className="inline-block bg-[#70BFFF] text-white font-semibold py-2.5 px-6 rounded-lg hover:bg-[#70BFFF]/90 transition-colors duration-300 shadow-sm"
+                  >
                     Apply Now
                   </a>
                 </div>
@@ -128,7 +163,8 @@ export function JobBoardBasic() {
             Ready to Join Our Creative Team?
           </h3>
           <p className="text-lg text-gray-700 mb-6 max-w-2xl mx-auto">
-            The opportunities above are examples. Apply now to join our creative team and access real job opportunities!
+            The opportunities above are examples. Apply now to join our creative
+            team and access real job opportunities!
           </p>
           <a
             href="/join-team"
@@ -139,5 +175,5 @@ export function JobBoardBasic() {
         </div>
       </div>
     </section>
-  )
+  );
 }

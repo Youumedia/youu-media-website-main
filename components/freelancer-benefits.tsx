@@ -1,5 +1,12 @@
-import { Card, CardContent } from "@/components/ui/card"
-import { Briefcase, Users, TrendingUp, Shield, Clock, Star } from "lucide-react"
+import { Card, CardContent } from "@/components/ui/card";
+import {
+  Briefcase,
+  Users,
+  TrendingUp,
+  Shield,
+  Clock,
+  Star,
+} from "lucide-react";
 
 const benefits = [
   {
@@ -7,7 +14,11 @@ const benefits = [
     title: "Consistent Project Flow",
     description:
       "Access to exciting projects across events, brands and corporate storytelling without needing to chase work.",
-    features: ["Regular opportunities", "Diverse project types", "No client hunting"],
+    features: [
+      "Regular opportunities",
+      "Diverse project types",
+      "No client hunting",
+    ],
   },
   {
     icon: Users,
@@ -26,35 +37,45 @@ const benefits = [
   {
     icon: Shield,
     title: "Business Support",
-    description: "We handle project management, logistics and client handling so you can focus on your craft.",
+    description:
+      "We handle project management, logistics and client handling so you can focus on your craft.",
     features: ["Client management", "Project coordination", "Payment handling"],
   },
   {
     icon: Clock,
     title: "Flexible Schedule",
-    description: "Choose projects that fit your schedule and availability. Work when you want, how you want.",
+    description:
+      "Choose projects that fit your schedule and availability. Work when you want, how you want.",
     features: ["Project selection", "Schedule control", "Work-life balance"],
   },
   {
     icon: Star,
     title: "Fair Opportunities",
-    description: "Transparent job distribution with respect for all team members and equal access to opportunities.",
-    features: ["Transparent process", "Fair compensation", "Equal opportunities"],
+    description:
+      "Transparent job distribution with respect for all team members and equal access to opportunities.",
+    features: [
+      "Transparent process",
+      "Fair compensation",
+      "Equal opportunities",
+    ],
   },
-]
+];
 
 export function FreelancerBenefits() {
   return (
-    <section className="py-24 bg-slate-50 relative overflow-hidden">
+    <section className="py-24 relative overflow-hidden">
       <div className="absolute top-0 left-0 w-full h-3 bg-gradient-brand animate-gradient-x"></div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-balance">
             Why Join{" "}
-            <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Youu Media</span>
+            <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+              Youu Media
+            </span>
           </h2>
           <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto text-pretty">
-            More than just picking up jobs - you're stepping into a community that supports your creative growth.
+            More than just picking up jobs - you're stepping into a community
+            that supports your creative growth.
           </p>
         </div>
 
@@ -66,9 +87,9 @@ export function FreelancerBenefits() {
               "bg-gradient-to-br from-emerald-200 via-green-100 to-teal-200",
               "bg-gradient-to-br from-orange-200 via-amber-100 to-yellow-200",
               "bg-gradient-to-br from-rose-200 via-pink-100 to-fuchsia-200",
-              "bg-gradient-to-br from-cyan-200 via-sky-100 to-blue-200"
+              "bg-gradient-to-br from-cyan-200 via-sky-100 to-blue-200",
             ];
-            
+
             return (
               <Card
                 key={index}
@@ -79,7 +100,7 @@ export function FreelancerBenefits() {
                   <div className="absolute top-4 right-4 w-20 h-20 bg-gradient-to-br from-[#BE55FF] to-[#70BFFF] rounded-full blur-xl"></div>
                   <div className="absolute bottom-4 left-4 w-16 h-16 bg-gradient-to-tr from-[#70BFFF] to-[#BE55FF] rounded-full blur-lg"></div>
                 </div>
-                
+
                 <CardContent className="p-8 relative z-10">
                   <div className="mb-6">
                     <div className="w-16 h-16 bg-gradient-to-r from-[#BE55FF] to-[#70BFFF] rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-xl relative">
@@ -87,8 +108,12 @@ export function FreelancerBenefits() {
                       {/* Glow effect */}
                       <div className="absolute inset-0 bg-gradient-to-r from-[#BE55FF] to-[#70BFFF] rounded-2xl blur-md opacity-50 group-hover:opacity-75 transition-opacity"></div>
                     </div>
-                    <h3 className="text-2xl font-bold mb-4 bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">{benefit.title}</h3>
-                    <p className="text-gray-700 text-pretty leading-relaxed">{benefit.description}</p>
+                    <h3 className="text-2xl font-bold mb-4 bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
+                      {benefit.title}
+                    </h3>
+                    <p className="text-gray-700 text-pretty leading-relaxed">
+                      {benefit.description}
+                    </p>
                   </div>
 
                   <ul className="space-y-3">
@@ -106,5 +131,5 @@ export function FreelancerBenefits() {
         </div>
       </div>
     </section>
-  )
+  );
 }
