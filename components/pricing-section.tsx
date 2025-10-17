@@ -19,7 +19,7 @@ const packages = [
       "Basic audio recording",
     ],
     popular: false,
-    cta: "Get Started",
+    cta: "Get Quote",
   },
   {
     name: "Professional",
@@ -37,7 +37,7 @@ const packages = [
       "Drone footage (if applicable)",
     ],
     popular: true,
-    cta: "Most Popular",
+    cta: "Get Quote",
   },
   {
     name: "Premium",
@@ -57,7 +57,7 @@ const packages = [
       "Rush delivery available",
     ],
     popular: false,
-    cta: "Get Started",
+    cta: "Get Quote",
   },
 ];
 
