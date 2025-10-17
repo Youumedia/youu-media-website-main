@@ -187,7 +187,7 @@ export function PricingSection() {
                 </div>
 
                 {pkg.popular && (
-                  <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 z-20">
+                  <div className="absolute top-2 left-1/2 transform -translate-x-1/2 z-20">
                     <Badge className="bg-gradient-to-r from-gray-600 to-slate-700 text-white px-3 py-1 text-xs shadow-lg shadow-gray-500/25">
                       <Star className="w-3 h-3 mr-1" />
                       Most Popular
