@@ -187,9 +187,9 @@ export function PricingSection() {
                 </div>
 
                 {pkg.popular && (
-                  <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 z-20">
-                    <Badge className="bg-gradient-to-r from-gray-600 to-slate-700 text-white px-6 py-2 shadow-xl shadow-gray-500/25">
-                      <Star className="w-4 h-4 mr-2" />
+                  <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 z-20">
+                    <Badge className="bg-gradient-to-r from-gray-600 to-slate-700 text-white px-3 py-1 text-xs shadow-lg shadow-gray-500/25">
+                      <Star className="w-3 h-3 mr-1" />
                       Most Popular
                     </Badge>
                   </div>
@@ -245,6 +245,7 @@ export function PricingSection() {
                   </ul>
 
                   <Button
+                    asChild
                     className={`w-full py-4 text-lg font-semibold rounded-xl transition-all duration-300 ${
                       index === 0
                         ? "bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white shadow-lg shadow-orange-600/25" // Copper Essential (Package A)
@@ -255,7 +256,9 @@ export function PricingSection() {
                     variant="default"
                     size="lg"
                   >
-                    {pkg.cta}
+                    <Link href="/contact">
+                      {pkg.cta}
+                    </Link>
                   </Button>
                 </CardContent>
               </Card>
