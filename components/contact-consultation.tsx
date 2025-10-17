@@ -1,4 +1,6 @@
-import { Card, CardContent } from "@/components/ui/card"
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export function ContactConsultation() {
   return (
@@ -8,15 +10,34 @@ export function ContactConsultation() {
         <div className="absolute top-4 right-4 w-24 h-24 bg-gradient-to-br from-[#BE55FF] to-[#70BFFF] rounded-full blur-2xl"></div>
         <div className="absolute bottom-4 left-4 w-20 h-20 bg-gradient-to-tr from-[#70BFFF] to-[#BE55FF] rounded-full blur-xl"></div>
       </div>
-      
+
       <CardContent className="p-8 relative z-10">
-        <h3 className="font-bold text-2xl mb-4 bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">Free Consultation</h3>
+        <h3 className="font-bold text-2xl mb-4 bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
+          Free Consultation
+        </h3>
         <p className="text-gray-700 mb-6 leading-relaxed text-lg">
-          Not sure which service is right for you? Schedule a free 30-minute consultation to discuss your project and
-          get expert recommendations.
+          Not sure which service is right for you? Schedule a free 30-minute
+          consultation to discuss your project and get expert recommendations.
         </p>
-        <p className="font-bold bg-gradient-to-r from-[#BE55FF] to-[#70BFFF] bg-clip-text text-transparent">No obligation • Expert advice • Custom solutions</p>
+        <p className="font-bold bg-gradient-to-r from-[#BE55FF] to-[#70BFFF] bg-clip-text text-transparent">
+          No obligation • Expert advice • Custom solutions
+        </p>
+
+        <div className="mt-6">
+          <Button
+            asChild
+            className="w-full bg-gradient-to-r from-[#BE55FF] to-[#70BFFF] hover:opacity-90 text-white border-0 font-semibold py-3"
+          >
+            <Link
+              href="https://calendly.com/youumedia-agency/30min"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Book Slot
+            </Link>
+          </Button>
+        </div>
       </CardContent>
     </Card>
-  )
+  );
 }
