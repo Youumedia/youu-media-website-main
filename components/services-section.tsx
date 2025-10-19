@@ -4,32 +4,36 @@ import { Camera, Video, Edit3, Users, Zap, Award } from "lucide-react";
 const services = [
   {
     icon: Video,
-    title: "Event Videography",
+    title: "Videography",
     description:
-      "Weddings, corporate functions, and celebrations captured with cinematic quality and professional consistency.",
+      "Professional video production for brands, businesses, and campaigns that demand impact. We create high-quality visuals that communicate your message clearly and leave a lasting impression.",
     features: [
-      "Multi-camera setups",
-      "Professional audio",
-      "Same-day highlights",
+      "Branded content and commercials",
+      "Corporate interviews and case studies",
+      "Promotional and product videos",
     ],
   },
   {
     icon: Camera,
-    title: "Brand Photography",
+    title: "Photography",
     description:
-      "Promotional content and social-first campaigns that bring businesses and products to life with visual impact.",
+      "High-end photography services that capture your business, products, and people with creativity and precision. We help brands build trust and stand out through strong, professional imagery.",
     features: [
-      "Product photography",
-      "Brand portraits",
-      "Social media content",
+      "Brand and lifestyle photography",
+      "Corporate headshots and portraits",
+      "Product and campaign photography",
     ],
   },
   {
     icon: Edit3,
     title: "Video Editing",
     description:
-      "Post-production services that transform raw footage into compelling stories with professional polish.",
-    features: ["Color grading", "Motion graphics", "Sound design"],
+      "Post-production that refines and elevates your visuals into captivating, professional stories. We ensure every frame, sound, and motion works together seamlessly to deliver cinematic results.",
+    features: [
+      "Colour grading and correction",
+      "Motion graphics and visual effects",
+      "Audio mixing and sound design",
+    ],
   },
 ];
 
@@ -67,8 +71,12 @@ export function ServicesSection() {
             </span>
           </h2>
           <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto text-pretty">
-            Premium videography services designed to capture stories with
-            cinematic quality and professional consistency.
+            High-end corporate and commercial media production designed to
+            elevate brands and businesses through impactful storytelling.
+          </p>
+          <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto text-pretty">
+            We deliver professional videography and photography that combine
+            creativity, clarity, and cinematic quality.
           </p>
         </div>
 
