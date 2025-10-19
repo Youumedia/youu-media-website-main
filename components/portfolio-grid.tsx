@@ -6,15 +6,6 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Play, Calendar, Users } from "lucide-react";
 
-const categories = [
-  "All",
-  "Event Videography",
-  "Brand Content",
-  "Corporate",
-  "Photography",
-  "AI Content",
-];
-
 const portfolioItems = [
   {
     id: 1,
@@ -123,35 +114,14 @@ const portfolioItems = [
 ];
 
 export function PortfolioGrid() {
-  const [selectedCategory, setSelectedCategory] = useState("All");
   const [selectedItem, setSelectedItem] = useState<number | null>(null);
 
-  const filteredItems =
-    selectedCategory === "All"
-      ? portfolioItems
-      : portfolioItems.filter((item) => item.category === selectedCategory);
-
-  const featuredItems = filteredItems.filter((item) => item.featured);
-  const regularItems = filteredItems.filter((item) => !item.featured);
+  const featuredItems = portfolioItems.filter((item) => item.featured);
+  const regularItems = portfolioItems.filter((item) => !item.featured);
 
   return (
     <section className="py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Category Filter */}
-        <div className="flex flex-wrap justify-center gap-2 mb-16">
-          {categories.map((category) => (
-            <Button
-              key={category}
-              variant={selectedCategory === category ? "default" : "outline"}
-              size="sm"
-              onClick={() => setSelectedCategory(category)}
-              className="transition-all duration-200"
-            >
-              {category}
-            </Button>
-          ))}
-        </div>
-
         {/* Featured Projects */}
         {featuredItems.length > 0 && (
           <div className="mb-16">
@@ -219,9 +189,6 @@ export function PortfolioGrid() {
                             {item.client}
                           </p>
                         </div>
-                        <Badge className="bg-gradient-to-r from-[#BE55FF] to-[#70BFFF] text-white px-3 py-1 shadow-sm">
-                          {item.category}
-                        </Badge>
                       </div>
 
                       <p className="text-gray-700 mb-6 text-pretty leading-relaxed">
@@ -293,11 +260,6 @@ export function PortfolioGrid() {
                   </div>
                   <div className="absolute top-3 right-3 bg-black/80 backdrop-blur-md px-3 py-1.5 rounded-lg text-white text-sm font-medium border border-white/20">
                     {item.duration}
-                  </div>
-                  <div className="absolute top-3 left-3">
-                    <Badge className="bg-gradient-to-r from-[#BE55FF] to-[#70BFFF] text-white text-sm px-3 py-1 shadow-lg">
-                      {item.category}
-                    </Badge>
                   </div>
                 </div>
 
