@@ -117,72 +117,25 @@ export function FreelancerApplicationForm() {
 
     try {
       console.log("Submitting form data:", formData);
-      setUploadProgress(10);
-      console.log(
-        "Supabase URL:",
-        process.env.NEXT_PUBLIC_SUPABASE_URL ? "Set" : "Missing"
-      );
-      console.log(
-        "Supabase Key:",
-        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ? "Set" : "Missing"
-      );
-      console.log("Files to save:", formData.files);
-      console.log(
-        "Files JSON:",
-        JSON.stringify(
-          formData.files.map((file) => ({
-            name: file.name,
-            size: file.size,
-            type: file.type,
-            lastModified: file.lastModified,
-          }))
-        )
-      );
-
-      // Upload files to Supabase Storage (portfolio bucket) only if enabled
-      let uploadedFileUrls: string[] = [];
-      const enableStorageUploads =
-        process.env.NEXT_PUBLIC_ENABLE_STORAGE_UPLOAD === "true";
-      if (enableStorageUploads && formData.files.length > 0) {
-        try {
-          setUploadProgress(20);
-          const uploadResults = await Promise.all(
-            formData.files.map(async (file, index) => {
-              const timestamp = Date.now();
-              const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, "_");
-              const path = `freelancer-applications/${timestamp}-${index}-${safeName}`;
-              const { data: uploadData, error: uploadError } =
-                await supabase.storage
-                  .from("portfolio")
-                  .upload(path, file, { upsert: false, cacheControl: "3600" });
-              if (uploadError) {
-                console.error("Storage upload error:", uploadError.message);
-                return null;
-              }
-              const { data: publicUrlData } = supabase.storage
-                .from("portfolio")
-                .getPublicUrl(uploadData.path);
-              return publicUrlData.publicUrl || null;
-            })
-          );
-          uploadedFileUrls = uploadResults.filter((u): u is string =>
-            Boolean(u)
-          );
-          console.log("Uploaded file URLs:", uploadedFileUrls);
-          setUploadProgress(30);
-        } catch (uploadUnexpectedError) {
-          console.error(
-            "Unexpected storage upload error:",
-            uploadUnexpectedError
-          );
-          uploadedFileUrls = [];
-          // Continue gracefully without failing submission
-        }
+      setUploadProgress(5);
+      // Quick validation
+      if (!formData.fullName || !formData.email) {
+        toast({
+          title: "Error",
+          description: "Please fill in all required fields.",
+          variant: "destructive",
+        });
+        return;
       }
 
-      // 1️⃣ Save to Supabase database
-      // Build base record
-      const baseRecord: any = {
+      // Skip file uploads for faster submission - just store metadata
+      let uploadedFileUrls: string[] = [];
+      console.log("Skipping file uploads for faster submission");
+
+      // 1️⃣ Save to Supabase database (optimized for speed)
+      setUploadProgress(20);
+      
+      const applicationData = {
         full_name: formData.fullName,
         email: formData.email,
         phone_number: formData.phone,
@@ -193,72 +146,53 @@ export function FreelancerApplicationForm() {
         about_you: formData.aboutYou,
         equipment_software: formData.equipment,
         day_rate: formData.rates,
-        created_at: new Date().toISOString(),
-      };
-
-      const recordWithFiles = {
-        ...baseRecord,
         uploaded_files: JSON.stringify(
-          uploadedFileUrls.length > 0
-            ? uploadedFileUrls.map((url) => ({ url }))
-            : formData.files.map((file) => ({
-                name: file.name,
-                size: file.size,
-                type: file.type,
-                lastModified: file.lastModified,
-              }))
+          formData.files.map((file) => ({
+            name: file.name,
+            size: file.size,
+            type: file.type,
+            lastModified: file.lastModified,
+          }))
         ),
       };
 
-      // Try insert with uploaded_files; on specific column-missing error, retry without it
-      let insertError: any | null = null;
-      let insertData: any | null = null;
-      {
-        const { data, error } = await supabase
+      // Try insert with uploaded_files; on column-missing error, retry without it
+      let { data: insertData, error: insertError } = await supabase
+        .from("FreelancerApplications")
+        .insert([applicationData]);
+
+      if (insertError && insertError.message?.includes("uploaded_files")) {
+        console.warn("uploaded_files column missing; retrying without it");
+        const { data: retryData, error: retryError } = await supabase
           .from("FreelancerApplications")
-          .insert([recordWithFiles]);
-        insertData = data;
-        insertError = error;
+          .insert([{
+            full_name: formData.fullName,
+            email: formData.email,
+            phone_number: formData.phone,
+            portfolio_url: formData.portfolioLink,
+            skills: formData.skillsText,
+            availability: formData.availability,
+            experience_years: formData.experience,
+            about_you: formData.aboutYou,
+            equipment_software: formData.equipment,
+            day_rate: formData.rates,
+          }]);
+        insertData = retryData;
+        insertError = retryError;
       }
 
       if (insertError) {
-        const message = insertError.message || "";
-        const columnMissing =
-          message.includes("uploaded_files") ||
-          message.includes("column") ||
-          insertError.code === "42703";
-        if (columnMissing) {
-          console.warn(
-            "uploaded_files column missing; retrying insert without it"
-          );
-          const { data: retryData, error: retryError } = await supabase
-            .from("FreelancerApplications")
-            .insert([baseRecord]);
-          insertData = retryData;
-          insertError = retryError;
-        }
-      }
-
-      if (insertError) {
-        console.error(
-          "Supabase insert error:",
-          insertError.message || insertError
-        );
+        console.error("Supabase insert error:", insertError.message || insertError);
         toast({
           title: "Error",
-          description: `Could not save application to the database: ${
-            insertError.message || insertError
-          }`,
+          description: `Could not save application to the database: ${insertError.message || insertError}`,
           variant: "destructive",
         });
         return;
       }
 
       console.log("Successfully saved to Supabase:", insertData);
-      setUploadProgress(40);
-
-      // Debug: Check if we have the required data
-      console.log("Form submission successful, setting success state");
+      setUploadProgress(70);
 
       // 2️⃣ Build email content
       const emailContent = `
@@ -288,40 +222,26 @@ ${formData.rates}
 This application was submitted through the Youu Media website.
       `;
 
-      // 3️⃣ Send email notification (non-blocking; failures won't fail submission)
-      setUploadProgress(60);
-      try {
-        const res = await fetch("/api/send-application", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            summary: emailContent,
-            files: formData.files.map((file) => ({
-              name: file.name,
-              size: file.size,
-              type: file.type,
-            })),
-          }),
-        });
-        if (!res.ok) {
-          console.warn("Email send returned non-OK status");
-        }
-      } catch (emailError) {
-        console.warn(
-          "Email send failed but submission will continue:",
-          emailError
-        );
-      }
+      // 3️⃣ Send email notification (fire-and-forget for speed)
+      setUploadProgress(80);
+      
+      // Send email in background without waiting
+      fetch("/api/send-application", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          summary: emailContent,
+          files: formData.files.map((file) => ({
+            name: file.name,
+            size: file.size,
+            type: file.type,
+          })),
+        }),
+      }).catch(err => console.warn("Email send failed:", err));
 
-      setUploadProgress(90);
-
-      // 4️⃣ Show success toast and update state
+      // 4️⃣ Show success immediately
       setUploadProgress(100);
-      console.log("Setting submitSuccess to true");
       setSubmitSuccess(true);
-      console.log("Success state set, showing toast");
       toast({
         title: "Application submitted successfully!",
         description:
@@ -442,7 +362,10 @@ This application was submitted through the Youu Media website.
                 </CardDescription>
               </CardHeader>
               <CardContent className="p-4 md:p-8">
-                <form onSubmit={handleSubmit} className="space-y-6 md:space-y-8">
+                <form
+                  onSubmit={handleSubmit}
+                  className="space-y-6 md:space-y-8"
+                >
                   {/* Personal Information */}
                   <div className="space-y-4 md:space-y-6">
                     <h3 className="text-lg font-semibold text-primary">
