@@ -32,7 +32,7 @@ export async function GET(request: NextRequest) {
 
     // Fetch all freelancer applications
     const { data: applications, error } = await supabase
-      .from('FreelancerApplications')
+      .from('freelancer_applications')
       .select('*')
       .order('created_at', { ascending: false })
 
@@ -90,7 +90,7 @@ export async function PATCH(request: NextRequest) {
 
     // Update the application status
     const { data, error } = await supabase
-      .from('FreelancerApplications')
+      .from('freelancer_applications')
       .update({ 
         status,
         updated_at: new Date().toISOString()

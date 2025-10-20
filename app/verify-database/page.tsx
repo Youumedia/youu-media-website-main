@@ -14,9 +14,9 @@ export default function VerifyDatabase() {
       try {
         setLoading(true);
         console.log("Fetching applications from database...");
-        
+
         const { data, error } = await supabase
-          .from("FreelancerApplications")
+          .from("freelancer_applications")
           .select("*")
           .order("created_at", { ascending: false })
           .limit(10);
@@ -67,29 +67,35 @@ export default function VerifyDatabase() {
             <div>
               <div className="mb-4">
                 <h3 className="text-lg font-semibold text-green-600">
-                  ✅ {applications.length} Application{applications.length !== 1 ? 's' : ''} Found
+                  ✅ {applications.length} Application
+                  {applications.length !== 1 ? "s" : ""} Found
                 </h3>
                 <p className="text-sm text-gray-600">
                   Database connection is working! Applications are being saved.
                 </p>
               </div>
-              
+
               <div className="space-y-4">
                 {applications.map((app, index) => (
-                  <div key={app.id || index} className="border rounded p-4 bg-gray-50">
+                  <div
+                    key={app.id || index}
+                    className="border rounded p-4 bg-gray-50"
+                  >
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
-                        <h4 className="font-semibold text-blue-600">{app.full_name}</h4>
+                        <h4 className="font-semibold text-blue-600">
+                          {app.full_name}
+                        </h4>
                         <p className="text-sm text-gray-600">{app.email}</p>
                         {app.phone_number && (
-                          <p className="text-sm text-gray-600">📞 {app.phone_number}</p>
+                          <p className="text-sm text-gray-600">
+                            📞 {app.phone_number}
+                          </p>
                         )}
                       </div>
                       <div className="text-sm text-gray-500">
                         <p>📅 {new Date(app.created_at).toLocaleString()}</p>
-                        {app.availability && (
-                          <p>⏰ {app.availability}</p>
-                        )}
+                        {app.availability && <p>⏰ {app.availability}</p>}
                         {app.experience_years && (
                           <p>💼 {app.experience_years} years experience</p>
                         )}
@@ -98,8 +104,9 @@ export default function VerifyDatabase() {
                     {app.about_you && (
                       <div className="mt-2">
                         <p className="text-sm text-gray-700">
-                          <strong>About:</strong> {app.about_you.substring(0, 100)}
-                          {app.about_you.length > 100 ? '...' : ''}
+                          <strong>About:</strong>{" "}
+                          {app.about_you.substring(0, 100)}
+                          {app.about_you.length > 100 ? "..." : ""}
                         </p>
                       </div>
                     )}

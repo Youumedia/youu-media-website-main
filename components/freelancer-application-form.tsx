@@ -23,7 +23,6 @@ import {
 } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import { Users, Briefcase, Mail, Send, CheckCircle } from "lucide-react";
-import supabase from "@/lib/supabase";
 
 const availabilityOptions = [
   "Full-time",
@@ -51,19 +50,13 @@ export function FreelancerApplicationForm() {
     rates: "",
   });
 
-  // Handle form submit - BULLETPROOF VERSION
+  // Handle form submit - Using API route
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     console.log("🚀 FORM SUBMIT CLICKED");
     console.log("Form data:", formData);
     console.log("Is submitting:", isSubmitting);
-
-    // Show immediate feedback
-    toast({
-      title: "Starting submission...",
-      description: "Please wait while we process your application",
-    });
 
     if (isSubmitting) {
       console.log("Already submitting, ignoring");
@@ -87,13 +80,7 @@ export function FreelancerApplicationForm() {
       console.log("Step 1: Validating form data");
       setUploadProgress(20);
 
-      console.log("Step 2: Testing Supabase connection");
-      console.log("Supabase URL:", process.env.NEXT_PUBLIC_SUPABASE_URL);
-      console.log("Supabase Key exists:", !!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY);
-      
-      setUploadProgress(30);
-
-      console.log("Step 3: Preparing data for database");
+      console.log("Step 2: Preparing data for API");
       const applicationData = {
         full_name: formData.fullName.trim(),
         email: formData.email.trim(),
@@ -110,32 +97,29 @@ export function FreelancerApplicationForm() {
       console.log("Application data:", applicationData);
       setUploadProgress(50);
 
-      console.log("Step 4: Inserting into database");
-      const { data, error } = await supabase
-        .from("FreelancerApplications")
-        .insert([applicationData]);
+      console.log("Step 3: Submitting to API");
+      const response = await fetch("/api/freelancer-applications", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(applicationData),
+      });
 
-      console.log("Database response:", { data, error });
+      const result = await response.json();
+      console.log("API response:", result);
 
-      if (error) {
-        console.error("❌ DATABASE ERROR:", error);
-        toast({
-          title: "Submission Failed",
-          description: `Database error: ${error.message}`,
-          variant: "destructive",
-        });
-        setIsSubmitting(false);
-        setUploadProgress(0);
-        return;
+      if (!response.ok) {
+        throw new Error(result.error || "Failed to submit application");
       }
 
-      console.log("✅ DATABASE SUCCESS!");
+      console.log("✅ API SUCCESS!");
       setUploadProgress(80);
 
       // Show success
       setUploadProgress(100);
       setSubmitSuccess(true);
-      
+
       toast({
         title: "Application Sent!",
         description: "Thank you for your application. We'll be in touch soon!",
@@ -161,12 +145,14 @@ export function FreelancerApplicationForm() {
         setUploadProgress(0);
         setIsSubmitting(false);
       }, 3000);
-
     } catch (error) {
-      console.error("❌ CRITICAL ERROR:", error);
+      console.error("❌ SUBMISSION ERROR:", error);
       toast({
         title: "Submission Error",
-        description: "Something went wrong. Please try again.",
+        description:
+          error instanceof Error
+            ? error.message
+            : "Something went wrong. Please try again.",
         variant: "destructive",
       });
       setIsSubmitting(false);
@@ -455,9 +441,9 @@ export function FreelancerApplicationForm() {
                           ? "bg-green-600 hover:bg-green-700"
                           : "bg-gradient-to-r from-[#70BFFF] to-[#BE55FF] animate-gradient-x hover:opacity-90"
                       }`}
-                      style={{ 
-                        WebkitTapHighlightColor: 'transparent',
-                        touchAction: 'manipulation'
+                      style={{
+                        WebkitTapHighlightColor: "transparent",
+                        touchAction: "manipulation",
                       }}
                     >
                       {isSubmitting ? (

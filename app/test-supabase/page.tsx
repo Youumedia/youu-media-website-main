@@ -11,19 +11,21 @@ export default function TestSupabase() {
     // Check environment variables
     setEnvVars({
       supabaseUrl: process.env.NEXT_PUBLIC_SUPABASE_URL,
-      supabaseKey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ? "Present" : "Missing",
+      supabaseKey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+        ? "Present"
+        : "Missing",
     });
 
     // Test Supabase connection
     async function testConnection() {
       try {
         setStatus("Testing Supabase connection...");
-        
+
         const { data, error } = await supabase
-          .from("FreelancerApplications")
+          .from("freelancer_applications")
           .select("count")
           .limit(1);
-        
+
         if (error) {
           setStatus(`❌ Error: ${error.message}`);
         } else {
@@ -40,7 +42,7 @@ export default function TestSupabase() {
   return (
     <div className="p-8">
       <h1 className="text-2xl font-bold mb-4">Supabase Connection Test</h1>
-      
+
       <div className="space-y-4">
         <div>
           <h2 className="text-lg font-semibold">Environment Variables:</h2>
@@ -48,7 +50,7 @@ export default function TestSupabase() {
             {JSON.stringify(envVars, null, 2)}
           </pre>
         </div>
-        
+
         <div>
           <h2 className="text-lg font-semibold">Connection Status:</h2>
           <p className="text-lg">{status}</p>

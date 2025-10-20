@@ -177,7 +177,7 @@ export function FreelancerApplicationForm() {
 
       console.log("Attempting database insert...");
       const { data: insertData, error: insertError } = await supabase
-        .from("FreelancerApplications")
+        .from("freelancer_applications")
         .insert([
           {
             full_name: formData.fullName,

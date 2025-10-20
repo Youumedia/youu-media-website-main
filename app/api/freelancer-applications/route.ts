@@ -1,9 +1,9 @@
-import { NextRequest, NextResponse } from 'next/server'
-import { createSupabaseServerClient } from '@/lib/supabase'
+import { NextRequest, NextResponse } from "next/server";
+import supabase from "@/lib/supabase";
 
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json()
+    const body = await request.json();
     const {
       full_name,
       email,
@@ -15,67 +15,98 @@ export async function POST(request: NextRequest) {
       about_you,
       equipment_software,
       day_rate,
-      uploaded_files,
-    } = body || {}
+    } = body;
 
+    // Basic validation
     if (!full_name || !email) {
-      return NextResponse.json({ error: 'Missing required fields' }, { status: 400 })
+      return NextResponse.json(
+        {
+          error: "Full name and email are required",
+        },
+        { status: 400 }
+      );
     }
 
-    const supabase = createSupabaseServerClient({
-      get: (name: string) => ({ name, value: request.cookies.get(name)?.value || '' }),
-      set: (_name: string, _value: string, _options: any) => {},
-      remove: (_name: string, _options: any) => {},
-    })
-
-    // Try insert with uploaded_files, fallback without if column missing
-    const baseRecord: any = {
-      full_name,
-      email,
-      phone_number,
-      portfolio_url,
-      skills,
-      availability,
-      experience_years,
-      about_you,
-      equipment_software,
-      day_rate,
-      created_at: new Date().toISOString(),
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      return NextResponse.json(
+        {
+          error: "Please provide a valid email address",
+        },
+        { status: 400 }
+      );
     }
 
-    const recordWithFiles = {
-      ...baseRecord,
-      uploaded_files: uploaded_files ?? null,
+    // Prepare data for database
+    const applicationData = {
+      full_name: full_name.trim(),
+      email: email.trim(),
+      phone_number: phone_number?.trim() || null,
+      portfolio_url: portfolio_url?.trim() || null,
+      skills: skills?.trim() || null,
+      availability: availability || null,
+      experience_years: experience_years?.trim() || null,
+      about_you: about_you?.trim() || null,
+      equipment_software: equipment_software?.trim() || null,
+      day_rate: day_rate?.trim() || null,
+      status: "pending",
+    };
+
+    console.log("Submitting freelancer application:", applicationData);
+
+    // Insert into database
+    const { data, error } = await supabase
+      .from("freelancer_applications")
+      .insert([applicationData])
+      .select()
+      .single();
+
+    if (error) {
+      console.error("Database error:", error);
+      return NextResponse.json(
+        {
+          error: "Failed to submit application. Please try again.",
+        },
+        { status: 500 }
+      );
     }
 
-    let insertError: any | null = null
-    let insertData: any | null = null
-    {
-      const { data, error } = await supabase.from('FreelancerApplications').insert([recordWithFiles]).select('*').single()
-      insertData = data
-      insertError = error
-    }
+    console.log("Application submitted successfully:", data);
 
-    if (insertError) {
-      const message = insertError.message || ''
-      const columnMissing = message.includes('uploaded_files') || insertError.code === '42703'
-      if (columnMissing) {
-        const { data, error } = await supabase.from('FreelancerApplications').insert([baseRecord]).select('*').single()
-        insertData = data
-        insertError = error
-      }
-    }
-
-    if (insertError) {
-      console.error('Failed to insert freelancer application:', insertError)
-      return NextResponse.json({ error: 'Failed to save application' }, { status: 500 })
-    }
-
-    return NextResponse.json({ application: insertData })
+    return NextResponse.json(
+      {
+        success: true,
+        application: data,
+        message: "Application submitted successfully!",
+      },
+      { status: 201 }
+    );
   } catch (error) {
-    console.error('Error in POST /api/freelancer-applications:', error)
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
+    console.error("Error in freelancer application API:", error);
+    return NextResponse.json(
+      {
+        error: "Internal server error. Please try again.",
+      },
+      { status: 500 }
+    );
   }
 }
 
-
+export async function GET(request: NextRequest) {
+  try {
+    // This endpoint could be used to fetch applications (admin only)
+    // For now, just return a simple response
+    return NextResponse.json({
+      message: "Freelancer applications API is working",
+    });
+  } catch (error) {
+    console.error("Error in GET freelancer applications:", error);
+    return NextResponse.json(
+      {
+        error: "Internal server error",
+      },
+      { status: 500 }
+    );
+  }
+}

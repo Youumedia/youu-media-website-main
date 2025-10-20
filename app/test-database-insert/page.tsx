@@ -17,7 +17,7 @@ export default function TestDatabaseInsert() {
 
     try {
       console.log("Testing database insert...");
-      
+
       const testData = {
         full_name: "Test User",
         email: "test@example.com",
@@ -26,7 +26,8 @@ export default function TestDatabaseInsert() {
         skills: "Video Editing, Photography",
         availability: "Full-time",
         experience_years: "5",
-        about_you: "This is a test application to verify database functionality.",
+        about_you:
+          "This is a test application to verify database functionality.",
         equipment_software: "Adobe Premiere, Canon EOS R5",
         day_rate: "£400-500",
       };
@@ -34,7 +35,7 @@ export default function TestDatabaseInsert() {
       console.log("Inserting test data:", testData);
 
       const { data, error } = await supabase
-        .from("FreelancerApplications")
+        .from("freelancer_applications")
         .insert([testData]);
 
       console.log("Database response:", { data, error });
@@ -76,11 +77,11 @@ export default function TestDatabaseInsert() {
         </CardHeader>
         <CardContent className="space-y-4">
           <p className="text-gray-600">
-            This page tests whether the database insert functionality is working properly.
-            Click the button below to insert a test application.
+            This page tests whether the database insert functionality is working
+            properly. Click the button below to insert a test application.
           </p>
-          
-          <Button 
+
+          <Button
             onClick={testDatabaseInsert}
             disabled={isTesting}
             className="w-full"
@@ -96,23 +97,32 @@ export default function TestDatabaseInsert() {
           </Button>
 
           {result && (
-            <div className={`p-4 rounded ${
-              result.includes("✅") 
-                ? "bg-green-50 text-green-800 border border-green-200" 
-                : "bg-red-50 text-red-800 border border-red-200"
-            }`}>
+            <div
+              className={`p-4 rounded ${
+                result.includes("✅")
+                  ? "bg-green-50 text-green-800 border border-green-200"
+                  : "bg-red-50 text-red-800 border border-red-200"
+              }`}
+            >
               <h3 className="font-semibold mb-2">Test Result:</h3>
               <p>{result}</p>
             </div>
           )}
 
           <div className="text-sm text-gray-500">
-            <p><strong>What this test does:</strong></p>
+            <p>
+              <strong>What this test does:</strong>
+            </p>
             <ul className="list-disc list-inside mt-2 space-y-1">
               <li>Creates a test application with sample data</li>
-              <li>Attempts to insert it into the FreelancerApplications table</li>
+              <li>
+                Attempts to insert it into the FreelancerApplications table
+              </li>
               <li>Shows success or error message</li>
-              <li>You can verify the result by visiting <code>/verify-database</code></li>
+              <li>
+                You can verify the result by visiting{" "}
+                <code>/verify-database</code>
+              </li>
             </ul>
           </div>
         </CardContent>
