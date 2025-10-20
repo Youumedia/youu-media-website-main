@@ -256,7 +256,7 @@ export function FreelancerApplicationForm() {
 
       console.log("Successfully saved to Supabase:", insertData);
       setUploadProgress(40);
-      
+
       // Debug: Check if we have the required data
       console.log("Form submission successful, setting success state");
 
@@ -397,26 +397,26 @@ This application was submitted through the Youu Media website.
             drop-shadow(0 0 60px rgba(168, 85, 247, 0.4));
         }
       `}</style>
-      <section className="py-20 px-4">
+      <section className="py-12 md:py-20 px-4">
         <div className="max-w-4xl mx-auto">
           {/* Header */}
-          <div className="text-center mb-12">
+          <div className="text-center mb-8 md:mb-12">
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-r from-[#70BFFF] to-[#BE55FF] animate-gradient-x opacity-20 blur-3xl"></div>
               <div className="relative">
-                <div className="flex items-center justify-center mb-6">
+                <div className="flex items-center justify-center mb-4 md:mb-6">
                   <Image
                     src="/images/youu-logo-updated.png"
                     alt="Youu Media"
                     width={80}
                     height={80}
-                    className="w-20 h-20"
+                    className="w-16 h-16 md:w-20 md:h-20"
                   />
                 </div>
-                <h1 className="text-4xl md:text-5xl font-bold mb-4 text-black">
+                <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-black">
                   Join the Youu Media Creative Team
                 </h1>
-                <p className="text-xl text-black max-w-2xl mx-auto">
+                <p className="text-lg md:text-xl text-black max-w-2xl mx-auto px-4">
                   Are you a talented creative professional? We're always looking
                   for skilled freelancers to join our network and work on
                   exciting projects.
@@ -441,14 +441,14 @@ This application was submitted through the Youu Media website.
                   review your application and get back to you soon.
                 </CardDescription>
               </CardHeader>
-              <CardContent className="p-8">
-                <form onSubmit={handleSubmit} className="space-y-8">
+              <CardContent className="p-4 md:p-8">
+                <form onSubmit={handleSubmit} className="space-y-6 md:space-y-8">
                   {/* Personal Information */}
-                  <div className="space-y-6">
+                  <div className="space-y-4 md:space-y-6">
                     <h3 className="text-lg font-semibold text-primary">
                       Personal Information
                     </h3>
-                    <div className="grid md:grid-cols-2 gap-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                       <div className="space-y-2">
                         <Label htmlFor="fullName">Full Name *</Label>
                         <Input
@@ -517,7 +517,7 @@ This application was submitted through the Youu Media website.
                   </div>
 
                   {/* Professional Information */}
-                  <div className="space-y-6">
+                  <div className="space-y-4 md:space-y-6">
                     <h3 className="text-lg font-semibold text-primary">
                       Professional Information
                     </h3>
@@ -539,7 +539,7 @@ This application was submitted through the Youu Media website.
                       />
                     </div>
 
-                    <div className="grid md:grid-cols-2 gap-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                       <div className="space-y-2">
                         <Label htmlFor="availability">Availability *</Label>
                         <Select
@@ -632,8 +632,8 @@ This application was submitted through the Youu Media website.
                   </div>
 
                   {/* Submit Button */}
-                  <div className="pt-6">
-                    <div className="space-y-2 mb-6">
+                  <div className="pt-4 md:pt-6">
+                    <div className="space-y-2 mb-4 md:mb-6">
                       <Label htmlFor="files">
                         Upload Best Portfolio Pieces (optional)
                       </Label>
@@ -661,13 +661,13 @@ This application was submitted through the Youu Media website.
                                 key={index}
                                 className="flex items-center justify-between text-sm bg-gray-50 p-2 rounded"
                               >
-                                <span className="truncate flex-1">
+                                <span className="truncate flex-1 min-w-0">
                                   {file.name}
                                 </span>
                                 <button
                                   type="button"
                                   onClick={() => handleRemoveFile(index)}
-                                  className="ml-2 text-red-500 hover:text-red-700 font-medium"
+                                  className="ml-2 text-red-500 hover:text-red-700 font-medium flex-shrink-0"
                                 >
                                   ✕
                                 </button>
@@ -681,7 +681,7 @@ This application was submitted through the Youu Media website.
                       type="submit"
                       size="lg"
                       disabled={isSubmitting}
-                      className={`w-full transition-opacity ${
+                      className={`w-full transition-opacity text-sm md:text-base py-3 md:py-4 ${
                         submitSuccess
                           ? "bg-green-600 hover:bg-green-700"
                           : "bg-gradient-to-r from-[#70BFFF] to-[#BE55FF] animate-gradient-x hover:opacity-90"
