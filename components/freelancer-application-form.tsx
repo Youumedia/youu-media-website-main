@@ -55,7 +55,7 @@ export function FreelancerApplicationForm() {
   // Handle file upload
   const handleFilesChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newFiles = Array.from(e.target.files || []);
-    
+
     // Validate file sizes (max 10MB per file)
     const maxSize = 10 * 1024 * 1024; // 10MB
     const oversizedFiles = newFiles.filter((file) => file.size > maxSize);
@@ -86,7 +86,9 @@ export function FreelancerApplicationForm() {
 
     toast({
       title: "Files added!",
-      description: `${newFiles.length} file${newFiles.length !== 1 ? "s" : ""} added.`,
+      description: `${newFiles.length} file${
+        newFiles.length !== 1 ? "s" : ""
+      } added.`,
     });
 
     e.target.value = "";
@@ -100,11 +102,19 @@ export function FreelancerApplicationForm() {
     }));
   };
 
-  // Handle form submit - ULTRA SIMPLE VERSION
+  // Handle form submit - TEST VERSION
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     console.log("🚀 FORM SUBMIT CLICKED");
+    console.log("Current form data:", formData);
+    console.log("Is submitting:", isSubmitting);
+    
+    // Show immediate feedback
+    toast({
+      title: "Form clicked!",
+      description: "Processing your submission...",
+    });
     
     if (isSubmitting) {
       console.log("Already submitting, ignoring");
@@ -112,34 +122,27 @@ export function FreelancerApplicationForm() {
     }
     
     setIsSubmitting(true);
-    setUploadProgress(10);
-    setSubmitSuccess(false);
-
-    console.log("Form data to submit:", formData);
-
+    setUploadProgress(20);
+    
+    // Test basic functionality first
+    console.log("✅ Form state updated, testing database connection...");
+    
     try {
-      // Basic validation
-      if (!formData.fullName || !formData.email) {
-        console.log("❌ Validation failed");
-        toast({
-          title: "Error",
-          description: "Please fill in all required fields.",
-          variant: "destructive",
-        });
-        setIsSubmitting(false);
-        return;
-      }
-
-      setUploadProgress(30);
-      console.log("✅ Validation passed, saving to database...");
-
-      // SIMPLE DATABASE INSERT - NO FILES, NO COMPLEX STUFF
+      // Test Supabase connection first
+      console.log("Testing Supabase connection...");
+      console.log("Supabase URL:", process.env.NEXT_PUBLIC_SUPABASE_URL);
+      console.log("Supabase Key exists:", !!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY);
+      
+      setUploadProgress(40);
+      
+      // Try the simplest possible insert
+      console.log("Attempting database insert...");
       const { data, error } = await supabase
         .from("FreelancerApplications")
         .insert([
           {
-            full_name: formData.fullName,
-            email: formData.email,
+            full_name: formData.fullName || "Test Name",
+            email: formData.email || "test@example.com",
             phone_number: formData.phone || "",
             portfolio_url: formData.portfolioLink || "",
             skills: formData.skillsText || "",
@@ -150,50 +153,37 @@ export function FreelancerApplicationForm() {
             day_rate: formData.rates || "",
           },
         ]);
-
-      console.log("Database insert result:", { data, error });
-
+      
+      console.log("Database result:", { data, error });
+      
       if (error) {
         console.error("❌ DATABASE ERROR:", error);
         toast({
           title: "Database Error",
-          description: `Failed to save: ${error.message}`,
+          description: `Database error: ${error.message}`,
           variant: "destructive",
         });
         setIsSubmitting(false);
         return;
       }
-
-      console.log("✅ DATABASE SUCCESS:", data);
+      
+      console.log("✅ DATABASE SUCCESS!");
       setUploadProgress(80);
-
-      // Try to send email (don't let it block success)
-      try {
-        fetch("/api/send-application", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            summary: `New Application from ${formData.fullName} (${formData.email})`,
-          }),
-        }).catch(err => console.warn("Email failed:", err));
-      } catch (emailErr) {
-        console.warn("Email error:", emailErr);
-      }
-
+      
+      // Show success
       setUploadProgress(100);
       setSubmitSuccess(true);
       setIsSubmitting(false);
-
-      console.log("✅ FORM SUBMISSION COMPLETE");
-
+      
       toast({
-        title: "Application submitted successfully!",
-        description: "Your application has been saved to the database.",
+        title: "SUCCESS!",
+        description: "Application saved to database!",
       });
-
-      // Reset form after 3 seconds
+      
+      console.log("✅ FORM COMPLETED SUCCESSFULLY");
+      
+      // Reset form
       setTimeout(() => {
-        console.log("Resetting form");
         setFormData({
           fullName: "",
           email: "",
@@ -210,12 +200,12 @@ export function FreelancerApplicationForm() {
         setSubmitSuccess(false);
         setUploadProgress(0);
       }, 3000);
-
+      
     } catch (error) {
-      console.error("❌ SUBMISSION ERROR:", error);
+      console.error("❌ CRITICAL ERROR:", error);
       toast({
-        title: "Error",
-        description: "Failed to submit application. Please try again.",
+        title: "Critical Error",
+        description: `Error: ${error.message}`,
         variant: "destructive",
       });
       setIsSubmitting(false);
@@ -227,16 +217,35 @@ export function FreelancerApplicationForm() {
     <>
       <style jsx>{`
         @keyframes gradient-flow {
-          0% { background-position: 0% 0%; }
-          100% { background-position: 200% 0%; }
+          0% {
+            background-position: 0% 0%;
+          }
+          100% {
+            background-position: 200% 0%;
+          }
         }
         .moving-gradient-border {
-          background: linear-gradient(90deg, #a855f7 0%, #60a5fa 10%, #a855f7 20%, #60a5fa 30%, #a855f7 40%, #60a5fa 50%, #a855f7 60%, #60a5fa 70%, #a855f7 80%, #60a5fa 90%, #a855f7 100%);
+          background: linear-gradient(
+            90deg,
+            #a855f7 0%,
+            #60a5fa 10%,
+            #a855f7 20%,
+            #60a5fa 30%,
+            #a855f7 40%,
+            #60a5fa 50%,
+            #a855f7 60%,
+            #60a5fa 70%,
+            #a855f7 80%,
+            #60a5fa 90%,
+            #a855f7 100%
+          );
           background-size: 200% 100%;
           animation: gradient-flow 3s linear infinite;
         }
         .border-glow {
-          filter: drop-shadow(0 0 20px rgba(168, 85, 247, 0.6)) drop-shadow(0 0 40px rgba(96, 165, 250, 0.6)) drop-shadow(0 0 60px rgba(168, 85, 247, 0.4));
+          filter: drop-shadow(0 0 20px rgba(168, 85, 247, 0.6))
+            drop-shadow(0 0 40px rgba(96, 165, 250, 0.6))
+            drop-shadow(0 0 60px rgba(168, 85, 247, 0.4));
         }
       `}</style>
       <section className="py-12 md:py-20 px-4">
@@ -282,7 +291,10 @@ export function FreelancerApplicationForm() {
                 </CardDescription>
               </CardHeader>
               <CardContent className="p-4 md:p-8">
-                <form onSubmit={handleSubmit} className="space-y-6 md:space-y-8">
+                <form
+                  onSubmit={handleSubmit}
+                  className="space-y-6 md:space-y-8"
+                >
                   {/* Personal Information */}
                   <div className="space-y-4 md:space-y-6">
                     <h3 className="text-lg font-semibold text-primary">
@@ -337,7 +349,9 @@ export function FreelancerApplicationForm() {
                         />
                       </div>
                       <div className="space-y-2">
-                        <Label htmlFor="portfolio">Portfolio/Website Link</Label>
+                        <Label htmlFor="portfolio">
+                          Portfolio/Website Link
+                        </Label>
                         <Input
                           id="portfolio"
                           type="url"
@@ -401,7 +415,9 @@ export function FreelancerApplicationForm() {
                         </Select>
                       </div>
                       <div className="space-y-2">
-                        <Label htmlFor="experience">Years of Experience *</Label>
+                        <Label htmlFor="experience">
+                          Years of Experience *
+                        </Label>
                         <Input
                           id="experience"
                           value={formData.experience}
@@ -469,9 +485,12 @@ export function FreelancerApplicationForm() {
                   {/* File Upload */}
                   <div className="pt-4 md:pt-6">
                     <div className="space-y-2 mb-4 md:mb-6">
-                      <Label htmlFor="files">Upload Best Portfolio Pieces (optional)</Label>
+                      <Label htmlFor="files">
+                        Upload Best Portfolio Pieces (optional)
+                      </Label>
                       <p className="text-sm text-muted-foreground mb-2">
-                        You can select multiple files (videos, images, PDFs, etc.). Max 5 files, 10MB each.
+                        You can select multiple files (videos, images, PDFs,
+                        etc.). Max 5 files, 10MB each.
                       </p>
                       <Input
                         id="files"
@@ -483,7 +502,8 @@ export function FreelancerApplicationForm() {
                       {formData.files.length > 0 && (
                         <div className="mt-3 space-y-2">
                           <p className="text-sm font-medium text-green-600">
-                            ✓ {formData.files.length} file{formData.files.length !== 1 ? "s" : ""} selected:
+                            ✓ {formData.files.length} file
+                            {formData.files.length !== 1 ? "s" : ""} selected:
                           </p>
                           <ul className="space-y-1">
                             {formData.files.map((file, index) => (
