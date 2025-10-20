@@ -141,7 +141,8 @@ export function FreelancerApplicationForm() {
 
       // Upload files to Supabase Storage (portfolio bucket) only if enabled
       let uploadedFileUrls: string[] = [];
-      const enableStorageUploads = process.env.NEXT_PUBLIC_ENABLE_STORAGE_UPLOAD === "true";
+      const enableStorageUploads =
+        process.env.NEXT_PUBLIC_ENABLE_STORAGE_UPLOAD === "true";
       if (enableStorageUploads && formData.files.length > 0) {
         try {
           setUploadProgress(20);
@@ -164,11 +165,16 @@ export function FreelancerApplicationForm() {
               return publicUrlData.publicUrl || null;
             })
           );
-          uploadedFileUrls = uploadResults.filter((u): u is string => Boolean(u));
+          uploadedFileUrls = uploadResults.filter((u): u is string =>
+            Boolean(u)
+          );
           console.log("Uploaded file URLs:", uploadedFileUrls);
           setUploadProgress(30);
         } catch (uploadUnexpectedError) {
-          console.error("Unexpected storage upload error:", uploadUnexpectedError);
+          console.error(
+            "Unexpected storage upload error:",
+            uploadUnexpectedError
+          );
           uploadedFileUrls = [];
           // Continue gracefully without failing submission
         }
@@ -248,8 +254,11 @@ export function FreelancerApplicationForm() {
         return;
       }
 
-      console.log("Successfully saved to Supabase:", data);
+      console.log("Successfully saved to Supabase:", insertData);
       setUploadProgress(40);
+      
+      // Debug: Check if we have the required data
+      console.log("Form submission successful, setting success state");
 
       // 2️⃣ Build email content
       const emailContent = `
@@ -300,14 +309,19 @@ This application was submitted through the Youu Media website.
           console.warn("Email send returned non-OK status");
         }
       } catch (emailError) {
-        console.warn("Email send failed but submission will continue:", emailError);
+        console.warn(
+          "Email send failed but submission will continue:",
+          emailError
+        );
       }
 
       setUploadProgress(90);
 
       // 4️⃣ Show success toast and update state
       setUploadProgress(100);
+      console.log("Setting submitSuccess to true");
       setSubmitSuccess(true);
+      console.log("Success state set, showing toast");
       toast({
         title: "Application submitted successfully!",
         description:
@@ -341,7 +355,6 @@ This application was submitted through the Youu Media website.
         variant: "destructive",
       });
       setUploadProgress(0);
-    } finally {
       setIsSubmitting(false);
     }
   };
