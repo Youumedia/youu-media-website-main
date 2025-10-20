@@ -124,6 +124,11 @@ export function FreelancerApplicationForm() {
 
       setUploadProgress(20);
 
+      console.log("🔍 DEBUGGING: Starting database insert");
+      console.log("Form data:", formData);
+      console.log("Supabase URL:", process.env.NEXT_PUBLIC_SUPABASE_URL);
+      console.log("Supabase Key:", process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ? "Present" : "Missing");
+
       // Save to database with file info
       const { data, error } = await supabase
         .from("FreelancerApplications")
@@ -150,15 +155,52 @@ export function FreelancerApplicationForm() {
           },
         ]);
 
+      console.log("🔍 Database result:", { data, error });
+
       if (error) {
-        console.error("Database error:", error);
-        toast({
-          title: "Error",
-          description: `Failed to save: ${error.message}`,
-          variant: "destructive",
-        });
-        setIsSubmitting(false);
-        return;
+        console.error("❌ Database error:", error);
+        
+        // Try again without uploaded_files column if that's the issue
+        if (error.message?.includes("uploaded_files") || error.message?.includes("column")) {
+          console.log("🔄 Retrying without uploaded_files column...");
+          const { data: retryData, error: retryError } = await supabase
+            .from("FreelancerApplications")
+            .insert([
+              {
+                full_name: formData.fullName,
+                email: formData.email,
+                phone_number: formData.phone,
+                portfolio_url: formData.portfolioLink,
+                skills: formData.skillsText,
+                availability: formData.availability,
+                experience_years: formData.experience,
+                about_you: formData.aboutYou,
+                equipment_software: formData.equipment,
+                day_rate: formData.rates,
+              },
+            ]);
+          
+          if (retryError) {
+            console.error("❌ Retry also failed:", retryError);
+            toast({
+              title: "Error",
+              description: `Failed to save: ${retryError.message}`,
+              variant: "destructive",
+            });
+            setIsSubmitting(false);
+            return;
+          } else {
+            console.log("✅ Retry successful:", retryData);
+          }
+        } else {
+          toast({
+            title: "Error",
+            description: `Failed to save: ${error.message}`,
+            variant: "destructive",
+          });
+          setIsSubmitting(false);
+          return;
+        }
       }
 
       setUploadProgress(80);
