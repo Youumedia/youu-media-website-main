@@ -41,7 +41,8 @@ export function FreelancerApplicationForm() {
     fullName: "",
     email: "",
     phone: "",
-    portfolioLink: "",
+    portfolioLink: "", // Website URL
+    portfolioFiles: "", // File attachments
     skillsText: "",
     availability: "",
     experience: "",
@@ -86,8 +87,9 @@ export function FreelancerApplicationForm() {
         email: formData.email.trim(),
         skills: formData.skillsText?.trim() || "",
         experience_years: formData.experience?.trim() || "",
-        portfolio_url: formData.portfolioLink?.trim() || "",
+        portfolio_url: formData.portfolioLink?.trim() || "", // Website URL goes here
         day_rate: formData.rates?.trim() || "",
+        // Note: portfolioFiles (file attachments) are handled separately
         // Removed fields that don't exist in your database:
         // phone_number, availability, about_you, equipment_software
       };
@@ -132,6 +134,7 @@ export function FreelancerApplicationForm() {
           email: "",
           phone: "",
           portfolioLink: "",
+          portfolioFiles: "",
           skillsText: "",
           availability: "",
           experience: "",
@@ -476,22 +479,22 @@ export function FreelancerApplicationForm() {
                                 .join(", ");
                               setFormData((prev) => ({
                                 ...prev,
-                                portfolioLink: fileNames,
+                                portfolioFiles: fileNames, // Use separate field for files
                               }));
                             }
                           }}
                         />
                       </div>
-                      {formData.portfolioLink && (
+                      {formData.portfolioFiles && (
                         <div className="text-sm text-green-600 bg-green-50 p-2 rounded">
                           <p className="font-medium">Files selected:</p>
-                          <p>{formData.portfolioLink}</p>
+                          <p>{formData.portfolioFiles}</p>
                         </div>
                       )}
                       <p className="text-xs text-gray-500">
                         Upload your best work samples, showreels, or portfolio
-                        documents. This will be sent to the portfolio_url field
-                        in the database.
+                        documents. Files are stored separately from the website
+                        URL above.
                       </p>
                     </div>
                   </div>
