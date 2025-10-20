@@ -51,19 +51,18 @@ export function FreelancerApplicationForm() {
     rates: "",
   });
 
-
-  // Handle form submit - TEST VERSION
+  // Handle form submit - BULLETPROOF VERSION
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     console.log("🚀 FORM SUBMIT CLICKED");
-    console.log("Current form data:", formData);
+    console.log("Form data:", formData);
     console.log("Is submitting:", isSubmitting);
 
     // Show immediate feedback
     toast({
-      title: "Form clicked!",
-      description: "Processing your submission...",
+      title: "Starting submission...",
+      description: "Please wait while we process your application",
     });
 
     if (isSubmitting) {
@@ -71,52 +70,62 @@ export function FreelancerApplicationForm() {
       return;
     }
 
-    setIsSubmitting(true);
-    setUploadProgress(20);
+    // Basic validation
+    if (!formData.fullName || !formData.email) {
+      toast({
+        title: "Missing Information",
+        description: "Please fill in your name and email address",
+        variant: "destructive",
+      });
+      return;
+    }
 
-    // Test basic functionality first
-    console.log("✅ Form state updated, testing database connection...");
+    setIsSubmitting(true);
+    setUploadProgress(10);
 
     try {
-      // Test Supabase connection first
-      console.log("Testing Supabase connection...");
+      console.log("Step 1: Validating form data");
+      setUploadProgress(20);
+
+      console.log("Step 2: Testing Supabase connection");
       console.log("Supabase URL:", process.env.NEXT_PUBLIC_SUPABASE_URL);
-      console.log(
-        "Supabase Key exists:",
-        !!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-      );
+      console.log("Supabase Key exists:", !!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY);
+      
+      setUploadProgress(30);
 
-      setUploadProgress(40);
+      console.log("Step 3: Preparing data for database");
+      const applicationData = {
+        full_name: formData.fullName.trim(),
+        email: formData.email.trim(),
+        phone_number: formData.phone?.trim() || "",
+        portfolio_url: formData.portfolioLink?.trim() || "",
+        skills: formData.skillsText?.trim() || "",
+        availability: formData.availability || "",
+        experience_years: formData.experience?.trim() || "",
+        about_you: formData.aboutYou?.trim() || "",
+        equipment_software: formData.equipment?.trim() || "",
+        day_rate: formData.rates?.trim() || "",
+      };
 
-      // Try the simplest possible insert
-      console.log("Attempting database insert...");
+      console.log("Application data:", applicationData);
+      setUploadProgress(50);
+
+      console.log("Step 4: Inserting into database");
       const { data, error } = await supabase
         .from("FreelancerApplications")
-        .insert([
-          {
-            full_name: formData.fullName || "Test Name",
-            email: formData.email || "test@example.com",
-            phone_number: formData.phone || "",
-            portfolio_url: formData.portfolioLink || "",
-            skills: formData.skillsText || "",
-            availability: formData.availability || "",
-            experience_years: formData.experience || "",
-            about_you: formData.aboutYou || "",
-            equipment_software: formData.equipment || "",
-            day_rate: formData.rates || "",
-          },
-        ]);
+        .insert([applicationData]);
 
-      console.log("Database result:", { data, error });
+      console.log("Database response:", { data, error });
 
       if (error) {
         console.error("❌ DATABASE ERROR:", error);
         toast({
-          title: "Database Error",
+          title: "Submission Failed",
           description: `Database error: ${error.message}`,
           variant: "destructive",
         });
         setIsSubmitting(false);
+        setUploadProgress(0);
         return;
       }
 
@@ -126,16 +135,15 @@ export function FreelancerApplicationForm() {
       // Show success
       setUploadProgress(100);
       setSubmitSuccess(true);
-      setIsSubmitting(false);
-
+      
       toast({
-        title: "SUCCESS!",
-        description: "Application saved to database!",
+        title: "Application Sent!",
+        description: "Thank you for your application. We'll be in touch soon!",
       });
 
       console.log("✅ FORM COMPLETED SUCCESSFULLY");
 
-      // Reset form
+      // Reset form after 3 seconds
       setTimeout(() => {
         setFormData({
           fullName: "",
@@ -151,12 +159,14 @@ export function FreelancerApplicationForm() {
         });
         setSubmitSuccess(false);
         setUploadProgress(0);
+        setIsSubmitting(false);
       }, 3000);
+
     } catch (error) {
       console.error("❌ CRITICAL ERROR:", error);
       toast({
-        title: "Critical Error",
-        description: `Error: ${error.message}`,
+        title: "Submission Error",
+        description: "Something went wrong. Please try again.",
         variant: "destructive",
       });
       setIsSubmitting(false);
@@ -435,17 +445,20 @@ export function FreelancerApplicationForm() {
 
                   {/* Submit Button */}
                   <div className="pt-4 md:pt-6">
-
                     {/* Submit Button */}
                     <Button
                       type="submit"
                       size="lg"
                       disabled={isSubmitting}
-                      className={`w-full transition-opacity text-sm md:text-base py-3 md:py-4 ${
+                      className={`w-full transition-opacity text-sm md:text-base py-3 md:py-4 touch-manipulation ${
                         submitSuccess
                           ? "bg-green-600 hover:bg-green-700"
                           : "bg-gradient-to-r from-[#70BFFF] to-[#BE55FF] animate-gradient-x hover:opacity-90"
                       }`}
+                      style={{ 
+                        WebkitTapHighlightColor: 'transparent',
+                        touchAction: 'manipulation'
+                      }}
                     >
                       {isSubmitting ? (
                         <>
