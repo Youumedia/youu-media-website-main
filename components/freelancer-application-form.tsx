@@ -167,9 +167,8 @@ export function FreelancerApplicationForm() {
         setUploadProgress(30);
       }
 
-      // 1️⃣ Save to Supabase database
-      // Build base record
-      const baseRecord: any = {
+      // 1️⃣ Save to database via server API (more reliable across envs)
+      const payload = {
         full_name: formData.fullName,
         email: formData.email,
         phone_number: formData.phone,
@@ -180,68 +179,36 @@ export function FreelancerApplicationForm() {
         about_you: formData.aboutYou,
         equipment_software: formData.equipment,
         day_rate: formData.rates,
-        created_at: new Date().toISOString(),
-      };
-
-      const recordWithFiles = {
-        ...baseRecord,
-        uploaded_files: JSON.stringify(
+        uploaded_files:
           uploadedFileUrls.length > 0
-            ? uploadedFileUrls.map((url) => ({ url }))
-            : formData.files.map((file) => ({
-                name: file.name,
-                size: file.size,
-                type: file.type,
-                lastModified: file.lastModified,
-              }))
-        ),
+            ? JSON.stringify(uploadedFileUrls.map((url) => ({ url })))
+            : JSON.stringify(
+                formData.files.map((file) => ({
+                  name: file.name,
+                  size: file.size,
+                  type: file.type,
+                  lastModified: file.lastModified,
+                }))
+              ),
       };
 
-      // Try insert with uploaded_files; on specific column-missing error, retry without it
-      let insertError: any | null = null;
-      let insertData: any | null = null;
-      {
-        const { data, error } = await supabase
-          .from("FreelancerApplications")
-          .insert([recordWithFiles]);
-        insertData = data;
-        insertError = error;
-      }
+      const apiRes = await fetch("/api/freelancer-applications", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
 
-      if (insertError) {
-        const message = insertError.message || "";
-        const columnMissing =
-          message.includes("uploaded_files") ||
-          message.includes("column") ||
-          insertError.code === "42703";
-        if (columnMissing) {
-          console.warn(
-            "uploaded_files column missing; retrying insert without it"
-          );
-          const { data: retryData, error: retryError } = await supabase
-            .from("FreelancerApplications")
-            .insert([baseRecord]);
-          insertData = retryData;
-          insertError = retryError;
-        }
-      }
-
-      if (insertError) {
-        console.error(
-          "Supabase insert error:",
-          insertError.message || insertError
-        );
+      if (!apiRes.ok) {
+        const errText = await apiRes.text().catch(() => "");
+        console.error("API insert error:", apiRes.status, errText);
         toast({
           title: "Error",
-          description: `Could not save application to the database: ${
-            insertError.message || insertError
-          }`,
+          description: "Could not save application. Please try again.",
           variant: "destructive",
         });
         return;
       }
 
-      console.log("Successfully saved to Supabase:", data);
       setUploadProgress(40);
 
       // 2️⃣ Build email content
@@ -275,7 +242,8 @@ This application was submitted through the Youu Media website.
       // 3️⃣ Send email notification (without files for speed)
       setUploadProgress(60);
 
-      const res = await fetch("/api/send-application", {
+      // Make email non-blocking: fire and forget
+      fetch("/api/send-application", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -288,11 +256,7 @@ This application was submitted through the Youu Media website.
             type: file.type,
           })),
         }),
-      });
-
-      if (!res.ok) {
-        throw new Error("Failed to submit application via email");
-      }
+      }).catch((err) => console.warn("Email send failed (non-blocking)", err));
 
       setUploadProgress(90);
 
