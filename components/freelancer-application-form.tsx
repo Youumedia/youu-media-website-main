@@ -112,13 +112,13 @@ export function FreelancerApplicationForm() {
   // Handle form submit - BULLETPROOF VERSION
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     // Prevent double submission
     if (isSubmitting) {
       console.log("Already submitting, ignoring duplicate submission");
       return;
     }
-    
+
     setIsSubmitting(true);
     setUploadProgress(0);
     setSubmitSuccess(false);
@@ -150,40 +150,57 @@ export function FreelancerApplicationForm() {
       console.log("Starting form submission:", formData);
       setUploadProgress(10);
 
+      // Check Supabase connection
+      if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
+        console.error("❌ SUPABASE CONFIGURATION MISSING");
+        toast({
+          title: "Configuration Error",
+          description: "Database connection not configured. Please contact support.",
+          variant: "destructive",
+        });
+        setIsSubmitting(false);
+        return;
+      }
+
+      console.log("✅ Supabase configuration found");
+
       // Skip file uploads for faster submission - just store metadata
       let uploadedFileUrls: string[] = [];
       console.log("Skipping file uploads for faster submission");
 
-      // 1️⃣ Database submission (fire-and-forget, never blocks)
+      // 1️⃣ Database submission (BLOCKING - must succeed before showing success)
       setUploadProgress(20);
-      
-      // Start database insert in background - don't wait for it
-      supabase
-        .from("FreelancerApplications")
-        .insert([{
-          full_name: formData.fullName,
-          email: formData.email,
-          phone_number: formData.phone,
-          portfolio_url: formData.portfolioLink,
-          skills: formData.skillsText,
-          availability: formData.availability,
-          experience_years: formData.experience,
-          about_you: formData.aboutYou,
-          equipment_software: formData.equipment,
-          day_rate: formData.rates,
-        }])
-        .then(result => {
-          if (result.error) {
-            console.error("Database insert failed:", result.error);
-          } else {
-            console.log("Database insert successful:", result.data);
-          }
-        })
-        .catch(err => {
-          console.error("Database error:", err);
-        });
 
-      // Continue immediately without waiting for database
+      console.log("Attempting database insert...");
+      const { data: insertData, error: insertError } = await supabase
+        .from("FreelancerApplications")
+        .insert([
+          {
+            full_name: formData.fullName,
+            email: formData.email,
+            phone_number: formData.phone,
+            portfolio_url: formData.portfolioLink,
+            skills: formData.skillsText,
+            availability: formData.availability,
+            experience_years: formData.experience,
+            about_you: formData.aboutYou,
+            equipment_software: formData.equipment,
+            day_rate: formData.rates,
+          },
+        ]);
+
+      if (insertError) {
+        console.error("❌ DATABASE INSERT FAILED:", insertError);
+        toast({
+          title: "Database Error",
+          description: `Failed to save application: ${insertError.message}`,
+          variant: "destructive",
+        });
+        setIsSubmitting(false);
+        return;
+      }
+
+      console.log("✅ DATABASE INSERT SUCCESSFUL:", insertData);
       setUploadProgress(50);
 
       // 2️⃣ Build email content
@@ -216,7 +233,7 @@ This application was submitted through the Youu Media website.
 
       // 3️⃣ Send email in background (fire-and-forget)
       setUploadProgress(70);
-      
+
       // Send email without waiting
       fetch("/api/send-application", {
         method: "POST",
@@ -231,17 +248,17 @@ This application was submitted through the Youu Media website.
         }),
       }).catch((err) => console.warn("Email send failed:", err));
 
-      // 4️⃣ FORCE SUCCESS - This will ALWAYS work
+      // 4️⃣ Show success ONLY after database confirmed working
       clearTimeout(timeoutId);
       setUploadProgress(100);
       setSubmitSuccess(true);
-      setIsSubmitting(false); // Critical: Reset submitting state
-      
-      console.log("✅ FORM SUBMISSION COMPLETED SUCCESSFULLY");
+      setIsSubmitting(false);
+
+      console.log("✅ FORM SUBMISSION COMPLETED - DATABASE CONFIRMED");
 
       toast({
         title: "Application submitted successfully!",
-        description: "Thanks! We'll review your application and get back to you.",
+        description: "Your application has been saved to our database.",
       });
 
       // 5️⃣ Reset form after a delay
@@ -268,7 +285,9 @@ This application was submitted through the Youu Media website.
       // 6️⃣ GUARANTEED SUCCESS FALLBACK - If anything goes wrong, this will fix it
       setTimeout(() => {
         if (isSubmitting) {
-          console.warn("Form still submitting after 4 seconds - forcing completion");
+          console.warn(
+            "Form still submitting after 4 seconds - forcing completion"
+          );
           setIsSubmitting(false);
           setSubmitSuccess(true);
           setUploadProgress(100);
