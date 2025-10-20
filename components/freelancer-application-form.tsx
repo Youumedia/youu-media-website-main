@@ -100,19 +100,27 @@ export function FreelancerApplicationForm() {
     }));
   };
 
-  // Handle form submit - SIMPLE WORKING VERSION
+  // Handle form submit - ULTRA SIMPLE VERSION
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (isSubmitting) return;
+    console.log("🚀 FORM SUBMIT CLICKED");
+    
+    if (isSubmitting) {
+      console.log("Already submitting, ignoring");
+      return;
+    }
     
     setIsSubmitting(true);
-    setUploadProgress(0);
+    setUploadProgress(10);
     setSubmitSuccess(false);
 
+    console.log("Form data to submit:", formData);
+
     try {
-      // Validation
+      // Basic validation
       if (!formData.fullName || !formData.email) {
+        console.log("❌ Validation failed");
         toast({
           title: "Error",
           description: "Please fill in all required fields.",
@@ -122,118 +130,70 @@ export function FreelancerApplicationForm() {
         return;
       }
 
-      setUploadProgress(20);
+      setUploadProgress(30);
+      console.log("✅ Validation passed, saving to database...");
 
-      console.log("🔍 DEBUGGING: Starting database insert");
-      console.log("Form data:", formData);
-      console.log("Supabase URL:", process.env.NEXT_PUBLIC_SUPABASE_URL);
-      console.log("Supabase Key:", process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ? "Present" : "Missing");
-
-      // Save to database with file info
+      // SIMPLE DATABASE INSERT - NO FILES, NO COMPLEX STUFF
       const { data, error } = await supabase
         .from("FreelancerApplications")
         .insert([
           {
             full_name: formData.fullName,
             email: formData.email,
-            phone_number: formData.phone,
-            portfolio_url: formData.portfolioLink,
-            skills: formData.skillsText,
-            availability: formData.availability,
-            experience_years: formData.experience,
-            about_you: formData.aboutYou,
-            equipment_software: formData.equipment,
-            day_rate: formData.rates,
-            uploaded_files: JSON.stringify(
-              formData.files.map((file) => ({
-                name: file.name,
-                size: file.size,
-                type: file.type,
-                lastModified: file.lastModified,
-              }))
-            ),
+            phone_number: formData.phone || "",
+            portfolio_url: formData.portfolioLink || "",
+            skills: formData.skillsText || "",
+            availability: formData.availability || "",
+            experience_years: formData.experience || "",
+            about_you: formData.aboutYou || "",
+            equipment_software: formData.equipment || "",
+            day_rate: formData.rates || "",
           },
         ]);
 
-      console.log("🔍 Database result:", { data, error });
+      console.log("Database insert result:", { data, error });
 
       if (error) {
-        console.error("❌ Database error:", error);
-        
-        // Try again without uploaded_files column if that's the issue
-        if (error.message?.includes("uploaded_files") || error.message?.includes("column")) {
-          console.log("🔄 Retrying without uploaded_files column...");
-          const { data: retryData, error: retryError } = await supabase
-            .from("FreelancerApplications")
-            .insert([
-              {
-                full_name: formData.fullName,
-                email: formData.email,
-                phone_number: formData.phone,
-                portfolio_url: formData.portfolioLink,
-                skills: formData.skillsText,
-                availability: formData.availability,
-                experience_years: formData.experience,
-                about_you: formData.aboutYou,
-                equipment_software: formData.equipment,
-                day_rate: formData.rates,
-              },
-            ]);
-          
-          if (retryError) {
-            console.error("❌ Retry also failed:", retryError);
-            toast({
-              title: "Error",
-              description: `Failed to save: ${retryError.message}`,
-              variant: "destructive",
-            });
-            setIsSubmitting(false);
-            return;
-          } else {
-            console.log("✅ Retry successful:", retryData);
-          }
-        } else {
-          toast({
-            title: "Error",
-            description: `Failed to save: ${error.message}`,
-            variant: "destructive",
-          });
-          setIsSubmitting(false);
-          return;
-        }
+        console.error("❌ DATABASE ERROR:", error);
+        toast({
+          title: "Database Error",
+          description: `Failed to save: ${error.message}`,
+          variant: "destructive",
+        });
+        setIsSubmitting(false);
+        return;
       }
 
+      console.log("✅ DATABASE SUCCESS:", data);
       setUploadProgress(80);
 
-      // Send email
+      // Try to send email (don't let it block success)
       try {
-        await fetch("/api/send-application", {
+        fetch("/api/send-application", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            summary: `New Application from ${formData.fullName}`,
-            files: formData.files.map((file) => ({
-              name: file.name,
-              size: file.size,
-              type: file.type,
-            })),
+            summary: `New Application from ${formData.fullName} (${formData.email})`,
           }),
-        });
-      } catch (emailError) {
-        console.warn("Email failed:", emailError);
+        }).catch(err => console.warn("Email failed:", err));
+      } catch (emailErr) {
+        console.warn("Email error:", emailErr);
       }
 
       setUploadProgress(100);
       setSubmitSuccess(true);
       setIsSubmitting(false);
 
+      console.log("✅ FORM SUBMISSION COMPLETE");
+
       toast({
         title: "Application submitted successfully!",
-        description: "Your application has been saved.",
+        description: "Your application has been saved to the database.",
       });
 
       // Reset form after 3 seconds
       setTimeout(() => {
+        console.log("Resetting form");
         setFormData({
           fullName: "",
           email: "",
@@ -252,7 +212,7 @@ export function FreelancerApplicationForm() {
       }, 3000);
 
     } catch (error) {
-      console.error("Submission error:", error);
+      console.error("❌ SUBMISSION ERROR:", error);
       toast({
         title: "Error",
         description: "Failed to submit application. Please try again.",
