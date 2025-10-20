@@ -139,38 +139,103 @@ export function FreelancerApplicationForm() {
         )
       );
 
+      // Upload files to Supabase Storage (portfolio bucket) and collect public URLs
+      let uploadedFileUrls: string[] = [];
+      if (formData.files.length > 0) {
+        setUploadProgress(20);
+        const uploadResults = await Promise.all(
+          formData.files.map(async (file, index) => {
+            const timestamp = Date.now();
+            const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, "_");
+            const path = `freelancer-applications/${timestamp}-${index}-${safeName}`;
+            const { data: uploadData, error: uploadError } =
+              await supabase.storage
+                .from("portfolio")
+                .upload(path, file, { upsert: false, cacheControl: "3600" });
+            if (uploadError) {
+              console.error("Storage upload error:", uploadError.message);
+              return null;
+            }
+            const { data: publicUrlData } = supabase.storage
+              .from("portfolio")
+              .getPublicUrl(uploadData.path);
+            return publicUrlData.publicUrl || null;
+          })
+        );
+        uploadedFileUrls = uploadResults.filter((u): u is string => Boolean(u));
+        console.log("Uploaded file URLs:", uploadedFileUrls);
+        setUploadProgress(30);
+      }
+
       // 1️⃣ Save to Supabase database
-      const { data, error } = await supabase
-        .from("FreelancerApplications")
-        .insert([
-          {
-            full_name: formData.fullName,
-            email: formData.email,
-            phone_number: formData.phone,
-            portfolio_url: formData.portfolioLink,
-            skills: formData.skillsText,
-            availability: formData.availability,
-            experience_years: formData.experience,
-            about_you: formData.aboutYou,
-            equipment_software: formData.equipment,
-            day_rate: formData.rates,
-            uploaded_files: JSON.stringify(
-              formData.files.map((file) => ({
+      // Build base record
+      const baseRecord: any = {
+        full_name: formData.fullName,
+        email: formData.email,
+        phone_number: formData.phone,
+        portfolio_url: formData.portfolioLink,
+        skills: formData.skillsText,
+        availability: formData.availability,
+        experience_years: formData.experience,
+        about_you: formData.aboutYou,
+        equipment_software: formData.equipment,
+        day_rate: formData.rates,
+        created_at: new Date().toISOString(),
+      };
+
+      const recordWithFiles = {
+        ...baseRecord,
+        uploaded_files: JSON.stringify(
+          uploadedFileUrls.length > 0
+            ? uploadedFileUrls.map((url) => ({ url }))
+            : formData.files.map((file) => ({
                 name: file.name,
                 size: file.size,
                 type: file.type,
                 lastModified: file.lastModified,
               }))
-            ),
-            created_at: new Date(),
-          },
-        ]);
+        ),
+      };
 
-      if (error) {
-        console.error("Supabase insert error:", error.message);
+      // Try insert with uploaded_files; on specific column-missing error, retry without it
+      let insertError: any | null = null;
+      let insertData: any | null = null;
+      {
+        const { data, error } = await supabase
+          .from("FreelancerApplications")
+          .insert([recordWithFiles]);
+        insertData = data;
+        insertError = error;
+      }
+
+      if (insertError) {
+        const message = insertError.message || "";
+        const columnMissing =
+          message.includes("uploaded_files") ||
+          message.includes("column") ||
+          insertError.code === "42703";
+        if (columnMissing) {
+          console.warn(
+            "uploaded_files column missing; retrying insert without it"
+          );
+          const { data: retryData, error: retryError } = await supabase
+            .from("FreelancerApplications")
+            .insert([baseRecord]);
+          insertData = retryData;
+          insertError = retryError;
+        }
+      }
+
+      if (insertError) {
+        console.error(
+          "Supabase insert error:",
+          insertError.message || insertError
+        );
         toast({
           title: "Error",
-          description: `Could not save application to the database: ${error.message}`,
+          description: `Could not save application to the database: ${
+            insertError.message || insertError
+          }`,
           variant: "destructive",
         });
         return;
