@@ -26,11 +26,6 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <head>
-        <link rel="icon" href="/images/youu-icon.png" type="image/png" />
-        <link rel="shortcut icon" href="/images/youu-icon.png" type="image/png" />
-        <link rel="apple-touch-icon" href="/images/youu-icon.png" />
-      </head>
       <body className={inter.className}>
         {children}
         <Chatbot />
