@@ -49,58 +49,8 @@ export function FreelancerApplicationForm() {
     aboutYou: "",
     equipment: "",
     rates: "",
-    files: [] as File[],
   });
 
-  // Handle file upload
-  const handleFilesChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newFiles = Array.from(e.target.files || []);
-
-    // Validate file sizes (max 10MB per file)
-    const maxSize = 10 * 1024 * 1024; // 10MB
-    const oversizedFiles = newFiles.filter((file) => file.size > maxSize);
-
-    if (oversizedFiles.length > 0) {
-      toast({
-        title: "File too large",
-        description: `Some files exceed 10MB limit. Please compress them or choose smaller files.`,
-        variant: "destructive",
-      });
-      return;
-    }
-
-    // Limit total files to 5
-    if (formData.files.length + newFiles.length > 5) {
-      toast({
-        title: "Too many files",
-        description: "Maximum 5 files allowed. Please remove some files first.",
-        variant: "destructive",
-      });
-      return;
-    }
-
-    setFormData((prev) => ({
-      ...prev,
-      files: [...prev.files, ...newFiles],
-    }));
-
-    toast({
-      title: "Files added!",
-      description: `${newFiles.length} file${
-        newFiles.length !== 1 ? "s" : ""
-      } added.`,
-    });
-
-    e.target.value = "";
-  };
-
-  // Remove a specific file
-  const handleRemoveFile = (index: number) => {
-    setFormData((prev) => ({
-      ...prev,
-      files: prev.files.filter((_, i) => i !== index),
-    }));
-  };
 
   // Handle form submit - TEST VERSION
   const handleSubmit = async (e: React.FormEvent) => {
@@ -198,7 +148,6 @@ export function FreelancerApplicationForm() {
           aboutYou: "",
           equipment: "",
           rates: "",
-          files: [],
         });
         setSubmitSuccess(false);
         setUploadProgress(0);
@@ -484,51 +433,8 @@ export function FreelancerApplicationForm() {
                     </div>
                   </div>
 
-                  {/* File Upload */}
+                  {/* Submit Button */}
                   <div className="pt-4 md:pt-6">
-                    <div className="space-y-2 mb-4 md:mb-6">
-                      <Label htmlFor="files">
-                        Upload Best Portfolio Pieces (optional)
-                      </Label>
-                      <p className="text-sm text-muted-foreground mb-2">
-                        You can select multiple files (videos, images, PDFs,
-                        etc.). Max 5 files, 10MB each.
-                      </p>
-                      <Input
-                        id="files"
-                        type="file"
-                        multiple
-                        onChange={handleFilesChange}
-                        accept="image/*,video/*,.pdf"
-                      />
-                      {formData.files.length > 0 && (
-                        <div className="mt-3 space-y-2">
-                          <p className="text-sm font-medium text-green-600">
-                            ✓ {formData.files.length} file
-                            {formData.files.length !== 1 ? "s" : ""} selected:
-                          </p>
-                          <ul className="space-y-1">
-                            {formData.files.map((file, index) => (
-                              <li
-                                key={index}
-                                className="flex items-center justify-between text-sm bg-gray-50 p-2 rounded"
-                              >
-                                <span className="truncate flex-1 min-w-0">
-                                  {file.name}
-                                </span>
-                                <button
-                                  type="button"
-                                  onClick={() => handleRemoveFile(index)}
-                                  className="ml-2 text-red-500 hover:text-red-700 font-medium flex-shrink-0"
-                                >
-                                  ✕
-                                </button>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      )}
-                    </div>
 
                     {/* Submit Button */}
                     <Button
