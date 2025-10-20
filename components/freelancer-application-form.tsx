@@ -436,7 +436,7 @@ export function FreelancerApplicationForm() {
                       <Label htmlFor="portfolioFile">
                         Upload Portfolio Files
                       </Label>
-                      <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-gray-400 transition-colors">
+                      <div className="relative border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-gray-400 transition-colors">
                         <div className="flex flex-col items-center space-y-2">
                           <svg
                             className="w-8 h-8 text-gray-400"
