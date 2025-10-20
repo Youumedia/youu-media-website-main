@@ -38,19 +38,15 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Prepare data for database
+    // Prepare data for database - matching your table columns
     const applicationData = {
       full_name: full_name.trim(),
       email: email.trim(),
-      phone_number: phone_number?.trim() || null,
-      portfolio_url: portfolio_url?.trim() || null,
       skills: skills?.trim() || null,
-      availability: availability || null,
-      experience_years: experience_years?.trim() || null,
-      about_you: about_you?.trim() || null,
-      equipment_software: equipment_software?.trim() || null,
+      experience: experience_years?.trim() || null, // Changed from experience_years to experience
+      portfolio_url: portfolio_url?.trim() || null,
       day_rate: day_rate?.trim() || null,
-      status: "pending",
+      // Note: about_you, equipment_software, availability, phone_number columns don't exist in your table
     };
 
     console.log("Submitting freelancer application:", applicationData);

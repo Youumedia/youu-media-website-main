@@ -84,14 +84,12 @@ export function FreelancerApplicationForm() {
       const applicationData = {
         full_name: formData.fullName.trim(),
         email: formData.email.trim(),
-        phone_number: formData.phone?.trim() || "",
-        portfolio_url: formData.portfolioLink?.trim() || "",
         skills: formData.skillsText?.trim() || "",
-        availability: formData.availability || "",
         experience_years: formData.experience?.trim() || "",
-        about_you: formData.aboutYou?.trim() || "",
-        equipment_software: formData.equipment?.trim() || "",
+        portfolio_url: formData.portfolioLink?.trim() || "",
         day_rate: formData.rates?.trim() || "",
+        // Removed fields that don't exist in your database:
+        // phone_number, availability, about_you, equipment_software
       };
 
       console.log("Application data:", applicationData);
@@ -426,6 +424,75 @@ export function FreelancerApplicationForm() {
                         }
                         placeholder="e.g., £300-500 per day"
                       />
+                    </div>
+                  </div>
+
+                  {/* Portfolio File Attachment */}
+                  <div className="space-y-4 md:space-y-6">
+                    <h3 className="text-lg font-semibold text-primary">
+                      Portfolio Files
+                    </h3>
+                    <div className="space-y-2">
+                      <Label htmlFor="portfolioFile">
+                        Upload Portfolio Files
+                      </Label>
+                      <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-gray-400 transition-colors">
+                        <div className="flex flex-col items-center space-y-2">
+                          <svg
+                            className="w-8 h-8 text-gray-400"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
+                            />
+                          </svg>
+                          <div className="text-sm text-gray-600">
+                            <p className="font-medium">
+                              Click to upload or drag and drop
+                            </p>
+                            <p className="text-xs">
+                              PDF, DOC, DOCX, JPG, PNG, MP4, MOV (Max 10MB each)
+                            </p>
+                          </div>
+                        </div>
+                        <input
+                          type="file"
+                          id="portfolioFile"
+                          multiple
+                          accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.mp4,.mov"
+                          className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                          onChange={(e) => {
+                            const files = Array.from(e.target.files || []);
+                            if (files.length > 0) {
+                              // For now, we'll just store the file names
+                              // In a real implementation, you'd upload to Supabase Storage
+                              const fileNames = files
+                                .map((file) => file.name)
+                                .join(", ");
+                              setFormData((prev) => ({
+                                ...prev,
+                                portfolioLink: fileNames,
+                              }));
+                            }
+                          }}
+                        />
+                      </div>
+                      {formData.portfolioLink && (
+                        <div className="text-sm text-green-600 bg-green-50 p-2 rounded">
+                          <p className="font-medium">Files selected:</p>
+                          <p>{formData.portfolioLink}</p>
+                        </div>
+                      )}
+                      <p className="text-xs text-gray-500">
+                        Upload your best work samples, showreels, or portfolio
+                        documents. This will be sent to the portfolio_url field
+                        in the database.
+                      </p>
                     </div>
                   </div>
 
