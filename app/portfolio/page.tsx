@@ -12,7 +12,7 @@ export default function PortfolioPage() {
     <main className="min-h-screen relative bg-white overflow-hidden">
       {/* Top gradient line */}
       <div className="absolute top-0 left-0 w-full h-3 bg-gradient-brand animate-gradient-x"></div>
-      
+
       <Navigation />
 
       {/* Subtle Moving Grid Background */}
