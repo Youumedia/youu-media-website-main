@@ -82,35 +82,35 @@ export function FreelancerApplicationForm() {
       setUploadProgress(20);
 
       console.log("Step 2: Preparing data for API");
-      const applicationData = {
-        full_name: formData.fullName.trim(),
-        email: formData.email.trim(),
-        phone_number: formData.phone?.trim() || "",
-        portfolio_url: formData.portfolioLink?.trim() || "",
-        day_rate: formData.rates?.trim() || "",
-        skills_text: formData.skillsText?.trim() || "",
-        availability: formData.availability?.trim() || "",
-        about_you: formData.aboutYou?.trim() || "",
-        equipment_software: formData.equipment?.trim() || "",
-        // Note: portfolioFiles (file attachments) are handled separately
-        // For now, we'll include file names in the submission
-        portfolio_files: formData.portfolioFiles.map(file => ({
-          name: file.name,
-          size: file.size,
-          type: file.type
-        }))
-      };
+      
+      // Create FormData for multipart/form-data submission
+      const formDataToSend = new FormData();
+      formDataToSend.append("full_name", formData.fullName.trim());
+      formDataToSend.append("email", formData.email.trim());
+      formDataToSend.append("phone_number", formData.phone?.trim() || "");
+      formDataToSend.append("portfolio_url", formData.portfolioLink?.trim() || "");
+      formDataToSend.append("day_rate", formData.rates?.trim() || "");
+      formDataToSend.append("skills_text", formData.skillsText?.trim() || "");
+      formDataToSend.append("availability", formData.availability?.trim() || "");
+      formDataToSend.append("about_you", formData.aboutYou?.trim() || "");
+      formDataToSend.append("equipment_software", formData.equipment?.trim() || "");
 
-      console.log("Application data:", applicationData);
+      // Add portfolio files
+      if (formData.portfolioFiles && formData.portfolioFiles.length > 0) {
+        formData.portfolioFiles.forEach((fileData) => {
+          if (fileData.file) {
+            formDataToSend.append("portfolioFiles", fileData.file);
+          }
+        });
+      }
+
+      console.log("Form data prepared with", formData.portfolioFiles?.length || 0, "files");
       setUploadProgress(50);
 
       console.log("Step 3: Submitting to API");
       const response = await fetch("/api/freelancer-applications", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(applicationData),
+        body: formDataToSend, // No Content-Type header - let browser set it for FormData
       });
 
       const result = await response.json();

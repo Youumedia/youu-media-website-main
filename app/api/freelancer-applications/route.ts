@@ -6,10 +6,24 @@ export async function POST(request: NextRequest) {
   try {
     console.log("POST /api/freelancer-applications - Starting request");
 
-    const body = await request.json();
-    console.log("Request body:", body);
+    // Parse multipart/form-data
+    const formData = await request.formData();
+    
+    // Extract form fields
+    const full_name = formData.get("full_name") as string;
+    const email = formData.get("email") as string;
+    const phone_number = formData.get("phone_number") as string;
+    const portfolio_url = formData.get("portfolio_url") as string;
+    const day_rate = formData.get("day_rate") as string;
+    const skills_text = formData.get("skills_text") as string;
+    const availability = formData.get("availability") as string;
+    const about_you = formData.get("about_you") as string;
+    const equipment_software = formData.get("equipment_software") as string;
 
-    const {
+    // Extract portfolio files
+    const portfolioFiles = formData.getAll("portfolioFiles") as File[];
+
+    console.log("Form data received:", {
       full_name,
       email,
       phone_number,
@@ -19,7 +33,8 @@ export async function POST(request: NextRequest) {
       availability,
       about_you,
       equipment_software,
-    } = body;
+      fileCount: portfolioFiles.length
+    });
 
     // Validate required fields
     if (!full_name || !email) {
@@ -59,6 +74,64 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // Handle file uploads to Supabase Storage
+    let portfolioFileUrls: string[] = [];
+    
+    if (portfolioFiles && portfolioFiles.length > 0) {
+      console.log(`Processing ${portfolioFiles.length} portfolio files...`);
+      
+      for (const file of portfolioFiles) {
+        if (file.size > 0) { // Only process non-empty files
+          try {
+            // Generate unique filename
+            const fileExt = file.name.split('.').pop();
+            const fileName = `${Date.now()}-${Math.random().toString(36).substring(2)}.${fileExt}`;
+            const filePath = `freelancer-portfolios/${email}/${fileName}`;
+
+            // Convert file to ArrayBuffer
+            const fileBuffer = await file.arrayBuffer();
+
+            // Upload to Supabase Storage
+            const { data: uploadData, error: uploadError } = await supabase.storage
+              .from('freelancer_portfolios')
+              .upload(filePath, fileBuffer, {
+                contentType: file.type,
+                upsert: false
+              });
+
+            if (uploadError) {
+              console.error('Error uploading file:', uploadError);
+              return NextResponse.json(
+                {
+                  error: `Failed to upload file ${file.name}: ${uploadError.message}`,
+                },
+                { status: 500 }
+              );
+            }
+
+            // Get public URL
+            const { data: urlData } = supabase.storage
+              .from('freelancer_portfolios')
+              .getPublicUrl(filePath);
+
+            if (urlData?.publicUrl) {
+              portfolioFileUrls.push(urlData.publicUrl);
+              console.log(`File uploaded successfully: ${urlData.publicUrl}`);
+            }
+
+          } catch (fileError) {
+            console.error('Error processing file:', fileError);
+            return NextResponse.json(
+              {
+                error: `Failed to process file ${file.name}`,
+              },
+              { status: 500 }
+            );
+          }
+        }
+      }
+    }
+
     // Insert the new application
     const { data: application, error: insertError } = await supabase
       .from("freelancer_applications")
@@ -73,6 +146,7 @@ export async function POST(request: NextRequest) {
           availability: availability || null,
           about_you: about_you || null,
           equipment_software: equipment_software || null,
+          portfolio_file_url: portfolioFileUrls.length > 0 ? portfolioFileUrls.join(',') : null,
           status: "pending",
         },
       ])
@@ -90,10 +164,12 @@ export async function POST(request: NextRequest) {
     }
 
     console.log("Application created successfully:", application);
+    console.log("Portfolio files uploaded:", portfolioFileUrls);
 
     return NextResponse.json({
       success: true,
       application,
+      portfolioFiles: portfolioFileUrls,
       message: "Application submitted successfully",
     });
   } catch (error) {
