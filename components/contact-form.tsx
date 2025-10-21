@@ -158,12 +158,14 @@ export function ContactForm() {
                   <SelectValue placeholder="Select a service" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="event-videography">Event Videography</SelectItem>
-                  <SelectItem value="brand-photography">Brand Photography</SelectItem>
+                  <SelectItem value="videography">Videography</SelectItem>
+                  <SelectItem value="photography">Photography</SelectItem>
+                  <SelectItem value="cinematography">Cinematography</SelectItem>
                   <SelectItem value="video-editing">Video Editing</SelectItem>
-                  <SelectItem value="corporate">Corporate Content</SelectItem>
-                  <SelectItem value="wedding">Wedding Coverage</SelectItem>
-                  <SelectItem value="other">Other/Multiple Services</SelectItem>
+                  <SelectItem value="commercial">Commercial</SelectItem>
+                  <SelectItem value="corporate">Corporate</SelectItem>
+                  <SelectItem value="other">Other</SelectItem>
+                  <SelectItem value="multiple-services">Multiple Services</SelectItem>
                 </SelectContent>
               </Select>
             </div>
