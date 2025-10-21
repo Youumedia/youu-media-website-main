@@ -2,7 +2,7 @@
 
 import { Navigation } from "@/components/navigation";
 import { PortfolioHero } from "@/components/portfolio-hero";
-import { PortfolioGrid } from "@/components/portfolio-grid";
+import { FuturisticPortfolioCarousel } from "@/components/futuristic-portfolio-carousel";
 import { ClientTestimonials } from "@/components/client-testimonials";
 import { PortfolioCTA } from "@/components/portfolio-cta";
 import { Footer } from "@/components/footer";
@@ -21,7 +21,7 @@ export default function PortfolioPage() {
       {/* Main content */}
       <div className="relative z-10">
         <PortfolioHero />
-        <PortfolioGrid />
+        <FuturisticPortfolioCarousel />
         <ClientTestimonials />
         <PortfolioCTA />
       </div>
