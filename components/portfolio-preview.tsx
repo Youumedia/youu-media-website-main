@@ -1,67 +1,37 @@
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import { Play, ExternalLink } from "lucide-react";
 import Link from "next/link";
 
-const portfolioItems = [
+const videoItems = [
   {
     id: 1,
-    title: "Title pending",
-    category: "Brand Content",
-    description:
-      "A cinematic brand story showcasing innovation and company culture.",
+    title: "Video 1",
     thumbnail: "/corporate-office-cinematic-video-thumbnail.jpg",
     duration: "2:30",
   },
   {
     id: 2,
-    title: "Title pending",
-    category: "Event Videography",
-    description:
-      "Emotional wedding day captured with multiple cameras and drone footage.",
+    title: "Video 2", 
     thumbnail: "/elegant-wedding-ceremony-cinematic-video-thumbnail.jpg",
     duration: "4:15",
   },
+];
+
+const photoItems = [
   {
-    id: 3,
-    title: "Title pending",
-    category: "Commercial",
-    description:
-      "High-end product reveal with dynamic camera movements and lighting.",
+    id: 1,
+    title: "Photo 1",
     thumbnail: "/luxury-product-launch-video-thumbnail.jpg",
-    duration: "1:45",
   },
   {
-    id: 4,
-    title: "Title pending",
-    category: "Corporate",
-    description:
-      "Multi-day event documentation with interviews and keynote highlights.",
+    id: 2,
+    title: "Photo 2",
     thumbnail: "/professional-conference-event-video-thumbnail.jpg",
-    duration: "8:20",
-  },
-  {
-    id: 5,
-    title: "Title pending",
-    category: "AI Content",
-    description:
-      "AI-generated video content showcasing cutting-edge technology and creative innovation.",
-    thumbnail: "/ai-generated-content-thumbnail.jpg",
-    duration: "3:45",
-  },
-  {
-    id: 6,
-    title: "Title pending",
-    category: "Photography",
-    description:
-      "Professional product photography with studio lighting and post-production enhancement.",
-    thumbnail: "/product-photography-thumbnail.jpg",
-    duration: "2:15",
   },
 ];
 
 export function PortfolioPreview() {
-  console.log("PortfolioPreview rendered with", portfolioItems.length, "items");
   return (
     <section className="py-24 relative overflow-hidden">
       <div className="absolute top-0 left-0 w-full h-3 bg-gradient-brand animate-gradient-x"></div>
@@ -79,61 +49,67 @@ export function PortfolioPreview() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-          {portfolioItems.map((item, index) => {
-            const portfolioGradients = [
-              "bg-gradient-to-br from-purple-200 via-pink-100 to-blue-200",
-              "bg-gradient-to-br from-blue-200 via-indigo-100 to-purple-200",
-              "bg-gradient-to-br from-purple-200 via-pink-100 to-blue-200",
-              "bg-gradient-to-br from-blue-200 via-indigo-100 to-purple-200",
-              "bg-gradient-to-br from-emerald-200 via-green-100 to-teal-200",
-              "bg-gradient-to-br from-orange-200 via-amber-100 to-yellow-200",
-            ];
-
-            return (
+        {/* Videos Section */}
+        <div className="mb-12">
+          <div className="text-center mb-8">
+            <h3 className="text-xl font-semibold text-gray-800 mb-4">Videos</h3>
+          </div>
+          <div className="flex justify-center gap-8">
+            {videoItems.map((item) => (
               <Card
                 key={item.id}
-                className={`group overflow-hidden hover:shadow-2xl transition-all duration-500 border-2 border-transparent hover:border-gradient-to-r hover:from-[#BE55FF] hover:to-[#70BFFF] ${portfolioGradients[index]} relative`}
+                className="group overflow-hidden hover:shadow-xl transition-all duration-500 border border-gray-200 hover:border-gray-300"
               >
-                {/* Decorative background pattern */}
-                <div className="absolute inset-0 opacity-10">
-                  <div className="absolute top-4 right-4 w-24 h-24 bg-gradient-to-br from-[#BE55FF] to-[#70BFFF] rounded-full blur-2xl"></div>
-                  <div className="absolute bottom-4 left-4 w-20 h-20 bg-gradient-to-tr from-[#70BFFF] to-[#BE55FF] rounded-full blur-xl"></div>
-                </div>
-
                 <div className="relative overflow-hidden bg-gradient-to-br from-gray-900 via-gray-800 to-black">
-                  {/* Blank video placeholder with enhanced background */}
-                  <div className="w-full h-64 bg-gradient-to-br from-gray-900 via-gray-800 to-black flex items-center justify-center group-hover:from-gray-800 group-hover:via-gray-700 group-hover:to-gray-900 transition-all duration-500 relative">
-                    {/* Animated background elements */}
-                    <div className="absolute inset-0 opacity-20">
-                      <div className="absolute top-1/4 left-1/4 w-32 h-32 bg-gradient-to-r from-[#BE55FF] to-[#70BFFF] rounded-full blur-3xl animate-pulse"></div>
-                      <div className="absolute bottom-1/4 right-1/4 w-24 h-24 bg-gradient-to-l from-[#70BFFF] to-[#BE55FF] rounded-full blur-2xl animate-pulse"></div>
-                    </div>
-
+                  <div className="w-80 h-48 bg-gradient-to-br from-gray-900 via-gray-800 to-black flex items-center justify-center group-hover:from-gray-800 group-hover:via-gray-700 group-hover:to-gray-900 transition-all duration-500 relative">
                     <div className="flex flex-col items-center justify-center relative z-10">
-                      <div className="w-20 h-20 bg-gradient-to-r from-[#BE55FF] to-[#70BFFF] rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-2xl relative">
-                        <Play className="h-10 w-10 text-white ml-1" />
-                        {/* Glow effect */}
+                      <div className="w-16 h-16 bg-gradient-to-r from-[#BE55FF] to-[#70BFFF] rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 shadow-2xl relative">
+                        <Play className="h-8 w-8 text-white ml-1" />
                         <div className="absolute inset-0 bg-gradient-to-r from-[#BE55FF] to-[#70BFFF] rounded-2xl blur-lg opacity-60 group-hover:opacity-80 transition-opacity"></div>
                       </div>
-                      <p className="text-white/90 text-base font-medium">
+                      <p className="text-white/90 text-sm font-medium">
                         Video Coming Soon
                       </p>
                     </div>
                   </div>
-
-                  <div className="absolute top-4 right-4 bg-black/80 backdrop-blur-md px-3 py-2 rounded-lg text-white text-sm font-medium border border-white/20">
+                  <div className="absolute top-3 right-3 bg-black/80 backdrop-blur-md px-2 py-1 rounded-lg text-white text-xs font-medium border border-white/20">
                     {item.duration}
                   </div>
-                  <div className="absolute top-4 left-4 bg-gradient-to-r from-[#BE55FF] to-[#70BFFF] backdrop-blur-md px-4 py-2 rounded-full text-white text-sm font-semibold shadow-lg">
-                    {item.category}
+                </div>
+              </Card>
+            ))}
+          </div>
+        </div>
+
+        {/* Photos Section */}
+        <div className="mb-12">
+          <div className="text-center mb-8">
+            <h3 className="text-xl font-semibold text-gray-800 mb-4">Photos</h3>
+          </div>
+          <div className="flex justify-center gap-8">
+            {photoItems.map((item) => (
+              <Card
+                key={item.id}
+                className="group overflow-hidden hover:shadow-xl transition-all duration-500 border border-gray-200 hover:border-gray-300"
+              >
+                <div className="relative overflow-hidden bg-gradient-to-br from-gray-900 via-gray-800 to-black">
+                  <div className="w-80 h-48 bg-gradient-to-br from-gray-900 via-gray-800 to-black flex items-center justify-center group-hover:from-gray-800 group-hover:via-gray-700 group-hover:to-gray-900 transition-all duration-500 relative">
+                    <div className="flex flex-col items-center justify-center relative z-10">
+                      <div className="w-16 h-16 bg-gradient-to-r from-[#70BFFF] to-[#BE55FF] rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 shadow-2xl relative">
+                        <div className="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center">
+                          <div className="w-4 h-4 bg-white rounded-sm"></div>
+                        </div>
+                        <div className="absolute inset-0 bg-gradient-to-r from-[#70BFFF] to-[#BE55FF] rounded-2xl blur-lg opacity-60 group-hover:opacity-80 transition-opacity"></div>
+                      </div>
+                      <p className="text-white/90 text-sm font-medium">
+                        Photo Coming Soon
+                      </p>
+                    </div>
                   </div>
                 </div>
-
-                {/* Removed titles and descriptions - keeping only colored outline */}
               </Card>
-            );
-          })}
+            ))}
+          </div>
         </div>
 
         <div className="text-center">
