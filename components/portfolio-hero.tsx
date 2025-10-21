@@ -31,7 +31,7 @@ export function PortfolioHero() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
           <div>
             <div className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-              25+
+              16+
             </div>
             <div className="text-sm text-muted-foreground mt-1">
               Projects Completed
@@ -39,10 +39,10 @@ export function PortfolioHero() {
           </div>
           <div>
             <div className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-              25+
+              10+
             </div>
             <div className="text-sm text-muted-foreground mt-1">
-              Happy Clients
+              Satisfied Clients
             </div>
           </div>
           <div>
