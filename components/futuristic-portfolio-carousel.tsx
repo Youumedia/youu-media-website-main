@@ -95,13 +95,38 @@ export function FuturisticPortfolioCarousel() {
   const videoContainerRef = useRef<HTMLDivElement>(null);
   const photoContainerRef = useRef<HTMLDivElement>(null);
 
+  // Center the active items on mount
+  useEffect(() => {
+    const centerActiveItems = () => {
+      if (videoContainerRef.current) {
+        const container = videoContainerRef.current;
+        const itemWidth = 320 + 24;
+        const containerWidth = container.clientWidth;
+        const scrollLeft = (activeVideoIndex * itemWidth) - (containerWidth / 2) + (itemWidth / 2);
+        container.scrollLeft = Math.max(0, scrollLeft);
+      }
+      if (photoContainerRef.current) {
+        const container = photoContainerRef.current;
+        const itemWidth = 320 + 24;
+        const containerWidth = container.clientWidth;
+        const scrollLeft = (activePhotoIndex * itemWidth) - (containerWidth / 2) + (itemWidth / 2);
+        container.scrollLeft = Math.max(0, scrollLeft);
+      }
+    };
+
+    // Delay to ensure containers are rendered
+    setTimeout(centerActiveItems, 100);
+  }, [activeVideoIndex, activePhotoIndex]);
+
   const scrollToVideo = (index: number) => {
     setActiveVideoIndex(index);
     if (videoContainerRef.current) {
       const container = videoContainerRef.current;
-      const itemWidth = container.scrollWidth / videoItems.length;
+      const itemWidth = 320 + 24; // 320px width + 24px gap
+      const containerWidth = container.clientWidth;
+      const scrollLeft = (index * itemWidth) - (containerWidth / 2) + (itemWidth / 2);
       container.scrollTo({
-        left: index * itemWidth,
+        left: Math.max(0, scrollLeft),
         behavior: "smooth",
       });
     }
@@ -111,9 +136,11 @@ export function FuturisticPortfolioCarousel() {
     setActivePhotoIndex(index);
     if (photoContainerRef.current) {
       const container = photoContainerRef.current;
-      const itemWidth = container.scrollWidth / photoItems.length;
+      const itemWidth = 320 + 24; // 320px width + 24px gap
+      const containerWidth = container.clientWidth;
+      const scrollLeft = (index * itemWidth) - (containerWidth / 2) + (itemWidth / 2);
       container.scrollTo({
-        left: index * itemWidth,
+        left: Math.max(0, scrollLeft),
         behavior: "smooth",
       });
     }
