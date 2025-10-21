@@ -105,6 +105,21 @@ export function FreelancerApplicationForm() {
         });
       }
 
+      console.log("=== FORM SUBMISSION DEBUG ===");
+      console.log("Form data being sent:", {
+        fullName: formData.fullName,
+        email: formData.email,
+        phone: formData.phone,
+        portfolioLink: formData.portfolioLink,
+        rates: formData.rates,
+        skillsText: formData.skillsText,
+        availability: formData.availability,
+        aboutYou: formData.aboutYou,
+        equipment: formData.equipment,
+        experience: formData.experience,
+        fileCount: formData.portfolioFiles?.length || 0
+      });
+      
       console.log("Form data prepared with", formData.portfolioFiles?.length || 0, "files");
       setUploadProgress(50);
 
