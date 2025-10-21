@@ -9,16 +9,17 @@ export async function POST(request: NextRequest) {
     // Parse multipart/form-data
     const formData = await request.formData();
     
-    // Extract form fields
+    // Extract form fields - match exact database column names
     const full_name = formData.get("full_name") as string;
     const email = formData.get("email") as string;
     const phone_number = formData.get("phone_number") as string;
     const portfolio_url = formData.get("portfolio_url") as string;
     const day_rate = formData.get("day_rate") as string;
-    const skills_text = formData.get("skills_text") as string;
+    const skills = formData.get("skills_text") as string; // Map skills_text to skills
     const availability = formData.get("availability") as string;
     const about_you = formData.get("about_you") as string;
     const equipment_software = formData.get("equipment_software") as string;
+    const experience_years = formData.get("experience") as string; // Map experience to experience_years
 
     // Extract portfolio files
     const portfolioFiles = formData.getAll("portfolioFiles") as File[];
@@ -29,10 +30,11 @@ export async function POST(request: NextRequest) {
       phone_number,
       portfolio_url,
       day_rate,
-      skills_text,
+      skills,
       availability,
       about_you,
       equipment_software,
+      experience_years,
       fileCount: portfolioFiles.length
     });
 
@@ -76,6 +78,7 @@ export async function POST(request: NextRequest) {
 
     // Handle file uploads to Supabase Storage
     let portfolioFileUrls: string[] = [];
+    let uploadedFiles: string[] = [];
     
     if (portfolioFiles && portfolioFiles.length > 0) {
       console.log(`Processing ${portfolioFiles.length} portfolio files...`);
@@ -116,6 +119,7 @@ export async function POST(request: NextRequest) {
 
             if (urlData?.publicUrl) {
               portfolioFileUrls.push(urlData.publicUrl);
+              uploadedFiles.push(file.name); // Store original filename
               console.log(`File uploaded successfully: ${urlData.publicUrl}`);
             }
 
@@ -132,7 +136,7 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    // Insert the new application
+    // Insert the new application with exact database column names
     const { data: application, error: insertError } = await supabase
       .from("freelancer_applications")
       .insert([
@@ -140,13 +144,15 @@ export async function POST(request: NextRequest) {
           full_name,
           email,
           phone_number: phone_number || null,
+          skills: skills || null,
+          experience_years: experience_years || null,
           portfolio_url: portfolio_url || null,
-          day_rate: day_rate || null,
-          skills: skills_text || null,
-          availability: availability || null,
           about_you: about_you || null,
+          availability: availability || null,
+          day_rate: day_rate || null,
           equipment_software: equipment_software || null,
           portfolio_file_url: portfolioFileUrls.length > 0 ? portfolioFileUrls.join(',') : null,
+          uploaded_files: uploadedFiles.length > 0 ? uploadedFiles.join(',') : null,
           status: "pending",
         },
       ])
@@ -158,6 +164,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(
         {
           error: "Failed to submit application",
+          details: insertError.message,
         },
         { status: 500 }
       );
@@ -177,6 +184,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(
       {
         error: "Internal server error",
+        details: error instanceof Error ? error.message : "Unknown error",
       },
       { status: 500 }
     );

@@ -94,6 +94,7 @@ export function FreelancerApplicationForm() {
       formDataToSend.append("availability", formData.availability?.trim() || "");
       formDataToSend.append("about_you", formData.aboutYou?.trim() || "");
       formDataToSend.append("equipment_software", formData.equipment?.trim() || "");
+      formDataToSend.append("experience", formData.experience?.trim() || "");
 
       // Add portfolio files
       if (formData.portfolioFiles && formData.portfolioFiles.length > 0) {

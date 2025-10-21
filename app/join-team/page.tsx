@@ -9,9 +9,9 @@ export default function JoinTeamPage() {
     <main className="min-h-screen relative bg-white overflow-hidden">
       {/* Top gradient line */}
       <div className="absolute top-0 left-0 w-full h-3 bg-gradient-brand animate-gradient-x"></div>
-      
+
       <Navigation />
-      
+
       {/* Subtle Moving Grid Background */}
       <div className="fixed inset-0 pointer-events-none moving-grid"></div>
 
