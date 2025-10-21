@@ -2,12 +2,6 @@ import { Card, CardContent } from "@/components/ui/card";
 
 const stats = [
   {
-    number: "25+",
-    label: "Projects Completed",
-    description:
-      "Successful deliveries across events, brands, and corporate storytelling",
-  },
-  {
     number: "8+",
     label: "Our Team",
     description:
@@ -47,7 +41,7 @@ export function StatsSection() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid md:grid-cols-3 gap-8">
           {stats.map((stat, index) => {
             const statGradients = [
               "bg-gradient-to-br from-blue-200 via-blue-100 to-indigo-200",

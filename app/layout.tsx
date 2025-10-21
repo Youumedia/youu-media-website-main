@@ -11,11 +11,11 @@ export const metadata: Metadata = {
     "Youu Media delivers premium videography, photography, and editing services with cinematic quality and creative storytelling.",
   icons: {
     icon: [
-      { url: "/images/youu-icon.png", sizes: "32x32", type: "image/png" },
-      { url: "/images/youu-icon.png", sizes: "16x16", type: "image/png" },
+      { url: "/images/youu-logo-updated.png", sizes: "32x32", type: "image/png" },
+      { url: "/images/youu-logo-updated.png", sizes: "16x16", type: "image/png" },
     ],
-    apple: [{ url: "/images/youu-icon.png", sizes: "180x180", type: "image/png" }],
-    shortcut: "/images/youu-icon.png",
+    apple: [{ url: "/images/youu-logo-updated.png", sizes: "180x180", type: "image/png" }],
+    shortcut: "/images/youu-logo-updated.png",
   },
 };
 

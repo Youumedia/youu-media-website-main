@@ -24,8 +24,8 @@ export default function HomePage() {
 
         {/* Main content with grid background */}
         <div className="relative z-10">
-          <ServicesSection />
           <PortfolioPreview />
+          <ServicesSection />
           <StatsSection />
           <CTASection />
         </div>
