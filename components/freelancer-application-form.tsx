@@ -42,7 +42,7 @@ export function FreelancerApplicationForm() {
     email: "",
     phone: "",
     portfolioLink: "", // Website URL
-    portfolioFiles: "", // File attachments
+    portfolioFiles: [], // File attachments - now an array
     skillsText: "",
     availability: "",
     experience: "",
@@ -93,6 +93,12 @@ export function FreelancerApplicationForm() {
         about_you: formData.aboutYou?.trim() || "",
         equipment_software: formData.equipment?.trim() || "",
         // Note: portfolioFiles (file attachments) are handled separately
+        // For now, we'll include file names in the submission
+        portfolio_files: formData.portfolioFiles.map(file => ({
+          name: file.name,
+          size: file.size,
+          type: file.type
+        }))
       };
 
       console.log("Application data:", applicationData);
@@ -135,7 +141,7 @@ export function FreelancerApplicationForm() {
           email: "",
           phone: "",
           portfolioLink: "",
-          portfolioFiles: "",
+          portfolioFiles: [],
           skillsText: "",
           availability: "",
           experience: "",
@@ -462,6 +468,9 @@ export function FreelancerApplicationForm() {
                             <p className="text-xs">
                               PDF, DOC, DOCX, JPG, PNG, MP4, MOV (Max 10MB each)
                             </p>
+                            <p className="text-xs text-blue-600 font-medium">
+                              You can select multiple files at once
+                            </p>
                           </div>
                         </div>
                         <input
@@ -473,23 +482,89 @@ export function FreelancerApplicationForm() {
                           onChange={(e) => {
                             const files = Array.from(e.target.files || []);
                             if (files.length > 0) {
-                              // For now, we'll just store the file names
-                              // In a real implementation, you'd upload to Supabase Storage
-                              const fileNames = files
-                                .map((file) => file.name)
-                                .join(", ");
+                              // Store file objects with metadata
+                              const fileData = files.map((file) => ({
+                                name: file.name,
+                                size: file.size,
+                                type: file.type,
+                                lastModified: file.lastModified,
+                                file: file // Keep reference to actual file
+                              }));
                               setFormData((prev) => ({
                                 ...prev,
-                                portfolioFiles: fileNames, // Use separate field for files
+                                portfolioFiles: [...prev.portfolioFiles, ...fileData],
                               }));
                             }
                           }}
                         />
                       </div>
-                      {formData.portfolioFiles && (
-                        <div className="text-sm text-green-600 bg-green-50 p-2 rounded">
-                          <p className="font-medium">Files selected:</p>
-                          <p>{formData.portfolioFiles}</p>
+                      {formData.portfolioFiles && formData.portfolioFiles.length > 0 && (
+                        <div className="mt-4 space-y-2">
+                          <p className="text-sm font-medium text-green-700">
+                            Files selected ({formData.portfolioFiles.length}):
+                          </p>
+                          <div className="space-y-2">
+                            {formData.portfolioFiles.map((file, index) => (
+                              <div
+                                key={`${file.name}-${file.lastModified}`}
+                                className="flex items-center justify-between bg-green-50 border border-green-200 rounded-lg p-3"
+                              >
+                                <div className="flex items-center space-x-3">
+                                  <div className="flex-shrink-0">
+                                    <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+                                      <svg
+                                        className="w-4 h-4 text-green-600"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                      >
+                                        <path
+                                          strokeLinecap="round"
+                                          strokeLinejoin="round"
+                                          strokeWidth={2}
+                                          d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                                        />
+                                      </svg>
+                                    </div>
+                                  </div>
+                                  <div className="flex-1 min-w-0">
+                                    <p className="text-sm font-medium text-gray-900 truncate">
+                                      {file.name}
+                                    </p>
+                                    <p className="text-xs text-gray-500">
+                                      {(file.size / 1024 / 1024).toFixed(2)} MB
+                                    </p>
+                                  </div>
+                                </div>
+                                <button
+                                  type="button"
+                                  onClick={() => {
+                                    setFormData((prev) => ({
+                                      ...prev,
+                                      portfolioFiles: prev.portfolioFiles.filter(
+                                        (_, i) => i !== index
+                                      ),
+                                    }));
+                                  }}
+                                  className="flex-shrink-0 ml-2 p-1 text-red-500 hover:text-red-700 hover:bg-red-50 rounded"
+                                >
+                                  <svg
+                                    className="w-4 h-4"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                  >
+                                    <path
+                                      strokeLinecap="round"
+                                      strokeLinejoin="round"
+                                      strokeWidth={2}
+                                      d="M6 18L18 6M6 6l12 12"
+                                    />
+                                  </svg>
+                                </button>
+                              </div>
+                            ))}
+                          </div>
                         </div>
                       )}
                       <p className="text-xs text-gray-500">
