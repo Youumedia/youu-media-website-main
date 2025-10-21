@@ -24,25 +24,7 @@ export async function POST(request: NextRequest) {
     // Extract portfolio files
     const portfolioFiles = formData.getAll("portfolioFiles") as File[];
 
-    console.log("=== FORM DATA DEBUG ===");
-    console.log("Raw form data entries:");
-    for (const [key, value] of formData.entries()) {
-      console.log(`${key}:`, value);
-    }
-    
-    console.log("Extracted fields:", {
-      full_name,
-      email,
-      phone_number,
-      portfolio_url,
-      day_rate,
-      skills,
-      availability,
-      about_you,
-      equipment_software,
-      experience_years,
-      fileCount: portfolioFiles.length
-    });
+    console.log("Form submission received:", { full_name, email, fileCount: portfolioFiles.length });
 
     // Validate required fields
     if (!full_name || !email) {
@@ -80,18 +62,14 @@ export async function POST(request: NextRequest) {
     // For freelancer applications, we allow anonymous submissions
     // No authentication required for public freelancer applications
     
-    // Check if we need to set up service role for anonymous inserts
-    console.log("Using Supabase client for anonymous insert");
-    
-    // Test database connection first
-    console.log("Testing database connection...");
+    // Test database connection
     const { data: testData, error: testError } = await supabase
       .from("freelancer_applications")
       .select("id")
       .limit(1);
       
     if (testError) {
-      console.error("Database connection test failed:", testError);
+      console.error("Database connection failed:", testError);
       return NextResponse.json(
         {
           error: "Database connection failed",
@@ -101,23 +79,15 @@ export async function POST(request: NextRequest) {
         { status: 500 }
       );
     }
-    console.log("Database connection test successful");
 
     // Check if application already exists for this email
-    console.log("Checking for existing application with email:", email);
     const { data: existingApplication, error: existingError } = await supabase
       .from("freelancer_applications")
       .select("id")
       .eq("email", email)
       .single();
 
-    // If error is not "not found", log it but continue
-    if (existingError && existingError.code !== 'PGRST116') {
-      console.warn("Error checking existing application:", existingError);
-    }
-
     if (existingApplication) {
-      console.log("Application already exists for email:", email);
       return NextResponse.json(
         {
           error: "Application already exists for this email address",
@@ -126,15 +96,17 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Handle file uploads to Supabase Storage
+    // Handle file uploads to Supabase Storage (parallel processing)
     let portfolioFileUrls: string[] = [];
     let uploadedFiles: string[] = [];
     
     if (portfolioFiles && portfolioFiles.length > 0) {
-      console.log(`Processing ${portfolioFiles.length} portfolio files...`);
+      console.log(`Processing ${portfolioFiles.length} portfolio files in parallel...`);
       
-      for (const file of portfolioFiles) {
-        if (file.size > 0) { // Only process non-empty files
+      // Process all files in parallel instead of sequential
+      const uploadPromises = portfolioFiles
+        .filter(file => file.size > 0) // Only process non-empty files
+        .map(async (file) => {
           try {
             // Generate unique filename
             const fileExt = file.name.split('.').pop();
@@ -153,10 +125,8 @@ export async function POST(request: NextRequest) {
               });
 
             if (uploadError) {
-              console.error('Error uploading file:', uploadError);
-              // Don't fail the entire submission for file upload errors
-              console.warn(`File upload failed for ${file.name}, continuing without file`);
-              continue;
+              console.warn(`File upload failed for ${file.name}: ${uploadError.message}`);
+              return null; // Return null for failed uploads
             }
 
             // Get public URL
@@ -165,19 +135,30 @@ export async function POST(request: NextRequest) {
               .getPublicUrl(filePath);
 
             if (urlData?.publicUrl) {
-              portfolioFileUrls.push(urlData.publicUrl);
-              uploadedFiles.push(file.name); // Store original filename
-              console.log(`File uploaded successfully: ${urlData.publicUrl}`);
+              return {
+                url: urlData.publicUrl,
+                filename: file.name
+              };
             }
-
+            return null;
           } catch (fileError) {
-            console.error('Error processing file:', fileError);
-            // Don't fail the entire submission for file processing errors
-            console.warn(`File processing failed for ${file.name}, continuing without file`);
-            continue;
+            console.warn(`File processing failed for ${file.name}: ${fileError.message}`);
+            return null;
           }
+        });
+
+      // Wait for all uploads to complete
+      const uploadResults = await Promise.all(uploadPromises);
+      
+      // Collect successful uploads
+      uploadResults.forEach(result => {
+        if (result) {
+          portfolioFileUrls.push(result.url);
+          uploadedFiles.push(result.filename);
         }
-      }
+      });
+      
+      console.log(`Successfully uploaded ${portfolioFileUrls.length} files`);
     }
 
     // Prepare the data object for database insert
@@ -197,11 +178,7 @@ export async function POST(request: NextRequest) {
       status: "pending",
     };
 
-    console.log("=== DATABASE INSERT DEBUG ===");
-    console.log("Application data to insert:", JSON.stringify(applicationData, null, 2));
-
     // Insert the new application with exact database column names
-    console.log("Attempting database insert...");
     let { data: application, error: insertError } = await supabase
       .from("freelancer_applications")
       .insert([applicationData])
@@ -210,8 +187,6 @@ export async function POST(request: NextRequest) {
 
     // If insert fails due to RLS, try with service role
     if (insertError && (insertError.code === '42501' || insertError.message.includes('RLS'))) {
-      console.log("RLS error detected, trying with service role...");
-      
       if (process.env.SUPABASE_SERVICE_ROLE_KEY) {
         // Create service role client
         const { createClient } = await import('@supabase/supabase-js');
@@ -235,8 +210,7 @@ export async function POST(request: NextRequest) {
         application = serviceResult.data;
         insertError = serviceResult.error;
       } else {
-        console.log("Service role key not available, using anon key with RLS bypass");
-        // Try with anon key but bypass RLS by using a different approach
+        // Try with anon key
         const { createClient } = await import('@supabase/supabase-js');
         const anonSupabase = createClient(
           process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -255,15 +229,9 @@ export async function POST(request: NextRequest) {
     }
 
     if (insertError) {
-      console.error("=== DATABASE INSERT ERROR ===");
-      console.error("Error details:", insertError);
-      console.error("Error message:", insertError.message);
-      console.error("Error code:", insertError.code);
-      console.error("Error details:", insertError.details);
-      console.error("Error hint:", insertError.hint);
+      console.error("Database insert failed:", insertError.message);
       
-      // Try a minimal insert as last resort
-      console.log("Attempting minimal insert as fallback...");
+      // Try minimal insert as fallback
       const minimalData = {
         full_name,
         email,
@@ -277,25 +245,18 @@ export async function POST(request: NextRequest) {
         .single();
         
       if (minimalError) {
-        console.error("Minimal insert also failed:", minimalError);
         return NextResponse.json(
           {
             error: "Failed to submit application",
             details: insertError.message,
-            code: insertError.code,
-            hint: insertError.hint,
-            fallbackError: minimalError.message
+            code: insertError.code
           },
           { status: 500 }
         );
       } else {
-        console.log("Minimal insert successful:", minimalApplication);
         application = minimalApplication;
       }
     }
-
-    console.log("Application created successfully:", application);
-    console.log("Portfolio files uploaded:", portfolioFileUrls);
 
     return NextResponse.json({
       success: true,
