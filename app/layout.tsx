@@ -14,7 +14,13 @@ export const metadata: Metadata = {
       { url: "/images/youu-clean-logo.png", sizes: "32x32", type: "image/png" },
       { url: "/images/youu-clean-logo.png", sizes: "16x16", type: "image/png" },
     ],
-    apple: [{ url: "/images/youu-clean-logo.png", sizes: "180x180", type: "image/png" }],
+    apple: [
+      {
+        url: "/images/youu-clean-logo.png",
+        sizes: "180x180",
+        type: "image/png",
+      },
+    ],
     shortcut: "/images/youu-clean-logo.png",
   },
 };
