@@ -85,13 +85,14 @@ export function FreelancerApplicationForm() {
       const applicationData = {
         full_name: formData.fullName.trim(),
         email: formData.email.trim(),
-        skills: formData.skillsText?.trim() || "",
-        experience_years: formData.experience?.trim() || "",
-        portfolio_url: formData.portfolioLink?.trim() || "", // Website URL goes here
+        phone_number: formData.phone?.trim() || "",
+        portfolio_url: formData.portfolioLink?.trim() || "",
         day_rate: formData.rates?.trim() || "",
+        skills_text: formData.skillsText?.trim() || "",
+        availability: formData.availability?.trim() || "",
+        about_you: formData.aboutYou?.trim() || "",
+        equipment_software: formData.equipment?.trim() || "",
         // Note: portfolioFiles (file attachments) are handled separately
-        // Removed fields that don't exist in your database:
-        // phone_number, availability, about_you, equipment_software
       };
 
       console.log("Application data:", applicationData);
