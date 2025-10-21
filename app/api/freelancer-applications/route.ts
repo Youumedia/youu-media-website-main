@@ -5,6 +5,13 @@ import { isDevMode, getDevUser, devLog } from "@/lib/dev-auth";
 export async function POST(request: NextRequest) {
   try {
     console.log("POST /api/freelancer-applications - Starting request");
+    
+    // Add error boundary for debugging
+    console.log("Environment check:", {
+      hasSupabaseUrl: !!process.env.NEXT_PUBLIC_SUPABASE_URL,
+      hasSupabaseAnonKey: !!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+      hasServiceRoleKey: !!process.env.SUPABASE_SERVICE_ROLE_KEY
+    });
 
     // Parse multipart/form-data
     const formData = await request.formData();
