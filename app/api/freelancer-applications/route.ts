@@ -40,21 +40,8 @@ export async function POST(request: NextRequest) {
       remove: (name: string, options: any) => {},
     });
 
-    // Check authentication (with dev mode bypass)
-    let user = null;
-    if (isDevMode()) {
-      user = getDevUser();
-      devLog("POST /api/freelancer-applications - Using dev user");
-    } else {
-      const {
-        data: { user: authUser },
-        error: authError,
-      } = await supabase.auth.getUser();
-      if (authError || !authUser) {
-        return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-      }
-      user = authUser;
-    }
+    // For freelancer applications, we allow anonymous submissions
+    // No authentication required for public freelancer applications
 
     // Check if application already exists for this email
     const { data: existingApplication, error: existingError } = await supabase
@@ -133,30 +120,31 @@ export async function GET(request: NextRequest) {
 
     // Check authentication (with dev mode bypass)
     let user = null;
+    let isAdmin = false;
+    
     if (isDevMode()) {
       user = getDevUser();
       devLog("GET /api/freelancer-applications - Using dev user");
+      isAdmin = true; // Dev mode is always admin
     } else {
       const {
         data: { user: authUser },
         error: authError,
       } = await supabase.auth.getUser();
-      if (authError || !authUser) {
-        return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+      if (authUser) {
+        user = authUser;
+        isAdmin = user.id === process.env.ADMIN_USER_ID || user.email === process.env.ADMIN_EMAIL;
       }
-      user = authUser;
     }
-
-    // Admin check
-    const isAdmin =
-      user.id === process.env.ADMIN_USER_ID ||
-      user.email === process.env.ADMIN_EMAIL;
 
     let query = supabase.from("freelancer_applications").select("*");
 
-    if (!isAdmin) {
-      // Non-admin users can only see their own applications
+    if (!isAdmin && user) {
+      // Non-admin authenticated users can only see their own applications
       query = query.eq("email", user.email);
+    } else if (!isAdmin && !user) {
+      // Anonymous users cannot view applications
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
     const { data: applications, error } = await query.order("created_at", {
