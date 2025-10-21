@@ -103,17 +103,15 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Handle file uploads to Supabase Storage (parallel processing)
+    // Handle file uploads to Supabase Storage
     let portfolioFileUrls: string[] = [];
     let uploadedFiles: string[] = [];
     
     if (portfolioFiles && portfolioFiles.length > 0) {
-      console.log(`Processing ${portfolioFiles.length} portfolio files in parallel...`);
+      console.log(`Processing ${portfolioFiles.length} portfolio files...`);
       
-      // Process all files in parallel instead of sequential
-      const uploadPromises = portfolioFiles
-        .filter(file => file.size > 0) // Only process non-empty files
-        .map(async (file) => {
+      for (const file of portfolioFiles) {
+        if (file.size > 0) { // Only process non-empty files
           try {
             // Generate unique filename
             const fileExt = file.name.split('.').pop();
@@ -133,7 +131,7 @@ export async function POST(request: NextRequest) {
 
             if (uploadError) {
               console.warn(`File upload failed for ${file.name}: ${uploadError.message}`);
-              return null; // Return null for failed uploads
+              continue; // Continue with other files
             }
 
             // Get public URL
@@ -142,30 +140,17 @@ export async function POST(request: NextRequest) {
               .getPublicUrl(filePath);
 
             if (urlData?.publicUrl) {
-              return {
-                url: urlData.publicUrl,
-                filename: file.name
-              };
+              portfolioFileUrls.push(urlData.publicUrl);
+              uploadedFiles.push(file.name);
+              console.log(`File uploaded: ${file.name}`);
             }
-            return null;
+
           } catch (fileError) {
             console.warn(`File processing failed for ${file.name}: ${fileError.message}`);
-            return null;
+            continue; // Continue with other files
           }
-        });
-
-      // Wait for all uploads to complete
-      const uploadResults = await Promise.all(uploadPromises);
-      
-      // Collect successful uploads
-      uploadResults.forEach(result => {
-        if (result) {
-          portfolioFileUrls.push(result.url);
-          uploadedFiles.push(result.filename);
         }
-      });
-      
-      console.log(`Successfully uploaded ${portfolioFileUrls.length} files`);
+      }
     }
 
     // Prepare the data object for database insert
