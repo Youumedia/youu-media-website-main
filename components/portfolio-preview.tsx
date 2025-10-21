@@ -54,14 +54,14 @@ export function PortfolioPreview() {
           <div className="text-center mb-8">
             <h3 className="text-xl font-semibold text-gray-800 mb-4">Videos</h3>
           </div>
-          <div className="flex justify-center gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
             {videoItems.map((item) => (
               <Card
                 key={item.id}
                 className="group overflow-hidden hover:shadow-xl transition-all duration-500 border border-gray-200 hover:border-gray-300"
               >
                 <div className="relative overflow-hidden bg-gradient-to-br from-gray-900 via-gray-800 to-black">
-                  <div className="w-80 h-48 bg-gradient-to-br from-gray-900 via-gray-800 to-black flex items-center justify-center group-hover:from-gray-800 group-hover:via-gray-700 group-hover:to-gray-900 transition-all duration-500 relative">
+                  <div className="w-full h-48 bg-gradient-to-br from-gray-900 via-gray-800 to-black flex items-center justify-center group-hover:from-gray-800 group-hover:via-gray-700 group-hover:to-gray-900 transition-all duration-500 relative">
                     <div className="flex flex-col items-center justify-center relative z-10">
                       <div className="w-16 h-16 bg-gradient-to-r from-[#BE55FF] to-[#70BFFF] rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 shadow-2xl relative">
                         <Play className="h-8 w-8 text-white ml-1" />
@@ -86,14 +86,14 @@ export function PortfolioPreview() {
           <div className="text-center mb-8">
             <h3 className="text-xl font-semibold text-gray-800 mb-4">Photos</h3>
           </div>
-          <div className="flex justify-center gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
             {photoItems.map((item) => (
               <Card
                 key={item.id}
                 className="group overflow-hidden hover:shadow-xl transition-all duration-500 border border-gray-200 hover:border-gray-300"
               >
                 <div className="relative overflow-hidden bg-gradient-to-br from-gray-900 via-gray-800 to-black">
-                  <div className="w-80 h-48 bg-gradient-to-br from-gray-900 via-gray-800 to-black flex items-center justify-center group-hover:from-gray-800 group-hover:via-gray-700 group-hover:to-gray-900 transition-all duration-500 relative">
+                  <div className="w-full h-48 bg-gradient-to-br from-gray-900 via-gray-800 to-black flex items-center justify-center group-hover:from-gray-800 group-hover:via-gray-700 group-hover:to-gray-900 transition-all duration-500 relative">
                     <div className="flex flex-col items-center justify-center relative z-10">
                       <div className="w-16 h-16 bg-gradient-to-r from-[#70BFFF] to-[#BE55FF] rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 shadow-2xl relative">
                         <div className="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center">
