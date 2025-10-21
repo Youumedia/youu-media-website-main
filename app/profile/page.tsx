@@ -47,7 +47,7 @@ export default function ProfilePage() {
     }
     for (const file of files) {
       const path = `${user.id}/${Date.now()}-${file.name}`
-      const { error } = await supabase.storage.from("portfolio").upload(path, file)
+      const { error } = await supabase.storage.from("portfolio_uploads").upload(path, file)
       if (error) {
         setMessage(error.message)
         setUploading(false)

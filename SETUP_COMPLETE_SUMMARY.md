@@ -206,7 +206,7 @@ User → Backend Page → Auth Check → Redirect to /signin if not logged in
 
 ### 4. **portfolio_items**
 - Purpose: User portfolio file uploads
-- Requires: Supabase Storage bucket named "portfolio"
+- Requires: Supabase Storage bucket named "portfolio_uploads"
 - Links: user_id → auth.users.id
 
 ---

@@ -44,7 +44,7 @@ create table portfolio_items (
 );
 ```
 
-Create storage bucket `portfolio` with public access (optional) or generate signed URLs as needed.
+Create storage bucket `portfolio_uploads` with public access (optional) or generate signed URLs as needed.
 
 # Youu Media website
 

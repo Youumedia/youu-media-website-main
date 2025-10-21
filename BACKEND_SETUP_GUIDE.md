@@ -52,7 +52,7 @@ If you want to enable portfolio uploads:
 
 1. In Supabase dashboard, go to **Storage**
 2. Click **Create new bucket**
-3. Name it: `portfolio`
+3. Name it: `portfolio_uploads`
 4. Set as **Public** or configure RLS policies as needed
 
 ---

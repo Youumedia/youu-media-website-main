@@ -93,7 +93,7 @@ export async function POST(request: NextRequest) {
 
             // Upload to Supabase Storage
             const { data: uploadData, error: uploadError } = await supabase.storage
-              .from('freelancer_portfolios')
+              .from('portfolio_uploads')
               .upload(filePath, fileBuffer, {
                 contentType: file.type,
                 upsert: false
@@ -111,7 +111,7 @@ export async function POST(request: NextRequest) {
 
             // Get public URL
             const { data: urlData } = supabase.storage
-              .from('freelancer_portfolios')
+              .from('portfolio_uploads')
               .getPublicUrl(filePath);
 
             if (urlData?.publicUrl) {

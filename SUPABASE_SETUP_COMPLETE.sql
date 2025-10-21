@@ -165,7 +165,7 @@ ON CONFLICT DO NOTHING;
 -- ============================================================
 
 -- Note: Storage buckets must be created via Supabase Dashboard
--- Go to Storage > Create new bucket > Name it "portfolio"
+-- Go to Storage > Create new bucket > Name it "portfolio_uploads"
 -- Set as Public or configure RLS policies as needed
 
 -- ============================================================
