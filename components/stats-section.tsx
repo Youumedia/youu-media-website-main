@@ -8,8 +8,8 @@ const stats = [
       "Successful deliveries across events, brands, and corporate storytelling",
   },
   {
-    number: "15+",
-    label: "Skilled Freelancers",
+    number: "8+",
+    label: "Our Team",
     description:
       "Professional videographers, photographers, and editors in our network",
   },
