@@ -74,18 +74,7 @@ export function FreelancerApplicationForm() {
       return;
     }
 
-    // File size validation
-    const maxFileSize = 50 * 1024 * 1024; // 50MB in bytes
-    const oversizedFiles = formData.portfolioFiles.filter(file => file.size > maxFileSize);
-    
-    if (oversizedFiles.length > 0) {
-      toast({
-        title: "File Too Large",
-        description: `The following files exceed 50MB limit: ${oversizedFiles.map(f => f.name).join(', ')}. Please compress or use smaller files.`,
-        variant: "destructive",
-      });
-      return;
-    }
+    // File size validation removed - clients can upload any size files (GB+)
 
     setIsSubmitting(true);
     setUploadProgress(10);
@@ -138,9 +127,9 @@ export function FreelancerApplicationForm() {
 
       console.log("Step 3: Submitting to API");
       
-      // Add timeout and better error handling for mobile
+      // Add timeout and better error handling for large files
       const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 120000); // 2 minute timeout for large files
+      const timeoutId = setTimeout(() => controller.abort(), 600000); // 10 minute timeout for GB-sized files
 
       try {
         const response = await fetch("/api/freelancer-applications", {
@@ -172,7 +161,7 @@ export function FreelancerApplicationForm() {
       } catch (fetchError) {
         clearTimeout(timeoutId);
         if (fetchError.name === 'AbortError') {
-          throw new Error("Request timed out. Please try again with smaller files (under 50MB each).");
+          throw new Error("Request timed out. Please try again or check your internet connection.");
         }
         throw fetchError;
       }
@@ -516,7 +505,7 @@ export function FreelancerApplicationForm() {
                               Tap to select files from your device
                             </p>
                             <p className="text-xs">
-                              PDF, DOC, DOCX, JPG, PNG, MP4, MOV (Max 50MB each)
+                              PDF, DOC, DOCX, JPG, PNG, MP4, MOV (No size limit)
                             </p>
                             <p className="text-xs text-blue-600 font-medium">
                               You can select multiple files at once
@@ -559,23 +548,16 @@ export function FreelancerApplicationForm() {
                           </p>
                           <div className="space-y-2">
                             {formData.portfolioFiles.map((file, index) => {
-                              const isOversized = file.size > 50 * 1024 * 1024; // 50MB
                               return (
                                 <div
                                   key={`${file.name}-${file.lastModified}`}
-                                  className={`flex items-center justify-between rounded-lg p-3 ${
-                                    isOversized 
-                                      ? 'bg-red-50 border border-red-200' 
-                                      : 'bg-green-50 border border-green-200'
-                                  }`}
+                                  className="flex items-center justify-between rounded-lg p-3 bg-green-50 border border-green-200"
                                 >
                                 <div className="flex items-center space-x-3">
                                   <div className="flex-shrink-0">
-                                    <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                                      isOversized ? 'bg-red-100' : 'bg-green-100'
-                                    }`}>
+                                    <div className="w-8 h-8 rounded-full flex items-center justify-center bg-green-100">
                                       <svg
-                                        className={`w-4 h-4 ${isOversized ? 'text-red-600' : 'text-green-600'}`}
+                                        className="w-4 h-4 text-green-600"
                                         fill="none"
                                         stroke="currentColor"
                                         viewBox="0 0 24 24"
@@ -593,9 +575,8 @@ export function FreelancerApplicationForm() {
                                     <p className="text-sm font-medium text-gray-900 truncate">
                                       {file.name}
                                     </p>
-                                    <p className={`text-xs ${isOversized ? 'text-red-500' : 'text-gray-500'}`}>
+                                    <p className="text-xs text-gray-500">
                                       {(file.size / 1024 / 1024).toFixed(2)} MB
-                                      {isOversized && ' ⚠️ Too large (max 50MB)'}
                                     </p>
                                   </div>
                                 </div>
