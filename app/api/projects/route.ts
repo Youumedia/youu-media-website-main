@@ -1,10 +1,18 @@
+export const runtime = "edge";
 import { NextResponse } from "next/server";
+import { createClient } from "@supabase/supabase-js";
 
 export async function POST(req: Request) {
-  const body = await req.json();
-
   try {
-    // Map form data to database column names
+    const body = await req.json();
+
+    // Create a fresh Supabase client every request
+    const supabase = createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.SUPABASE_SERVICE_ROLE_KEY!
+    );
+
+    // Map form data to DB columns
     const projectData = {
       client_name: body.clientName,
       client_email: body.clientEmail,
@@ -14,44 +22,32 @@ export async function POST(req: Request) {
       project_description: body.projectDescription,
       budget_range: body.budgetRange,
       expected_completion_date: body.expectedCompletionDate,
-      requirements: body.requirements || [],
-      special_requests: body.specialRequests,
+      special_requests: body.specialRequests || "",
       team_size: body.teamSize || 1,
       status: "new",
     };
 
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/project_inquiries?select=reference_number`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          apikey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-          Authorization: `Bearer ${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!}`,
-          Prefer: "return=representation",
-        },
-        body: JSON.stringify(projectData),
-      }
-    );
+    // Insert directly into Supabase (no fetch needed)
+    const { data, error } = await supabase
+      .from("project_inquiries")
+      .insert([projectData])
+      .select("reference_number")
+      .single();
 
-    if (!response.ok) {
-      const errorText = await response.text();
-      console.error("Supabase error:", errorText);
+    if (error) {
+      console.error("Supabase insert error:", error);
       return NextResponse.json(
-        { error: "Failed to submit project", details: errorText },
+        { error: "Failed to submit project", details: error.message },
         { status: 500 }
       );
     }
-
-    const result = await response.json();
-    const project = result[0];
 
     return NextResponse.json(
       {
         success: true,
         message: "Project inquiry submitted successfully!",
         project: {
-          referenceNumber: project.reference_number,
+          referenceNumber: data?.reference_number,
         },
       },
       { status: 200 }

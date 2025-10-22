@@ -127,6 +127,10 @@ export function FreelancerApplicationForm() {
       const response = await fetch("/api/freelancer-applications", {
         method: "POST",
         body: formDataToSend, // No Content-Type header - let browser set it for FormData
+        // Add mobile-friendly headers
+        headers: {
+          'Accept': 'application/json',
+        },
       });
 
       const result = await response.json();
@@ -495,6 +499,7 @@ export function FreelancerApplicationForm() {
                           multiple
                           accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.mp4,.mov"
                           className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                          capture="environment"
                           onChange={(e) => {
                             const files = Array.from(e.target.files || []);
                             if (files.length > 0) {
