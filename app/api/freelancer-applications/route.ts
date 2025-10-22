@@ -43,6 +43,13 @@ export async function POST(request: NextRequest) {
     const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
     const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
     
+    console.log("Environment check:", {
+      url: !!supabaseUrl,
+      serviceRole: !!process.env.SUPABASE_SERVICE_ROLE_KEY,
+      anon: !!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+      usingKey: process.env.SUPABASE_SERVICE_ROLE_KEY ? "service" : "anon"
+    });
+    
     if (!supabaseUrl || !supabaseKey) {
       console.error("Missing Supabase credentials:", {
         url: !!supabaseUrl,
@@ -51,7 +58,7 @@ export async function POST(request: NextRequest) {
         anon: !!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
       });
       return NextResponse.json(
-        { error: "Server configuration error" },
+        { error: "Server configuration error - missing Supabase credentials" },
         { status: 500 }
       );
     }
