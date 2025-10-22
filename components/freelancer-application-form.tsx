@@ -75,13 +75,13 @@ export function FreelancerApplicationForm() {
     }
 
     // File size validation
-    const maxFileSize = 10 * 1024 * 1024; // 10MB in bytes
+    const maxFileSize = 50 * 1024 * 1024; // 50MB in bytes
     const oversizedFiles = formData.portfolioFiles.filter(file => file.size > maxFileSize);
     
     if (oversizedFiles.length > 0) {
       toast({
         title: "File Too Large",
-        description: `The following files exceed 10MB limit: ${oversizedFiles.map(f => f.name).join(', ')}. Please compress or use smaller files.`,
+        description: `The following files exceed 50MB limit: ${oversizedFiles.map(f => f.name).join(', ')}. Please compress or use smaller files.`,
         variant: "destructive",
       });
       return;
@@ -172,7 +172,7 @@ export function FreelancerApplicationForm() {
       } catch (fetchError) {
         clearTimeout(timeoutId);
         if (fetchError.name === 'AbortError') {
-          throw new Error("Request timed out. Please try again with smaller files (under 10MB each).");
+          throw new Error("Request timed out. Please try again with smaller files (under 50MB each).");
         }
         throw fetchError;
       }
@@ -516,7 +516,7 @@ export function FreelancerApplicationForm() {
                               Tap to select files from your device
                             </p>
                             <p className="text-xs">
-                              PDF, DOC, DOCX, JPG, PNG, MP4, MOV (Max 10MB each)
+                              PDF, DOC, DOCX, JPG, PNG, MP4, MOV (Max 50MB each)
                             </p>
                             <p className="text-xs text-blue-600 font-medium">
                               You can select multiple files at once
@@ -559,7 +559,7 @@ export function FreelancerApplicationForm() {
                           </p>
                           <div className="space-y-2">
                             {formData.portfolioFiles.map((file, index) => {
-                              const isOversized = file.size > 10 * 1024 * 1024; // 10MB
+                              const isOversized = file.size > 50 * 1024 * 1024; // 50MB
                               return (
                                 <div
                                   key={`${file.name}-${file.lastModified}`}
@@ -595,7 +595,7 @@ export function FreelancerApplicationForm() {
                                     </p>
                                     <p className={`text-xs ${isOversized ? 'text-red-500' : 'text-gray-500'}`}>
                                       {(file.size / 1024 / 1024).toFixed(2)} MB
-                                      {isOversized && ' ⚠️ Too large (max 10MB)'}
+                                      {isOversized && ' ⚠️ Too large (max 50MB)'}
                                     </p>
                                   </div>
                                 </div>

@@ -40,10 +40,23 @@ export async function POST(request: NextRequest) {
     }
 
     // Create a fresh Supabase client every request
-    const supabase = createClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.SUPABASE_SERVICE_ROLE_KEY!
-    );
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+    
+    if (!supabaseUrl || !supabaseKey) {
+      console.error("Missing Supabase credentials:", {
+        url: !!supabaseUrl,
+        key: !!supabaseKey,
+        serviceRole: !!process.env.SUPABASE_SERVICE_ROLE_KEY,
+        anon: !!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+      });
+      return NextResponse.json(
+        { error: "Server configuration error" },
+        { status: 500 }
+      );
+    }
+    
+    const supabase = createClient(supabaseUrl, supabaseKey);
 
     // Helper function for uploading a single file
     const uploadFile = async (
