@@ -74,6 +74,19 @@ export function FreelancerApplicationForm() {
       return;
     }
 
+    // File size validation
+    const maxFileSize = 10 * 1024 * 1024; // 10MB in bytes
+    const oversizedFiles = formData.portfolioFiles.filter(file => file.size > maxFileSize);
+    
+    if (oversizedFiles.length > 0) {
+      toast({
+        title: "File Too Large",
+        description: `The following files exceed 10MB limit: ${oversizedFiles.map(f => f.name).join(', ')}. Please compress or use smaller files.`,
+        variant: "destructive",
+      });
+      return;
+    }
+
     setIsSubmitting(true);
     setUploadProgress(10);
 
@@ -124,28 +137,45 @@ export function FreelancerApplicationForm() {
       setUploadProgress(50);
 
       console.log("Step 3: Submitting to API");
-      const response = await fetch("/api/freelancer-applications", {
-        method: "POST",
-        body: formDataToSend, // No Content-Type header - let browser set it for FormData
-        // Add mobile-friendly headers
-        headers: {
-          'Accept': 'application/json',
-        },
-      });
+      
+      // Add timeout and better error handling for mobile
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 120000); // 2 minute timeout for large files
 
-      const result = await response.json();
-      console.log("API response:", result);
+      try {
+        const response = await fetch("/api/freelancer-applications", {
+          method: "POST",
+          body: formDataToSend,
+          signal: controller.signal,
+          headers: {
+            'Accept': 'application/json',
+          },
+        });
 
-      if (!response.ok) {
-        throw new Error(result.error || "Failed to submit application");
+        clearTimeout(timeoutId);
+        
+        if (!response.ok) {
+          const errorText = await response.text();
+          console.error("API Error Response:", errorText);
+          throw new Error(`Server error: ${response.status} - ${errorText}`);
+        }
+
+        const result = await response.json();
+        console.log("API response:", result);
+
+        console.log("✅ API SUCCESS!");
+        setUploadProgress(80);
+
+        // Show success
+        setUploadProgress(100);
+        setSubmitSuccess(true);
+      } catch (fetchError) {
+        clearTimeout(timeoutId);
+        if (fetchError.name === 'AbortError') {
+          throw new Error("Request timed out. Please try again with smaller files (under 10MB each).");
+        }
+        throw fetchError;
       }
-
-      console.log("✅ API SUCCESS!");
-      setUploadProgress(80);
-
-      // Show success
-      setUploadProgress(100);
-      setSubmitSuccess(true);
 
       toast({
         title: "Application Sent!",
@@ -528,16 +558,24 @@ export function FreelancerApplicationForm() {
                             Files selected ({formData.portfolioFiles.length}):
                           </p>
                           <div className="space-y-2">
-                            {formData.portfolioFiles.map((file, index) => (
-                              <div
-                                key={`${file.name}-${file.lastModified}`}
-                                className="flex items-center justify-between bg-green-50 border border-green-200 rounded-lg p-3"
-                              >
+                            {formData.portfolioFiles.map((file, index) => {
+                              const isOversized = file.size > 10 * 1024 * 1024; // 10MB
+                              return (
+                                <div
+                                  key={`${file.name}-${file.lastModified}`}
+                                  className={`flex items-center justify-between rounded-lg p-3 ${
+                                    isOversized 
+                                      ? 'bg-red-50 border border-red-200' 
+                                      : 'bg-green-50 border border-green-200'
+                                  }`}
+                                >
                                 <div className="flex items-center space-x-3">
                                   <div className="flex-shrink-0">
-                                    <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+                                    <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
+                                      isOversized ? 'bg-red-100' : 'bg-green-100'
+                                    }`}>
                                       <svg
-                                        className="w-4 h-4 text-green-600"
+                                        className={`w-4 h-4 ${isOversized ? 'text-red-600' : 'text-green-600'}`}
                                         fill="none"
                                         stroke="currentColor"
                                         viewBox="0 0 24 24"
@@ -555,8 +593,9 @@ export function FreelancerApplicationForm() {
                                     <p className="text-sm font-medium text-gray-900 truncate">
                                       {file.name}
                                     </p>
-                                    <p className="text-xs text-gray-500">
+                                    <p className={`text-xs ${isOversized ? 'text-red-500' : 'text-gray-500'}`}>
                                       {(file.size / 1024 / 1024).toFixed(2)} MB
+                                      {isOversized && ' ⚠️ Too large (max 10MB)'}
                                     </p>
                                   </div>
                                 </div>
@@ -587,7 +626,8 @@ export function FreelancerApplicationForm() {
                                   </svg>
                                 </button>
                               </div>
-                            ))}
+                              );
+                            })}
                           </div>
                         </div>
                       )}
