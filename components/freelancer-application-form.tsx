@@ -43,7 +43,6 @@ export function FreelancerApplicationForm() {
     email: "",
     phone: "",
     portfolioLink: "", // Website URL
-    portfolioFiles: [], // File attachments - now an array
     skillsText: "",
     availability: "",
     experience: "",
@@ -97,7 +96,7 @@ export function FreelancerApplicationForm() {
         "portfolio_url",
         formData.portfolioLink?.trim() || ""
       );
-      formDataToSend.append("day_rate", formData.rates?.trim() || "");
+      formDataToSend.append("ideal_day_rate", formData.rates?.trim() || "");
       formDataToSend.append("skills_text", formData.skillsText?.trim() || "");
       formDataToSend.append(
         "availability",
@@ -109,15 +108,6 @@ export function FreelancerApplicationForm() {
         formData.equipment?.trim() || ""
       );
       formDataToSend.append("experience", formData.experience?.trim() || "");
-
-      // Add portfolio files
-      if (formData.portfolioFiles && formData.portfolioFiles.length > 0) {
-        formData.portfolioFiles.forEach((fileData) => {
-          if (fileData.file) {
-            formDataToSend.append("portfolioFiles", fileData.file);
-          }
-        });
-      }
 
       console.log("=== FORM SUBMISSION DEBUG ===");
       console.log("Form data being sent:", {
@@ -131,29 +121,21 @@ export function FreelancerApplicationForm() {
         aboutYou: formData.aboutYou,
         equipment: formData.equipment,
         experience: formData.experience,
-        fileCount: formData.portfolioFiles?.length || 0,
       });
 
-      console.log(
-        "Form data prepared with",
-        formData.portfolioFiles?.length || 0,
-        "files"
-      );
+      console.log("Form data prepared for submission");
       setUploadProgress(50);
-      setUploadStatus(
-        "Uploading files... (this may take a few minutes for large files)"
-      );
+      setUploadStatus("Submitting application...");
 
       console.log("Step 3: Submitting to API");
       console.log("FormData contents:", {
         full_name: formDataToSend.get("full_name"),
         email: formDataToSend.get("email"),
-        fileCount: formDataToSend.getAll("portfolioFiles").length
       });
-      
-      // Add timeout and better error handling for large files
+
+      // Add timeout for form submission
       const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 600000); // 10 minute timeout for GB-sized files
+      const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 second timeout
 
       try {
         console.log("Making fetch request to /api/freelancer-applications");
@@ -165,11 +147,11 @@ export function FreelancerApplicationForm() {
             Accept: "application/json",
           },
         });
-        
+
         console.log("Response received:", {
           status: response.status,
           statusText: response.statusText,
-          ok: response.ok
+          ok: response.ok,
         });
 
         clearTimeout(timeoutId);
@@ -184,19 +166,13 @@ export function FreelancerApplicationForm() {
         console.log("API response:", result);
 
         console.log("✅ API SUCCESS!");
-        setUploadProgress(80);
-        setUploadStatus("Processing files...");
-
-        // Show success
         setUploadProgress(100);
-        setUploadStatus("Upload complete!");
+        setUploadStatus("Application submitted!");
         setSubmitSuccess(true);
       } catch (fetchError) {
         clearTimeout(timeoutId);
         if (fetchError.name === "AbortError") {
-          throw new Error(
-            "Request timed out. Please try again or check your internet connection."
-          );
+          throw new Error("Request timed out. Please try again.");
         }
         throw fetchError;
       }
@@ -215,7 +191,6 @@ export function FreelancerApplicationForm() {
           email: "",
           phone: "",
           portfolioLink: "",
-          portfolioFiles: [],
           skillsText: "",
           availability: "",
           experience: "",
@@ -230,9 +205,9 @@ export function FreelancerApplicationForm() {
     } catch (error) {
       console.error("❌ SUBMISSION ERROR:", error);
       console.error("Error details:", {
-        name: error instanceof Error ? error.name : 'Unknown',
+        name: error instanceof Error ? error.name : "Unknown",
         message: error instanceof Error ? error.message : String(error),
-        stack: error instanceof Error ? error.stack : undefined
+        stack: error instanceof Error ? error.stack : undefined,
       });
       toast({
         title: "Submission Error",
@@ -514,159 +489,6 @@ export function FreelancerApplicationForm() {
                         }
                         placeholder="e.g., £300-500 per day"
                       />
-                    </div>
-                  </div>
-
-                  {/* Portfolio File Attachment */}
-                  <div className="space-y-4 md:space-y-6">
-                    <h3 className="text-lg font-semibold text-primary">
-                      Portfolio Files
-                    </h3>
-                    <div className="space-y-2">
-                      <Label htmlFor="portfolioFile">
-                        Upload Portfolio Files
-                      </Label>
-                      <div className="relative border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-gray-400 transition-colors min-h-[120px] flex items-center justify-center">
-                        <div className="flex flex-col items-center space-y-2">
-                          <svg
-                            className="w-8 h-8 text-gray-400"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
-                            />
-                          </svg>
-                          <div className="text-sm text-gray-600">
-                            <p className="font-medium">
-                              Tap to select files from your device
-                            </p>
-                            <p className="text-xs">
-                              PDF, DOC, DOCX, JPG, PNG, MP4, MOV (No size limit)
-                            </p>
-                            <p className="text-xs text-blue-600 font-medium">
-                              You can select multiple files at once
-                            </p>
-                            <p className="text-xs text-gray-500 mt-1">
-                              📁 Choose from gallery, files, or camera
-                            </p>
-                            <p className="text-xs text-orange-600 mt-2 font-medium">
-                              ⚠️ Large files may take several minutes to upload
-                            </p>
-                          </div>
-                        </div>
-                        <input
-                          type="file"
-                          id="portfolioFile"
-                          multiple
-                          accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.mp4,.mov"
-                          className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-                          style={{ touchAction: "manipulation" }}
-                          onChange={(e) => {
-                            const files = Array.from(e.target.files || []);
-                            if (files.length > 0) {
-                              // Store file objects with metadata
-                              const fileData = files.map((file) => ({
-                                name: file.name,
-                                size: file.size,
-                                type: file.type,
-                                lastModified: file.lastModified,
-                                file: file, // Keep reference to actual file
-                              }));
-                              setFormData((prev) => ({
-                                ...prev,
-                                portfolioFiles: [
-                                  ...prev.portfolioFiles,
-                                  ...fileData,
-                                ],
-                              }));
-                            }
-                          }}
-                        />
-                      </div>
-                      {formData.portfolioFiles &&
-                        formData.portfolioFiles.length > 0 && (
-                          <div className="mt-4 space-y-2">
-                            <p className="text-sm font-medium text-green-700">
-                              Files selected ({formData.portfolioFiles.length}):
-                            </p>
-                            <div className="space-y-2">
-                              {formData.portfolioFiles.map((file, index) => {
-                                return (
-                                  <div
-                                    key={`${file.name}-${file.lastModified}`}
-                                    className="flex items-center justify-between rounded-lg p-3 bg-green-50 border border-green-200"
-                                  >
-                                    <div className="flex items-center space-x-3">
-                                      <div className="flex-shrink-0">
-                                        <div className="w-8 h-8 rounded-full flex items-center justify-center bg-green-100">
-                                          <svg
-                                            className="w-4 h-4 text-green-600"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            viewBox="0 0 24 24"
-                                          >
-                                            <path
-                                              strokeLinecap="round"
-                                              strokeLinejoin="round"
-                                              strokeWidth={2}
-                                              d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                                            />
-                                          </svg>
-                                        </div>
-                                      </div>
-                                      <div className="flex-1 min-w-0">
-                                        <p className="text-sm font-medium text-gray-900 truncate">
-                                          {file.name}
-                                        </p>
-                                        <p className="text-xs text-gray-500">
-                                          {(file.size / 1024 / 1024).toFixed(2)}{" "}
-                                          MB
-                                        </p>
-                                      </div>
-                                    </div>
-                                    <button
-                                      type="button"
-                                      onClick={() => {
-                                        setFormData((prev) => ({
-                                          ...prev,
-                                          portfolioFiles:
-                                            prev.portfolioFiles.filter(
-                                              (_, i) => i !== index
-                                            ),
-                                        }));
-                                      }}
-                                      className="flex-shrink-0 ml-2 p-1 text-red-500 hover:text-red-700 hover:bg-red-50 rounded"
-                                    >
-                                      <svg
-                                        className="w-4 h-4"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        viewBox="0 0 24 24"
-                                      >
-                                        <path
-                                          strokeLinecap="round"
-                                          strokeLinejoin="round"
-                                          strokeWidth={2}
-                                          d="M6 18L18 6M6 6l12 12"
-                                        />
-                                      </svg>
-                                    </button>
-                                  </div>
-                                );
-                              })}
-                            </div>
-                          </div>
-                        )}
-                      <p className="text-xs text-gray-500">
-                        Upload your best work samples, showreels, or portfolio
-                        documents. Files are stored separately from the website
-                        URL above.
-                      </p>
                     </div>
                   </div>
 

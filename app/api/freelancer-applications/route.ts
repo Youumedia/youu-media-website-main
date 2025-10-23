@@ -8,7 +8,10 @@ export async function POST(request: NextRequest) {
 
   try {
     console.log("=== FREELANCER APPLICATION API START ===");
-    console.log("Request headers:", Object.fromEntries(request.headers.entries()));
+    console.log(
+      "Request headers:",
+      Object.fromEntries(request.headers.entries())
+    );
     console.log("Request method:", request.method);
     console.log("Request URL:", request.url);
 
@@ -21,18 +24,16 @@ export async function POST(request: NextRequest) {
     const email = formData.get("email") as string;
     const phone_number = formData.get("phone_number") as string;
     const portfolio_url = formData.get("portfolio_url") as string;
-    const day_rate = formData.get("day_rate") as string;
+    const ideal_day_rate = formData.get("ideal_day_rate") as string;
     const skills = formData.get("skills_text") as string;
     const availability = formData.get("availability") as string;
     const about_you = formData.get("about_you") as string;
     const equipment_software = formData.get("equipment_software") as string;
     const experience_years = formData.get("experience") as string;
-    const portfolioFiles = formData.getAll("portfolioFiles") as File[];
 
     console.log("Form data received:", {
       full_name,
       email,
-      fileCount: portfolioFiles.length,
     });
 
     // Basic validation
@@ -71,45 +72,8 @@ export async function POST(request: NextRequest) {
 
     const supabase = createClient(supabaseUrl, supabaseKey);
 
-    // Helper function for uploading a single file
-    const uploadFile = async (
-      file: File
-    ): Promise<{ url: string; fileName: string } | null> => {
-      if (file.size === 0) return null;
-
-      try {
-        const fileExt = file.name.split(".").pop();
-        const fileName = `${Date.now()}-${Math.random()
-          .toString(36)
-          .substring(2)}.${fileExt}`;
-        const filePath = `freelancer-portfolios/${email}/${fileName}`;
-        const fileBuffer = await file.arrayBuffer();
-
-        const { data: uploadData, error: uploadError } = await supabase.storage
-          .from("portfolio_uploads")
-          .upload(filePath, fileBuffer, {
-            contentType: file.type,
-            upsert: false,
-          });
-
-        if (!uploadError) {
-          const { data: urlData } = supabase.storage
-            .from("portfolio_uploads")
-            .getPublicUrl(filePath);
-
-          if (urlData?.publicUrl) {
-            console.log(`File uploaded: ${file.name}`);
-            return { url: urlData.publicUrl, fileName: file.name };
-          }
-        }
-      } catch (fileError) {
-        console.warn(`File upload failed: ${fileError}`);
-      }
-      return null;
-    };
-
-    // Prepare data for database (without file URLs initially)
-    const baseApplicationData = {
+    // Prepare data for database
+    const applicationData = {
       full_name,
       email,
       phone_number: phone_number || null,
@@ -118,141 +82,88 @@ export async function POST(request: NextRequest) {
       portfolio_url: portfolio_url || null,
       about_you: about_you || null,
       availability: availability || null,
-      day_rate: day_rate || null,
+      ideal_day_rate: ideal_day_rate || null,
       equipment_software: equipment_software || null,
       status: "pending",
     };
 
-    // Run file uploads and database insert in parallel
-    console.log("Starting parallel file uploads and database insert...");
+    // Insert application data into database
+    console.log("Inserting application into database...");
 
-    const uploadPromise = (async () => {
-      let portfolioFileUrls: string[] = [];
-      let uploadedFiles: string[] = [];
+    let application;
+    let insertError;
 
-      if (portfolioFiles && portfolioFiles.length > 0) {
-        console.log(`Processing ${portfolioFiles.length} files in parallel...`);
-
-        // Upload all files in parallel
-        const uploadPromises = portfolioFiles.map((file) => uploadFile(file));
-        const uploadResults = await Promise.all(uploadPromises);
-
-        // Process results
-        uploadResults.forEach((result) => {
-          if (result) {
-            portfolioFileUrls.push(result.url);
-            uploadedFiles.push(result.fileName);
-          }
-        });
-      }
-
-      return { portfolioFileUrls, uploadedFiles };
-    })();
-
-    const insertPromise = (async () => {
-      console.log("Attempting database insert...");
-
-      // Try database insert with multiple fallbacks
-      let application;
-      let insertError;
-
-      // First attempt
-      let { data: applicationData_result, error: insertError_result } =
-        await supabase
-          .from("freelancer_applications")
-          .insert([baseApplicationData])
-          .select()
-          .single();
-
-      application = applicationData_result;
-      insertError = insertError_result;
-
-      // If RLS error, try with service role
-      if (
-        insertError &&
-        (insertError.code === "42501" || insertError.message.includes("RLS"))
-      ) {
-        console.log("RLS error, trying service role...");
-
-        if (process.env.SUPABASE_SERVICE_ROLE_KEY) {
-          try {
-            const { createClient } = await import("@supabase/supabase-js");
-            const serviceSupabase = createClient(
-              process.env.NEXT_PUBLIC_SUPABASE_URL!,
-              process.env.SUPABASE_SERVICE_ROLE_KEY!,
-              { auth: { autoRefreshToken: false, persistSession: false } }
-            );
-
-            const serviceResult = await serviceSupabase
-              .from("freelancer_applications")
-              .insert([baseApplicationData])
-              .select()
-              .single();
-
-            application = serviceResult.data;
-            insertError = serviceResult.error;
-          } catch (serviceError) {
-            console.error("Service role failed:", serviceError);
-          }
-        }
-      }
-
-      // If still error, try minimal insert
-      if (insertError) {
-        console.log("Trying minimal insert...");
-        const minimalData = { full_name, email, status: "pending" };
-
-        const { data: minimalResult, error: minimalError } = await supabase
-          .from("freelancer_applications")
-          .insert([minimalData])
-          .select()
-          .single();
-
-        if (!minimalError) {
-          application = minimalResult;
-          insertError = null;
-        }
-      }
-
-      if (insertError) {
-        console.error("All database attempts failed:", insertError);
-        throw new Error(`Failed to save application: ${insertError.message}`);
-      }
-
-      console.log("Application saved successfully:", application?.id);
-      return application;
-    })();
-
-    // Wait for both operations to complete
-    const [uploadResult, application] = await Promise.all([
-      uploadPromise,
-      insertPromise,
-    ]);
-
-    // Update the application with file URLs if uploads completed successfully
-    if (
-      uploadResult.portfolioFileUrls.length > 0 ||
-      uploadResult.uploadedFiles.length > 0
-    ) {
-      const updatedData = {
-        portfolio_file_url: uploadResult.portfolioFileUrls.join(","),
-        uploaded_files: uploadResult.uploadedFiles.join(","),
-      };
-
+    // First attempt
+    let { data: applicationData_result, error: insertError_result } =
       await supabase
         .from("freelancer_applications")
-        .update(updatedData)
-        .eq("id", application.id);
+        .insert([applicationData])
+        .select()
+        .single();
+
+    application = applicationData_result;
+    insertError = insertError_result;
+
+    // If RLS error, try with service role
+    if (
+      insertError &&
+      (insertError.code === "42501" || insertError.message.includes("RLS"))
+    ) {
+      console.log("RLS error, trying service role...");
+
+      if (process.env.SUPABASE_SERVICE_ROLE_KEY) {
+        try {
+          const { createClient } = await import("@supabase/supabase-js");
+          const serviceSupabase = createClient(
+            process.env.NEXT_PUBLIC_SUPABASE_URL!,
+            process.env.SUPABASE_SERVICE_ROLE_KEY!,
+            { auth: { autoRefreshToken: false, persistSession: false } }
+          );
+
+          const serviceResult = await serviceSupabase
+            .from("freelancer_applications")
+            .insert([applicationData])
+            .select()
+            .single();
+
+          application = serviceResult.data;
+          insertError = serviceResult.error;
+        } catch (serviceError) {
+          console.error("Service role failed:", serviceError);
+        }
+      }
     }
+
+    // If still error, try minimal insert
+    if (insertError) {
+      console.log("Trying minimal insert...");
+      const minimalData = { full_name, email, status: "pending" };
+
+      const { data: minimalResult, error: minimalError } = await supabase
+        .from("freelancer_applications")
+        .insert([minimalData])
+        .select()
+        .single();
+
+      if (!minimalError) {
+        application = minimalResult;
+        insertError = null;
+      }
+    }
+
+    if (insertError) {
+      console.error("All database attempts failed:", insertError);
+      throw new Error(`Failed to save application: ${insertError.message}`);
+    }
+
+    console.log("Application saved successfully:", application?.id);
 
     const elapsed = Date.now() - start;
     console.log(`⏱️ Form processed in ${elapsed}ms`);
 
     return NextResponse.json({
       success: true,
-      application,
-      portfolioFiles: uploadResult.portfolioFileUrls,
-      message: "Application submitted successfully",
+      message: "Application submitted successfully.",
     });
   } catch (error) {
     console.error("API Error:", error);
