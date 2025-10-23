@@ -37,6 +37,7 @@ export function FreelancerApplicationForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
+  const [uploadStatus, setUploadStatus] = useState("");
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -78,10 +79,12 @@ export function FreelancerApplicationForm() {
 
     setIsSubmitting(true);
     setUploadProgress(10);
+    setUploadStatus("Preparing upload...");
 
     try {
       console.log("Step 1: Validating form data");
       setUploadProgress(20);
+      setUploadStatus("Validating form data...");
 
       console.log("Step 2: Preparing data for API");
       
@@ -124,6 +127,7 @@ export function FreelancerApplicationForm() {
       
       console.log("Form data prepared with", formData.portfolioFiles?.length || 0, "files");
       setUploadProgress(50);
+      setUploadStatus("Uploading files... (this may take a few minutes for large files)");
 
       console.log("Step 3: Submitting to API");
       
@@ -154,9 +158,11 @@ export function FreelancerApplicationForm() {
 
         console.log("✅ API SUCCESS!");
         setUploadProgress(80);
+        setUploadStatus("Processing files...");
 
         // Show success
         setUploadProgress(100);
+        setUploadStatus("Upload complete!");
         setSubmitSuccess(true);
       } catch (fetchError) {
         clearTimeout(timeoutId);
@@ -513,6 +519,9 @@ export function FreelancerApplicationForm() {
                             <p className="text-xs text-gray-500 mt-1">
                               📁 Choose from gallery, files, or camera
                             </p>
+                            <p className="text-xs text-orange-600 mt-2 font-medium">
+                              ⚠️ Large files may take several minutes to upload
+                            </p>
                           </div>
                         </div>
                         <input
@@ -640,9 +649,9 @@ export function FreelancerApplicationForm() {
                       {isSubmitting ? (
                         <>
                           <div className="mr-2 h-4 w-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                          {uploadProgress > 0
+                          {uploadStatus || (uploadProgress > 0
                             ? `Submitting... ${uploadProgress}%`
-                            : "Submitting..."}
+                            : "Submitting...")}
                         </>
                       ) : submitSuccess ? (
                         <>
