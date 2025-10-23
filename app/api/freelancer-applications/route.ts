@@ -8,10 +8,10 @@ export async function POST(request: NextRequest) {
 
   try {
     console.log("=== FREELANCER APPLICATION API START ===");
-    
+
     // Parse form data
     const formData = await request.formData();
-    
+
     // Extract all fields
     const full_name = formData.get("full_name") as string;
     const email = formData.get("email") as string;
@@ -41,28 +41,30 @@ export async function POST(request: NextRequest) {
 
     // Create a fresh Supabase client every request
     const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-    const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-    
+    const supabaseKey =
+      process.env.SUPABASE_SERVICE_ROLE_KEY ||
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
     console.log("Environment check:", {
       url: !!supabaseUrl,
       serviceRole: !!process.env.SUPABASE_SERVICE_ROLE_KEY,
       anon: !!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
-      usingKey: process.env.SUPABASE_SERVICE_ROLE_KEY ? "service" : "anon"
+      usingKey: process.env.SUPABASE_SERVICE_ROLE_KEY ? "service" : "anon",
     });
-    
+
     if (!supabaseUrl || !supabaseKey) {
       console.error("Missing Supabase credentials:", {
         url: !!supabaseUrl,
         key: !!supabaseKey,
         serviceRole: !!process.env.SUPABASE_SERVICE_ROLE_KEY,
-        anon: !!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+        anon: !!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
       });
       return NextResponse.json(
         { error: "Server configuration error - missing Supabase credentials" },
         { status: 500 }
       );
     }
-    
+
     const supabase = createClient(supabaseUrl, supabaseKey);
 
     // Helper function for uploading a single file
@@ -76,29 +78,29 @@ export async function POST(request: NextRequest) {
         const fileName = `${Date.now()}-${Math.random()
           .toString(36)
           .substring(2)}.${fileExt}`;
-            const filePath = `freelancer-portfolios/${email}/${fileName}`;
-            const fileBuffer = await file.arrayBuffer();
+        const filePath = `freelancer-portfolios/${email}/${fileName}`;
+        const fileBuffer = await file.arrayBuffer();
 
-            const { data: uploadData, error: uploadError } = await supabase.storage
+        const { data: uploadData, error: uploadError } = await supabase.storage
           .from("portfolio_uploads")
           .upload(filePath, fileBuffer, {
             contentType: file.type,
             upsert: false,
           });
 
-            if (!uploadError) {
-              const { data: urlData } = supabase.storage
+        if (!uploadError) {
+          const { data: urlData } = supabase.storage
             .from("portfolio_uploads")
-                .getPublicUrl(filePath);
-              
-              if (urlData?.publicUrl) {
-                console.log(`File uploaded: ${file.name}`);
+            .getPublicUrl(filePath);
+
+          if (urlData?.publicUrl) {
+            console.log(`File uploaded: ${file.name}`);
             return { url: urlData.publicUrl, fileName: file.name };
-              }
-            }
-          } catch (fileError) {
-            console.warn(`File upload failed: ${fileError}`);
           }
+        }
+      } catch (fileError) {
+        console.warn(`File upload failed: ${fileError}`);
+      }
       return null;
     };
 
@@ -144,76 +146,76 @@ export async function POST(request: NextRequest) {
     })();
 
     const insertPromise = (async () => {
-    console.log("Attempting database insert...");
+      console.log("Attempting database insert...");
 
-    // Try database insert with multiple fallbacks
-    let application;
-    let insertError;
+      // Try database insert with multiple fallbacks
+      let application;
+      let insertError;
 
-    // First attempt
+      // First attempt
       let { data: applicationData_result, error: insertError_result } =
         await supabase
-      .from("freelancer_applications")
+          .from("freelancer_applications")
           .insert([baseApplicationData])
-      .select()
-      .single();
+          .select()
+          .single();
 
-    application = applicationData_result;
-    insertError = insertError_result;
+      application = applicationData_result;
+      insertError = insertError_result;
 
-    // If RLS error, try with service role
+      // If RLS error, try with service role
       if (
         insertError &&
         (insertError.code === "42501" || insertError.message.includes("RLS"))
       ) {
-      console.log("RLS error, trying service role...");
-      
-      if (process.env.SUPABASE_SERVICE_ROLE_KEY) {
-        try {
+        console.log("RLS error, trying service role...");
+
+        if (process.env.SUPABASE_SERVICE_ROLE_KEY) {
+          try {
             const { createClient } = await import("@supabase/supabase-js");
-          const serviceSupabase = createClient(
-            process.env.NEXT_PUBLIC_SUPABASE_URL!,
-            process.env.SUPABASE_SERVICE_ROLE_KEY!,
-            { auth: { autoRefreshToken: false, persistSession: false } }
-          );
+            const serviceSupabase = createClient(
+              process.env.NEXT_PUBLIC_SUPABASE_URL!,
+              process.env.SUPABASE_SERVICE_ROLE_KEY!,
+              { auth: { autoRefreshToken: false, persistSession: false } }
+            );
 
-          const serviceResult = await serviceSupabase
-            .from("freelancer_applications")
+            const serviceResult = await serviceSupabase
+              .from("freelancer_applications")
               .insert([baseApplicationData])
-            .select()
-            .single();
+              .select()
+              .single();
 
-          application = serviceResult.data;
-          insertError = serviceResult.error;
-        } catch (serviceError) {
-          console.error("Service role failed:", serviceError);
+            application = serviceResult.data;
+            insertError = serviceResult.error;
+          } catch (serviceError) {
+            console.error("Service role failed:", serviceError);
+          }
         }
       }
-    }
 
-    // If still error, try minimal insert
-    if (insertError) {
-      console.log("Trying minimal insert...");
-      const minimalData = { full_name, email, status: "pending" };
-      
-      const { data: minimalResult, error: minimalError } = await supabase
-        .from("freelancer_applications")
-        .insert([minimalData])
-        .select()
-        .single();
+      // If still error, try minimal insert
+      if (insertError) {
+        console.log("Trying minimal insert...");
+        const minimalData = { full_name, email, status: "pending" };
 
-      if (!minimalError) {
-        application = minimalResult;
-        insertError = null;
+        const { data: minimalResult, error: minimalError } = await supabase
+          .from("freelancer_applications")
+          .insert([minimalData])
+          .select()
+          .single();
+
+        if (!minimalError) {
+          application = minimalResult;
+          insertError = null;
+        }
       }
-    }
 
-    if (insertError) {
-      console.error("All database attempts failed:", insertError);
+      if (insertError) {
+        console.error("All database attempts failed:", insertError);
         throw new Error(`Failed to save application: ${insertError.message}`);
-    }
+      }
 
-    console.log("Application saved successfully:", application?.id);
+      console.log("Application saved successfully:", application?.id);
       return application;
     })();
 
@@ -252,7 +254,7 @@ export async function POST(request: NextRequest) {
     console.error("API Error:", error);
     return NextResponse.json(
       {
-      error: "Internal server error", 
+        error: "Internal server error",
         details: String(error),
       },
       { status: 500 }

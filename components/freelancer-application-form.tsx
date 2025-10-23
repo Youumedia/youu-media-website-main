@@ -87,18 +87,27 @@ export function FreelancerApplicationForm() {
       setUploadStatus("Validating form data...");
 
       console.log("Step 2: Preparing data for API");
-      
+
       // Create FormData for multipart/form-data submission
       const formDataToSend = new FormData();
       formDataToSend.append("full_name", formData.fullName.trim());
       formDataToSend.append("email", formData.email.trim());
       formDataToSend.append("phone_number", formData.phone?.trim() || "");
-      formDataToSend.append("portfolio_url", formData.portfolioLink?.trim() || "");
+      formDataToSend.append(
+        "portfolio_url",
+        formData.portfolioLink?.trim() || ""
+      );
       formDataToSend.append("day_rate", formData.rates?.trim() || "");
       formDataToSend.append("skills_text", formData.skillsText?.trim() || "");
-      formDataToSend.append("availability", formData.availability?.trim() || "");
+      formDataToSend.append(
+        "availability",
+        formData.availability?.trim() || ""
+      );
       formDataToSend.append("about_you", formData.aboutYou?.trim() || "");
-      formDataToSend.append("equipment_software", formData.equipment?.trim() || "");
+      formDataToSend.append(
+        "equipment_software",
+        formData.equipment?.trim() || ""
+      );
       formDataToSend.append("experience", formData.experience?.trim() || "");
 
       // Add portfolio files
@@ -122,15 +131,21 @@ export function FreelancerApplicationForm() {
         aboutYou: formData.aboutYou,
         equipment: formData.equipment,
         experience: formData.experience,
-        fileCount: formData.portfolioFiles?.length || 0
+        fileCount: formData.portfolioFiles?.length || 0,
       });
-      
-      console.log("Form data prepared with", formData.portfolioFiles?.length || 0, "files");
+
+      console.log(
+        "Form data prepared with",
+        formData.portfolioFiles?.length || 0,
+        "files"
+      );
       setUploadProgress(50);
-      setUploadStatus("Uploading files... (this may take a few minutes for large files)");
+      setUploadStatus(
+        "Uploading files... (this may take a few minutes for large files)"
+      );
 
       console.log("Step 3: Submitting to API");
-      
+
       // Add timeout and better error handling for large files
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 600000); // 10 minute timeout for GB-sized files
@@ -141,12 +156,12 @@ export function FreelancerApplicationForm() {
           body: formDataToSend,
           signal: controller.signal,
           headers: {
-            'Accept': 'application/json',
+            Accept: "application/json",
           },
         });
 
         clearTimeout(timeoutId);
-        
+
         if (!response.ok) {
           const errorText = await response.text();
           console.error("API Error Response:", errorText);
@@ -166,8 +181,10 @@ export function FreelancerApplicationForm() {
         setSubmitSuccess(true);
       } catch (fetchError) {
         clearTimeout(timeoutId);
-        if (fetchError.name === 'AbortError') {
-          throw new Error("Request timed out. Please try again or check your internet connection.");
+        if (fetchError.name === "AbortError") {
+          throw new Error(
+            "Request timed out. Please try again or check your internet connection."
+          );
         }
         throw fetchError;
       }
@@ -530,7 +547,7 @@ export function FreelancerApplicationForm() {
                           multiple
                           accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.mp4,.mov"
                           className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-                          style={{ touchAction: 'manipulation' }}
+                          style={{ touchAction: "manipulation" }}
                           onChange={(e) => {
                             const files = Array.from(e.target.files || []);
                             if (files.length > 0) {
@@ -540,33 +557,75 @@ export function FreelancerApplicationForm() {
                                 size: file.size,
                                 type: file.type,
                                 lastModified: file.lastModified,
-                                file: file // Keep reference to actual file
+                                file: file, // Keep reference to actual file
                               }));
                               setFormData((prev) => ({
                                 ...prev,
-                                portfolioFiles: [...prev.portfolioFiles, ...fileData],
+                                portfolioFiles: [
+                                  ...prev.portfolioFiles,
+                                  ...fileData,
+                                ],
                               }));
                             }
                           }}
                         />
                       </div>
-                      {formData.portfolioFiles && formData.portfolioFiles.length > 0 && (
-                        <div className="mt-4 space-y-2">
-                          <p className="text-sm font-medium text-green-700">
-                            Files selected ({formData.portfolioFiles.length}):
-                          </p>
-                          <div className="space-y-2">
-                            {formData.portfolioFiles.map((file, index) => {
-                              return (
-                                <div
-                                  key={`${file.name}-${file.lastModified}`}
-                                  className="flex items-center justify-between rounded-lg p-3 bg-green-50 border border-green-200"
-                                >
-                                <div className="flex items-center space-x-3">
-                                  <div className="flex-shrink-0">
-                                    <div className="w-8 h-8 rounded-full flex items-center justify-center bg-green-100">
+                      {formData.portfolioFiles &&
+                        formData.portfolioFiles.length > 0 && (
+                          <div className="mt-4 space-y-2">
+                            <p className="text-sm font-medium text-green-700">
+                              Files selected ({formData.portfolioFiles.length}):
+                            </p>
+                            <div className="space-y-2">
+                              {formData.portfolioFiles.map((file, index) => {
+                                return (
+                                  <div
+                                    key={`${file.name}-${file.lastModified}`}
+                                    className="flex items-center justify-between rounded-lg p-3 bg-green-50 border border-green-200"
+                                  >
+                                    <div className="flex items-center space-x-3">
+                                      <div className="flex-shrink-0">
+                                        <div className="w-8 h-8 rounded-full flex items-center justify-center bg-green-100">
+                                          <svg
+                                            className="w-4 h-4 text-green-600"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            viewBox="0 0 24 24"
+                                          >
+                                            <path
+                                              strokeLinecap="round"
+                                              strokeLinejoin="round"
+                                              strokeWidth={2}
+                                              d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                                            />
+                                          </svg>
+                                        </div>
+                                      </div>
+                                      <div className="flex-1 min-w-0">
+                                        <p className="text-sm font-medium text-gray-900 truncate">
+                                          {file.name}
+                                        </p>
+                                        <p className="text-xs text-gray-500">
+                                          {(file.size / 1024 / 1024).toFixed(2)}{" "}
+                                          MB
+                                        </p>
+                                      </div>
+                                    </div>
+                                    <button
+                                      type="button"
+                                      onClick={() => {
+                                        setFormData((prev) => ({
+                                          ...prev,
+                                          portfolioFiles:
+                                            prev.portfolioFiles.filter(
+                                              (_, i) => i !== index
+                                            ),
+                                        }));
+                                      }}
+                                      className="flex-shrink-0 ml-2 p-1 text-red-500 hover:text-red-700 hover:bg-red-50 rounded"
+                                    >
                                       <svg
-                                        className="w-4 h-4 text-green-600"
+                                        className="w-4 h-4"
                                         fill="none"
                                         stroke="currentColor"
                                         viewBox="0 0 24 24"
@@ -575,52 +634,16 @@ export function FreelancerApplicationForm() {
                                           strokeLinecap="round"
                                           strokeLinejoin="round"
                                           strokeWidth={2}
-                                          d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                                          d="M6 18L18 6M6 6l12 12"
                                         />
                                       </svg>
-                                    </div>
+                                    </button>
                                   </div>
-                                  <div className="flex-1 min-w-0">
-                                    <p className="text-sm font-medium text-gray-900 truncate">
-                                      {file.name}
-                                    </p>
-                                    <p className="text-xs text-gray-500">
-                                      {(file.size / 1024 / 1024).toFixed(2)} MB
-                                    </p>
-                                  </div>
-                                </div>
-                                <button
-                                  type="button"
-                                  onClick={() => {
-                                    setFormData((prev) => ({
-                                      ...prev,
-                                      portfolioFiles: prev.portfolioFiles.filter(
-                                        (_, i) => i !== index
-                                      ),
-                                    }));
-                                  }}
-                                  className="flex-shrink-0 ml-2 p-1 text-red-500 hover:text-red-700 hover:bg-red-50 rounded"
-                                >
-                                  <svg
-                                    className="w-4 h-4"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    viewBox="0 0 24 24"
-                                  >
-                                    <path
-                                      strokeLinecap="round"
-                                      strokeLinejoin="round"
-                                      strokeWidth={2}
-                                      d="M6 18L18 6M6 6l12 12"
-                                    />
-                                  </svg>
-                                </button>
-                              </div>
-                              );
-                            })}
+                                );
+                              })}
+                            </div>
                           </div>
-                        </div>
-                      )}
+                        )}
                       <p className="text-xs text-gray-500">
                         Upload your best work samples, showreels, or portfolio
                         documents. Files are stored separately from the website
@@ -649,9 +672,10 @@ export function FreelancerApplicationForm() {
                       {isSubmitting ? (
                         <>
                           <div className="mr-2 h-4 w-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                          {uploadStatus || (uploadProgress > 0
-                            ? `Submitting... ${uploadProgress}%`
-                            : "Submitting...")}
+                          {uploadStatus ||
+                            (uploadProgress > 0
+                              ? `Submitting... ${uploadProgress}%`
+                              : "Submitting...")}
                         </>
                       ) : submitSuccess ? (
                         <>
