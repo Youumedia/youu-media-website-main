@@ -8,9 +8,13 @@ export async function POST(request: NextRequest) {
 
   try {
     console.log("=== FREELANCER APPLICATION API START ===");
+    console.log("Request headers:", Object.fromEntries(request.headers.entries()));
+    console.log("Request method:", request.method);
+    console.log("Request URL:", request.url);
 
     // Parse form data
     const formData = await request.formData();
+    console.log("FormData keys:", Array.from(formData.keys()));
 
     // Extract all fields
     const full_name = formData.get("full_name") as string;

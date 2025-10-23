@@ -145,12 +145,18 @@ export function FreelancerApplicationForm() {
       );
 
       console.log("Step 3: Submitting to API");
-
+      console.log("FormData contents:", {
+        full_name: formDataToSend.get("full_name"),
+        email: formDataToSend.get("email"),
+        fileCount: formDataToSend.getAll("portfolioFiles").length
+      });
+      
       // Add timeout and better error handling for large files
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 600000); // 10 minute timeout for GB-sized files
 
       try {
+        console.log("Making fetch request to /api/freelancer-applications");
         const response = await fetch("/api/freelancer-applications", {
           method: "POST",
           body: formDataToSend,
@@ -158,6 +164,12 @@ export function FreelancerApplicationForm() {
           headers: {
             Accept: "application/json",
           },
+        });
+        
+        console.log("Response received:", {
+          status: response.status,
+          statusText: response.statusText,
+          ok: response.ok
         });
 
         clearTimeout(timeoutId);
@@ -217,6 +229,11 @@ export function FreelancerApplicationForm() {
       }, 3000);
     } catch (error) {
       console.error("❌ SUBMISSION ERROR:", error);
+      console.error("Error details:", {
+        name: error instanceof Error ? error.name : 'Unknown',
+        message: error instanceof Error ? error.message : String(error),
+        stack: error instanceof Error ? error.stack : undefined
+      });
       toast({
         title: "Submission Error",
         description:
@@ -227,6 +244,7 @@ export function FreelancerApplicationForm() {
       });
       setIsSubmitting(false);
       setUploadProgress(0);
+      setUploadStatus("");
     }
   };
 
