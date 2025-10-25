@@ -24,7 +24,7 @@ export async function POST(request: NextRequest) {
     const email = formData.get("email") as string;
     const phone_number = formData.get("phone_number") as string;
     const portfolio_url = formData.get("portfolio_url") as string;
-    const ideal_day_rate = formData.get("ideal_day_rate") as string;
+    const day_rate = formData.get("ideal_day_rate") as string;
     const skills = formData.get("skills_text") as string;
     const availability = formData.get("availability") as string;
     const about_you = formData.get("about_you") as string;
@@ -34,6 +34,14 @@ export async function POST(request: NextRequest) {
     console.log("Form data received:", {
       full_name,
       email,
+      phone_number,
+      portfolio_url,
+      day_rate,
+      skills,
+      availability,
+      about_you,
+      equipment_software,
+      experience_years,
     });
 
     // Basic validation
@@ -82,13 +90,14 @@ export async function POST(request: NextRequest) {
       portfolio_url: portfolio_url || null,
       about_you: about_you || null,
       availability: availability || null,
-      ideal_day_rate: ideal_day_rate || null,
+      day_rate: day_rate || null,
       equipment_software: equipment_software || null,
       status: "pending",
     };
 
     // Insert application data into database
     console.log("Inserting application into database...");
+    console.log("Data being inserted:", applicationData);
 
     let application;
     let insertError;
