@@ -24,24 +24,24 @@ export async function POST(request: NextRequest) {
     const email = formData.get("email") as string;
     const phone_number = formData.get("phone_number") as string;
     const portfolio_url = formData.get("portfolio_url") as string;
-    const day_rate = formData.get("ideal_day_rate") as string;
-    const skills = formData.get("skills_text") as string;
+    const ideal_day_rate = formData.get("ideal_day_rate") as string;
+    const skills_text = formData.get("skills_text") as string;
     const availability = formData.get("availability") as string;
     const about_you = formData.get("about_you") as string;
     const equipment_software = formData.get("equipment_software") as string;
-    const experience_years = formData.get("experience") as string;
+    const experience = formData.get("experience") as string;
 
     console.log("Form data received:", {
       full_name,
       email,
       phone_number,
       portfolio_url,
-      day_rate,
-      skills,
+      ideal_day_rate,
+      skills_text,
       availability,
       about_you,
       equipment_software,
-      experience_years,
+      experience,
     });
 
     // Basic validation
@@ -85,12 +85,12 @@ export async function POST(request: NextRequest) {
       full_name,
       email,
       phone_number: phone_number || null,
-      skills: skills || null,
-      experience_years: experience_years || null,
+      skills: skills_text || null,
+      experience_years: experience || null,
       portfolio_url: portfolio_url || null,
       about_you: about_you || null,
       availability: availability || null,
-      day_rate: day_rate || null,
+      day_rate: ideal_day_rate || null,
       equipment_software: equipment_software || null,
       status: "pending",
     };
