@@ -14,12 +14,14 @@ import { Footer } from "@/components/footer";
 export default function HomePage() {
   return (
     <main className="min-h-screen bg-white">
-      <LandingHero />
-      <LandingAbout />
-      <LandingServices />
-      <LandingPortfolio />
-      <LandingTestimonials />
-      <LandingBrands />
+      <div className="bg-[#E6F2FF]">
+        <LandingHero />
+        <LandingAbout />
+        <LandingServices />
+        <LandingPortfolio />
+        <LandingTestimonials />
+        <LandingBrands />
+      </div>
       <LandingMission />
       <LandingNetwork />
       <LandingContact />

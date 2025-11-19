@@ -4,7 +4,7 @@ export function LandingAbout() {
   return (
     <section
       id="about"
-      className="py-12 md:py-16 bg-[#E6F2FF] relative overflow-hidden"
+      className="py-12 md:py-16 relative overflow-hidden"
     >
       {/* Creative floating orbs and shapes - About section distribution */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
