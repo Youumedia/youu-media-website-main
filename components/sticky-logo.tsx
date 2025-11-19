@@ -9,7 +9,7 @@ export function StickyLogo() {
   };
 
   return (
-    <div className="fixed top-0 left-4 md:top-1 md:left-6 z-[9999]">
+    <div className="fixed -top-1 left-1 md:top-1 md:left-6 z-[9999]">
       <Link
         href="#hero"
         onClick={scrollToTop}
