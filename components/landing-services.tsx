@@ -77,17 +77,12 @@ export function LandingServices() {
               </div>
 
               <div className="relative z-10">
-                <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-[#70BFFF] group-hover:to-[#BE55FF] group-hover:bg-clip-text transition-all">
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">
                   {service.title}
                 </h3>
                 <p className="text-lg text-gray-700 leading-relaxed">
                   {service.description}
                 </p>
-              </div>
-
-              {/* Arrow icon on hover */}
-              <div className="absolute bottom-6 right-6 text-3xl text-[#70BFFF] opacity-0 group-hover:opacity-100 transform translate-x-4 group-hover:translate-x-0 transition-all">
-                →
               </div>
             </div>
           ))}
