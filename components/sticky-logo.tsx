@@ -13,7 +13,7 @@ export function StickyLogo() {
       <Link
         href="#hero"
         onClick={scrollToTop}
-        className="block transition-all hover:scale-105"
+        className="block transition-all hover:scale-105 pb-3 md:pb-0"
         aria-label="Youu Media - Go to top"
       >
         <Image
