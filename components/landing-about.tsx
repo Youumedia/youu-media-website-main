@@ -4,7 +4,7 @@ export function LandingAbout() {
   return (
     <section
       id="about"
-      className="py-24 md:py-32 bg-white relative overflow-hidden"
+      className="py-12 md:py-16 bg-gradient-to-b from-white via-[#70BFFF]/5 to-[#BE55FF]/5 relative overflow-hidden"
     >
       {/* Creative gradient overlay with shapes */}
       <div className="absolute inset-0">

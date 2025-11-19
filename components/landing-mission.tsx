@@ -4,7 +4,7 @@ export function LandingMission() {
   return (
     <section
       id="mission"
-      className="py-24 md:py-32 bg-gradient-to-br from-[#70BFFF]/10 via-[#BE55FF]/10 to-[#70BFFF]/10"
+      className="py-12 md:py-16 bg-gradient-to-br from-[#70BFFF]/10 via-[#BE55FF]/10 to-[#70BFFF]/10"
     >
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-8">

@@ -27,7 +27,7 @@ export function LandingServices() {
   return (
     <section
       id="services"
-      className="py-24 md:py-32 bg-white relative overflow-hidden"
+      className="py-12 md:py-16 bg-gradient-to-b from-[#BE55FF]/5 via-[#70BFFF]/5 to-white relative overflow-hidden"
     >
       {/* Creative gradient background */}
       <div className="absolute inset-0">

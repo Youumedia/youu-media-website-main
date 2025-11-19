@@ -13,7 +13,7 @@ export function LandingBrands() {
   return (
     <section
       id="brands"
-      className="py-24 md:py-32 bg-white relative overflow-hidden"
+      className="py-12 md:py-16 bg-white relative overflow-hidden"
     >
       {/* Creative background */}
       <div className="absolute inset-0">

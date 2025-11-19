@@ -57,7 +57,7 @@ export function LandingTestimonials() {
   return (
     <section
       id="testimonials"
-      className="py-24 md:py-32 bg-white relative overflow-hidden"
+      className="py-12 md:py-16 bg-white relative overflow-hidden"
     >
       {/* Subtle gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#BE55FF]/3 via-transparent to-[#70BFFF]/3" />

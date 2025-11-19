@@ -49,7 +49,7 @@ export function LandingPortfolio() {
   return (
     <section
       id="portfolio"
-      className="py-24 md:py-32 bg-white relative overflow-hidden"
+      className="py-12 md:py-16 bg-white relative overflow-hidden"
     >
       {/* Subtle gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#70BFFF]/3 via-transparent to-[#BE55FF]/3" />
