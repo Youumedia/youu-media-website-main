@@ -7,6 +7,9 @@ const brandLogos = Array.from({ length: 12 }, (_, i) => ({
 }));
 
 export function LandingBrands() {
+  // Duplicate logos for seamless infinite scroll (3 sets for smooth looping)
+  const duplicatedLogos = [...brandLogos, ...brandLogos, ...brandLogos];
+
   return (
     <section
       id="brands"
@@ -32,29 +35,58 @@ export function LandingBrands() {
           <p className="text-xl text-gray-700">Across multiple industries.</p>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6 items-center">
-          {brandLogos.map((brand, index) => (
-            <div
-              key={brand.id}
-              className="group flex items-center justify-center p-6 bg-white rounded-2xl hover:bg-gradient-to-br hover:from-[#70BFFF]/5 hover:to-[#BE55FF]/5 transition-all border border-gray-200 hover:border-[#70BFFF]/40 hover:shadow-xl aspect-square transform hover:scale-105"
-            >
-              <div className="text-center relative">
-                {/* Animated gradient background */}
-                <div className="absolute inset-0 bg-gradient-to-br from-[#70BFFF]/10 to-[#BE55FF]/10 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity blur-sm" />
+        {/* Infinite scrolling container */}
+        <div className="relative w-full overflow-hidden -mx-4 md:-mx-6 lg:-mx-8">
+          {/* Gradient fade on edges for smooth visual effect */}
+          <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-white via-white/80 to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-white via-white/80 to-transparent z-10 pointer-events-none" />
 
-                <div className="relative w-24 h-24 mx-auto mb-2 bg-gradient-to-br from-[#70BFFF]/20 to-[#BE55FF]/20 rounded-xl flex items-center justify-center group-hover:from-[#70BFFF]/30 group-hover:to-[#BE55FF]/30 transition-all shadow-lg group-hover:shadow-xl">
-                  <span className="text-xs text-gray-600 font-bold group-hover:text-gray-900 transition-colors">
-                    Logo
-                  </span>
+          {/* Scrolling logos - single continuous line */}
+          <div className="flex gap-8 animate-scroll">
+            {duplicatedLogos.map((brand, index) => (
+              <div
+                key={`${brand.id}-${index}`}
+                className="flex-shrink-0 group flex items-center justify-center p-6 bg-white rounded-2xl hover:bg-gradient-to-br hover:from-[#70BFFF]/5 hover:to-[#BE55FF]/5 transition-all border border-gray-200 hover:border-[#70BFFF]/40 hover:shadow-xl w-[180px] h-[180px] transform hover:scale-105"
+              >
+                <div className="text-center relative w-full">
+                  {/* Animated gradient background */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-[#70BFFF]/10 to-[#BE55FF]/10 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity blur-sm" />
+
+                  <div className="relative w-20 h-20 mx-auto mb-2 bg-gradient-to-br from-[#70BFFF]/20 to-[#BE55FF]/20 rounded-xl flex items-center justify-center group-hover:from-[#70BFFF]/30 group-hover:to-[#BE55FF]/30 transition-all shadow-lg group-hover:shadow-xl">
+                    <span className="text-xs text-gray-600 font-bold group-hover:text-gray-900 transition-colors">
+                      Logo
+                    </span>
+                  </div>
+                  <p className="text-xs text-gray-600 font-medium group-hover:text-gray-900 transition-colors">
+                    {brand.name}
+                  </p>
                 </div>
-                <p className="text-xs text-gray-600 font-medium group-hover:text-gray-900 transition-colors">
-                  {brand.name}
-                </p>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
+
+      <style jsx>{`
+        @keyframes scroll {
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(calc(-180px * 12 - 2rem * 11));
+          }
+        }
+
+        .animate-scroll {
+          display: flex;
+          animation: scroll 40s linear infinite;
+          will-change: transform;
+        }
+
+        .animate-scroll:hover {
+          animation-play-state: paused;
+        }
+      `}</style>
     </section>
   );
 }
