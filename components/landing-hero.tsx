@@ -21,7 +21,7 @@ export function LandingHero() {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#E6F2FF]"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
       {/* Creative floating orbs and shapes - Hero section distribution */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -56,7 +56,7 @@ export function LandingHero() {
             </span>
           </div>
           <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold mb-4 leading-tight">
-            <span className="block bg-gradient-to-r from-[#70BFFF] via-gray-900 to-[#BE55FF] bg-clip-text text-transparent mb-2">
+            <span className="block bg-gradient-to-r from-[#70BFFF] via-gray-900 to-[#BE55FF] bg-clip-text text-transparent pb-2">
               Strategic visual content
             </span>
             <span className="block bg-gradient-to-r from-[#BE55FF] via-gray-900 to-[#70BFFF] bg-clip-text text-transparent">
