@@ -2,24 +2,26 @@
 
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import Image from "next/image";
 
 export function LandingNetwork() {
   return (
     <section id="network" className="py-24 md:py-32 bg-white">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Logo in white space above the box */}
+        <div className="flex justify-center mb-12">
+          <img
+            src="/images/The Youu Network - Transparent.png"
+            alt="The Youu Network"
+            className="w-auto h-14 md:h-20"
+            onError={(e) => {
+              // Hide image if it fails to load
+              e.currentTarget.style.display = 'none';
+            }}
+          />
+        </div>
+        
         <div className="bg-gradient-to-br from-[#70BFFF]/10 via-[#BE55FF]/10 to-[#70BFFF]/10 rounded-3xl p-12 md:p-16 border border-[#70BFFF]/20">
           <div className="text-center mb-8">
-            <div className="flex justify-center mb-6">
-              <Image
-                src="/images/youu-network-logo.png"
-                alt="The Youu Network"
-                width={400}
-                height={150}
-                className="w-full max-w-md h-auto"
-                priority
-              />
-            </div>
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
               The Youu Network
             </h2>
