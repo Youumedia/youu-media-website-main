@@ -105,11 +105,6 @@ export function LandingPortfolio() {
                 {/* Gradient overlay on hover */}
                 <div className="absolute inset-0 bg-gradient-to-br from-[#70BFFF]/10 via-[#BE55FF]/10 to-[#70BFFF]/10 opacity-0 group-hover:opacity-100 transition-opacity z-10" />
 
-                {/* Project number badge */}
-                <div className="absolute top-4 left-4 z-20 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-gray-700 shadow-lg">
-                  Project {index + 1}
-                </div>
-
                 <div className="aspect-video bg-gradient-to-br from-[#70BFFF]/15 to-[#BE55FF]/15 flex items-center justify-center relative overflow-hidden group-hover:scale-105 transition-transform duration-500">
                   <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(112,191,255,0.2),transparent_70%)] opacity-0 group-hover:opacity-100 transition-opacity" />
                   <span className="text-gray-500 text-sm relative z-10 group-hover:text-gray-700 transition-colors">
