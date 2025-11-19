@@ -2,13 +2,14 @@
 
 const services = [
   {
-    title: "Corporate and Commercial Videography",
+    title: "Videography and Photography",
     description:
-      "High quality video content designed to build authority and support business growth.",
+      "High quality video and photography content designed to build authority, strengthen brand identity and support business growth.",
   },
   {
-    title: "Professional Photography",
-    description: "Sharp, trustworthy visuals that strengthen brand identity.",
+    title: "Branded Visual Content for Social Media platforms",
+    description:
+      "Strategic visual content creation, graphic design and management for social media and digital platforms that engages your audience and drives results.",
   },
   {
     title: "Brand Storytelling and Visual Strategy",

@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export function LandingNetwork() {
   return (
@@ -28,9 +29,16 @@ export function LandingNetwork() {
           <div className="text-center">
             <Button
               size="lg"
+              asChild
               className="bg-gradient-to-r from-[#70BFFF] to-[#BE55FF] hover:opacity-90 text-white px-8 py-6 text-lg font-semibold rounded-full shadow-xl hover:shadow-2xl transition-all"
             >
-              Join The Network
+              <Link
+                href="https://chat.whatsapp.com/LMHrYWeo9ttFWDs7es2qaT?mode=wwt"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Join The Network
+              </Link>
             </Button>
           </div>
         </div>
