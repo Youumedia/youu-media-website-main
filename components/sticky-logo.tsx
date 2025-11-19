@@ -9,19 +9,19 @@ export function StickyLogo() {
   };
 
   return (
-    <div className="fixed top-4 left-4 md:top-6 md:left-6 z-[9999]">
+    <div className="fixed top-1 left-4 md:top-1 md:left-6 z-[9999]">
       <Link
         href="#hero"
         onClick={scrollToTop}
-        className="block transition-all hover:scale-105 bg-white rounded-lg p-3 shadow-xl border-2 border-gray-200 hover:border-[#70BFFF]/50"
+        className="block transition-all hover:scale-105"
         aria-label="Youu Media - Go to top"
       >
         <Image
-          src="/images/youu-logo-updated.png"
+          src="/images/youu-main-logo.png"
           alt="Youu Media"
-          width={140}
-          height={45}
-          className="h-8 md:h-10 w-auto"
+          width={490}
+          height={157}
+          className="h-28 md:h-[140px] w-auto"
           priority
           onError={(e) => {
             // Fallback if image doesn't load
