@@ -10,10 +10,7 @@ export function LandingContact() {
       id="contact"
       className="py-12 md:py-16 bg-[#E6F2FF] relative overflow-hidden"
     >
-      {/* Plain light blue background with creative shapes */}
-      <div className="absolute inset-0 bg-[#E6F2FF]"></div>
-
-      {/* Floating orbs and creative shapes */}
+      {/* Creative floating orbs and shapes */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-[#70BFFF]/20 rounded-full blur-3xl animate-float-slow" />
         <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-[#BE55FF]/20 rounded-full blur-3xl animate-float-medium" />
