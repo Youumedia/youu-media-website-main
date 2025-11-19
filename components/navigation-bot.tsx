@@ -2,30 +2,17 @@
 
 import { useState } from "react";
 import { Smile, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
-const sections = [
-  { id: "hero", label: "Hero" },
-  { id: "about", label: "About" },
-  { id: "services", label: "Services" },
-  { id: "portfolio", label: "Portfolio" },
-  { id: "testimonials", label: "Testimonials" },
-  { id: "brands", label: "Brands" },
-  { id: "mission", label: "Mission" },
-  { id: "network", label: "The Youu Network" },
-  { id: "contact", label: "Contact" },
+const navigationItems = [
+  { href: "/", label: "Home" },
+  { href: "/about", label: "About" },
+  { href: "/#portfolio", label: "Our Work" },
+  { href: "/#contact", label: "Contact Us" },
 ];
 
 export function NavigationBot() {
   const [isOpen, setIsOpen] = useState(false);
-
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth", block: "start" });
-      setIsOpen(false);
-    }
-  };
 
   return (
     <div className="fixed bottom-4 right-4 md:bottom-6 md:right-6 z-50">
@@ -42,14 +29,15 @@ export function NavigationBot() {
             </button>
           </div>
           <div className="space-y-1">
-            {sections.map((section) => (
-              <button
-                key={section.id}
-                onClick={() => scrollToSection(section.id)}
-                className="w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gradient-to-r hover:from-[#70BFFF]/10 hover:to-[#BE55FF]/10 rounded-lg transition-all hover:text-gray-900 font-medium"
+            {navigationItems.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                onClick={() => setIsOpen(false)}
+                className="block w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gradient-to-r hover:from-[#70BFFF]/10 hover:to-[#BE55FF]/10 rounded-lg transition-all hover:text-gray-900 font-medium"
               >
-                {section.label}
-              </button>
+                {item.label}
+              </Link>
             ))}
           </div>
         </div>
