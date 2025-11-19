@@ -55,28 +55,69 @@ export function LandingTestimonials() {
   };
 
   return (
-    <section id="testimonials" className="py-24 md:py-32 bg-gray-50">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            Client Feedback
+    <section
+      id="testimonials"
+      className="py-24 md:py-32 bg-white relative overflow-hidden"
+    >
+      {/* Subtle gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#BE55FF]/3 via-transparent to-[#70BFFF]/3" />
+
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="text-center mb-20">
+          <span className="text-sm font-bold text-[#BE55FF] uppercase tracking-widest mb-4 block">
+            Testimonials
+          </span>
+          <h2 className="text-5xl md:text-6xl font-black text-gray-900 mb-4">
+            Client{" "}
+            <span className="bg-gradient-to-r from-[#70BFFF] to-[#BE55FF] bg-clip-text text-transparent">
+              Feedback
+            </span>
           </h2>
-          <p className="text-xl text-gray-600">
+          <p className="text-xl text-gray-700">
             What people say about working with Youu Media.
           </p>
         </div>
 
         <div className="relative">
+          {/* Decorative quote marks */}
+          <div className="absolute -top-8 -left-8 text-9xl text-[#70BFFF]/10 font-black z-0">
+            "
+          </div>
+          <div className="absolute -bottom-8 -right-8 text-9xl text-[#BE55FF]/10 font-black z-0">
+            "
+          </div>
+
           {/* Testimonial Card */}
-          <div className="bg-white rounded-2xl p-8 md:p-12 shadow-lg border border-gray-100 min-h-[300px] flex flex-col justify-center">
-            <p className="text-xl md:text-2xl text-gray-700 mb-8 leading-relaxed italic">
-              "{testimonials[currentIndex].content}"
-            </p>
-            <div>
-              <p className="text-lg font-semibold text-gray-900">
-                {testimonials[currentIndex].name}
+          <div className="relative bg-white rounded-3xl p-8 md:p-12 shadow-2xl border border-gray-200 min-h-[300px] flex flex-col justify-center hover:border-[#70BFFF]/40 transition-all overflow-hidden group">
+            {/* Gradient overlay on hover */}
+            <div className="absolute inset-0 bg-gradient-to-br from-[#70BFFF]/5 via-[#BE55FF]/5 to-[#70BFFF]/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+
+            {/* Decorative corner */}
+            <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-[#70BFFF]/10 to-[#BE55FF]/10 rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity" />
+
+            <div className="relative z-10">
+              <p className="text-xl md:text-2xl text-gray-700 mb-8 leading-relaxed italic relative">
+                <span className="text-4xl text-[#70BFFF]/30 absolute -left-6 -top-4">
+                  "
+                </span>
+                {testimonials[currentIndex].content}
+                <span className="text-4xl text-[#BE55FF]/30 absolute -right-6 -bottom-4">
+                  "
+                </span>
               </p>
-              <p className="text-gray-600">{testimonials[currentIndex].role}</p>
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#70BFFF] to-[#BE55FF] flex items-center justify-center text-white font-bold text-lg">
+                  {testimonials[currentIndex].name.charAt(0)}
+                </div>
+                <div>
+                  <p className="text-lg font-bold text-gray-900">
+                    {testimonials[currentIndex].name}
+                  </p>
+                  <p className="text-gray-600">
+                    {testimonials[currentIndex].role}
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -84,7 +125,7 @@ export function LandingTestimonials() {
           <div className="flex justify-center items-center gap-4 mt-8">
             <button
               onClick={prevTestimonial}
-              className="bg-white rounded-full p-3 shadow-lg hover:shadow-xl transition-all hover:scale-110 border border-gray-200"
+              className="bg-white rounded-full p-3 shadow-lg hover:shadow-xl transition-all hover:scale-110 border border-gray-200 hover:border-[#70BFFF]/50"
               aria-label="Previous testimonial"
             >
               <ChevronLeft className="h-5 w-5 text-gray-700" />
@@ -108,7 +149,7 @@ export function LandingTestimonials() {
 
             <button
               onClick={nextTestimonial}
-              className="bg-white rounded-full p-3 shadow-lg hover:shadow-xl transition-all hover:scale-110 border border-gray-200"
+              className="bg-white rounded-full p-3 shadow-lg hover:shadow-xl transition-all hover:scale-110 border border-gray-200 hover:border-[#70BFFF]/50"
               aria-label="Next testimonial"
             >
               <ChevronRight className="h-5 w-5 text-gray-700" />
