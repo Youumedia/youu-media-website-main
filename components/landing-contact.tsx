@@ -53,7 +53,7 @@ export function LandingContact() {
           </div>
 
           {/* Contact Icons */}
-          <div className="flex flex-wrap justify-center md:justify-end items-center gap-8 md:gap-12">
+          <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
             <Link
               href="https://www.linkedin.com/company/youu-media/"
               target="_blank"
@@ -65,6 +65,9 @@ export function LandingContact() {
               </div>
               <span className="text-sm font-medium text-gray-700">
                 LinkedIn
+              </span>
+              <span className="text-xs text-gray-600 opacity-0">
+                &nbsp;
               </span>
             </Link>
 
