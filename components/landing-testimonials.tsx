@@ -6,38 +6,65 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 const testimonials = [
   {
     id: 1,
-    name: "Client Name",
-    role: "CEO, Company Name",
-    content:
-      "Youu Media transformed our brand presence with exceptional visual content. Their professional approach and creative vision exceeded our expectations.",
+    type: "text",
+    name: "Christian N Jr.",
+    role: "FT100 Most Influential BAME Leaders in UK Tech",
+    content: "Very good video. Very, very good.",
   },
   {
     id: 2,
-    name: "Client Name",
-    role: "Marketing Director, Company Name",
-    content:
-      "Working with Youu Media was a game-changer. Their strategic storytelling helped us connect with our audience in ways we never imagined.",
+    type: "video",
+    name: "Catherine",
+    role: "Video Testimonial",
+    content: "",
+    videoUrl: "/videos/catherine-testimonial.mp4",
   },
   {
     id: 3,
-    name: "Client Name",
-    role: "Founder, Company Name",
+    type: "text",
+    name: "Elena Karpenko",
+    role: "Founder of The Business Minds",
     content:
-      "The quality of work from Youu Media is outstanding. They understand corporate branding and deliver content that truly represents our values.",
+      "It was a pleasure having Youu Media with us, and your work truly captured the spirit of The Business Minds community. The energy, the conversations, and the connections that night were special, and your team brought it all to life perfectly. Huge thanks again for your professionalism, creativity, and for being such a great partner. Looking forward to creating even more impactful moments together!",
   },
   {
     id: 4,
-    name: "Client Name",
-    role: "VP of Communications, Company Name",
+    type: "text",
+    name: "Agatha Howes",
+    role: "Founder, Claudia Fabian Media Ltd",
     content:
-      "Professional, creative, and results-driven. Youu Media helped us build trust and authority through powerful visual storytelling.",
+      "Great piece of work Youu Media 👏 – you captured the event in a way that gives us an insight into what we've missed out on (those who did not attend) and what the main themes and atmosphere was like for those who were there. Engaging and informative – well done.",
   },
   {
     id: 5,
-    name: "Client Name",
-    role: "Business Owner, Company Name",
+    type: "text",
+    name: "Fenton Cayless",
+    role: "Founder, CameThru",
+    content: "Great video.",
+  },
+  {
+    id: 6,
+    type: "text",
+    name: "Geoff Ranson",
+    role: "Project Manager, Startup Croydon",
     content:
-      "Youu Media's expertise in videography and photography elevated our brand. Highly recommend for any professional looking to stand out.",
+      "We look forward to supporting small businesses grow and making Croydon's economy even stronger. Small businesses like You Media who created the video of our launch event on 6 November.",
+  },
+  {
+    id: 7,
+    type: "text",
+    name: "Saffron Saunders",
+    role: "CEO, Startup Croydon",
+    content:
+      "We know the power of video and networking. On the night, I got to meet the energy of Khai Phillips, who had started his journey a couple of years back through a project run here with Youth PWR Charity and The Creative Digital Lab! Check out his video, which says it all! Thank you, Khai, and I look forward to getting to know you in the coming months.",
+  },
+  {
+    id: 8,
+    type: "text",
+    name: "Shanice Tomlinson",
+    role: "Co-Founder, Become Orbit",
+    content:
+      "Love the video you've created! It captures the vibes of the night. I've followed your business page so looking forward to see how you continue to grow.",
   },
 ];
 
@@ -54,11 +81,29 @@ export function LandingTestimonials() {
     );
   };
 
+  const currentTestimonial = testimonials[currentIndex];
+
   return (
     <section
       id="testimonials"
-      className="py-12 md:py-16 relative overflow-hidden"
+      className="py-12 md:py-16 bg-[#E6F2FF] relative overflow-hidden"
     >
+      {/* Creative floating orbs and shapes - Testimonials section distribution */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {/* Large floating orbs - spread around */}
+        <div className="absolute top-1/5 left-0 w-[420px] h-[420px] bg-[#70BFFF]/20 rounded-full blur-3xl animate-float-slow" />
+        <div className="absolute bottom-1/5 right-0 w-[450px] h-[450px] bg-[#BE55FF]/20 rounded-full blur-3xl animate-float-medium" />
+        <div className="absolute top-1/2 left-1/2 w-[380px] h-[380px] bg-[#70BFFF]/15 rounded-full blur-2xl animate-float-fast" />
+        <div className="absolute bottom-0 right-1/3 w-[410px] h-[410px] bg-[#BE55FF]/18 rounded-full blur-3xl animate-float-slow" />
+
+        {/* Geometric shapes - distributed */}
+        <div className="absolute top-1/6 right-1/4 w-28 h-28 bg-gradient-to-br from-[#70BFFF]/25 to-[#BE55FF]/25 rounded-3xl rotate-45 animate-pulse" />
+        <div className="absolute bottom-1/4 left-1/5 w-24 h-24 bg-gradient-to-br from-[#BE55FF]/25 to-[#70BFFF]/25 rounded-full animate-pulse" style={{ animationDelay: "1.1s" }} />
+        <div className="absolute top-2/3 right-1/3 w-16 h-16 bg-[#70BFFF]/20 rounded-lg rotate-12 animate-pulse" style={{ animationDelay: "0.7s" }} />
+        <div className="absolute bottom-1/2 left-2/3 w-20 h-20 bg-[#BE55FF]/22 rounded-2xl rotate-45 animate-pulse" style={{ animationDelay: "1.5s" }} />
+        <div className="absolute top-1/4 left-1/2 w-24 h-24 bg-gradient-to-br from-[#70BFFF]/20 to-[#BE55FF]/20 rounded-full animate-pulse" style={{ animationDelay: "0.3s" }} />
+      </div>
+
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-20">
           <span className="text-sm font-bold text-[#BE55FF] uppercase tracking-widest mb-4 block">
@@ -93,28 +138,70 @@ export function LandingTestimonials() {
             <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-[#70BFFF]/10 to-[#BE55FF]/10 rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity" />
 
             <div className="relative z-10">
-              <p className="text-xl md:text-2xl text-gray-700 mb-8 leading-relaxed italic relative">
-                <span className="text-4xl text-[#70BFFF]/30 absolute -left-6 -top-4">
-                  "
-                </span>
-                {testimonials[currentIndex].content}
-                <span className="text-4xl text-[#BE55FF]/30 absolute -right-6 -bottom-4">
-                  "
-                </span>
-              </p>
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#70BFFF] to-[#BE55FF] flex items-center justify-center text-white font-bold text-lg">
-                  {testimonials[currentIndex].name.charAt(0)}
+              {currentTestimonial.type === "video" ? (
+                /* Video Testimonial */
+                <div className="w-full flex flex-col justify-center">
+                  <div className="aspect-video bg-gray-900 rounded-xl overflow-hidden mb-8 flex items-center justify-center">
+                    {currentTestimonial.videoUrl ? (
+                      <video
+                        className="w-full h-full object-cover"
+                        controls
+                      >
+                        <source src={currentTestimonial.videoUrl} type="video/mp4" />
+                        Your browser does not support the video tag.
+                      </video>
+                    ) : (
+                      <div className="text-center text-white p-8">
+                        <p className="text-lg font-semibold mb-2">Video Testimonial</p>
+                        <p className="text-sm text-gray-300">
+                          Add video URL to the testimonials array
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#70BFFF] to-[#BE55FF] flex items-center justify-center text-white font-bold text-lg">
+                      {currentTestimonial.name.charAt(0)}
+                    </div>
+                    <div>
+                      <p className="text-lg font-bold text-gray-900">
+                        {currentTestimonial.name}
+                      </p>
+                      {currentTestimonial.role && (
+                        <p className="text-gray-600">
+                          {currentTestimonial.role}
+                        </p>
+                      )}
+                    </div>
+                  </div>
                 </div>
-                <div>
-                  <p className="text-lg font-bold text-gray-900">
-                    {testimonials[currentIndex].name}
+              ) : (
+                /* Text Testimonial */
+                <>
+                  <p className="text-xl md:text-2xl text-gray-700 mb-8 leading-relaxed italic relative">
+                    <span className="text-4xl text-[#70BFFF]/30 absolute -left-6 -top-4">
+                      "
+                    </span>
+                    {currentTestimonial.content}
+                    <span className="text-4xl text-[#BE55FF]/30 absolute -right-6 -bottom-4">
+                      "
+                    </span>
                   </p>
-                  <p className="text-gray-600">
-                    {testimonials[currentIndex].role}
-                  </p>
-                </div>
-              </div>
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#70BFFF] to-[#BE55FF] flex items-center justify-center text-white font-bold text-lg">
+                      {currentTestimonial.name.charAt(0)}
+                    </div>
+                    <div>
+                      <p className="text-lg font-bold text-gray-900">
+                        {currentTestimonial.name}
+                      </p>
+                      <p className="text-gray-600">
+                        {currentTestimonial.role}
+                      </p>
+                    </div>
+                  </div>
+                </>
+              )}
             </div>
           </div>
 
