@@ -28,10 +28,10 @@ export default function AboutPage() {
               Our Story
             </span>
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-black text-gray-900 mb-6 leading-tight">
-              From London to
+              Building Our Own
               <br />
               <span className="bg-gradient-to-r from-[#70BFFF] to-[#BE55FF] bg-clip-text text-transparent">
-                Creating Opportunities
+                Path to Success
               </span>
             </h1>
           </div>
@@ -57,7 +57,7 @@ export default function AboutPage() {
                 </p>
                 
                 <p className="text-lg md:text-xl text-gray-900 leading-relaxed">
-                  Starting off as a freelancer, Khai quickly realized he wanted to build something more established. 
+                  Starting off as a freelancer, Khai quickly realised he wanted to build something more established. 
                   That's when <span className="font-bold bg-gradient-to-r from-[#70BFFF] to-[#BE55FF] bg-clip-text text-transparent">Youu Media</span> was born. 
                   Through dedication, creativity, and an unwavering belief in his vision, Khai has found his way into many doors 
                   he never expected to open.
@@ -91,7 +91,7 @@ export default function AboutPage() {
                 To empower brands and professionals through strategic visual storytelling, 
                 helping them build trust, communicate authority, and achieve measurable growth. 
                 We believe in creating opportunities, building communities, and making professional 
-                success accessible to everyone—regardless of their background.
+                success accessible to everyone, regardless of their background.
               </p>
             </div>
           </div>
@@ -292,13 +292,13 @@ export default function AboutPage() {
             <div className="bg-white/20 backdrop-blur-xl rounded-3xl p-8 md:p-12 border border-white/30 shadow-[0_8px_32px_0_rgba(31,38,135,0.37)]">
               <div className="space-y-6 text-lg md:text-xl text-gray-900 leading-relaxed">
                 <p>
-                  The rise of AI is transforming how we work, and at Youu Media, we're not just watching—we're leading. 
+                  The rise of AI is transforming how we work, and at Youu Media, we're not just watching, we're leading. 
                   We have plans to implement AI into our work where we see fit for our clients, helping them with 
                   <span className="font-semibold text-[#70BFFF]"> efficiency and client growth</span>.
                 </p>
                 <p>
                   Our approach is strategic and thoughtful. We're exploring how AI can enhance our creative processes, 
-                  streamline workflows, and deliver even better results for our clients—all while maintaining the 
+                  streamline workflows, and deliver even better results for our clients, all while maintaining the 
                   human touch and creativity that sets us apart.
                 </p>
                 <p className="font-semibold text-[#BE55FF]">
