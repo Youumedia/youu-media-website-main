@@ -25,6 +25,9 @@ export function Navigation() {
             <Link href="/about" className="text-foreground hover:text-primary transition-colors">
               About
             </Link>
+            <Link href="/services" className="text-foreground hover:text-primary transition-colors">
+              Our Services
+            </Link>
           </div>
 
           {/* Mobile menu button */}
@@ -52,6 +55,13 @@ export function Navigation() {
                 onClick={() => setIsOpen(false)}
               >
                 About
+              </Link>
+              <Link
+                href="/services"
+                className="block px-3 py-2 text-foreground hover:text-primary transition-colors"
+                onClick={() => setIsOpen(false)}
+              >
+                Our Services
               </Link>
             </div>
           </div>
