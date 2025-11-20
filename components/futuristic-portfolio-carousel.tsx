@@ -221,6 +221,16 @@ export function FuturisticPortfolioCarousel() {
                                   src={`https://img.youtube.com/vi/${item.youtubeId}/maxresdefault.jpg`}
                                   alt={item.title}
                                   className="w-full h-full object-cover opacity-60"
+                                  onError={(e) => {
+                                    const target = e.target as HTMLImageElement;
+                                    // Fallback to hqdefault if maxresdefault fails
+                                    if (target.src.includes('maxresdefault')) {
+                                      target.src = `https://img.youtube.com/vi/${item.youtubeId}/hqdefault.jpg`;
+                                    } else if (target.src.includes('hqdefault')) {
+                                      // Final fallback to sddefault
+                                      target.src = `https://img.youtube.com/vi/${item.youtubeId}/sddefault.jpg`;
+                                    }
+                                  }}
                                 />
 
                                 {/* Play button overlay */}

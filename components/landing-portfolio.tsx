@@ -239,6 +239,16 @@ export function LandingPortfolio() {
                         alt={item.title}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 pointer-events-none"
                         draggable={false}
+                        onError={(e) => {
+                          const target = e.target as HTMLImageElement;
+                          // Fallback to hqdefault if maxresdefault fails
+                          if (target.src.includes('maxresdefault')) {
+                            target.src = `https://img.youtube.com/vi/${item.youtubeId}/hqdefault.jpg`;
+                          } else if (target.src.includes('hqdefault')) {
+                            // Final fallback to sddefault
+                            target.src = `https://img.youtube.com/vi/${item.youtubeId}/sddefault.jpg`;
+                          }
+                        }}
                       />
                       
                       {/* Play button overlay */}
