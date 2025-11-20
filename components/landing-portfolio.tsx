@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { ChevronLeft, ChevronRight, Play } from "lucide-react";
 
 const portfolioItems = [
@@ -167,15 +167,27 @@ export function LandingPortfolio() {
             const uniqueKey = `${item.id}-${index}`;
             // Track playing state by original item id, not the looped index
             const isPlaying = playingVideoId === item.id;
+            
+            const handleVideoClick = (e: React.MouseEvent) => {
+              e.preventDefault();
+              e.stopPropagation();
+              if (!isPlaying) {
+                setPlayingVideoId(item.id);
+              }
+            };
+            
             return (
               <div
                 key={uniqueKey}
                 className="group flex-shrink-0 w-[400px] md:w-[500px] rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all bg-white border border-gray-200 hover:border-transparent relative"
               >
-                {/* Gradient overlay on hover */}
-                <div className="absolute inset-0 bg-gradient-to-br from-[#70BFFF]/10 via-[#BE55FF]/10 to-[#70BFFF]/10 opacity-0 group-hover:opacity-100 transition-opacity z-10" />
+                {/* Gradient overlay on hover - behind video */}
+                <div className="absolute inset-0 bg-gradient-to-br from-[#70BFFF]/10 via-[#BE55FF]/10 to-[#70BFFF]/10 opacity-0 group-hover:opacity-100 transition-opacity z-0 pointer-events-none" />
 
-                <div className="aspect-video relative overflow-hidden bg-black rounded-t-3xl">
+                <div 
+                  className="aspect-video relative overflow-hidden bg-black rounded-t-3xl cursor-pointer"
+                  onClick={handleVideoClick}
+                >
                   {isPlaying ? (
                     <iframe
                       className="w-full h-full"
@@ -191,15 +203,15 @@ export function LandingPortfolio() {
                       <img
                         src={`https://img.youtube.com/vi/${item.youtubeId}/maxresdefault.jpg`}
                         alt={item.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 pointer-events-none"
+                        draggable={false}
                       />
                       
                       {/* Play button overlay */}
                       <div 
-                        className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/30 transition-colors cursor-pointer"
-                        onClick={() => setPlayingVideoId(item.id)}
+                        className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/30 transition-colors z-10"
                       >
-                        <div className="w-20 h-20 bg-gradient-to-r from-[#70BFFF] to-[#BE55FF] rounded-full flex items-center justify-center shadow-2xl group-hover:scale-110 transition-transform duration-300 relative">
+                        <div className="w-20 h-20 bg-gradient-to-r from-[#70BFFF] to-[#BE55FF] rounded-full flex items-center justify-center shadow-2xl group-hover:scale-110 transition-transform duration-300 relative pointer-events-none">
                           <Play className="h-10 w-10 text-white ml-1" />
                           <div className="absolute inset-0 bg-gradient-to-r from-[#70BFFF] to-[#BE55FF] rounded-full blur-xl opacity-60 group-hover:opacity-80 transition-opacity"></div>
                         </div>
@@ -210,7 +222,7 @@ export function LandingPortfolio() {
 
                 {/* Hover arrow - only show when not playing */}
                 {!isPlaying && (
-                  <div className="absolute bottom-4 right-4 z-20 text-2xl text-[#70BFFF] opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all bg-white/90 backdrop-blur-sm w-10 h-10 rounded-full flex items-center justify-center shadow-lg">
+                  <div className="absolute bottom-4 right-4 z-20 text-2xl text-[#70BFFF] opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all bg-white/90 backdrop-blur-sm w-10 h-10 rounded-full flex items-center justify-center shadow-lg pointer-events-none">
                     ↗
                   </div>
                 )}
