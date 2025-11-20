@@ -13,7 +13,7 @@ export function LandingBrands() {
   return (
     <section
       id="brands"
-      className="py-12 md:py-16 relative overflow-hidden"
+      className="py-12 md:py-16 bg-[#E6F2FF] relative overflow-x-hidden"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-20">
@@ -28,36 +28,36 @@ export function LandingBrands() {
           </h2>
           <p className="text-xl text-gray-700">Across multiple industries.</p>
         </div>
+      </div>
 
-        {/* Infinite scrolling container */}
-        <div className="relative w-full overflow-hidden -mx-4 md:-mx-6 lg:-mx-8">
-          {/* Gradient fade on edges for smooth visual effect */}
-          <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-white via-white/80 to-transparent z-10 pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-white via-white/80 to-transparent z-10 pointer-events-none" />
+      {/* Infinite scrolling container - full width edge to edge */}
+      <div className="relative w-screen overflow-hidden -ml-[50vw] left-1/2">
+        {/* Gradient fade on edges for smooth visual effect */}
+        <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-[#E6F2FF] via-[#E6F2FF]/80 to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-[#E6F2FF] via-[#E6F2FF]/80 to-transparent z-10 pointer-events-none" />
 
-          {/* Scrolling logos - single continuous line */}
-          <div className="flex gap-8 animate-scroll">
-            {duplicatedLogos.map((brand, index) => (
-              <div
-                key={`${brand.id}-${index}`}
-                className="flex-shrink-0 group flex items-center justify-center p-6 bg-white rounded-2xl hover:bg-gradient-to-br hover:from-[#70BFFF]/5 hover:to-[#BE55FF]/5 transition-all border border-gray-200 hover:border-[#70BFFF]/40 hover:shadow-xl w-[180px] h-[180px] transform hover:scale-105"
-              >
-                <div className="text-center relative w-full">
-                  {/* Animated gradient background */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-[#70BFFF]/10 to-[#BE55FF]/10 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity blur-sm" />
+        {/* Scrolling logos - single continuous line - full width */}
+        <div className="flex gap-8 animate-scroll pl-4 md:pl-6 lg:pl-8 pr-4 md:pr-6 lg:pr-8">
+          {duplicatedLogos.map((brand, index) => (
+            <div
+              key={`${brand.id}-${index}`}
+              className="flex-shrink-0 group flex items-center justify-center p-6 bg-white rounded-2xl hover:bg-gradient-to-br hover:from-[#70BFFF]/5 hover:to-[#BE55FF]/5 transition-all border border-gray-200 hover:border-[#70BFFF]/40 hover:shadow-xl w-[180px] h-[180px] transform hover:scale-105"
+            >
+              <div className="text-center relative w-full">
+                {/* Animated gradient background */}
+                <div className="absolute inset-0 bg-gradient-to-br from-[#70BFFF]/10 to-[#BE55FF]/10 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity blur-sm" />
 
-                  <div className="relative w-20 h-20 mx-auto mb-2 bg-gradient-to-br from-[#70BFFF]/20 to-[#BE55FF]/20 rounded-xl flex items-center justify-center group-hover:from-[#70BFFF]/30 group-hover:to-[#BE55FF]/30 transition-all shadow-lg group-hover:shadow-xl">
-                    <span className="text-xs text-gray-600 font-bold group-hover:text-gray-900 transition-colors">
-                      Logo
-                    </span>
-                  </div>
-                  <p className="text-xs text-gray-600 font-medium group-hover:text-gray-900 transition-colors">
-                    {brand.name}
-                  </p>
+                <div className="relative w-20 h-20 mx-auto mb-2 bg-gradient-to-br from-[#70BFFF]/20 to-[#BE55FF]/20 rounded-xl flex items-center justify-center group-hover:from-[#70BFFF]/30 group-hover:to-[#BE55FF]/30 transition-all shadow-lg group-hover:shadow-xl">
+                  <span className="text-xs text-gray-600 font-bold group-hover:text-gray-900 transition-colors">
+                    Logo
+                  </span>
                 </div>
+                <p className="text-xs text-gray-600 font-medium group-hover:text-gray-900 transition-colors">
+                  {brand.name}
+                </p>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
       </div>
 
@@ -75,6 +75,7 @@ export function LandingBrands() {
           display: flex;
           animation: scroll 40s linear infinite;
           will-change: transform;
+          width: max-content;
         }
 
         .animate-scroll:hover {

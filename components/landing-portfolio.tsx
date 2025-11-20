@@ -49,7 +49,7 @@ export function LandingPortfolio() {
   return (
     <section
       id="portfolio"
-      className="py-12 md:py-16 relative overflow-hidden"
+      className="py-12 md:py-16 bg-[#E6F2FF] relative overflow-hidden"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-20">
@@ -66,56 +66,57 @@ export function LandingPortfolio() {
             A look at some of the brands and projects we have supported.
           </p>
         </div>
+      </div>
 
-        <div className="relative">
-          {/* Scroll buttons */}
-          {canScrollLeft && (
-            <button
-              onClick={() => scroll("left")}
-              className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white rounded-full p-3 shadow-lg hover:shadow-xl transition-all hover:scale-110 border border-gray-200 hover:border-[#70BFFF]/50"
-              aria-label="Scroll left"
-            >
-              <ChevronLeft className="h-6 w-6 text-gray-700" />
-            </button>
-          )}
-          {canScrollRight && (
-            <button
-              onClick={() => scroll("right")}
-              className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white rounded-full p-3 shadow-lg hover:shadow-xl transition-all hover:scale-110 border border-gray-200 hover:border-[#70BFFF]/50"
-              aria-label="Scroll right"
-            >
-              <ChevronRight className="h-6 w-6 text-gray-700" />
-            </button>
-          )}
-
-          {/* Horizontal scroll container */}
-          <div
-            ref={scrollContainerRef}
-            className="flex gap-6 overflow-x-auto scrollbar-hide pb-4 scroll-smooth"
-            style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+      {/* Horizontal scroll container - full width edge to edge */}
+      <div className="relative w-screen overflow-hidden -ml-[50vw] left-1/2">
+        {/* Scroll buttons */}
+        {canScrollLeft && (
+          <button
+            onClick={() => scroll("left")}
+            className="absolute left-4 md:left-6 lg:left-8 top-1/2 -translate-y-1/2 z-10 bg-white rounded-full p-3 shadow-lg hover:shadow-xl transition-all hover:scale-110 border border-gray-200 hover:border-[#70BFFF]/50"
+            aria-label="Scroll left"
           >
-            {portfolioItems.map((item, index) => (
-              <div
-                key={item.id}
-                className="group flex-shrink-0 w-[400px] md:w-[500px] rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all bg-white border border-gray-200 hover:border-transparent relative"
-              >
-                {/* Gradient overlay on hover */}
-                <div className="absolute inset-0 bg-gradient-to-br from-[#70BFFF]/10 via-[#BE55FF]/10 to-[#70BFFF]/10 opacity-0 group-hover:opacity-100 transition-opacity z-10" />
+            <ChevronLeft className="h-6 w-6 text-gray-700" />
+          </button>
+        )}
+        {canScrollRight && (
+          <button
+            onClick={() => scroll("right")}
+            className="absolute right-4 md:right-6 lg:right-8 top-1/2 -translate-y-1/2 z-10 bg-white rounded-full p-3 shadow-lg hover:shadow-xl transition-all hover:scale-110 border border-gray-200 hover:border-[#70BFFF]/50"
+            aria-label="Scroll right"
+          >
+            <ChevronRight className="h-6 w-6 text-gray-700" />
+          </button>
+        )}
 
-                <div className="aspect-video bg-gradient-to-br from-[#70BFFF]/15 to-[#BE55FF]/15 flex items-center justify-center relative overflow-hidden group-hover:scale-105 transition-transform duration-500">
-                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(112,191,255,0.2),transparent_70%)] opacity-0 group-hover:opacity-100 transition-opacity" />
-                  <span className="text-gray-500 text-sm relative z-10 group-hover:text-gray-700 transition-colors">
-                    Video/Image Placeholder
-                  </span>
-                </div>
+        {/* Horizontal scroll container */}
+        <div
+          ref={scrollContainerRef}
+          className="flex gap-6 overflow-x-auto scrollbar-hide pb-4 scroll-smooth pl-4 md:pl-6 lg:pl-8 pr-4 md:pr-6 lg:pr-8"
+          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+        >
+          {portfolioItems.map((item, index) => (
+            <div
+              key={item.id}
+              className="group flex-shrink-0 w-[400px] md:w-[500px] rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all bg-white border border-gray-200 hover:border-transparent relative"
+            >
+              {/* Gradient overlay on hover */}
+              <div className="absolute inset-0 bg-gradient-to-br from-[#70BFFF]/10 via-[#BE55FF]/10 to-[#70BFFF]/10 opacity-0 group-hover:opacity-100 transition-opacity z-10" />
 
-                {/* Hover arrow */}
-                <div className="absolute bottom-4 right-4 z-20 text-2xl text-[#70BFFF] opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all bg-white/90 backdrop-blur-sm w-10 h-10 rounded-full flex items-center justify-center shadow-lg">
-                  ↗
-                </div>
+              <div className="aspect-video bg-gradient-to-br from-[#70BFFF]/15 to-[#BE55FF]/15 flex items-center justify-center relative overflow-hidden group-hover:scale-105 transition-transform duration-500">
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(112,191,255,0.2),transparent_70%)] opacity-0 group-hover:opacity-100 transition-opacity" />
+                <span className="text-gray-500 text-sm relative z-10 group-hover:text-gray-700 transition-colors">
+                  Video/Image Placeholder
+                </span>
               </div>
-            ))}
-          </div>
+
+              {/* Hover arrow */}
+              <div className="absolute bottom-4 right-4 z-20 text-2xl text-[#70BFFF] opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all bg-white/90 backdrop-blur-sm w-10 h-10 rounded-full flex items-center justify-center shadow-lg">
+                ↗
+              </div>
+            </div>
+          ))}
         </div>
       </div>
 
