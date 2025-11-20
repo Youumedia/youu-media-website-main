@@ -8,45 +8,31 @@ import { Play, ChevronLeft, ChevronRight } from "lucide-react";
 const videoItems = [
   {
     id: 1,
-    title: "Corporate Cinematic",
-    category: "Brand Content",
-    thumbnail: "/corporate-office-cinematic-video-thumbnail.jpg",
-    duration: "2:30",
+    title: "Portfolio Video 1",
+    category: "Portfolio",
+    youtubeId: "xkMZtQnHDOE",
+    embedUrl: "https://www.youtube.com/embed/xkMZtQnHDOE?rel=0&modestbranding=1&playsinline=1",
   },
   {
     id: 2,
-    title: "Wedding Ceremony",
-    category: "Event Videography",
-    thumbnail: "/elegant-wedding-ceremony-cinematic-video-thumbnail.jpg",
-    duration: "4:15",
+    title: "Portfolio Video 2",
+    category: "Portfolio",
+    youtubeId: "IJv94hCtnJU",
+    embedUrl: "https://www.youtube.com/embed/IJv94hCtnJU?rel=0&modestbranding=1&playsinline=1",
   },
   {
     id: 3,
-    title: "Product Launch",
-    category: "Commercial",
-    thumbnail: "/luxury-product-launch-video-thumbnail.jpg",
-    duration: "1:45",
+    title: "Portfolio Video 3",
+    category: "Portfolio",
+    youtubeId: "lErDN_bLkaI",
+    embedUrl: "https://www.youtube.com/embed/lErDN_bLkaI?rel=0&modestbranding=1&playsinline=1",
   },
   {
     id: 4,
-    title: "Conference Event",
-    category: "Corporate",
-    thumbnail: "/professional-conference-event-video-thumbnail.jpg",
-    duration: "8:20",
-  },
-  {
-    id: 5,
-    title: "AI Content",
-    category: "AI Content",
-    thumbnail: "/ai-generated-content-thumbnail.jpg",
-    duration: "3:45",
-  },
-  {
-    id: 6,
-    title: "Product Photography",
-    category: "Photography",
-    thumbnail: "/product-photography-thumbnail.jpg",
-    duration: "2:15",
+    title: "Portfolio Video 4",
+    category: "Portfolio",
+    youtubeId: "pUu0xgPwOpU",
+    embedUrl: "https://www.youtube.com/embed/pUu0xgPwOpU?rel=0&modestbranding=1&playsinline=1",
   },
 ];
 
@@ -203,29 +189,47 @@ export function FuturisticPortfolioCarousel() {
                       )}
 
                       <div className="relative overflow-hidden bg-gradient-to-br from-gray-900 via-gray-800 to-black">
-                        <div className="w-80 h-48 bg-gradient-to-br from-gray-900 via-gray-800 to-black flex items-center justify-center group-hover:from-gray-800 group-hover:via-gray-700 group-hover:to-gray-900 transition-all duration-500 relative">
-                          {/* Animated background elements */}
-                          <div className="absolute inset-0 opacity-20">
-                            <div className="absolute top-1/4 left-1/4 w-32 h-32 bg-gradient-to-r from-[#BE55FF] to-[#70BFFF] rounded-full blur-3xl animate-pulse"></div>
-                            <div className="absolute bottom-1/4 right-1/4 w-24 h-24 bg-gradient-to-l from-[#70BFFF] to-[#BE55FF] rounded-full blur-2xl animate-pulse"></div>
-                          </div>
+                        <div className="w-80 h-48 relative">
+                          {isActive ? (
+                            <iframe
+                              className="w-full h-full"
+                              src={item.embedUrl}
+                              title={item.title}
+                              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                              allowFullScreen
+                              style={{ border: "none" }}
+                            />
+                          ) : (
+                            <>
+                              {/* Thumbnail with play button overlay */}
+                              <div className="w-full h-full bg-gradient-to-br from-gray-900 via-gray-800 to-black flex items-center justify-center group-hover:from-gray-800 group-hover:via-gray-700 group-hover:to-gray-900 transition-all duration-500 relative">
+                                {/* Animated background elements */}
+                                <div className="absolute inset-0 opacity-20">
+                                  <div className="absolute top-1/4 left-1/4 w-32 h-32 bg-gradient-to-r from-[#BE55FF] to-[#70BFFF] rounded-full blur-3xl animate-pulse"></div>
+                                  <div className="absolute bottom-1/4 right-1/4 w-24 h-24 bg-gradient-to-l from-[#70BFFF] to-[#BE55FF] rounded-full blur-2xl animate-pulse"></div>
+                                </div>
 
-                          <div className="flex flex-col items-center justify-center relative z-10">
-                            <div className="w-16 h-16 bg-gradient-to-r from-[#BE55FF] to-[#70BFFF] rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 shadow-2xl relative">
-                              <Play className="h-8 w-8 text-white ml-1" />
-                              <div className="absolute inset-0 bg-gradient-to-r from-[#BE55FF] to-[#70BFFF] rounded-2xl blur-lg opacity-60 group-hover:opacity-80 transition-opacity"></div>
-                            </div>
-                            <p className="text-white/90 text-sm font-medium">
-                              {isActive ? "Click to Play" : "Video Coming Soon"}
-                            </p>
-                          </div>
+                                {/* YouTube thumbnail */}
+                                <img
+                                  src={`https://img.youtube.com/vi/${item.youtubeId}/maxresdefault.jpg`}
+                                  alt={item.title}
+                                  className="w-full h-full object-cover opacity-60"
+                                />
 
-                          <div className="absolute top-3 right-3 bg-black/80 backdrop-blur-md px-2 py-1 rounded-lg text-white text-xs font-medium border border-white/20">
-                            {item.duration}
-                          </div>
-                          <div className="absolute top-3 left-3 bg-gradient-to-r from-[#BE55FF] to-[#70BFFF] backdrop-blur-md px-3 py-1 rounded-full text-white text-xs font-semibold shadow-lg">
-                            {item.category}
-                          </div>
+                                {/* Play button overlay */}
+                                <div className="absolute inset-0 flex items-center justify-center">
+                                  <div className="w-16 h-16 bg-gradient-to-r from-[#BE55FF] to-[#70BFFF] rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 shadow-2xl relative cursor-pointer">
+                                    <Play className="h-8 w-8 text-white ml-1" />
+                                    <div className="absolute inset-0 bg-gradient-to-r from-[#BE55FF] to-[#70BFFF] rounded-2xl blur-lg opacity-60 group-hover:opacity-80 transition-opacity"></div>
+                                  </div>
+                                </div>
+
+                                <div className="absolute top-3 left-3 bg-gradient-to-r from-[#BE55FF] to-[#70BFFF] backdrop-blur-md px-3 py-1 rounded-full text-white text-xs font-semibold shadow-lg z-10">
+                                  {item.category}
+                                </div>
+                              </div>
+                            </>
+                          )}
                         </div>
                       </div>
                     </Card>

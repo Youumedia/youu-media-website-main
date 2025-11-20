@@ -1,44 +1,114 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, Play } from "lucide-react";
 
-const portfolioItems = Array.from({ length: 6 }, (_, i) => ({
-  id: i + 1,
-  title: `Project ${i + 1}`,
-  image: "/placeholder.jpg",
-}));
+const portfolioItems = [
+  {
+    id: 1,
+    title: "Portfolio Video 1",
+    youtubeId: "xkMZtQnHDOE",
+    embedUrl: "https://www.youtube.com/embed/xkMZtQnHDOE?rel=0&modestbranding=1&playsinline=1",
+  },
+  {
+    id: 2,
+    title: "Portfolio Video 2",
+    youtubeId: "IJv94hCtnJU",
+    embedUrl: "https://www.youtube.com/embed/IJv94hCtnJU?rel=0&modestbranding=1&playsinline=1",
+  },
+  {
+    id: 3,
+    title: "Portfolio Video 3",
+    youtubeId: "lErDN_bLkaI",
+    embedUrl: "https://www.youtube.com/embed/lErDN_bLkaI?rel=0&modestbranding=1&playsinline=1",
+  },
+  {
+    id: 4,
+    title: "Portfolio Video 4",
+    youtubeId: "pUu0xgPwOpU",
+    embedUrl: "https://www.youtube.com/embed/pUu0xgPwOpU?rel=0&modestbranding=1&playsinline=1",
+  },
+];
 
 export function LandingPortfolio() {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const [canScrollLeft, setCanScrollLeft] = useState(false);
-  const [canScrollRight, setCanScrollRight] = useState(true);
+  const [playingVideoId, setPlayingVideoId] = useState<number | null>(null);
+  const isScrollingRef = useRef(false);
 
-  const checkScrollability = () => {
-    if (scrollContainerRef.current) {
-      const { scrollLeft, scrollWidth, clientWidth } =
-        scrollContainerRef.current;
-      setCanScrollLeft(scrollLeft > 0);
-      setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 10);
+  // Create looped items (3 copies for seamless looping)
+  const loopedItems = [...portfolioItems, ...portfolioItems, ...portfolioItems];
+  
+  // Calculate item width including gap
+  const getItemWidth = () => {
+    if (typeof window !== 'undefined') {
+      return window.innerWidth >= 768 ? 500 + 24 : 400 + 24; // width + gap
     }
+    return 424;
   };
 
   useEffect(() => {
-    checkScrollability();
     const container = scrollContainerRef.current;
-    if (container) {
-      container.addEventListener("scroll", checkScrollability);
-      window.addEventListener("resize", checkScrollability);
-      return () => {
-        container.removeEventListener("scroll", checkScrollability);
-        window.removeEventListener("resize", checkScrollability);
-      };
-    }
+    if (!container) return;
+
+    // Calculate dimensions
+    const calculateDimensions = () => {
+      const itemWidth = getItemWidth();
+      const singleSetWidth = portfolioItems.length * itemWidth;
+      const padding = window.innerWidth >= 768 ? 48 : 32; // pl-6/pr-6 = 48px, pl-4/pr-4 = 32px
+      return { itemWidth, singleSetWidth, padding };
+    };
+
+    // Start in the middle section
+    const { singleSetWidth } = calculateDimensions();
+    container.scrollLeft = singleSetWidth;
+
+    const handleScroll = () => {
+      if (!container || isScrollingRef.current) return;
+
+      const { scrollLeft } = container;
+      const { singleSetWidth } = calculateDimensions();
+      const threshold = 50; // Small threshold to prevent flickering
+      
+      // If scrolled past the second set (near the end), jump to the middle set
+      if (scrollLeft >= singleSetWidth * 2 - threshold) {
+        isScrollingRef.current = true;
+        const newScrollLeft = scrollLeft - singleSetWidth;
+        container.scrollLeft = newScrollLeft;
+        // Use requestAnimationFrame to ensure the scroll position is set before resetting the flag
+        requestAnimationFrame(() => {
+          isScrollingRef.current = false;
+        });
+      }
+      // If scrolled before the first set (near the beginning), jump to the middle set
+      else if (scrollLeft <= threshold) {
+        isScrollingRef.current = true;
+        const newScrollLeft = singleSetWidth + scrollLeft;
+        container.scrollLeft = newScrollLeft;
+        requestAnimationFrame(() => {
+          isScrollingRef.current = false;
+        });
+      }
+    };
+
+    const handleResize = () => {
+      const { singleSetWidth } = calculateDimensions();
+      // Reset to middle section on resize
+      container.scrollLeft = singleSetWidth;
+    };
+
+    container.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      container.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
   const scroll = (direction: "left" | "right") => {
     if (scrollContainerRef.current) {
-      const scrollAmount = scrollContainerRef.current.clientWidth * 0.8;
+      const itemWidth = getItemWidth();
+      const scrollAmount = itemWidth;
       scrollContainerRef.current.scrollBy({
         left: direction === "left" ? -scrollAmount : scrollAmount,
         behavior: "smooth",
@@ -70,25 +140,21 @@ export function LandingPortfolio() {
 
       {/* Horizontal scroll container - full width edge to edge */}
       <div className="relative w-screen overflow-hidden -ml-[50vw] left-1/2">
-        {/* Scroll buttons */}
-        {canScrollLeft && (
-          <button
-            onClick={() => scroll("left")}
-            className="absolute left-4 md:left-6 lg:left-8 top-1/2 -translate-y-1/2 z-10 bg-white rounded-full p-3 shadow-lg hover:shadow-xl transition-all hover:scale-110 border border-gray-200 hover:border-[#70BFFF]/50"
-            aria-label="Scroll left"
-          >
-            <ChevronLeft className="h-6 w-6 text-gray-700" />
-          </button>
-        )}
-        {canScrollRight && (
-          <button
-            onClick={() => scroll("right")}
-            className="absolute right-4 md:right-6 lg:right-8 top-1/2 -translate-y-1/2 z-10 bg-white rounded-full p-3 shadow-lg hover:shadow-xl transition-all hover:scale-110 border border-gray-200 hover:border-[#70BFFF]/50"
-            aria-label="Scroll right"
-          >
-            <ChevronRight className="h-6 w-6 text-gray-700" />
-          </button>
-        )}
+        {/* Scroll buttons - always visible for infinite loop */}
+        <button
+          onClick={() => scroll("left")}
+          className="absolute left-4 md:left-6 lg:left-8 top-1/2 -translate-y-1/2 z-10 bg-white rounded-full p-3 shadow-lg hover:shadow-xl transition-all hover:scale-110 border border-gray-200 hover:border-[#70BFFF]/50"
+          aria-label="Scroll left"
+        >
+          <ChevronLeft className="h-6 w-6 text-gray-700" />
+        </button>
+        <button
+          onClick={() => scroll("right")}
+          className="absolute right-4 md:right-6 lg:right-8 top-1/2 -translate-y-1/2 z-10 bg-white rounded-full p-3 shadow-lg hover:shadow-xl transition-all hover:scale-110 border border-gray-200 hover:border-[#70BFFF]/50"
+          aria-label="Scroll right"
+        >
+          <ChevronRight className="h-6 w-6 text-gray-700" />
+        </button>
 
         {/* Horizontal scroll container */}
         <div
@@ -96,27 +162,61 @@ export function LandingPortfolio() {
           className="flex gap-6 overflow-x-auto scrollbar-hide pb-4 scroll-smooth pl-4 md:pl-6 lg:pl-8 pr-4 md:pr-6 lg:pr-8"
           style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
         >
-          {portfolioItems.map((item, index) => (
-            <div
-              key={item.id}
-              className="group flex-shrink-0 w-[400px] md:w-[500px] rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all bg-white border border-gray-200 hover:border-transparent relative"
-            >
-              {/* Gradient overlay on hover */}
-              <div className="absolute inset-0 bg-gradient-to-br from-[#70BFFF]/10 via-[#BE55FF]/10 to-[#70BFFF]/10 opacity-0 group-hover:opacity-100 transition-opacity z-10" />
+          {loopedItems.map((item, index) => {
+            // Use a unique key that includes the index to handle duplicates
+            const uniqueKey = `${item.id}-${index}`;
+            // Track playing state by original item id, not the looped index
+            const isPlaying = playingVideoId === item.id;
+            return (
+              <div
+                key={uniqueKey}
+                className="group flex-shrink-0 w-[400px] md:w-[500px] rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all bg-white border border-gray-200 hover:border-transparent relative"
+              >
+                {/* Gradient overlay on hover */}
+                <div className="absolute inset-0 bg-gradient-to-br from-[#70BFFF]/10 via-[#BE55FF]/10 to-[#70BFFF]/10 opacity-0 group-hover:opacity-100 transition-opacity z-10" />
 
-              <div className="aspect-video bg-gradient-to-br from-[#70BFFF]/15 to-[#BE55FF]/15 flex items-center justify-center relative overflow-hidden group-hover:scale-105 transition-transform duration-500">
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(112,191,255,0.2),transparent_70%)] opacity-0 group-hover:opacity-100 transition-opacity" />
-                <span className="text-gray-500 text-sm relative z-10 group-hover:text-gray-700 transition-colors">
-                  Video/Image Placeholder
-                </span>
-              </div>
+                <div className="aspect-video relative overflow-hidden bg-black rounded-t-3xl">
+                  {isPlaying ? (
+                    <iframe
+                      className="w-full h-full"
+                      src={`${item.embedUrl}&autoplay=1`}
+                      title={item.title}
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      allowFullScreen
+                      style={{ border: "none" }}
+                    />
+                  ) : (
+                    <>
+                      {/* YouTube thumbnail */}
+                      <img
+                        src={`https://img.youtube.com/vi/${item.youtubeId}/maxresdefault.jpg`}
+                        alt={item.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
+                      
+                      {/* Play button overlay */}
+                      <div 
+                        className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/30 transition-colors cursor-pointer"
+                        onClick={() => setPlayingVideoId(item.id)}
+                      >
+                        <div className="w-20 h-20 bg-gradient-to-r from-[#70BFFF] to-[#BE55FF] rounded-full flex items-center justify-center shadow-2xl group-hover:scale-110 transition-transform duration-300 relative">
+                          <Play className="h-10 w-10 text-white ml-1" />
+                          <div className="absolute inset-0 bg-gradient-to-r from-[#70BFFF] to-[#BE55FF] rounded-full blur-xl opacity-60 group-hover:opacity-80 transition-opacity"></div>
+                        </div>
+                      </div>
+                    </>
+                  )}
+                </div>
 
-              {/* Hover arrow */}
-              <div className="absolute bottom-4 right-4 z-20 text-2xl text-[#70BFFF] opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all bg-white/90 backdrop-blur-sm w-10 h-10 rounded-full flex items-center justify-center shadow-lg">
-                ↗
+                {/* Hover arrow - only show when not playing */}
+                {!isPlaying && (
+                  <div className="absolute bottom-4 right-4 z-20 text-2xl text-[#70BFFF] opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all bg-white/90 backdrop-blur-sm w-10 h-10 rounded-full flex items-center justify-center shadow-lg">
+                    ↗
+                  </div>
+                )}
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
 
