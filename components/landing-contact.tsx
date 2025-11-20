@@ -26,10 +26,12 @@ export function LandingContact() {
           </p>
         </div>
 
-        <div className="relative bg-white rounded-3xl p-8 md:p-12 shadow-2xl border border-gray-200 overflow-hidden group">
-          {/* Creative background effects */}
-          <div className="absolute inset-0 bg-gradient-to-br from-[#70BFFF]/5 via-[#BE55FF]/5 to-[#70BFFF]/5 opacity-0 group-hover:opacity-100 transition-opacity" />
-          <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-[#70BFFF]/10 to-[#BE55FF]/10 rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity" />
+        <div className="relative bg-white/20 backdrop-blur-xl rounded-3xl p-8 md:p-12 border border-white/30 shadow-[0_8px_32px_0_rgba(31,38,135,0.37)] hover:shadow-[0_12px_40px_0_rgba(31,38,135,0.5)] hover:bg-white/25 hover:border-white/40 transform hover:scale-[1.01] transition-all overflow-hidden group">
+          {/* 3D Glass effect layers */}
+          <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-transparent rounded-3xl opacity-60" />
+          <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-white/20 to-transparent rounded-t-3xl" />
+          {/* Subtle inner glow */}
+          <div className="absolute inset-[1px] bg-gradient-to-br from-[#70BFFF]/5 via-transparent to-[#BE55FF]/5 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity" />
 
           {/* Calendly Link */}
           <div className="text-center mb-12 relative z-10">
@@ -51,7 +53,7 @@ export function LandingContact() {
           </div>
 
           {/* Contact Icons */}
-          <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
+          <div className="flex flex-wrap justify-center md:justify-end items-center gap-8 md:gap-12">
             <Link
               href="https://www.linkedin.com/company/youu-media/"
               target="_blank"
