@@ -10,8 +10,8 @@ export function StickyLogo() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  // Hide on about page since Navigation component already has logo
-  if (pathname === "/about") {
+  // Hide on about page and home page since Navigation component already has logo
+  if (pathname === "/about" || pathname === "/") {
     return null;
   }
 

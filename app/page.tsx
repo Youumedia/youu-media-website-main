@@ -1,5 +1,6 @@
 "use client";
 
+import { Navigation } from "@/components/navigation";
 import { LandingHero } from "@/components/landing-hero";
 import { LandingAbout } from "@/components/landing-about";
 import { LandingServices } from "@/components/landing-services";
@@ -13,6 +14,7 @@ import { Footer } from "@/components/footer";
 export default function HomePage() {
   return (
     <main className="min-h-screen bg-white">
+      <Navigation />
       <div className="bg-[#E6F2FF] relative overflow-hidden">
         {/* Hero Section Backgrounds */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
