@@ -44,19 +44,19 @@ export default function AboutPage() {
               <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-white/20 to-transparent rounded-t-3xl" />
               
               <div className="relative z-10 space-y-6">
-                <p className="text-lg md:text-xl text-gray-900 leading-relaxed">
+                <p className="text-lg md:text-xl text-gray-900 leading-relaxed font-medium">
                   Meet <span className="font-bold text-[#70BFFF]">Khai Phillips</span>, the founder of Youu Media. 
                   Born and raised in London, Khai faced the typical struggles many creative minds encounter. 
                   Growing up with dyslexia in school, he always found himself drawn to the creative side of things.
                 </p>
                 
-                <p className="text-lg md:text-xl text-gray-900 leading-relaxed">
+                <p className="text-lg md:text-xl text-gray-900 leading-relaxed font-medium">
                   Despite his passion and talent, Khai found himself not being accepted into traditional professional roles. 
                   Instead of letting that stop him, he made a bold decision: <span className="font-semibold text-[#BE55FF]">he would create his own table</span> and 
                   attract the professional world to him.
                 </p>
                 
-                <p className="text-lg md:text-xl text-gray-900 leading-relaxed">
+                <p className="text-lg md:text-xl text-gray-900 leading-relaxed font-medium">
                   Starting off as a freelancer, Khai quickly realised he wanted to build something more established. 
                   That's when <span className="font-bold bg-gradient-to-r from-[#70BFFF] to-[#BE55FF] bg-clip-text text-transparent">Youu Media</span> was born. 
                   Through dedication, creativity, and an unwavering belief in his vision, Khai has found his way into many doors 
@@ -291,12 +291,12 @@ export default function AboutPage() {
 
             <div className="bg-white/20 backdrop-blur-xl rounded-3xl p-8 md:p-12 border border-white/30 shadow-[0_8px_32px_0_rgba(31,38,135,0.37)]">
               <div className="space-y-6 text-lg md:text-xl text-gray-900 leading-relaxed">
-                <p>
+                <p className="font-medium">
                   The rise of AI is transforming how we work, and at Youu Media, we're not just watching, we're leading. 
                   We have plans to implement AI into our work where we see fit for our clients, helping them with 
                   <span className="font-semibold text-[#70BFFF]"> efficiency and client growth</span>.
                 </p>
-                <p>
+                <p className="font-medium">
                   Our approach is strategic and thoughtful. We're exploring how AI can enhance our creative processes, 
                   streamline workflows, and deliver even better results for our clients, all while maintaining the 
                   human touch and creativity that sets us apart.
