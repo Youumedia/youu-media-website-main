@@ -9,37 +9,33 @@ export function LandingNetwork() {
       id="network"
       className="py-12 md:py-16 bg-white relative overflow-hidden"
     >
-      {/* Glowing LED Lights in dark blue */}
+      {/* Glowing LED Lines in dark blue with different transparency */}
       <div className="absolute inset-0 pointer-events-none">
-        {/* Top left LED */}
-        <div className="absolute top-[10%] left-[5%] w-3 h-3 bg-[#1e40af] rounded-full shadow-[0_0_20px_#1e40af,0_0_40px_#1e40af] animate-pulse" style={{ animationDelay: "0s" }} />
-        <div className="absolute top-[10%] left-[5%] w-3 h-3 bg-[#1e40af] rounded-full opacity-50 blur-sm" />
+        {/* Top left - horizontal line */}
+        <div className="absolute top-[10%] left-[5%] w-24 h-0.5 bg-[#1e40af] opacity-80 shadow-[0_0_10px_#1e40af,0_0_20px_#1e40af] animate-pulse" style={{ animationDelay: "0s" }} />
         
-        {/* Top right LED */}
-        <div className="absolute top-[15%] right-[8%] w-3 h-3 bg-[#1e40af] rounded-full shadow-[0_0_20px_#1e40af,0_0_40px_#1e40af] animate-pulse" style={{ animationDelay: "0.5s" }} />
-        <div className="absolute top-[15%] right-[8%] w-3 h-3 bg-[#1e40af] rounded-full opacity-50 blur-sm" />
+        {/* Top right - vertical line */}
+        <div className="absolute top-[15%] right-[8%] w-0.5 h-20 bg-[#1e40af] opacity-70 shadow-[0_0_10px_#1e40af,0_0_20px_#1e40af] animate-pulse" style={{ animationDelay: "0.5s" }} />
         
-        {/* Middle left LED */}
-        <div className="absolute top-[50%] left-[3%] w-4 h-4 bg-[#1e40af] rounded-full shadow-[0_0_25px_#1e40af,0_0_50px_#1e40af] animate-pulse" style={{ animationDelay: "1s" }} />
-        <div className="absolute top-[50%] left-[3%] w-4 h-4 bg-[#1e40af] rounded-full opacity-50 blur-sm" />
+        {/* Middle left - longer horizontal line */}
+        <div className="absolute top-[50%] left-[3%] w-32 h-0.5 bg-[#1e40af] opacity-90 shadow-[0_0_12px_#1e40af,0_0_25px_#1e40af] animate-pulse" style={{ animationDelay: "1s" }} />
         
-        {/* Middle right LED */}
-        <div className="absolute top-[45%] right-[5%] w-3 h-3 bg-[#1e40af] rounded-full shadow-[0_0_20px_#1e40af,0_0_40px_#1e40af] animate-pulse" style={{ animationDelay: "1.5s" }} />
-        <div className="absolute top-[45%] right-[5%] w-3 h-3 bg-[#1e40af] rounded-full opacity-50 blur-sm" />
+        {/* Middle right - vertical line */}
+        <div className="absolute top-[45%] right-[5%] w-0.5 h-16 bg-[#1e40af] opacity-75 shadow-[0_0_10px_#1e40af,0_0_20px_#1e40af] animate-pulse" style={{ animationDelay: "1.5s" }} />
         
-        {/* Bottom left LED */}
-        <div className="absolute bottom-[20%] left-[7%] w-3 h-3 bg-[#1e40af] rounded-full shadow-[0_0_20px_#1e40af,0_0_40px_#1e40af] animate-pulse" style={{ animationDelay: "0.3s" }} />
-        <div className="absolute bottom-[20%] left-[7%] w-3 h-3 bg-[#1e40af] rounded-full opacity-50 blur-sm" />
+        {/* Bottom left - horizontal line */}
+        <div className="absolute bottom-[20%] left-[7%] w-20 h-0.5 bg-[#1e40af] opacity-65 shadow-[0_0_10px_#1e40af,0_0_20px_#1e40af] animate-pulse" style={{ animationDelay: "0.3s" }} />
         
-        {/* Bottom right LED */}
-        <div className="absolute bottom-[15%] right-[6%] w-4 h-4 bg-[#1e40af] rounded-full shadow-[0_0_25px_#1e40af,0_0_50px_#1e40af] animate-pulse" style={{ animationDelay: "0.8s" }} />
-        <div className="absolute bottom-[15%] right-[6%] w-4 h-4 bg-[#1e40af] rounded-full opacity-50 blur-sm" />
+        {/* Bottom right - longer vertical line */}
+        <div className="absolute bottom-[15%] right-[6%] w-0.5 h-28 bg-[#1e40af] opacity-85 shadow-[0_0_12px_#1e40af,0_0_25px_#1e40af] animate-pulse" style={{ animationDelay: "0.8s" }} />
         
-        {/* Additional scattered LEDs */}
-        <div className="absolute top-[30%] left-[10%] w-2 h-2 bg-[#1e40af] rounded-full shadow-[0_0_15px_#1e40af,0_0_30px_#1e40af] animate-pulse" style={{ animationDelay: "1.2s" }} />
-        <div className="absolute top-[70%] right-[12%] w-2 h-2 bg-[#1e40af] rounded-full shadow-[0_0_15px_#1e40af,0_0_30px_#1e40af] animate-pulse" style={{ animationDelay: "0.7s" }} />
-        <div className="absolute bottom-[35%] left-[12%] w-2 h-2 bg-[#1e40af] rounded-full shadow-[0_0_15px_#1e40af,0_0_30px_#1e40af] animate-pulse" style={{ animationDelay: "1.3s" }} />
-        <div className="absolute top-[25%] right-[15%] w-2 h-2 bg-[#1e40af] rounded-full shadow-[0_0_15px_#1e40af,0_0_30px_#1e40af] animate-pulse" style={{ animationDelay: "0.4s" }} />
+        {/* Additional scattered lines */}
+        <div className="absolute top-[30%] left-[10%] w-16 h-0.5 bg-[#1e40af] opacity-60 shadow-[0_0_8px_#1e40af,0_0_15px_#1e40af] animate-pulse" style={{ animationDelay: "1.2s" }} />
+        <div className="absolute top-[70%] right-[12%] w-0.5 h-14 bg-[#1e40af] opacity-55 shadow-[0_0_8px_#1e40af,0_0_15px_#1e40af] animate-pulse" style={{ animationDelay: "0.7s" }} />
+        <div className="absolute bottom-[35%] left-[12%] w-18 h-0.5 bg-[#1e40af] opacity-70 shadow-[0_0_10px_#1e40af,0_0_20px_#1e40af] animate-pulse" style={{ animationDelay: "1.3s" }} />
+        <div className="absolute top-[25%] right-[15%] w-0.5 h-12 bg-[#1e40af] opacity-50 shadow-[0_0_8px_#1e40af,0_0_15px_#1e40af] animate-pulse" style={{ animationDelay: "0.4s" }} />
+        <div className="absolute top-[60%] left-[8%] w-14 h-0.5 bg-[#1e40af] opacity-45 shadow-[0_0_8px_#1e40af,0_0_15px_#1e40af] animate-pulse" style={{ animationDelay: "0.9s" }} />
+        <div className="absolute bottom-[45%] right-[10%] w-0.5 h-18 bg-[#1e40af] opacity-75 shadow-[0_0_10px_#1e40af,0_0_20px_#1e40af] animate-pulse" style={{ animationDelay: "1.1s" }} />
       </div>
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
