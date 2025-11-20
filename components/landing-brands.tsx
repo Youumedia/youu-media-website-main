@@ -69,7 +69,7 @@ export function LandingBrands() {
           {duplicatedLogos.map((brand, index) => (
             <div
               key={`${brand.id}-${index}`}
-              className="flex-shrink-0 group flex flex-col items-center justify-center gap-3 transform hover:scale-110 transition-transform duration-300"
+              className="flex-shrink-0 group flex items-center justify-center transform hover:scale-110 transition-transform duration-300"
             >
               {/* Logo image with rounded corners */}
               <div className="relative flex items-center justify-center">
@@ -91,11 +91,6 @@ export function LandingBrands() {
                   />
                 </div>
               </div>
-              
-              {/* Label */}
-              <p className="text-sm text-gray-700 font-medium group-hover:text-gray-900 transition-colors text-center">
-                {brand.name}
-              </p>
             </div>
           ))}
         </div>

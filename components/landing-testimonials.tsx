@@ -96,12 +96,12 @@ export function LandingTestimonials() {
         <div className="absolute top-1/2 left-1/2 w-[380px] h-[380px] bg-[#70BFFF]/15 rounded-full blur-2xl animate-float-fast" />
         <div className="absolute bottom-0 right-1/3 w-[410px] h-[410px] bg-[#BE55FF]/18 rounded-full blur-3xl animate-float-slow" />
 
-        {/* Geometric shapes - distributed */}
-        <div className="absolute top-1/6 right-1/4 w-28 h-28 bg-gradient-to-br from-[#70BFFF]/25 to-[#BE55FF]/25 rounded-3xl rotate-45 animate-pulse" />
-        <div className="absolute bottom-1/4 left-1/5 w-24 h-24 bg-gradient-to-br from-[#BE55FF]/25 to-[#70BFFF]/25 rounded-full animate-pulse" style={{ animationDelay: "1.1s" }} />
-        <div className="absolute top-2/3 right-1/3 w-16 h-16 bg-[#70BFFF]/20 rounded-lg rotate-12 animate-pulse" style={{ animationDelay: "0.7s" }} />
-        <div className="absolute bottom-1/2 left-2/3 w-20 h-20 bg-[#BE55FF]/22 rounded-2xl rotate-45 animate-pulse" style={{ animationDelay: "1.5s" }} />
-        <div className="absolute top-1/4 left-1/2 w-24 h-24 bg-gradient-to-br from-[#70BFFF]/20 to-[#BE55FF]/20 rounded-full animate-pulse" style={{ animationDelay: "0.3s" }} />
+        {/* Geometric shapes - distributed with floating animations */}
+        <div className="absolute top-1/6 right-1/4 w-28 h-28 bg-gradient-to-br from-[#70BFFF]/25 to-[#BE55FF]/25 rounded-3xl rotate-45 animate-float-slow" />
+        <div className="absolute bottom-1/4 left-1/5 w-24 h-24 bg-gradient-to-br from-[#BE55FF]/25 to-[#70BFFF]/25 rounded-full animate-float-medium" style={{ animationDelay: "1.1s" }} />
+        <div className="absolute top-2/3 right-1/3 w-16 h-16 bg-[#70BFFF]/20 rounded-lg rotate-12 animate-float-fast" style={{ animationDelay: "0.7s" }} />
+        <div className="absolute bottom-1/2 left-2/3 w-20 h-20 bg-[#BE55FF]/22 rounded-2xl rotate-45 animate-float-slow" style={{ animationDelay: "1.5s" }} />
+        <div className="absolute top-1/4 left-1/2 w-24 h-24 bg-gradient-to-br from-[#70BFFF]/20 to-[#BE55FF]/20 rounded-full animate-float-medium" style={{ animationDelay: "0.3s" }} />
       </div>
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -130,18 +130,27 @@ export function LandingTestimonials() {
           </div>
 
           {/* Testimonial Card */}
-          <div className="relative bg-white rounded-3xl p-8 md:p-12 shadow-2xl border border-gray-200 min-h-[300px] flex flex-col justify-center hover:border-[#70BFFF]/40 transition-all overflow-hidden group">
-            {/* Gradient overlay on hover */}
-            <div className="absolute inset-0 bg-gradient-to-br from-[#70BFFF]/5 via-[#BE55FF]/5 to-[#70BFFF]/5 opacity-0 group-hover:opacity-100 transition-opacity" />
-
-            {/* Decorative corner */}
-            <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-[#70BFFF]/10 to-[#BE55FF]/10 rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity" />
+          <div className={`relative rounded-3xl p-8 md:p-12 min-h-[300px] flex flex-col justify-center transition-all overflow-hidden group ${
+            currentTestimonial.type === "video" 
+              ? "bg-transparent" 
+              : "bg-white/20 backdrop-blur-xl border border-white/30 shadow-[0_8px_32px_0_rgba(31,38,135,0.37)] hover:shadow-[0_12px_40px_0_rgba(31,38,135,0.5)] hover:bg-white/25 hover:border-white/40 transform hover:scale-[1.02] hover:-translate-y-1"
+          }`}>
+            {/* 3D Glass effect layers - only for text testimonials */}
+            {currentTestimonial.type === "text" && (
+              <>
+                {/* Glass reflection effect */}
+                <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-transparent rounded-3xl opacity-60" />
+                <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-white/20 to-transparent rounded-t-3xl" />
+                {/* Subtle inner glow */}
+                <div className="absolute inset-[1px] bg-gradient-to-br from-[#70BFFF]/5 via-transparent to-[#BE55FF]/5 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity" />
+              </>
+            )}
 
             <div className="relative z-10">
               {currentTestimonial.type === "video" ? (
                 /* Video Testimonial */
                 <div className="w-full flex flex-col justify-center">
-                  <div className="aspect-video bg-gray-900 rounded-xl overflow-hidden mb-8 flex items-center justify-center">
+                  <div className="aspect-video rounded-xl overflow-hidden mb-8 flex items-center justify-center">
                     {currentTestimonial.videoUrl ? (
                       <video
                         className="w-full h-full object-cover"
@@ -178,24 +187,24 @@ export function LandingTestimonials() {
               ) : (
                 /* Text Testimonial */
                 <>
-                  <p className="text-xl md:text-2xl text-gray-700 mb-8 leading-relaxed italic relative">
-                    <span className="text-4xl text-[#70BFFF]/30 absolute -left-6 -top-4">
+                  <p className="text-xl md:text-2xl text-gray-900 mb-8 leading-relaxed italic relative" style={{ fontFamily: "var(--font-playfair), 'Playfair Display', 'Georgia', serif" }}>
+                    <span className="text-4xl text-gray-900/30 absolute -left-6 -top-4">
                       "
                     </span>
                     {currentTestimonial.content}
-                    <span className="text-4xl text-[#BE55FF]/30 absolute -right-6 -bottom-4">
+                    <span className="text-4xl text-gray-900/30 absolute -right-6 -bottom-4">
                       "
                     </span>
                   </p>
                   <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#70BFFF] to-[#BE55FF] flex items-center justify-center text-white font-bold text-lg">
+                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#70BFFF] to-[#BE55FF] flex items-center justify-center text-white font-bold text-lg shadow-lg">
                       {currentTestimonial.name.charAt(0)}
                     </div>
                     <div>
                       <p className="text-lg font-bold text-gray-900">
                         {currentTestimonial.name}
                       </p>
-                      <p className="text-gray-600">
+                      <p className="text-gray-700">
                         {currentTestimonial.role}
                       </p>
                     </div>

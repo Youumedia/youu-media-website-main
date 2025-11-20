@@ -1,10 +1,11 @@
 import "../styles/globals.css";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Playfair_Display } from "next/font/google";
 import { NavigationBot } from "@/components/navigation-bot";
 import { StickyLogo } from "@/components/sticky-logo";
 
 const inter = Inter({ subsets: ["latin"] });
+const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-playfair" });
 
 export const metadata: Metadata = {
   title: "Youu Media | Strategic Visual Content for Brands",
@@ -33,7 +34,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={`${inter.className} ${playfair.variable}`}>
         <StickyLogo />
         {children}
         <NavigationBot />

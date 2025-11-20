@@ -179,10 +179,8 @@ export function LandingPortfolio() {
             return (
               <div
                 key={uniqueKey}
-                className="group flex-shrink-0 w-[400px] md:w-[500px] rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all bg-white border border-gray-200 hover:border-transparent relative"
+                className="group flex-shrink-0 w-[400px] md:w-[500px] rounded-3xl overflow-hidden transition-all bg-transparent relative"
               >
-                {/* Gradient overlay on hover - behind video */}
-                <div className="absolute inset-0 bg-gradient-to-br from-[#70BFFF]/10 via-[#BE55FF]/10 to-[#70BFFF]/10 opacity-0 group-hover:opacity-100 transition-opacity z-0 pointer-events-none" />
 
                 <div 
                   className="aspect-video relative overflow-hidden bg-black rounded-t-3xl cursor-pointer"
