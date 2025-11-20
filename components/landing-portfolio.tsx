@@ -5,6 +5,12 @@ import { ChevronLeft, ChevronRight, Play } from "lucide-react";
 
 const portfolioItems = [
   {
+    id: 3,
+    title: "Portfolio Video 3",
+    youtubeId: "lErDN_bLkaI",
+    embedUrl: "https://www.youtube.com/embed/lErDN_bLkaI?rel=0&modestbranding=1&playsinline=1",
+  },
+  {
     id: 1,
     title: "Portfolio Video 1",
     youtubeId: "xkMZtQnHDOE",
@@ -15,12 +21,6 @@ const portfolioItems = [
     title: "Portfolio Video 2",
     youtubeId: "IJv94hCtnJU",
     embedUrl: "https://www.youtube.com/embed/IJv94hCtnJU?rel=0&modestbranding=1&playsinline=1",
-  },
-  {
-    id: 3,
-    title: "Portfolio Video 3",
-    youtubeId: "lErDN_bLkaI",
-    embedUrl: "https://www.youtube.com/embed/lErDN_bLkaI?rel=0&modestbranding=1&playsinline=1",
   },
   {
     id: 4,
