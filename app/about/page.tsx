@@ -15,11 +15,23 @@ export default function AboutPage() {
       <div className="bg-[#E6F2FF] relative overflow-hidden pt-24 pb-16 md:pt-32 md:pb-24">
         {/* Background Shapes */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-[20%] left-[20%] w-[500px] h-[500px] bg-[#70BFFF]/20 rounded-full blur-3xl animate-float-slow" style={{ animationDelay: "0s" }} />
+          <div className="absolute top-[15%] left-[20%] w-[500px] h-[500px] bg-[#70BFFF]/20 rounded-full blur-3xl animate-float-slow" style={{ animationDelay: "0s" }} />
           <div className="absolute bottom-[15%] right-[25%] w-[500px] h-[500px] bg-[#BE55FF]/20 rounded-full blur-3xl animate-float-medium" style={{ animationDelay: "0.5s" }} />
-          <div className="absolute top-[45%] left-[55%] w-[300px] h-[300px] bg-[#70BFFF]/15 rounded-full blur-2xl animate-float-fast" style={{ animationDelay: "1s" }} />
-          <div className="absolute top-[70%] left-[10%] w-[400px] h-[400px] bg-[#BE55FF]/18 rounded-full blur-3xl animate-float-slow" style={{ animationDelay: "1.5s" }} />
-          <div className="absolute top-[10%] right-[30%] w-[350px] h-[350px] bg-[#70BFFF]/16 rounded-full blur-2xl animate-float-medium" style={{ animationDelay: "2s" }} />
+          <div className="absolute top-[50%] left-[55%] w-[300px] h-[300px] bg-[#70BFFF]/15 rounded-full blur-2xl animate-float-fast" style={{ animationDelay: "1s" }} />
+          <div className="absolute top-[65%] left-[10%] w-[400px] h-[400px] bg-[#BE55FF]/18 rounded-full blur-3xl animate-float-slow" style={{ animationDelay: "1.5s" }} />
+          <div className="absolute top-[12%] right-[30%] w-[350px] h-[350px] bg-[#70BFFF]/16 rounded-full blur-2xl animate-float-medium" style={{ animationDelay: "2s" }} />
+
+          {/* Geometric shapes - kept within bounds */}
+          <div className="absolute top-[18%] left-[15%] w-28 h-28 bg-gradient-to-br from-[#70BFFF]/25 to-[#BE55FF]/25 rounded-3xl rotate-45 animate-float-slow" style={{ animationDelay: "0.2s" }} />
+          <div className="absolute bottom-[20%] right-[20%] w-24 h-24 bg-gradient-to-br from-[#BE55FF]/25 to-[#70BFFF]/25 rounded-full animate-float-medium" style={{ animationDelay: "1.1s" }} />
+          <div className="absolute top-[40%] right-[15%] w-16 h-16 bg-[#70BFFF]/20 rounded-lg rotate-12 animate-float-fast" style={{ animationDelay: "2.2s" }} />
+          <div className="absolute bottom-[25%] left-[25%] w-20 h-20 bg-[#BE55FF]/22 rounded-2xl rotate-45 animate-float-slow" style={{ animationDelay: "0.7s" }} />
+          <div className="absolute top-[55%] right-[35%] w-26 h-26 bg-gradient-to-br from-[#70BFFF]/22 to-[#BE55FF]/22 rounded-full animate-float-medium" style={{ animationDelay: "1.4s" }} />
+          <div className="absolute bottom-[18%] left-[18%] w-22 h-22 bg-[#BE55FF]/18 rounded-xl rotate-12 animate-float-fast" style={{ animationDelay: "0.9s" }} />
+          <div className="absolute top-[22%] left-[60%] w-28 h-28 bg-gradient-to-br from-[#70BFFF]/20 to-[#BE55FF]/20 rounded-2xl rotate-45 animate-float-slow" style={{ animationDelay: "1.6s" }} />
+          <div className="absolute top-[45%] left-[8%] w-18 h-18 bg-[#70BFFF]/19 rounded-lg rotate-12 animate-float-medium" style={{ animationDelay: "0.4s" }} />
+          <div className="absolute bottom-[30%] right-[45%] w-30 h-30 bg-gradient-to-br from-[#BE55FF]/21 to-[#70BFFF]/21 rounded-full animate-float-fast" style={{ animationDelay: "1.8s" }} />
+          <div className="absolute top-[60%] left-[50%] w-24 h-24 bg-[#BE55FF]/18 rounded-xl rotate-45 animate-float-slow" style={{ animationDelay: "1.0s" }} />
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -101,8 +113,21 @@ export default function AboutPage() {
       {/* The Youu Network Section */}
       <div className="bg-[#E6F2FF] relative overflow-hidden py-16 md:py-24">
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-[25%] left-[25%] w-[480px] h-[480px] bg-[#70BFFF]/20 rounded-full blur-3xl animate-float-slow" style={{ animationDelay: "0.5s" }} />
+          <div className="absolute top-[20%] left-[25%] w-[480px] h-[480px] bg-[#70BFFF]/20 rounded-full blur-3xl animate-float-slow" style={{ animationDelay: "0.5s" }} />
           <div className="absolute bottom-[15%] right-[20%] w-[420px] h-[420px] bg-[#BE55FF]/18 rounded-full blur-3xl animate-float-medium" style={{ animationDelay: "1.2s" }} />
+          <div className="absolute top-[50%] left-[50%] w-[350px] h-[350px] bg-[#70BFFF]/15 rounded-full blur-2xl animate-float-fast" style={{ animationDelay: "0.8s" }} />
+
+          {/* Geometric shapes - kept within bounds */}
+          <div className="absolute top-[18%] left-[15%] w-28 h-28 bg-gradient-to-br from-[#70BFFF]/25 to-[#BE55FF]/25 rounded-3xl rotate-45 animate-float-slow" style={{ animationDelay: "0.3s" }} />
+          <div className="absolute bottom-[20%] right-[15%] w-24 h-24 bg-gradient-to-br from-[#BE55FF]/25 to-[#70BFFF]/25 rounded-full animate-float-medium" style={{ animationDelay: "1.3s" }} />
+          <div className="absolute top-[40%] right-[10%] w-16 h-16 bg-[#70BFFF]/20 rounded-lg rotate-12 animate-float-fast" style={{ animationDelay: "0.6s" }} />
+          <div className="absolute bottom-[25%] left-[20%] w-20 h-20 bg-[#BE55FF]/22 rounded-2xl rotate-45 animate-float-slow" style={{ animationDelay: "1.5s" }} />
+          <div className="absolute top-[55%] right-[25%] w-26 h-26 bg-gradient-to-br from-[#70BFFF]/22 to-[#BE55FF]/22 rounded-full animate-float-medium" style={{ animationDelay: "0.9s" }} />
+          <div className="absolute bottom-[18%] left-[18%] w-22 h-22 bg-[#BE55FF]/18 rounded-xl rotate-12 animate-float-fast" style={{ animationDelay: "1.1s" }} />
+          <div className="absolute top-[25%] left-[60%] w-28 h-28 bg-gradient-to-br from-[#70BFFF]/20 to-[#BE55FF]/20 rounded-2xl rotate-45 animate-float-slow" style={{ animationDelay: "0.4s" }} />
+          <div className="absolute top-[45%] left-[8%] w-18 h-18 bg-[#70BFFF]/19 rounded-lg rotate-12 animate-float-medium" style={{ animationDelay: "1.7s" }} />
+          <div className="absolute bottom-[30%] right-[40%] w-30 h-30 bg-gradient-to-br from-[#BE55FF]/21 to-[#70BFFF]/21 rounded-full animate-float-fast" style={{ animationDelay: "0.7s" }} />
+          <div className="absolute top-[65%] left-[45%] w-24 h-24 bg-[#BE55FF]/18 rounded-xl rotate-45 animate-float-slow" style={{ animationDelay: "1.2s" }} />
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -271,8 +296,20 @@ export default function AboutPage() {
       {/* AI Implementation Section */}
       <div className="bg-[#E6F2FF] relative overflow-hidden py-16 md:py-24">
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-[20%] right-[25%] w-[500px] h-[500px] bg-[#70BFFF]/20 rounded-full blur-3xl animate-float-medium" style={{ animationDelay: "0.4s" }} />
-          <div className="absolute bottom-[20%] left-[20%] w-[450px] h-[450px] bg-[#BE55FF]/18 rounded-full blur-3xl animate-float-slow" style={{ animationDelay: "1.1s" }} />
+          <div className="absolute top-[18%] right-[25%] w-[500px] h-[500px] bg-[#70BFFF]/20 rounded-full blur-3xl animate-float-medium" style={{ animationDelay: "0.4s" }} />
+          <div className="absolute bottom-[18%] left-[20%] w-[450px] h-[450px] bg-[#BE55FF]/18 rounded-full blur-3xl animate-float-slow" style={{ animationDelay: "1.1s" }} />
+          <div className="absolute top-[50%] left-[50%] w-[380px] h-[380px] bg-[#70BFFF]/15 rounded-full blur-2xl animate-float-fast" style={{ animationDelay: "0.7s" }} />
+
+          {/* Geometric shapes - kept within bounds */}
+          <div className="absolute top-[20%] left-[15%] w-28 h-28 bg-gradient-to-br from-[#70BFFF]/25 to-[#BE55FF]/25 rounded-3xl rotate-45 animate-float-slow" style={{ animationDelay: "0.2s" }} />
+          <div className="absolute bottom-[22%] right-[15%] w-24 h-24 bg-gradient-to-br from-[#BE55FF]/25 to-[#70BFFF]/25 rounded-full animate-float-medium" style={{ animationDelay: "1.3s" }} />
+          <div className="absolute top-[42%] right-[10%] w-16 h-16 bg-[#70BFFF]/20 rounded-lg rotate-12 animate-float-fast" style={{ animationDelay: "0.6s" }} />
+          <div className="absolute bottom-[28%] left-[22%] w-20 h-20 bg-[#BE55FF]/22 rounded-2xl rotate-45 animate-float-slow" style={{ animationDelay: "1.5s" }} />
+          <div className="absolute top-[58%] right-[28%] w-26 h-26 bg-gradient-to-br from-[#70BFFF]/22 to-[#BE55FF]/22 rounded-full animate-float-medium" style={{ animationDelay: "0.9s" }} />
+          <div className="absolute bottom-[20%] left-[18%] w-22 h-22 bg-[#BE55FF]/18 rounded-xl rotate-12 animate-float-fast" style={{ animationDelay: "1.1s" }} />
+          <div className="absolute top-[25%] left-[58%] w-28 h-28 bg-gradient-to-br from-[#70BFFF]/20 to-[#BE55FF]/20 rounded-2xl rotate-45 animate-float-slow" style={{ animationDelay: "0.4s" }} />
+          <div className="absolute top-[48%] left-[8%] w-18 h-18 bg-[#70BFFF]/19 rounded-lg rotate-12 animate-float-medium" style={{ animationDelay: "1.7s" }} />
+          <div className="absolute bottom-[32%] right-[42%] w-30 h-30 bg-gradient-to-br from-[#BE55FF]/21 to-[#70BFFF]/21 rounded-full animate-float-fast" style={{ animationDelay: "0.8s" }} />
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
