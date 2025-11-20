@@ -34,6 +34,13 @@ const videoItems = [
     youtubeId: "pUu0xgPwOpU",
     embedUrl: "https://www.youtube.com/embed/pUu0xgPwOpU?rel=0&modestbranding=1&playsinline=1",
   },
+  {
+    id: 5,
+    title: "Portfolio Video 5",
+    category: "Portfolio",
+    youtubeId: "wSpapekkDyc",
+    embedUrl: "https://www.youtube.com/embed/wSpapekkDyc?rel=0&modestbranding=1&playsinline=1",
+  },
 ];
 
 const photoItems = [
