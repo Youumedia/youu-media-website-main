@@ -1,10 +1,38 @@
 "use client";
 
-// Placeholder logos - user will replace these
-const brandLogos = Array.from({ length: 12 }, (_, i) => ({
-  id: i + 1,
-  name: `Brand ${i + 1}`,
-}));
+// Partner logos
+const brandLogos = [
+  {
+    id: 1,
+    name: "Investogo",
+    image: "/images/partners/1.png",
+  },
+  {
+    id: 2,
+    name: "The Business Minds",
+    image: "/images/partners/2.jpg",
+  },
+  {
+    id: 3,
+    name: "AFROSOCIAL",
+    image: "/images/partners/3.jpg",
+  },
+  {
+    id: 4,
+    name: "Digital Leadership Conference",
+    image: "/images/partners/4.jpg",
+  },
+  {
+    id: 5,
+    name: "ARTIFIC",
+    image: "/images/partners/5.jpg",
+  },
+  {
+    id: 6,
+    name: "Startup Croydon",
+    image: "/images/partners/6.jpg",
+  },
+];
 
 export function LandingBrands() {
   // Duplicate logos for seamless infinite scroll (3 sets for smooth looping)
@@ -37,25 +65,37 @@ export function LandingBrands() {
         <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-[#E6F2FF] via-[#E6F2FF]/80 to-transparent z-10 pointer-events-none" />
 
         {/* Scrolling logos - single continuous line - full width */}
-        <div className="flex gap-8 animate-scroll pl-4 md:pl-6 lg:pl-8 pr-4 md:pr-6 lg:pr-8">
+        <div className="flex gap-12 animate-scroll pl-4 md:pl-6 lg:pl-8 pr-4 md:pr-6 lg:pr-8 items-center">
           {duplicatedLogos.map((brand, index) => (
             <div
               key={`${brand.id}-${index}`}
-              className="flex-shrink-0 group flex items-center justify-center p-6 bg-white rounded-2xl hover:bg-gradient-to-br hover:from-[#70BFFF]/5 hover:to-[#BE55FF]/5 transition-all border border-gray-200 hover:border-[#70BFFF]/40 hover:shadow-xl w-[180px] h-[180px] transform hover:scale-105"
+              className="flex-shrink-0 group flex flex-col items-center justify-center gap-3 transform hover:scale-110 transition-transform duration-300"
             >
-              <div className="text-center relative w-full">
-                {/* Animated gradient background */}
-                <div className="absolute inset-0 bg-gradient-to-br from-[#70BFFF]/10 to-[#BE55FF]/10 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity blur-sm" />
-
-                <div className="relative w-20 h-20 mx-auto mb-2 bg-gradient-to-br from-[#70BFFF]/20 to-[#BE55FF]/20 rounded-xl flex items-center justify-center group-hover:from-[#70BFFF]/30 group-hover:to-[#BE55FF]/30 transition-all shadow-lg group-hover:shadow-xl">
-                  <span className="text-xs text-gray-600 font-bold group-hover:text-gray-900 transition-colors">
-                    Logo
-                  </span>
+              {/* Logo image with rounded corners */}
+              <div className="relative flex items-center justify-center">
+                {/* Logo image */}
+                <div className="relative w-32 h-20 md:w-40 md:h-24 flex items-center justify-center">
+                  <img
+                    src={brand.image}
+                    alt={brand.name}
+                    className="object-contain w-full h-full rounded-lg"
+                    style={{ borderRadius: '8px', maxWidth: '100%', height: 'auto' }}
+                    onError={(e) => {
+                      console.error(`Failed to load image: ${brand.image}`);
+                      // Hide the image container if image fails to load
+                      const container = (e.target as HTMLElement).parentElement;
+                      if (container) {
+                        container.style.display = 'none';
+                      }
+                    }}
+                  />
                 </div>
-                <p className="text-xs text-gray-600 font-medium group-hover:text-gray-900 transition-colors">
-                  {brand.name}
-                </p>
               </div>
+              
+              {/* Label */}
+              <p className="text-sm text-gray-700 font-medium group-hover:text-gray-900 transition-colors text-center">
+                {brand.name}
+              </p>
             </div>
           ))}
         </div>
@@ -67,13 +107,13 @@ export function LandingBrands() {
             transform: translateX(0);
           }
           100% {
-            transform: translateX(calc(-180px * 12 - 2rem * 11));
+            transform: translateX(calc(-200px * ${brandLogos.length} - 3rem * ${brandLogos.length - 1}));
           }
         }
 
         .animate-scroll {
           display: flex;
-          animation: scroll 40s linear infinite;
+          animation: scroll ${40 + brandLogos.length * 2}s linear infinite;
           will-change: transform;
           width: max-content;
         }
