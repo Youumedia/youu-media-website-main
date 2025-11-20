@@ -241,14 +241,19 @@ export function LandingPortfolio() {
                         draggable={false}
                         onError={(e) => {
                           const target = e.target as HTMLImageElement;
-                          // Fallback to hqdefault if maxresdefault fails
+                          // Try multiple fallback options
                           if (target.src.includes('maxresdefault')) {
                             target.src = `https://img.youtube.com/vi/${item.youtubeId}/hqdefault.jpg`;
                           } else if (target.src.includes('hqdefault')) {
-                            // Final fallback to sddefault
+                            target.src = `https://img.youtube.com/vi/${item.youtubeId}/mqdefault.jpg`;
+                          } else if (target.src.includes('mqdefault')) {
                             target.src = `https://img.youtube.com/vi/${item.youtubeId}/sddefault.jpg`;
+                          } else if (target.src.includes('sddefault')) {
+                            // Final fallback to 0.jpg (first frame)
+                            target.src = `https://img.youtube.com/vi/${item.youtubeId}/0.jpg`;
                           }
                         }}
+                        loading="lazy"
                       />
                       
                       {/* Play button overlay */}
