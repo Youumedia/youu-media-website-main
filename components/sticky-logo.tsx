@@ -2,11 +2,18 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export function StickyLogo() {
+  const pathname = usePathname();
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
+
+  // Hide on about page since Navigation component already has logo
+  if (pathname === "/about") {
+    return null;
+  }
 
   return (
     <div className="fixed -top-2 left-1 md:top-1 md:left-6 z-[9999]">
