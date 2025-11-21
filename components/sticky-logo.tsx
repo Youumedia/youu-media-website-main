@@ -11,7 +11,7 @@ export function StickyLogo() {
   };
 
   // Hide on about page, home page, and services page since Navigation component already has logo
-  if (pathname === "/about" || pathname === "/" || pathname === "/services") {
+  if (pathname === "/about" || pathname === "/about/" || pathname === "/" || pathname === "/services" || pathname === "/services/") {
     return null;
   }
 
