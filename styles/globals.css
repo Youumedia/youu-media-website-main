@@ -197,4 +197,26 @@
   .animate-pulse-drift {
     animation: pulse-drift 14s ease-in-out infinite;
   }
+
+  @keyframes bounce-subtle {
+    0%, 90%, 100% {
+      transform: translateY(0);
+    }
+    92% {
+      transform: translateY(-8px);
+    }
+    94% {
+      transform: translateY(-4px);
+    }
+    96% {
+      transform: translateY(-6px);
+    }
+    98% {
+      transform: translateY(-2px);
+    }
+  }
+
+  .animate-bounce-subtle {
+    animation: bounce-subtle 4s ease-in-out infinite;
+  }
 }

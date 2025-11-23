@@ -7,6 +7,8 @@ import Link from "next/link";
 const navigationItems = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
+  { href: "/services", label: "Our Services" },
+  { href: "/#network", label: "The U-Network" },
   { href: "/#portfolio", label: "Our Work" },
   { href: "/#contact", label: "Contact Us" },
 ];
@@ -15,10 +17,10 @@ export function NavigationBot() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="fixed bottom-4 right-4 md:bottom-6 md:right-6 z-50">
+    <div className="fixed bottom-8 right-4 md:bottom-10 md:right-6 z-50">
       {/* Navigation Panel */}
       {isOpen && (
-        <div className="absolute bottom-16 md:bottom-20 right-0 mb-2 bg-white rounded-2xl shadow-2xl border border-gray-100 p-4 min-w-[220px] animate-in slide-in-from-bottom-4 fade-in duration-200">
+        <div className="absolute bottom-20 md:bottom-24 right-0 mb-2 bg-white rounded-2xl shadow-2xl border border-gray-100 p-4 min-w-[220px] animate-in slide-in-from-bottom-4 fade-in duration-200">
           <div className="flex items-center justify-between mb-3">
             <h3 className="text-sm font-semibold text-gray-900">Navigate</h3>
             <button
@@ -46,10 +48,10 @@ export function NavigationBot() {
       {/* Smiley Face Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-gradient-to-br from-[#70BFFF] to-[#BE55FF] shadow-lg hover:shadow-xl transition-all hover:scale-110 flex items-center justify-center text-white"
+        className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-gradient-to-br from-[#70BFFF] to-[#BE55FF] shadow-lg hover:shadow-xl transition-all hover:scale-110 flex items-center justify-center text-white animate-bounce-subtle"
         aria-label="Navigation menu"
       >
-        <Smile className="h-6 w-6 md:h-7 md:w-7" />
+        <Smile className="h-8 w-8 md:h-10 md:w-10" />
       </button>
     </div>
   );

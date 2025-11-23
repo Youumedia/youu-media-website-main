@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const testimonials = [
@@ -70,6 +70,9 @@ const testimonials = [
 
 export function LandingTestimonials() {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const touchStartX = useRef<number>(0);
+  const touchEndX = useRef<number>(0);
 
   const nextTestimonial = () => {
     setCurrentIndex((prev) => (prev + 1) % testimonials.length);
@@ -79,6 +82,41 @@ export function LandingTestimonials() {
     setCurrentIndex(
       (prev) => (prev - 1 + testimonials.length) % testimonials.length
     );
+  };
+
+  // Swipe handlers
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+    touchEndX.current = 0; // Reset end position
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    touchEndX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    if (!touchStartX.current) return;
+    
+    // If no movement was detected, reset and return
+    if (touchEndX.current === 0) {
+      touchStartX.current = 0;
+      return;
+    }
+    
+    const distance = touchStartX.current - touchEndX.current;
+    const minSwipeDistance = 30; // Reduced threshold for more responsive swiping
+
+    if (distance > minSwipeDistance) {
+      // Swipe left - go to next
+      nextTestimonial();
+    } else if (distance < -minSwipeDistance) {
+      // Swipe right - go to previous
+      prevTestimonial();
+    }
+
+    // Reset
+    touchStartX.current = 0;
+    touchEndX.current = 0;
   };
 
   const currentTestimonial = testimonials[currentIndex];
@@ -132,7 +170,13 @@ export function LandingTestimonials() {
           </p>
         </div>
 
-        <div className="relative">
+        <div 
+          className="relative"
+          ref={containerRef}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+        >
           {/* Decorative quote marks */}
           <div className="absolute -top-8 -left-8 text-9xl text-[#70BFFF]/10 font-black z-0">
             "
@@ -143,22 +187,16 @@ export function LandingTestimonials() {
 
           {/* Testimonial Card */}
           <div
-            className={`relative rounded-3xl p-8 md:p-12 min-h-[300px] flex flex-col justify-center transition-all overflow-hidden group ${
-              currentTestimonial.type === "video"
-                ? "bg-transparent"
-                : "bg-white/20 backdrop-blur-xl border border-white/30 shadow-[0_8px_32px_0_rgba(31,38,135,0.37)] hover:shadow-[0_12px_40px_0_rgba(31,38,135,0.5)] hover:bg-white/25 hover:border-white/40 transform hover:scale-[1.02] hover:-translate-y-1"
-            }`}
+            className="relative rounded-3xl p-8 md:p-12 min-h-[300px] flex flex-col justify-center transition-all overflow-hidden group bg-white/20 backdrop-blur-xl border border-white/30 shadow-[0_8px_32px_0_rgba(31,38,135,0.37)] hover:shadow-[0_12px_40px_0_rgba(31,38,135,0.5)] hover:bg-white/25 hover:border-white/40 transform hover:scale-[1.02] hover:-translate-y-1"
           >
-            {/* 3D Glass effect layers - only for text testimonials */}
-            {currentTestimonial.type === "text" && (
-              <>
-                {/* Glass reflection effect */}
-                <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-transparent rounded-3xl opacity-60" />
-                <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-white/20 to-transparent rounded-t-3xl" />
-                {/* Subtle inner glow */}
-                <div className="absolute inset-[1px] bg-gradient-to-br from-[#70BFFF]/5 via-transparent to-[#BE55FF]/5 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity" />
-              </>
-            )}
+            {/* 3D Glass effect layers */}
+            <>
+              {/* Glass reflection effect */}
+              <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-transparent rounded-3xl opacity-60" />
+              <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-white/20 to-transparent rounded-t-3xl" />
+              {/* Subtle inner glow */}
+              <div className="absolute inset-[1px] bg-gradient-to-br from-[#70BFFF]/5 via-transparent to-[#BE55FF]/5 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity" />
+            </>
 
             <div className="relative z-10">
               {currentTestimonial.type === "video" ? (
@@ -238,7 +276,7 @@ export function LandingTestimonials() {
           <div className="flex justify-center items-center gap-4 mt-8">
             <button
               onClick={prevTestimonial}
-              className="bg-white rounded-full p-3 shadow-lg hover:shadow-xl transition-all hover:scale-110 border border-gray-200 hover:border-[#70BFFF]/50"
+              className="bg-white/20 backdrop-blur-xl rounded-full p-3 shadow-lg hover:shadow-xl transition-all hover:scale-110 border border-white/30 hover:border-white/50"
               aria-label="Previous testimonial"
             >
               <ChevronLeft className="h-5 w-5 text-gray-700" />
@@ -262,7 +300,7 @@ export function LandingTestimonials() {
 
             <button
               onClick={nextTestimonial}
-              className="bg-white rounded-full p-3 shadow-lg hover:shadow-xl transition-all hover:scale-110 border border-gray-200 hover:border-[#70BFFF]/50"
+              className="bg-white/20 backdrop-blur-xl rounded-full p-3 shadow-lg hover:shadow-xl transition-all hover:scale-110 border border-white/30 hover:border-white/50"
               aria-label="Next testimonial"
             >
               <ChevronRight className="h-5 w-5 text-gray-700" />

@@ -174,19 +174,24 @@ export function LandingPortfolio() {
         </div>
       </div>
 
+      {/* Swipe instruction */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 mb-6">
+        <p className="text-center text-sm text-gray-500 opacity-60">Swipe left</p>
+      </div>
+
       {/* Horizontal scroll container - full width edge to edge */}
       <div className="relative w-screen overflow-hidden -ml-[50vw] left-1/2">
         {/* Scroll buttons - always visible for infinite loop */}
         <button
           onClick={() => scroll("left")}
-          className="absolute left-4 md:left-6 lg:left-8 top-1/2 -translate-y-1/2 z-10 bg-white rounded-full p-3 shadow-lg hover:shadow-xl transition-all hover:scale-110 border border-gray-200 hover:border-[#70BFFF]/50"
+          className="absolute left-4 md:left-6 lg:left-8 top-1/2 -translate-y-1/2 z-10 bg-white/20 backdrop-blur-xl rounded-full p-3 shadow-lg hover:shadow-xl transition-all hover:scale-110 border border-white/30 hover:border-white/50"
           aria-label="Scroll left"
         >
           <ChevronLeft className="h-6 w-6 text-gray-700" />
         </button>
         <button
           onClick={() => scroll("right")}
-          className="absolute right-4 md:right-6 lg:right-8 top-1/2 -translate-y-1/2 z-10 bg-white rounded-full p-3 shadow-lg hover:shadow-xl transition-all hover:scale-110 border border-gray-200 hover:border-[#70BFFF]/50"
+          className="absolute right-4 md:right-6 lg:right-8 top-1/2 -translate-y-1/2 z-10 bg-white/20 backdrop-blur-xl rounded-full p-3 shadow-lg hover:shadow-xl transition-all hover:scale-110 border border-white/30 hover:border-white/50"
           aria-label="Scroll right"
         >
           <ChevronRight className="h-6 w-6 text-gray-700" />
@@ -279,6 +284,13 @@ export function LandingPortfolio() {
             );
           })}
         </div>
+      </div>
+
+      {/* Video Quality Notice */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 mt-8">
+        <p className="text-center text-sm text-gray-600 opacity-75">
+          For the best viewing experience, tap the gear icon and set video quality to the highest resolution.
+        </p>
       </div>
 
       <style jsx>{`
