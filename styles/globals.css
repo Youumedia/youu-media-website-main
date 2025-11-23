@@ -231,6 +231,15 @@
 
   @keyframes bounce-arrow-vertical {
     0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(8px);
+    }
+  }
+
+  @keyframes bounce-arrow-vertical-rotated {
+    0%, 100% {
       transform: rotate(90deg) translateY(0);
     }
     50% {
@@ -244,5 +253,9 @@
 
   .animate-bounce-arrow-vertical {
     animation: bounce-arrow-vertical 1.5s ease-in-out infinite;
+  }
+
+  .animate-bounce-arrow-vertical-rotated {
+    animation: bounce-arrow-vertical-rotated 1.5s ease-in-out infinite;
   }
 }
