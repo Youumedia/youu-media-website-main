@@ -229,39 +229,29 @@
     }
   }
 
-  @keyframes bounce-arrow-vertical {
+  @keyframes bounce-arrow-up-down {
     0%, 100% {
       transform: translateY(0);
     }
-    25% {
-      transform: translateY(-10px);
-    }
-    75% {
-      transform: translateY(10px);
+    50% {
+      transform: translateY(-8px);
     }
   }
 
-  @keyframes bounce-arrow-vertical-rotated {
+  @keyframes bounce-arrow-up-down-rotated {
     0%, 100% {
       transform: rotate(90deg) translateY(0);
     }
-    25% {
-      transform: rotate(90deg) translateY(-10px);
+    50% {
+      transform: rotate(90deg) translateY(-8px);
     }
-    75% {
-      transform: rotate(90deg) translateY(10px);
-    }
-  }
-
-  .animate-bounce-arrow-horizontal {
-    animation: bounce-arrow-horizontal 1.5s ease-in-out infinite;
   }
 
   .animate-bounce-arrow-vertical {
-    animation: bounce-arrow-vertical 1s ease-in-out infinite;
+    animation: bounce-arrow-up-down 1.2s ease-in-out infinite;
   }
 
   .animate-bounce-arrow-vertical-rotated {
-    animation: bounce-arrow-vertical-rotated 1s ease-in-out infinite;
+    animation: bounce-arrow-up-down-rotated 1.2s ease-in-out infinite;
   }
 }
