@@ -11,6 +11,12 @@ const portfolioItems = [
     embedUrl: "https://www.youtube.com/embed/lErDN_bLkaI?rel=0&modestbranding=1&playsinline=1",
   },
   {
+    id: 6,
+    title: "Portfolio Video 6",
+    youtubeId: "zHHMS9D_CVQ",
+    embedUrl: "https://www.youtube.com/embed/zHHMS9D_CVQ?rel=0&modestbranding=1&playsinline=1",
+  },
+  {
     id: 1,
     title: "Portfolio Video 1",
     youtubeId: "xkMZtQnHDOE",
