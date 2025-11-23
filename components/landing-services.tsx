@@ -42,28 +42,28 @@ export function LandingServices() {
           </h2>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-2 gap-4 md:gap-8">
           {services.map((service, index) => (
             <div
               key={index}
-              className="group relative bg-white p-8 rounded-3xl shadow-lg hover:shadow-2xl transition-all border border-gray-200 hover:border-transparent overflow-hidden"
+              className="group relative bg-white p-4 md:p-8 rounded-3xl shadow-lg hover:shadow-2xl transition-all border border-gray-200 hover:border-transparent overflow-hidden"
             >
               {/* Animated gradient background on hover */}
               <div className="absolute inset-0 bg-gradient-to-br from-[#70BFFF]/10 via-[#BE55FF]/10 to-[#70BFFF]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
               {/* Decorative corner element */}
-              <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-[#70BFFF]/20 to-[#BE55FF]/20 rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity" />
+              <div className="absolute top-0 right-0 w-16 h-16 md:w-24 md:h-24 bg-gradient-to-br from-[#70BFFF]/20 to-[#BE55FF]/20 rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity" />
 
               {/* Number badge */}
-              <div className="absolute -top-4 -left-4 w-16 h-16 bg-gradient-to-br from-[#70BFFF] to-[#BE55FF] rounded-2xl flex items-center justify-center text-white font-black text-2xl shadow-lg transform rotate-12 group-hover:rotate-0 transition-transform">
+              <div className="absolute -top-4 -left-4 w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-[#70BFFF] to-[#BE55FF] rounded-2xl flex items-center justify-center text-white font-black text-lg md:text-2xl shadow-lg transform rotate-12 group-hover:rotate-0 transition-transform">
                 {index + 1}
               </div>
 
               <div className="relative z-10">
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                <h3 className="text-base md:text-2xl font-bold text-gray-900 mb-2 md:mb-4">
                   {service.title}
                 </h3>
-                <p className="text-lg text-gray-700 leading-relaxed">
+                <p className="text-sm md:text-lg text-gray-700 leading-relaxed">
                   {service.description}
                 </p>
               </div>
