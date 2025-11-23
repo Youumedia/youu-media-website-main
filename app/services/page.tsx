@@ -59,6 +59,18 @@ export default function ServicesPage() {
             <p className="text-xl md:text-2xl text-gray-700 max-w-3xl mx-auto">
               Comprehensive visual content solutions tailored to your budget, goals, and brand identity.
             </p>
+
+            {/* Creative scroll indicator */}
+            <div className="relative z-10 mt-8 md:mt-12 mb-2 md:mb-4 flex justify-center">
+              <div className="flex flex-col items-center gap-1.5 md:gap-2">
+                <div className="w-5 h-8 md:w-6 md:h-10 border-2 border-gray-400 rounded-full flex items-start justify-center p-1">
+                  <div className="w-1.5 h-1.5 bg-gradient-to-b from-[#70BFFF] to-[#BE55FF] rounded-full animate-bounce" />
+                </div>
+                <span className="text-[10px] md:text-xs text-gray-500 uppercase tracking-widest font-semibold">
+                  Scroll
+                </span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
