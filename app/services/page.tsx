@@ -28,7 +28,7 @@ export default function ServicesPage() {
       <Navigation />
 
       {/* Hero Section */}
-      <div className="bg-[#E6F2FF] relative overflow-hidden pt-24 pb-16 md:pt-32 md:pb-24">
+      <div className="bg-[#E6F2FF] relative overflow-hidden pt-24 pb-8 md:pt-32 md:pb-12">
         {/* Background Shapes */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div className="absolute top-[15%] left-[20%] w-[500px] h-[500px] bg-[#70BFFF]/20 rounded-full blur-3xl animate-float-slow" style={{ animationDelay: "0s" }} />
@@ -61,7 +61,7 @@ export default function ServicesPage() {
             </p>
 
             {/* Creative scroll indicator */}
-            <div className="relative z-10 mt-8 md:mt-12 mb-2 md:mb-4 flex justify-center">
+            <div className="relative z-10 mt-8 md:mt-12 mb-0 flex justify-center">
               <div className="flex flex-col items-center gap-1.5 md:gap-2">
                 <div className="w-5 h-8 md:w-6 md:h-10 border-2 border-gray-400 rounded-full flex items-start justify-center p-1">
                   <div className="w-1.5 h-1.5 bg-gradient-to-b from-[#70BFFF] to-[#BE55FF] rounded-full animate-bounce" />
