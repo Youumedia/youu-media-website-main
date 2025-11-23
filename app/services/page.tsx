@@ -110,7 +110,7 @@ export default function ServicesPage() {
 
                 {/* Arrow */}
                 <div className="mx-4">
-                  <ArrowRight className="h-8 w-8 text-[#70BFFF] animate-bounce-arrow-vertical" />
+                  <ArrowRight className="h-8 w-8 text-[#70BFFF]" />
                 </div>
 
                 {/* Stage 2 */}
@@ -128,7 +128,7 @@ export default function ServicesPage() {
 
                 {/* Arrow */}
                 <div className="mx-4">
-                  <ArrowRight className="h-8 w-8 text-[#70BFFF] animate-bounce-arrow-vertical" />
+                  <ArrowRight className="h-8 w-8 text-[#70BFFF]" />
                 </div>
 
                 {/* Stage 3 */}
@@ -146,7 +146,7 @@ export default function ServicesPage() {
 
                 {/* Arrow */}
                 <div className="mx-4">
-                  <ArrowRight className="h-8 w-8 text-[#70BFFF] animate-bounce-arrow-vertical" />
+                  <ArrowRight className="h-8 w-8 text-[#70BFFF]" />
                 </div>
 
                 {/* Stage 4 */}
@@ -176,7 +176,7 @@ export default function ServicesPage() {
                 </p>
               </div>
               <div className="flex justify-center">
-                <ArrowRight className="h-8 w-8 text-[#70BFFF] animate-bounce-arrow-vertical-rotated" />
+                <ArrowRight className="h-8 w-8 text-[#70BFFF] rotate-90" />
               </div>
               <div className="bg-gradient-to-br from-[#BE55FF]/10 to-[#70BFFF]/10 rounded-2xl p-6 border-2 border-[#BE55FF]/20">
                 <div className="w-16 h-16 bg-gradient-to-br from-[#BE55FF] to-[#70BFFF] rounded-full flex items-center justify-center mx-auto mb-4">
@@ -188,7 +188,7 @@ export default function ServicesPage() {
                 </p>
               </div>
               <div className="flex justify-center">
-                <ArrowRight className="h-8 w-8 text-[#70BFFF] animate-bounce-arrow-vertical-rotated" />
+                <ArrowRight className="h-8 w-8 text-[#70BFFF] rotate-90" />
               </div>
               <div className="bg-gradient-to-br from-[#70BFFF]/10 to-[#BE55FF]/10 rounded-2xl p-6 border-2 border-[#70BFFF]/20">
                 <div className="w-16 h-16 bg-gradient-to-br from-[#70BFFF] to-[#BE55FF] rounded-full flex items-center justify-center mx-auto mb-4">
@@ -200,7 +200,7 @@ export default function ServicesPage() {
                 </p>
               </div>
               <div className="flex justify-center">
-                <ArrowRight className="h-8 w-8 text-[#70BFFF] animate-bounce-arrow-vertical-rotated" />
+                <ArrowRight className="h-8 w-8 text-[#70BFFF] rotate-90" />
               </div>
               <div className="bg-gradient-to-br from-[#BE55FF]/10 to-[#70BFFF]/10 rounded-2xl p-6 border-2 border-[#BE55FF]/20">
                 <div className="w-16 h-16 bg-gradient-to-br from-[#BE55FF] to-[#70BFFF] rounded-full flex items-center justify-center mx-auto mb-4">
