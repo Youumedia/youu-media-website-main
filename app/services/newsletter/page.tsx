@@ -112,7 +112,7 @@ export default function NewsletterPage() {
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle2 className="h-5 w-5 text-[#BE55FF] mt-0.5 flex-shrink-0" />
-                  <span className="text-gray-700">Best practices and optimization tips</span>
+                  <span className="text-gray-700">Best practices and optimisation tips</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle2 className="h-5 w-5 text-[#BE55FF] mt-0.5 flex-shrink-0" />
@@ -135,7 +135,7 @@ export default function NewsletterPage() {
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle2 className="h-5 w-5 text-[#70BFFF] mt-0.5 flex-shrink-0" />
-                  <span className="text-gray-700">Engagement optimization techniques</span>
+                  <span className="text-gray-700">Engagement optimisation techniques</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle2 className="h-5 w-5 text-[#70BFFF] mt-0.5 flex-shrink-0" />
@@ -229,7 +229,7 @@ export default function NewsletterPage() {
             {[
               { step: 1, title: "Content Research & Curation", desc: "Research industry trends, platform updates, and gather valuable insights from multiple sources" },
               { step: 2, title: "Strategic Content Development", desc: "Develop weekly newsletter content that provides actionable value and strategic insights" },
-              { step: 3, title: "Trend Analysis & Insights", desc: "Analyze current trends and provide forward-looking insights relevant to your industry" },
+              { step: 3, title: "Trend Analysis & Insights", desc: "Analyse current trends and provide forward-looking insights relevant to your industry" },
               { step: 4, title: "Platform Update Compilation", desc: "Curate and explain important platform changes and how they impact content strategy" },
               { step: 5, title: "Strategy Tips & Best Practices", desc: "Share actionable content strategy tips and best practices based on current performance data" },
               { step: 6, title: "Community Value Delivery", desc: "Include community support, networking opportunities, and exclusive insights" },

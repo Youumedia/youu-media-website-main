@@ -37,7 +37,7 @@ const services = [
   {
     id: 3,
     title: "Done-For-You Social Media Management",
-    description: "Complete social media management including content planning, scheduling, community engagement, and account optimization.",
+    description: "Complete social media management including content planning, scheduling, community engagement, and account optimisation.",
     icon: Instagram,
     href: "/services/social-management",
     gradient: "from-[#70BFFF] to-[#BE55FF]",
@@ -45,7 +45,7 @@ const services = [
   {
     id: 4,
     title: "Paid Advertising & Campaign Management",
-    description: "End-to-end paid advertising campaigns with Meta ads, audience building, A/B testing, and performance optimization.",
+    description: "End-to-end paid advertising campaigns with Meta ads, audience building, A/B testing, and performance optimisation.",
     icon: TrendingUp,
     href: "/services/paid-ads",
     gradient: "from-[#BE55FF] to-[#70BFFF]",

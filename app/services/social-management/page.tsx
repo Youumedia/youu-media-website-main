@@ -40,7 +40,7 @@ export default function SocialManagementPage() {
               Complete social media management including content planning, scheduling, and community engagement.
             </p>
             <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-              We handle every aspect of your social media presence, from content creation and copywriting to scheduling, engagement, and account optimization. You focus on your business while we manage your social media presence professionally.
+              We handle every aspect of your social media presence, from content creation and copywriting to scheduling, engagement, and account optimisation. You focus on your business while we manage your social media presence professionally.
             </p>
           </div>
         </div>
@@ -54,7 +54,7 @@ export default function SocialManagementPage() {
               What This Service <span className="bg-gradient-to-r from-[#70BFFF] to-[#BE55FF] bg-clip-text text-transparent">Includes</span>
             </h2>
             <p className="text-xl text-gray-700 leading-relaxed text-center mb-12">
-              Our done-for-you social media management service provides comprehensive coverage of all social media needs. From content planning and creation to scheduling, engagement, and optimization, we ensure your social media presence is professional, consistent, and aligned with your brand.
+              Our done-for-you social media management service provides comprehensive coverage of all social media needs. From content planning and creation to scheduling, engagement, and optimisation, we ensure your social media presence is professional, consistent, and aligned with your brand.
             </p>
           </div>
         </div>
@@ -171,7 +171,7 @@ export default function SocialManagementPage() {
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle2 className="h-5 w-5 text-[#BE55FF] mt-0.5 flex-shrink-0" />
-                  <span className="text-gray-700">Performance tracking and optimization</span>
+                  <span className="text-gray-700">Performance tracking and optimisation</span>
                 </li>
               </ul>
             </div>
@@ -198,7 +198,7 @@ export default function SocialManagementPage() {
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle2 className="h-5 w-5 text-[#70BFFF] mt-0.5 flex-shrink-0" />
-                  <span className="text-gray-700">Engagement optimization</span>
+                  <span className="text-gray-700">Engagement optimisation</span>
                 </li>
               </ul>
             </div>
@@ -208,20 +208,20 @@ export default function SocialManagementPage() {
                 <div className="w-14 h-14 bg-gradient-to-br from-[#BE55FF] to-[#70BFFF] rounded-xl flex items-center justify-center">
                   <TrendingUp className="h-7 w-7 text-white" />
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900">Account Optimization</h3>
+                <h3 className="text-2xl font-bold text-gray-900">Account Optimisation</h3>
               </div>
               <ul className="space-y-3">
                 <li className="flex items-start gap-3">
                   <CheckCircle2 className="h-5 w-5 text-[#BE55FF] mt-0.5 flex-shrink-0" />
-                  <span className="text-gray-700">Profile optimization</span>
+                  <span className="text-gray-700">Profile optimisation</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle2 className="h-5 w-5 text-[#BE55FF] mt-0.5 flex-shrink-0" />
-                  <span className="text-gray-700">Bio and link optimization</span>
+                  <span className="text-gray-700">Bio and link optimisation</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle2 className="h-5 w-5 text-[#BE55FF] mt-0.5 flex-shrink-0" />
-                  <span className="text-gray-700">Content feed optimization</span>
+                  <span className="text-gray-700">Content feed optimisation</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle2 className="h-5 w-5 text-[#BE55FF] mt-0.5 flex-shrink-0" />
@@ -242,14 +242,14 @@ export default function SocialManagementPage() {
           
           <div className="max-w-4xl mx-auto space-y-8">
             {[
-              { step: 1, title: "Account Audit & Strategy", desc: "Comprehensive review of current social media presence and development of optimization strategy" },
+              { step: 1, title: "Account Audit & Strategy", desc: "Comprehensive review of current social media presence and development of optimisation strategy" },
               { step: 2, title: "Content Calendar Development", desc: "Create monthly content calendar aligned with your marketing goals and brand messaging" },
               { step: 3, title: "Content Creation & Planning", desc: "Develop and plan all content including captions, hashtags, and creative direction" },
               { step: 4, title: "Content Scheduling", desc: "Schedule all posts at optimal times across all platforms for maximum engagement" },
               { step: 5, title: "Active Posting & Distribution", desc: "Execute weekly posting schedule and ensure consistent brand presence" },
               { step: 6, title: "Community Engagement", desc: "Monitor and engage with your audience through comments, DMs, and community building" },
               { step: 7, title: "Performance Monitoring", desc: "Track engagement metrics, growth, and content performance across all platforms" },
-              { step: 8, title: "Optimization & Refinement", desc: "Continuously optimize strategy based on performance data and platform trends" },
+              { step: 8, title: "Optimisation & Refinement", desc: "Continuously optimise strategy based on performance data and platform trends" },
             ].map((item) => (
               <div key={item.step} className="flex gap-6 items-start">
                 <div className="flex-shrink-0 w-16 h-16 bg-gradient-to-br from-[#70BFFF] to-[#BE55FF] rounded-2xl flex items-center justify-center text-white font-black text-xl">
@@ -304,7 +304,7 @@ export default function SocialManagementPage() {
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle2 className="h-5 w-5 text-[#BE55FF] mt-0.5 flex-shrink-0" />
-                  <span className="text-gray-700">Account optimization and maintenance</span>
+                  <span className="text-gray-700">Account optimisation and maintenance</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle2 className="h-5 w-5 text-[#BE55FF] mt-0.5 flex-shrink-0" />
@@ -312,7 +312,7 @@ export default function SocialManagementPage() {
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle2 className="h-5 w-5 text-[#BE55FF] mt-0.5 flex-shrink-0" />
-                  <span className="text-gray-700">Strategy adjustments and optimization</span>
+                  <span className="text-gray-700">Strategy adjustments and optimisation</span>
                 </li>
               </ul>
             </div>

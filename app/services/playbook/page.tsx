@@ -83,7 +83,7 @@ export default function PlaybookPage() {
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle2 className="h-5 w-5 text-[#BE55FF] mt-0.5 flex-shrink-0" />
-                  <span className="text-gray-700">Color palette and hex code specifications</span>
+                  <span className="text-gray-700">Colour palette and hex code specifications</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle2 className="h-5 w-5 text-[#BE55FF] mt-0.5 flex-shrink-0" />
@@ -168,7 +168,7 @@ export default function PlaybookPage() {
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle2 className="h-5 w-5 text-[#70BFFF] mt-0.5 flex-shrink-0" />
-                  <span className="text-gray-700">Lighting and color treatment standards</span>
+                  <span className="text-gray-700">Lighting and colour treatment standards</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle2 className="h-5 w-5 text-[#70BFFF] mt-0.5 flex-shrink-0" />

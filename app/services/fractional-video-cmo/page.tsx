@@ -164,9 +164,9 @@ export default function FractionalVideoCMOPage() {
               { step: 3, title: "Campaign Planning", desc: "Develop quarterly and annual campaign roadmaps aligned with business goals" },
               { step: 4, title: "Brand Storytelling Architecture", desc: "Define narrative frameworks, messaging pillars, and visual communication strategies" },
               { step: 5, title: "Content Ecosystem Design", desc: "Map out integrated content systems across all platforms and touchpoints" },
-              { step: 6, title: "Ongoing Strategic Guidance", desc: "Regular consultation sessions to adjust strategy, review performance, and optimize approach" },
+              { step: 6, title: "Ongoing Strategic Guidance", desc: "Regular consultation sessions to adjust strategy, review performance, and optimise approach" },
               { step: 7, title: "Team Alignment & Training", desc: "Ensure your internal team understands and can execute the strategic vision" },
-              { step: 8, title: "Performance Review & Optimization", desc: "Quarterly reviews to assess results, refine strategy, and plan next phase initiatives" },
+              { step: 8, title: "Performance Review & Optimisation", desc: "Quarterly reviews to assess results, refine strategy, and plan next phase initiatives" },
             ].map((item) => (
               <div key={item.step} className="flex gap-6 items-start">
                 <div className="flex-shrink-0 w-16 h-16 bg-gradient-to-br from-[#70BFFF] to-[#BE55FF] rounded-2xl flex items-center justify-center text-white font-black text-xl">
@@ -225,7 +225,7 @@ export default function FractionalVideoCMOPage() {
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle2 className="h-5 w-5 text-[#BE55FF] mt-0.5 flex-shrink-0" />
-                  <span className="text-gray-700">Content ecosystem optimization</span>
+                  <span className="text-gray-700">Content ecosystem optimisation</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle2 className="h-5 w-5 text-[#BE55FF] mt-0.5 flex-shrink-0" />

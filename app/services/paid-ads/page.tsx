@@ -38,10 +38,10 @@ export default function PaidAdsPage() {
               Paid Advertising & <span className="bg-gradient-to-r from-[#BE55FF] to-[#70BFFF] bg-clip-text text-transparent">Campaign Management</span>
             </h1>
             <p className="text-xl md:text-2xl text-gray-700 max-w-3xl mx-auto mb-4">
-              End-to-end paid advertising campaigns with Meta ads, audience building, and performance optimization.
+              End-to-end paid advertising campaigns with Meta ads, audience building, and performance optimisation.
             </p>
             <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-              We manage your entire paid advertising ecosystem, from campaign setup and creative planning to execution, optimization, and scaling. Our data-driven approach ensures maximum ROI on your advertising investment.
+              We manage your entire paid advertising ecosystem, from campaign setup and creative planning to execution, optimisation, and scaling. Our data-driven approach ensures maximum ROI on your advertising investment.
             </p>
           </div>
         </div>
@@ -55,7 +55,7 @@ export default function PaidAdsPage() {
               What This Service <span className="bg-gradient-to-r from-[#BE55FF] to-[#70BFFF] bg-clip-text text-transparent">Includes</span>
             </h2>
             <p className="text-xl text-gray-700 leading-relaxed text-center mb-12">
-              Our paid advertising service provides comprehensive campaign management across Meta platforms. From initial setup and audience building to ongoing optimization and scaling, we handle every aspect of your paid advertising to drive measurable results and ROI.
+              Our paid advertising service provides comprehensive campaign management across Meta platforms. From initial setup and audience building to ongoing optimisation and scaling, we handle every aspect of your paid advertising to drive measurable results and ROI.
             </p>
           </div>
         </div>
@@ -87,7 +87,7 @@ export default function PaidAdsPage() {
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle2 className="h-5 w-5 text-[#BE55FF] mt-0.5 flex-shrink-0" />
-                  <span className="text-gray-700">Campaign structure optimization</span>
+                  <span className="text-gray-700">Campaign structure optimisation</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle2 className="h-5 w-5 text-[#BE55FF] mt-0.5 flex-shrink-0" />
@@ -145,7 +145,7 @@ export default function PaidAdsPage() {
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle2 className="h-5 w-5 text-[#BE55FF] mt-0.5 flex-shrink-0" />
-                  <span className="text-gray-700">Format optimization (video, image, carousel)</span>
+                  <span className="text-gray-700">Format optimisation (video, image, carousel)</span>
                 </li>
               </ul>
             </div>
@@ -164,7 +164,7 @@ export default function PaidAdsPage() {
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle2 className="h-5 w-5 text-[#70BFFF] mt-0.5 flex-shrink-0" />
-                  <span className="text-gray-700">Conversion funnel optimization</span>
+                  <span className="text-gray-700">Conversion funnel optimisation</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle2 className="h-5 w-5 text-[#70BFFF] mt-0.5 flex-shrink-0" />
@@ -216,7 +216,7 @@ export default function PaidAdsPage() {
                 <div className="w-14 h-14 bg-gradient-to-br from-[#70BFFF] to-[#BE55FF] rounded-xl flex items-center justify-center">
                   <BarChart3 className="h-7 w-7 text-white" />
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900">Live Optimization</h3>
+                <h3 className="text-2xl font-bold text-gray-900">Live Optimisation</h3>
               </div>
               <ul className="space-y-3">
                 <li className="flex items-start gap-3">
@@ -229,7 +229,7 @@ export default function PaidAdsPage() {
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle2 className="h-5 w-5 text-[#70BFFF] mt-0.5 flex-shrink-0" />
-                  <span className="text-gray-700">Bid optimization and budget reallocation</span>
+                  <span className="text-gray-700">Bid optimisation and budget reallocation</span>
                 </li>
               </ul>
             </div>
@@ -241,7 +241,7 @@ export default function PaidAdsPage() {
       <div className="bg-[#E6F2FF] relative overflow-hidden py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-12 text-center">
-            A/B Testing & <span className="bg-gradient-to-r from-[#BE55FF] to-[#70BFFF] bg-clip-text text-transparent">Optimization</span>
+            A/B Testing & <span className="bg-gradient-to-r from-[#BE55FF] to-[#70BFFF] bg-clip-text text-transparent">Optimisation</span>
           </h2>
           
           <div className="grid md:grid-cols-3 gap-8">
@@ -251,7 +251,7 @@ export default function PaidAdsPage() {
                 <li>• Ad creative variations</li>
                 <li>• Visual asset testing</li>
                 <li>• Video vs image performance</li>
-                <li>• Format optimization</li>
+                <li>• Format optimisation</li>
               </ul>
             </div>
 
@@ -260,7 +260,7 @@ export default function PaidAdsPage() {
               <ul className="space-y-2 text-gray-700">
                 <li>• Hook variations</li>
                 <li>• Caption testing</li>
-                <li>• CTA optimization</li>
+                <li>• CTA optimisation</li>
                 <li>• Value proposition testing</li>
               </ul>
             </div>
@@ -271,7 +271,7 @@ export default function PaidAdsPage() {
                 <li>• Audience segment testing</li>
                 <li>• Lookalike variations</li>
                 <li>• Interest targeting tests</li>
-                <li>• Demographic optimization</li>
+                <li>• Demographic optimisation</li>
               </ul>
             </div>
 
@@ -279,9 +279,9 @@ export default function PaidAdsPage() {
               <h3 className="text-xl font-bold text-gray-900 mb-4">Landing Page Testing</h3>
               <ul className="space-y-2 text-gray-700">
                 <li>• Page layout variations</li>
-                <li>• Form optimization</li>
+                <li>• Form optimisation</li>
                 <li>• CTA placement testing</li>
-                <li>• Conversion flow optimization</li>
+                <li>• Conversion flow optimisation</li>
               </ul>
             </div>
           </div>
@@ -309,7 +309,7 @@ export default function PaidAdsPage() {
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle2 className="h-5 w-5 text-[#BE55FF] mt-0.5 flex-shrink-0" />
-                  <span className="text-gray-700">Quick optimization recommendations</span>
+                  <span className="text-gray-700">Quick optimisation recommendations</span>
                 </li>
               </ul>
             </div>
@@ -344,12 +344,12 @@ export default function PaidAdsPage() {
           
           <div className="max-w-4xl mx-auto space-y-8">
             {[
-              { step: 1, title: "Account Setup & Configuration", desc: "Complete Meta Business Manager setup, pixel installation, and account structure optimization" },
+              { step: 1, title: "Account Setup & Configuration", desc: "Complete Meta Business Manager setup, pixel installation, and account structure optimisation" },
               { step: 2, title: "Audience Development", desc: "Build custom audiences, lookalikes, and retargeting segments based on your business data" },
               { step: 3, title: "Creative Planning & Development", desc: "Develop ad creatives, copy, and messaging aligned with your brand and campaign objectives" },
-              { step: 4, title: "Funnel Mapping & Strategy", desc: "Map customer journey, optimize conversion funnels, and structure campaign budgets" },
+              { step: 4, title: "Funnel Mapping & Strategy", desc: "Map customer journey, optimise conversion funnels, and structure campaign budgets" },
               { step: 5, title: "Campaign Launch", desc: "Launch campaigns with strategic targeting, bidding, and budget allocation" },
-              { step: 6, title: "Daily Monitoring & Optimization", desc: "Monitor performance daily, make real-time adjustments, and optimize for best results" },
+              { step: 6, title: "Daily Monitoring & Optimisation", desc: "Monitor performance daily, make real-time adjustments, and optimise for best results" },
               { step: 7, title: "A/B Testing & Iteration", desc: "Continuously test creatives, audiences, and messaging to improve performance" },
               { step: 8, title: "Reporting & Scaling", desc: "Provide weekly insights and monthly reports with scaling strategies and recommendations" },
             ].map((item) => (
@@ -397,7 +397,7 @@ export default function PaidAdsPage() {
 
             <div className="bg-[#E6F2FF] rounded-3xl p-8 border border-gray-200 shadow-lg">
               <Zap className="h-10 w-10 text-[#BE55FF] mb-4" />
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Ongoing Optimization</h3>
+              <h3 className="text-xl font-bold text-gray-900 mb-4">Ongoing Optimisation</h3>
               <ul className="space-y-2 text-gray-700">
                 <li>• Daily monitoring</li>
                 <li>• Real-time adjustments</li>
@@ -446,7 +446,7 @@ export default function PaidAdsPage() {
             {[
               { icon: TrendingUp, title: "Measurable ROI", desc: "Data-driven campaigns that deliver clear return on advertising investment" },
               { icon: Target, title: "Precise Targeting", desc: "Advanced audience targeting to reach your ideal customers effectively" },
-              { icon: Zap, title: "Continuous Optimization", desc: "Ongoing campaign optimization to improve performance and reduce costs" },
+              { icon: Zap, title: "Continuous Optimisation", desc: "Ongoing campaign optimisation to improve performance and reduce costs" },
               { icon: BarChart3, title: "Performance Insights", desc: "Comprehensive reporting to understand what works and why" },
               { icon: Lightbulb, title: "Strategic Scaling", desc: "Data-backed strategies for scaling successful campaigns" },
               { icon: CheckCircle2, title: "Time Efficiency", desc: "Focus on your business while we handle all advertising management" },

@@ -39,7 +39,7 @@ export default function AnalyticsPage() {
               Comprehensive monthly reporting with growth insights, ROI breakdown, and strategic recommendations.
             </p>
             <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-              We transform your content performance data into actionable insights. Our monthly reporting provides clear visibility into what's working, what's not, and how to optimize your content strategy for maximum impact and ROI.
+              We transform your content performance data into actionable insights. Our monthly reporting provides clear visibility into what's working, what's not, and how to optimise your content strategy for maximum impact and ROI.
             </p>
           </div>
         </div>
@@ -166,7 +166,7 @@ export default function AnalyticsPage() {
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle2 className="h-5 w-5 text-[#BE55FF] mt-0.5 flex-shrink-0" />
-                  <span className="text-gray-700">Posting time optimization insights</span>
+                  <span className="text-gray-700">Posting time optimisation insights</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle2 className="h-5 w-5 text-[#BE55FF] mt-0.5 flex-shrink-0" />
@@ -185,7 +185,7 @@ export default function AnalyticsPage() {
               <ul className="space-y-3">
                 <li className="flex items-start gap-3">
                   <CheckCircle2 className="h-5 w-5 text-[#70BFFF] mt-0.5 flex-shrink-0" />
-                  <span className="text-gray-700">Actionable optimization strategies</span>
+                  <span className="text-gray-700">Actionable optimisation strategies</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle2 className="h-5 w-5 text-[#70BFFF] mt-0.5 flex-shrink-0" />
@@ -197,7 +197,7 @@ export default function AnalyticsPage() {
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle2 className="h-5 w-5 text-[#70BFFF] mt-0.5 flex-shrink-0" />
-                  <span className="text-gray-700">Platform-specific optimization tips</span>
+                  <span className="text-gray-700">Platform-specific optimisation tips</span>
                 </li>
               </ul>
             </div>
@@ -243,9 +243,9 @@ export default function AnalyticsPage() {
             {[
               { step: 1, title: "Data Collection & Integration", desc: "Aggregate data from all platforms and marketing channels into unified analytics dashboard" },
               { step: 2, title: "Performance Tracking", desc: "Monitor key metrics including engagement, growth, reach, and conversion rates" },
-              { step: 3, title: "Content Analysis", desc: "Analyze individual content performance to identify top performers and patterns" },
+              { step: 3, title: "Content Analysis", desc: "Analyse individual content performance to identify top performers and patterns" },
               { step: 4, title: "ROI Calculation", desc: "Calculate return on investment for all content and marketing initiatives" },
-              { step: 5, title: "Trend Identification", desc: "Identify performance trends, patterns, and opportunities for optimization" },
+              { step: 5, title: "Trend Identification", desc: "Identify performance trends, patterns, and opportunities for optimisation" },
               { step: 6, title: "Competitive Analysis", desc: "Benchmark performance against industry standards and competitors" },
               { step: 7, title: "Strategic Recommendations", desc: "Develop actionable recommendations based on data insights" },
               { step: 8, title: "Monthly Reporting", desc: "Deliver comprehensive monthly reports with insights, recommendations, and next steps" },
@@ -299,7 +299,7 @@ export default function AnalyticsPage() {
               <ul className="space-y-3">
                 <li className="flex items-start gap-3">
                   <CheckCircle2 className="h-5 w-5 text-[#BE55FF] mt-0.5 flex-shrink-0" />
-                  <span className="text-gray-700">Actionable optimization recommendations</span>
+                  <span className="text-gray-700">Actionable optimisation recommendations</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle2 className="h-5 w-5 text-[#BE55FF] mt-0.5 flex-shrink-0" />
@@ -331,7 +331,7 @@ export default function AnalyticsPage() {
               {[
                 "Businesses wanting data-driven content decisions",
                 "Companies needing clear ROI visibility",
-                "Brands seeking performance optimization insights",
+                "Brands seeking performance optimisation insights",
                 "Organizations requiring competitive intelligence",
                 "Businesses wanting to understand what works and why",
                 "Companies looking to scale successful strategies",
@@ -356,11 +356,11 @@ export default function AnalyticsPage() {
           <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {[
               { icon: BarChart3, title: "Data-Driven Decisions", desc: "Make strategic decisions based on comprehensive performance data and insights" },
-              { icon: TrendingUp, title: "Continuous Improvement", desc: "Identify optimization opportunities to improve performance month over month" },
+              { icon: TrendingUp, title: "Continuous Improvement", desc: "Identify optimisation opportunities to improve performance month over month" },
               { icon: Target, title: "ROI Visibility", desc: "Clear understanding of return on investment for all content and marketing efforts" },
               { icon: Lightbulb, title: "Strategic Insights", desc: "Actionable recommendations that drive measurable business results" },
               { icon: Users, title: "Competitive Advantage", desc: "Benchmark against competitors and identify market opportunities" },
-              { icon: CheckCircle2, title: "Performance Optimization", desc: "Continuously refine strategy based on data-driven insights" },
+              { icon: CheckCircle2, title: "Performance Optimisation", desc: "Continuously refine strategy based on data-driven insights" },
             ].map((benefit, index) => {
               const Icon = benefit.icon;
               return (
