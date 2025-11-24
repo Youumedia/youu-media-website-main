@@ -28,7 +28,7 @@ export default function NewsletterPage() {
         <main className="min-h-screen relative bg-white overflow-hidden">
           <Navigation />
 
-          <div className="bg-[#E6F2FF] relative overflow-hidden pt-24 pb-8 md:pt-32 md:pb-12">
+          <div className="bg-white relative overflow-hidden pt-24 pb-8 md:pt-32 md:pb-12">
             <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
               <Link href="/#portfolio" className="inline-flex items-center text-[#70BFFF] hover:text-[#BE55FF] mb-6 transition-colors">
                 <ArrowLeft className="h-4 w-4 mr-2" />

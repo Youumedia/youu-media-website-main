@@ -10,8 +10,8 @@ export function StickyLogo() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  // Hide on about page, home page, and all services pages since Navigation component already has logo
-  if (pathname === "/about" || pathname === "/about/" || pathname === "/" || pathname === "/services" || pathname === "/services/" || pathname?.startsWith("/services/")) {
+  // Hide on about page, home page, services pages, and newsletter pages since Navigation component already has logo
+  if (pathname === "/about" || pathname === "/about/" || pathname === "/" || pathname === "/services" || pathname === "/services/" || pathname?.startsWith("/services/") || pathname?.startsWith("/newsletters/")) {
     return null;
   }
 

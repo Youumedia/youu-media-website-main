@@ -2,6 +2,7 @@
 
 import React, { useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { ChevronLeft, ChevronRight, FileText } from "lucide-react";
 
 interface Newsletter {
@@ -22,6 +23,7 @@ const newsletters: Newsletter[] = [
     title: "AI Video Tools Revolutionise Content Creation",
     description: "Discover how AI-powered video tools are transforming content creation workflows and what this means for brands in 2025.",
     slug: "2025-11-24-ai-video-tools-revolution",
+    previewImage: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=600&fit=crop&q=80",
   },
   {
     id: "2025-11-17",
@@ -30,6 +32,7 @@ const newsletters: Newsletter[] = [
     title: "Short-Form Video Strategy: What's Working Now",
     description: "Latest trends in short-form video content across TikTok, Instagram Reels, and YouTube Shorts that are driving engagement.",
     slug: "2025-11-17-short-form-video-strategy",
+    previewImage: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=800&h=600&fit=crop&q=80",
   },
   {
     id: "2025-11-10",
@@ -38,6 +41,7 @@ const newsletters: Newsletter[] = [
     title: "Brand Storytelling in the Age of Authenticity",
     description: "How authentic storytelling is replacing polished perfection in brand communications and why it's more effective.",
     slug: "2025-11-10-brand-storytelling-authenticity",
+    previewImage: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop&q=80",
   },
   {
     id: "2025-11-03",
@@ -46,6 +50,7 @@ const newsletters: Newsletter[] = [
     title: "Meta Algorithm Updates: What You Need to Know",
     description: "Breaking down the latest Meta algorithm changes affecting Instagram and Facebook content performance.",
     slug: "2025-11-03-meta-algorithm-updates",
+    previewImage: "https://images.unsplash.com/photo-1432888622747-4eb9a8f2d1b9?w=800&h=600&fit=crop&q=80",
   },
   {
     id: "2025-10-27",
@@ -54,6 +59,7 @@ const newsletters: Newsletter[] = [
     title: "Video Production Trends: Cinematic Mobile Content",
     description: "The rise of cinematic mobile video production and how brands are creating Hollywood-quality content with smartphones.",
     slug: "2025-10-27-cinematic-mobile-content",
+    previewImage: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=800&h=600&fit=crop&q=80",
   },
   {
     id: "2025-10-20",
@@ -62,6 +68,7 @@ const newsletters: Newsletter[] = [
     title: "Content Repurposing: Maximise Your Media Investment",
     description: "Strategic approaches to repurposing video content across multiple platforms to maximise ROI and reach.",
     slug: "2025-10-20-content-repurposing-strategy",
+    previewImage: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop&q=80",
   },
 ];
 
@@ -130,11 +137,24 @@ export function NewsletterSlider() {
             <Link
               key={newsletter.id}
               href={`/newsletters/${newsletter.slug}`}
-              className="group flex-shrink-0 w-[320px] md:w-[350px] bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all hover:scale-[1.02] border border-gray-200"
+              className="group flex-shrink-0 w-[320px] md:w-[350px] bg-white/80 backdrop-blur-xl rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all hover:scale-[1.02] border border-white/40"
             >
-              <div className="relative h-[200px] bg-gradient-to-br from-[#70BFFF] to-[#BE55FF] flex items-center justify-center">
-                <FileText className="h-16 w-16 text-white/80" />
-                <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full">
+              <div className="relative h-[200px] overflow-hidden">
+                {newsletter.previewImage ? (
+                  <>
+                    <img 
+                      src={newsletter.previewImage} 
+                      alt={newsletter.title}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+                  </>
+                ) : (
+                  <div className="relative h-full bg-gradient-to-br from-[#70BFFF] to-[#BE55FF] flex items-center justify-center">
+                    <FileText className="h-16 w-16 text-white/80" />
+                  </div>
+                )}
+                <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full shadow-lg">
                   <span className="text-xs font-bold text-gray-900">{newsletter.dateFormatted.split(' ')[0]} {newsletter.dateFormatted.split(' ')[1].substring(0, 3)}</span>
                 </div>
               </div>

@@ -5,11 +5,17 @@ import { Footer } from "@/components/footer";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Download, ArrowLeft, Zap, TrendingUp, Lightbulb, Target } from "lucide-react";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
+import { downloadNewsletterAsPDF } from "@/components/pdf-download";
 
 export default function NewsletterPage() {
-  const handleDownloadPDF = () => {
-    window.print();
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  const handleDownloadPDF = async () => {
+    if (contentRef.current) {
+      const filename = `youu-media-newsletter-ai-video-tools-2025-11-24.pdf`;
+      await downloadNewsletterAsPDF(contentRef.current, filename);
+    }
   };
 
   useEffect(() => {
@@ -28,14 +34,14 @@ export default function NewsletterPage() {
         <main className="min-h-screen relative bg-white overflow-hidden">
           <Navigation />
 
-          <div className="bg-[#E6F2FF] relative overflow-hidden pt-24 pb-8 md:pt-32 md:pb-12">
+          <div className="bg-white relative overflow-hidden pt-24 pb-8 md:pt-32 md:pb-12">
             <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
               <Link href="/#portfolio" className="inline-flex items-center text-[#70BFFF] hover:text-[#BE55FF] mb-6 transition-colors">
                 <ArrowLeft className="h-4 w-4 mr-2" />
                 Back to Our Work
               </Link>
               
-              <div className="bg-white rounded-3xl shadow-2xl p-8 md:p-12">
+              <div className="bg-white rounded-3xl shadow-2xl p-8 md:p-12" ref={contentRef}>
                 <NewsletterContent />
                 
                 <div className="mt-8 pt-8 border-t border-gray-200 flex flex-col sm:flex-row gap-4 justify-between items-center no-print">
@@ -159,7 +165,7 @@ function NewsletterContent() {
         <div className="bg-gradient-to-br from-[#70BFFF]/10 to-[#BE55FF]/10 rounded-2xl p-8 mb-10 print:mb-8 print:p-6 print:bg-gray-50">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">This Week's Insight</h2>
           <p className="text-gray-700 leading-relaxed mb-4 text-lg">
-            The landscape of video content creation is undergoing a seismic shift. AI-powered video tools are no longer experimental—they're becoming essential parts of professional content workflows. This week, we explore what this means for brands and creators in 2025, and how to leverage these powerful tools while maintaining brand authenticity and strategic vision.
+            The landscape of video content creation is undergoing a seismic shift. AI-powered video tools are no longer experimental. They're becoming essential parts of professional content workflows. This week, we explore what this means for brands and creators in 2025, and how to leverage these powerful tools while maintaining brand authenticity and strategic vision.
           </p>
           <p className="text-gray-700 leading-relaxed">
             The democratisation of high-quality video production is here, but with great power comes the need for strategic thinking. Brands that simply use AI tools without a clear strategy risk blending into the noise.
@@ -179,7 +185,7 @@ function NewsletterContent() {
           </p>
           <div className="bg-white border-l-4 border-[#70BFFF] pl-6 py-4 my-6 print:my-4 print:border-l-2">
             <p className="text-gray-800 font-semibold italic">
-              "The tools are becoming so good that the differentiator isn't the technology—it's the strategy, creativity, and brand vision behind how you use them."
+              "The tools are becoming so good that the differentiator isn't the technology. It's the strategy, creativity, and brand vision behind how you use them."
             </p>
           </div>
         </section>
@@ -226,7 +232,7 @@ function NewsletterContent() {
                 While AI handles execution, strategic vision, creative direction, and brand storytelling require human insight. The most successful brands use AI as a tool, not a replacement for creative strategy. Your unique brand voice and strategic thinking are what differentiate you.
               </p>
               <p className="text-sm text-gray-600 italic">
-                The brands winning in 2025 are those that combine AI efficiency with human creativity and strategic vision—not those replacing humans entirely.
+                The brands winning in 2025 are those that combine AI efficiency with human creativity and strategic vision, not those replacing humans entirely.
               </p>
             </div>
           </div>
@@ -243,7 +249,7 @@ function NewsletterContent() {
               <div>
                 <h3 className="font-bold text-gray-900 mb-2 text-lg">Instagram Reels</h3>
                 <p className="text-gray-700 text-sm leading-relaxed">
-                  New AI-powered editing features now available for creators. Instagram's algorithm is favouring content that uses native editing tools. Test internal analytics to see how AI-generated content performs versus traditional production—early data suggests mixed results depending on audience and niche.
+                  New AI-powered editing features now available for creators. Instagram's algorithm is favouring content that uses native editing tools. Test internal analytics to see how AI-generated content performs versus traditional production. Early data suggests mixed results depending on audience and niche.
                 </p>
               </div>
             </div>
@@ -298,7 +304,7 @@ function NewsletterContent() {
               </div>
               <div>
                 <p className="text-gray-900 font-semibold mb-1">Test One AI Tool</p>
-                <p className="text-gray-700">This week, test one AI video tool. Start with something accessible like auto-captioning, basic editing, or thumbnail generation. Document what works, what doesn't, and how it impacts your workflow. Don't aim for perfection—aim for learning.</p>
+                <p className="text-gray-700">This week, test one AI video tool. Start with something accessible like auto-captioning, basic editing, or thumbnail generation. Document what works, what doesn't, and how it impacts your workflow. Don't aim for perfection. Aim for learning.</p>
               </div>
             </li>
             <li className="flex items-start gap-4 bg-gray-50 rounded-xl p-5 print:p-3">
