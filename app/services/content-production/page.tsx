@@ -14,7 +14,8 @@ import {
   Image,
   FileText,
   Palette,
-  Users
+  Users,
+  TrendingUp
 } from "lucide-react";
 
 export default function ContentProductionPage() {
