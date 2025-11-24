@@ -99,7 +99,7 @@ function NewsletterContent() {
             Why Authenticity Wins
           </h2>
           <p className="text-gray-700 leading-relaxed mb-4">
-            Modern consumers have developed sophisticated filters for marketing. They can spot inauthentic content instantly and, more importantly, they're choosing to ignore it. Brands that show their humanity—including imperfections, challenges, and genuine moments—build deeper connections.
+            Modern consumers have developed sophisticated filters for marketing. They can spot inauthentic content instantly and, more importantly, they're choosing to ignore it. Brands that show their humanity, including imperfections, challenges, and genuine moments, build deeper connections.
           </p>
           <p className="text-gray-700 leading-relaxed mb-4">
             This doesn't mean abandoning brand guidelines or professional standards. It means finding the balance between polish and personality, between strategy and spontaneity.
@@ -149,7 +149,7 @@ function NewsletterContent() {
               <div className="w-6 h-6 bg-gradient-to-br from-[#70BFFF] to-[#BE55FF] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
                 <span className="text-white text-sm font-bold">2</span>
               </div>
-              <p className="text-gray-700">Create one piece of content this week that shows the human side of your brand—whether that's your team, process, or values in action.</p>
+              <p className="text-gray-700">Create one piece of content this week that shows the human side of your brand, whether that's your team, process, or values in action.</p>
             </li>
             <li className="flex items-start gap-3">
               <div className="w-6 h-6 bg-gradient-to-br from-[#70BFFF] to-[#BE55FF] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">

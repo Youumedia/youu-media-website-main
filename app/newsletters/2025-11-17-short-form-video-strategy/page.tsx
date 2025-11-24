@@ -159,10 +159,10 @@ function NewsletterContent() {
         <div className="bg-gradient-to-br from-[#70BFFF]/10 to-[#BE55FF]/10 rounded-2xl p-8 mb-10 print:mb-8 print:p-6 print:bg-gray-50">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">This Week's Insight</h2>
           <p className="text-gray-700 leading-relaxed mb-4 text-lg">
-            Short-form video continues to dominate social media engagement in 2025. With attention spans shorter than ever and content volume at an all-time high, brands that master short-form video strategy are seeing 3-5x higher engagement rates. This week, we're breaking down exactly what's working across TikTok, Instagram Reels, and YouTube Shorts—based on real data from brands seeing measurable results.
+            Short-form video continues to dominate social media engagement in 2025. With attention spans shorter than ever and content volume at an all-time high, brands that master short-form video strategy are seeing 3-5x higher engagement rates. This week, we're breaking down exactly what's working across TikTok, Instagram Reels, and YouTube Shorts, based on real data from brands seeing measurable results.
           </p>
           <p className="text-gray-700 leading-relaxed">
-            The winning formula isn't about producing more content—it's about producing smarter content that hooks viewers in the first three seconds and delivers value throughout.
+            The winning formula isn't about producing more content. It's about producing smarter content that hooks viewers in the first three seconds and delivers value throughout.
           </p>
         </div>
 
@@ -172,7 +172,7 @@ function NewsletterContent() {
             The Hook Matters More Than Ever
           </h2>
           <p className="text-gray-700 leading-relaxed mb-4 text-base">
-            Research shows that 50% of viewers decide whether to continue watching in the first 3 seconds. Algorithms heavily favour content with high watch-time completion rates. This means your hook isn't just nice to have—it's the difference between viral reach and invisible content.
+            Research shows that 50% of viewers decide whether to continue watching in the first 3 seconds. Algorithms heavily favour content with high watch-time completion rates. This means your hook isn't just nice to have. It's the difference between viral reach and invisible content.
           </p>
           <p className="text-gray-700 leading-relaxed mb-4 text-base">
             Successful hooks in 2025 follow proven patterns: immediate visual interest (bright colours, movement, faces), a clear value proposition ("I'll show you the one mistake everyone makes"), or an intriguing question that creates curiosity gap ("What if I told you everything you know about X is wrong?"). Brands that master these patterns see completion rates of 70-85% versus 20-30% for weak hooks.
@@ -197,7 +197,7 @@ function NewsletterContent() {
                 <h3 className="text-xl font-bold text-gray-900">TikTok: Authenticity Wins</h3>
               </div>
               <p className="text-gray-700 leading-relaxed mb-3">
-                Raw, unpolished content performs significantly better than over-produced videos on TikTok. Users want to see the real you—the process, the behind-the-scenes, the genuine moments. Brands that show their personality and humanity see 2-3x higher engagement than those with corporate perfection.
+                Raw, unpolished content performs significantly better than over-produced videos on TikTok. Users want to see the real you, the process, the behind-the-scenes, the genuine moments. Brands that show their personality and humanity see 2-3x higher engagement than those with corporate perfection.
               </p>
               <p className="text-sm text-gray-600 italic mb-3">
                 Tip: Use trending sounds, but make them your own with unique visuals or context that reflects your brand personality.
@@ -313,7 +313,7 @@ function NewsletterContent() {
               </div>
               <div>
                 <p className="text-gray-900 font-semibold mb-1">Test New Hook Formats</p>
-                <p className="text-gray-700">This week, test one new hook format you haven't tried before—whether it's a question, visual surprise, or bold value statement. Create 3 variations and measure which performs best. Use the winning pattern for your next batch of content.</p>
+                <p className="text-gray-700">This week, test one new hook format you haven't tried before, whether it's a question, visual surprise, or bold value statement. Create 3 variations and measure which performs best. Use the winning pattern for your next batch of content.</p>
               </div>
             </li>
           </ul>
@@ -326,10 +326,10 @@ function NewsletterContent() {
           </h2>
           <div className="bg-gradient-to-br from-[#70BFFF]/10 via-[#BE55FF]/10 to-[#70BFFF]/10 rounded-2xl p-8 print:p-6 print:bg-gray-50 border-2 border-[#70BFFF]/20">
             <p className="text-gray-800 leading-relaxed mb-4 text-base font-medium">
-              Short-form video success isn't about producing more content—it's about producing smarter content. Master the 3-second hook, understand each platform's unique preferences, and consistently deliver value. Brands that combine strategic hook development with authentic brand voice see exponential growth in engagement and reach.
+              Short-form video success isn't about producing more content. It's about producing smarter content. Master the 3-second hook, understand each platform's unique preferences, and consistently deliver value. Brands that combine strategic hook development with authentic brand voice see exponential growth in engagement and reach.
             </p>
             <p className="text-gray-700 leading-relaxed text-base">
-              Remember: Every second counts. Your first three seconds determine whether your content gets watched, shared, and algorithmically boosted—or ignored completely.
+              Remember: Every second counts. Your first three seconds determine whether your content gets watched, shared, and algorithmically boosted, or ignored completely.
             </p>
           </div>
         </section>
