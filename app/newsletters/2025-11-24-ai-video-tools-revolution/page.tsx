@@ -11,23 +11,30 @@ import { downloadNewsletterAsPDF } from "@/components/pdf-download";
 export default function NewsletterPage() {
   const contentRef = useRef<HTMLDivElement>(null);
 
-  const handleDownloadPDF = async (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleDownloadPDF = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     e.stopPropagation();
     
-    // Use setTimeout to prevent blocking the UI
-    setTimeout(async () => {
-      if (contentRef.current) {
-        try {
-          const filename = `youu-media-newsletter-ai-video-tools-2025-11-24.pdf`;
-          await downloadNewsletterAsPDF(contentRef.current, filename);
-        } catch (error) {
-          console.error('PDF download failed:', error);
-          // Fallback to print
-          window.print();
-        }
-      }
-    }, 100);
+    // Check if mobile first - if so, use immediate print (no async)
+    const isMobile = typeof window !== 'undefined' && (
+      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
+      (window.innerWidth <= 768 && 'ontouchstart' in window)
+    );
+    
+    if (isMobile) {
+      // For mobile, just print directly - no async operations
+      window.print();
+      return;
+    }
+    
+    // For desktop, use async PDF generation
+    if (contentRef.current) {
+      const filename = `youu-media-newsletter-ai-video-tools-2025-11-24.pdf`;
+      downloadNewsletterAsPDF(contentRef.current, filename).catch((error) => {
+        console.error('PDF download failed:', error);
+        window.print();
+      });
+    }
   };
 
   useEffect(() => {

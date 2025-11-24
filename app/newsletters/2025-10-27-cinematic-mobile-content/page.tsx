@@ -11,21 +11,27 @@ import { downloadNewsletterAsPDF } from "@/components/pdf-download";
 export default function NewsletterPage() {
   const contentRef = useRef<HTMLDivElement>(null);
 
-  const handleDownloadPDF = async (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleDownloadPDF = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     e.stopPropagation();
     
-    setTimeout(async () => {
-      if (contentRef.current) {
-        try {
-          const filename = `youu-media-newsletter-cinematic-mobile-2025-10-27.pdf`;
-          await downloadNewsletterAsPDF(contentRef.current, filename);
-        } catch (error) {
-          console.error('PDF download failed:', error);
-          window.print();
-        }
-      }
-    }, 100);
+    const isMobile = typeof window !== 'undefined' && (
+      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
+      (window.innerWidth <= 768 && 'ontouchstart' in window)
+    );
+    
+    if (isMobile) {
+      window.print();
+      return;
+    }
+    
+    if (contentRef.current) {
+      const filename = `youu-media-newsletter-cinematic-mobile-2025-10-27.pdf`;
+      downloadNewsletterAsPDF(contentRef.current, filename).catch((error) => {
+        console.error('PDF download failed:', error);
+        window.print();
+      });
+    }
   };
 
   return (

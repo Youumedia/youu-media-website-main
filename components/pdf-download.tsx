@@ -1,22 +1,28 @@
 "use client";
 
-export async function downloadNewsletterAsPDF(contentElement: HTMLElement, filename: string) {
-  // Detect mobile devices more reliably
-  const isMobile = typeof window !== 'undefined' && (
-    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
-    (window.innerWidth <= 768 && 'ontouchstart' in window)
-  );
+// Helper function to detect mobile devices
+function isMobileDevice(): boolean {
+  if (typeof window === 'undefined') return false;
   
-  // For mobile devices, use print API which is the most reliable
-  // Mobile browsers support "Save as PDF" option in the print dialog
-  if (isMobile) {
-    window.print();
+  return (
+    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
+    (window.innerWidth <= 768 && 'ontouchstart' in window) ||
+    (window.innerWidth <= 768 && navigator.maxTouchPoints > 0)
+  );
+}
+
+export async function downloadNewsletterAsPDF(contentElement: HTMLElement, filename: string) {
+  // For mobile devices, immediately use print API (most reliable)
+  if (isMobileDevice()) {
+    // Use requestAnimationFrame to ensure the UI is ready
+    requestAnimationFrame(() => {
+      window.print();
+    });
     return;
   }
 
-  // For desktop, try html2pdf.js with better error handling
+  // For desktop, use html2pdf.js
   try {
-    // Use dynamic import to avoid loading on mobile
     const html2pdf = (await import('html2pdf.js')).default;
     
     const opt = {
@@ -42,7 +48,6 @@ export async function downloadNewsletterAsPDF(contentElement: HTMLElement, filen
     await html2pdf().set(opt).from(contentElement).save();
   } catch (error) {
     console.error('PDF generation failed, using print fallback:', error);
-    // Fallback to print dialog on any error
     window.print();
   }
 }
