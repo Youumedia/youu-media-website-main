@@ -5,22 +5,85 @@ import { Footer } from "@/components/footer";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { 
-  BarChart3, 
-  Video, 
-  Camera, 
-  Instagram, 
-  Mail, 
-  Film, 
-  User, 
-  Palette, 
-  Target, 
-  Eye,
+  Brain,
+  Video,
+  Instagram,
   TrendingUp,
-  CheckCircle2,
+  BarChart3,
+  BookOpen,
+  GraduationCap,
+  MessageSquare,
   ArrowRight,
-  Layers,
-  Zap
+  Lock
 } from "lucide-react";
+
+const services = [
+  {
+    id: 1,
+    title: "Fractional Video CMO & Strategy",
+    description: "Strategic leadership and high-level consulting to guide your visual content ecosystem and brand storytelling architecture.",
+    icon: Brain,
+    href: "/services/fractional-video-cmo",
+    gradient: "from-[#70BFFF] to-[#BE55FF]",
+  },
+  {
+    id: 2,
+    title: "Monthly Content Creation & Production",
+    description: "Cinematic video production, photography, and post-production delivered monthly to support your brand's visual storytelling needs.",
+    icon: Video,
+    href: "/services/content-production",
+    gradient: "from-[#BE55FF] to-[#70BFFF]",
+  },
+  {
+    id: 3,
+    title: "Done-For-You Social Media Management",
+    description: "Complete social media management including content planning, scheduling, community engagement, and account optimization.",
+    icon: Instagram,
+    href: "/services/social-management",
+    gradient: "from-[#70BFFF] to-[#BE55FF]",
+  },
+  {
+    id: 4,
+    title: "Paid Advertising & Campaign Management",
+    description: "End-to-end paid advertising campaigns with Meta ads, audience building, A/B testing, and performance optimization.",
+    icon: TrendingUp,
+    href: "/services/paid-ads",
+    gradient: "from-[#BE55FF] to-[#70BFFF]",
+  },
+  {
+    id: 5,
+    title: "Analytics, Insights & Performance Reporting",
+    description: "Comprehensive monthly reporting with growth insights, ROI breakdown, and strategic recommendations for continuous improvement.",
+    icon: BarChart3,
+    href: "/services/analytics",
+    gradient: "from-[#70BFFF] to-[#BE55FF]",
+  },
+  {
+    id: 6,
+    title: "Brand Playbook & Content Framework Development",
+    description: "Develop comprehensive brand guidelines, messaging frameworks, content pillars, and visual style rules for consistent brand expression.",
+    icon: BookOpen,
+    href: "/services/playbook",
+    gradient: "from-[#BE55FF] to-[#70BFFF]",
+  },
+  {
+    id: 7,
+    title: "Executive Workshops & Training Days",
+    description: "Launching soon — full educational hub in development.",
+    icon: GraduationCap,
+    href: null, // Not clickable
+    gradient: "from-gray-400 to-gray-500",
+    comingSoon: true,
+  },
+  {
+    id: 8,
+    title: "Weekly WhatsApp Newsletter",
+    description: "Weekly insights, trends, platform updates, and content strategy tips delivered directly to your WhatsApp for ongoing value and support.",
+    icon: MessageSquare,
+    href: "/services/newsletter",
+    gradient: "from-[#70BFFF] to-[#BE55FF]",
+  },
+];
 
 export default function ServicesPage() {
   return (
@@ -35,7 +98,7 @@ export default function ServicesPage() {
           <div className="absolute bottom-[15%] right-[25%] w-[500px] h-[500px] bg-[#BE55FF]/20 rounded-full blur-3xl animate-float-medium" style={{ animationDelay: "0.5s" }} />
           <div className="absolute top-[50%] left-[50%] w-[380px] h-[380px] bg-[#70BFFF]/15 rounded-full blur-2xl animate-float-fast" style={{ animationDelay: "0.8s" }} />
 
-          {/* Geometric shapes - kept within bounds */}
+          {/* Geometric shapes */}
           <div className="absolute top-[18%] left-[15%] w-28 h-28 bg-gradient-to-br from-[#70BFFF]/25 to-[#BE55FF]/25 rounded-3xl rotate-45 animate-float-slow" style={{ animationDelay: "0.2s" }} />
           <div className="absolute bottom-[20%] right-[20%] w-24 h-24 bg-gradient-to-br from-[#BE55FF]/25 to-[#70BFFF]/25 rounded-full animate-float-medium" style={{ animationDelay: "1.1s" }} />
           <div className="absolute top-[40%] right-[15%] w-16 h-16 bg-[#70BFFF]/20 rounded-lg rotate-12 animate-float-fast" style={{ animationDelay: "0.6s" }} />
@@ -51,13 +114,16 @@ export default function ServicesPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center mb-12">
             <span className="text-sm font-bold text-[#70BFFF] uppercase tracking-widest mb-4 block">
-              What We Do
+              Strategic Media Partnership
             </span>
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-black text-gray-900 mb-6 leading-tight">
               Our <span className="bg-gradient-to-r from-[#70BFFF] to-[#BE55FF] bg-clip-text text-transparent">Services</span>
             </h1>
-            <p className="text-xl md:text-2xl text-gray-700 max-w-3xl mx-auto">
+            <p className="text-xl md:text-2xl text-gray-700 max-w-3xl mx-auto mb-4">
               Comprehensive visual content solutions tailored to your budget, goals, and brand identity.
+            </p>
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+              We position ourselves as your strategic media partner, supporting long-term growth through premium, corporate-level services.
             </p>
 
             {/* Creative scroll indicator */}
@@ -75,517 +141,76 @@ export default function ServicesPage() {
         </div>
       </div>
 
-      {/* Integration Process Diagram */}
+      {/* Services Grid */}
       <div className="bg-white relative overflow-hidden py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <span className="text-sm font-bold text-[#BE55FF] uppercase tracking-widest mb-4 block">
-              Our Process
-            </span>
-            <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-6">
-              How We <span className="bg-gradient-to-r from-[#70BFFF] to-[#BE55FF] bg-clip-text text-transparent">Integrate</span>
-            </h2>
-            <p className="text-xl text-gray-700 max-w-3xl mx-auto">
-              A structured approach to understanding your business and delivering results.
-            </p>
-          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {services.map((service) => {
+              const Icon = service.icon;
+              const isComingSoon = service.comingSoon;
 
-          {/* Process Flow Diagram */}
-          <div className="relative">
-            {/* Desktop Process Flow */}
-            <div className="hidden md:block">
-              <div className="flex items-center justify-between mb-8">
-                {/* Stage 1 */}
-                <div className="flex-1 text-center">
-                  <div className="bg-gradient-to-br from-[#70BFFF]/10 to-[#BE55FF]/10 rounded-2xl p-6 border-2 border-[#70BFFF]/20 mb-4">
-                    <div className="w-16 h-16 bg-gradient-to-br from-[#70BFFF] to-[#BE55FF] rounded-full flex items-center justify-center mx-auto mb-4">
-                      <Eye className="h-8 w-8 text-white" />
+              return (
+                <div
+                  key={service.id}
+                  className={`group relative bg-white rounded-3xl p-8 border-2 border-gray-200 shadow-lg hover:shadow-2xl transition-all overflow-hidden ${
+                    isComingSoon ? "opacity-75 cursor-not-allowed" : "hover:border-[#70BFFF]/50 hover:scale-[1.02]"
+                  }`}
+                >
+                  {/* Coming Soon Overlay */}
+                  {isComingSoon && (
+                    <div className="absolute inset-0 bg-white/90 backdrop-blur-sm z-20 flex flex-col items-center justify-center rounded-3xl">
+                      <Lock className="h-12 w-12 text-gray-400 mb-4" />
+                      <div className="text-center px-4">
+                        <div className="inline-block bg-gradient-to-r from-gray-400 to-gray-500 text-white px-4 py-2 rounded-full text-sm font-bold mb-3">
+                          COMING SOON
+                        </div>
+                        <p className="text-sm text-gray-600">
+                          Launching soon — resources and training hub in development.
+                        </p>
+                      </div>
                     </div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-2">Understanding Vision</h3>
-                    <p className="text-gray-700 text-sm">
-                      Deep dive into your business objectives, target audience, and long-term goals
+                  )}
+
+                  {/* Gradient background on hover */}
+                  <div className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-500 rounded-3xl`} />
+
+                  {/* Icon */}
+                  <div className={`w-16 h-16 bg-gradient-to-br ${service.gradient} rounded-2xl flex items-center justify-center mb-6 ${isComingSoon ? "opacity-50" : ""}`}>
+                    <Icon className="h-8 w-8 text-white" />
+                  </div>
+
+                  {/* Content */}
+                  <div className="relative z-10">
+                    <h3 className={`text-2xl font-bold text-gray-900 mb-4 ${isComingSoon ? "opacity-50" : ""}`}>
+                      {service.title}
+                    </h3>
+                    <p className={`text-gray-700 mb-6 leading-relaxed ${isComingSoon ? "opacity-50" : ""}`}>
+                      {service.description}
                     </p>
+
+                    {/* Learn More Button */}
+                    {!isComingSoon && (
+                      <Button
+                        size="lg"
+                        asChild
+                        className={`w-full bg-gradient-to-r ${service.gradient} hover:opacity-90 text-white font-bold rounded-full shadow-lg hover:shadow-xl transition-all transform hover:scale-105`}
+                      >
+                        <Link href={service.href || "#"}>
+                          Learn More
+                          <ArrowRight className="ml-2 h-5 w-5 inline" />
+                        </Link>
+                      </Button>
+                    )}
                   </div>
                 </div>
-
-                {/* Arrow */}
-                <div className="mx-4">
-                  <ArrowRight className="h-8 w-8 text-[#70BFFF]" />
-                </div>
-
-                {/* Stage 2 */}
-                <div className="flex-1 text-center">
-                  <div className="bg-gradient-to-br from-[#BE55FF]/10 to-[#70BFFF]/10 rounded-2xl p-6 border-2 border-[#BE55FF]/20 mb-4">
-                    <div className="w-16 h-16 bg-gradient-to-br from-[#BE55FF] to-[#70BFFF] rounded-full flex items-center justify-center mx-auto mb-4">
-                      <Palette className="h-8 w-8 text-white" />
-                    </div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-2">Brand Alignment</h3>
-                    <p className="text-gray-700 text-sm">
-                      Analyse existing brand guidelines, hex codes, and visual identity to ensure consistency
-                    </p>
-                  </div>
-                </div>
-
-                {/* Arrow */}
-                <div className="mx-4">
-                  <ArrowRight className="h-8 w-8 text-[#70BFFF]" />
-                </div>
-
-                {/* Stage 3 */}
-                <div className="flex-1 text-center">
-                  <div className="bg-gradient-to-br from-[#70BFFF]/10 to-[#BE55FF]/10 rounded-2xl p-6 border-2 border-[#70BFFF]/20 mb-4">
-                    <div className="w-16 h-16 bg-gradient-to-br from-[#70BFFF] to-[#BE55FF] rounded-full flex items-center justify-center mx-auto mb-4">
-                      <Target className="h-8 w-8 text-white" />
-                    </div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-2">Goal Setting</h3>
-                    <p className="text-gray-700 text-sm">
-                      Define measurable KPIs, content strategy, and success metrics aligned with your objectives
-                    </p>
-                  </div>
-                </div>
-
-                {/* Arrow */}
-                <div className="mx-4">
-                  <ArrowRight className="h-8 w-8 text-[#70BFFF]" />
-                </div>
-
-                {/* Stage 4 */}
-                <div className="flex-1 text-center">
-                  <div className="bg-gradient-to-br from-[#BE55FF]/10 to-[#70BFFF]/10 rounded-2xl p-6 border-2 border-[#BE55FF]/20 mb-4">
-                    <div className="w-16 h-16 bg-gradient-to-br from-[#BE55FF] to-[#70BFFF] rounded-full flex items-center justify-center mx-auto mb-4">
-                      <Zap className="h-8 w-8 text-white" />
-                    </div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-2">Execution</h3>
-                    <p className="text-gray-700 text-sm">
-                      Deliver content that integrates seamlessly into your business processes and workflows
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Mobile Process Flow */}
-            <div className="md:hidden space-y-6">
-              <div className="bg-gradient-to-br from-[#70BFFF]/10 to-[#BE55FF]/10 rounded-2xl p-6 border-2 border-[#70BFFF]/20">
-                <div className="w-16 h-16 bg-gradient-to-br from-[#70BFFF] to-[#BE55FF] rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Eye className="h-8 w-8 text-white" />
-                </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-2 text-center">Understanding Vision</h3>
-                <p className="text-gray-700 text-sm text-center">
-                  Deep dive into your business objectives, target audience, and long-term goals
-                </p>
-              </div>
-              <div className="flex justify-center">
-                <ArrowRight className="h-8 w-8 text-[#70BFFF] rotate-90" />
-              </div>
-              <div className="bg-gradient-to-br from-[#BE55FF]/10 to-[#70BFFF]/10 rounded-2xl p-6 border-2 border-[#BE55FF]/20">
-                <div className="w-16 h-16 bg-gradient-to-br from-[#BE55FF] to-[#70BFFF] rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Palette className="h-8 w-8 text-white" />
-                </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-2 text-center">Brand Alignment</h3>
-                <p className="text-gray-700 text-sm text-center">
-                  Analyse existing brand guidelines, hex codes, and visual identity to ensure consistency
-                </p>
-              </div>
-              <div className="flex justify-center">
-                <ArrowRight className="h-8 w-8 text-[#70BFFF] rotate-90" />
-              </div>
-              <div className="bg-gradient-to-br from-[#70BFFF]/10 to-[#BE55FF]/10 rounded-2xl p-6 border-2 border-[#70BFFF]/20">
-                <div className="w-16 h-16 bg-gradient-to-br from-[#70BFFF] to-[#BE55FF] rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Target className="h-8 w-8 text-white" />
-                </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-2 text-center">Goal Setting</h3>
-                <p className="text-gray-700 text-sm text-center">
-                  Define measurable KPIs, content strategy, and success metrics aligned with your objectives
-                </p>
-              </div>
-              <div className="flex justify-center">
-                <ArrowRight className="h-8 w-8 text-[#70BFFF] rotate-90" />
-              </div>
-              <div className="bg-gradient-to-br from-[#BE55FF]/10 to-[#70BFFF]/10 rounded-2xl p-6 border-2 border-[#BE55FF]/20">
-                <div className="w-16 h-16 bg-gradient-to-br from-[#BE55FF] to-[#70BFFF] rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Zap className="h-8 w-8 text-white" />
-                </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-2 text-center">Execution</h3>
-                <p className="text-gray-700 text-sm text-center">
-                  Deliver content that integrates seamlessly into your business processes and workflows
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Service Tiers */}
-      <div className="bg-[#E6F2FF] relative overflow-hidden py-16 md:py-24">
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-[18%] right-[20%] w-[450px] h-[450px] bg-[#BE55FF]/15 rounded-full blur-3xl animate-float-medium" style={{ animationDelay: "0.3s" }} />
-          <div className="absolute bottom-[18%] left-[20%] w-[400px] h-[400px] bg-[#70BFFF]/18 rounded-full blur-3xl animate-float-slow" style={{ animationDelay: "1s" }} />
-          <div className="absolute top-[50%] left-[50%] w-[360px] h-[360px] bg-[#BE55FF]/12 rounded-full blur-2xl animate-float-fast" style={{ animationDelay: "0.7s" }} />
-
-          {/* Geometric shapes - kept within bounds */}
-          <div className="absolute top-[20%] left-[15%] w-28 h-28 bg-gradient-to-br from-[#70BFFF]/25 to-[#BE55FF]/25 rounded-3xl rotate-45 animate-float-slow" style={{ animationDelay: "0.2s" }} />
-          <div className="absolute bottom-[22%] right-[15%] w-24 h-24 bg-gradient-to-br from-[#BE55FF]/25 to-[#70BFFF]/25 rounded-full animate-float-medium" style={{ animationDelay: "1.3s" }} />
-          <div className="absolute top-[42%] right-[10%] w-16 h-16 bg-[#70BFFF]/20 rounded-lg rotate-12 animate-float-fast" style={{ animationDelay: "0.6s" }} />
-          <div className="absolute bottom-[28%] left-[22%] w-20 h-20 bg-[#BE55FF]/22 rounded-2xl rotate-45 animate-float-slow" style={{ animationDelay: "1.5s" }} />
-          <div className="absolute top-[58%] right-[28%] w-26 h-26 bg-gradient-to-br from-[#70BFFF]/22 to-[#BE55FF]/22 rounded-full animate-float-medium" style={{ animationDelay: "0.9s" }} />
-          <div className="absolute bottom-[20%] left-[18%] w-22 h-22 bg-[#BE55FF]/18 rounded-xl rotate-12 animate-float-fast" style={{ animationDelay: "1.1s" }} />
-          <div className="absolute top-[25%] left-[58%] w-28 h-28 bg-gradient-to-br from-[#70BFFF]/20 to-[#BE55FF]/20 rounded-2xl rotate-45 animate-float-slow" style={{ animationDelay: "0.4s" }} />
-          <div className="absolute top-[48%] left-[8%] w-18 h-18 bg-[#70BFFF]/19 rounded-lg rotate-12 animate-float-medium" style={{ animationDelay: "1.7s" }} />
-          <div className="absolute bottom-[32%] right-[42%] w-30 h-30 bg-gradient-to-br from-[#BE55FF]/21 to-[#70BFFF]/21 rounded-full animate-float-fast" style={{ animationDelay: "0.8s" }} />
-          <div className="absolute top-[65%] left-[45%] w-24 h-24 bg-[#BE55FF]/18 rounded-xl rotate-45 animate-float-slow" style={{ animationDelay: "1.2s" }} />
-        </div>
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center mb-16">
-            <span className="text-sm font-bold text-[#70BFFF] uppercase tracking-widest mb-4 block">
-              Service Tiers
-            </span>
-            <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-6">
-              Solutions for Every <span className="bg-gradient-to-r from-[#70BFFF] to-[#BE55FF] bg-clip-text text-transparent">Budget</span>
-            </h2>
-            <p className="text-xl text-gray-700 max-w-3xl mx-auto">
-              From one-off projects to comprehensive retainer agreements, we offer flexible solutions tailored to your needs.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {/* Starter Tier */}
-            <div className="bg-white rounded-3xl p-8 border-2 border-gray-200 shadow-lg hover:shadow-xl transition-all">
-              <div className="text-center mb-6">
-                <div className="w-16 h-16 bg-gradient-to-br from-[#70BFFF] to-[#BE55FF] rounded-2xl flex items-center justify-center mx-auto mb-4">
-                  <Layers className="h-8 w-8 text-white" />
-                </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">Starter</h3>
-                <p className="text-gray-600">Project-Based</p>
-              </div>
-              <ul className="space-y-3 mb-8">
-                <li className="flex items-start gap-3">
-                  <CheckCircle2 className="h-5 w-5 text-[#70BFFF] mt-0.5 flex-shrink-0" />
-                  <span className="text-gray-700">One-off video or photo projects</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <CheckCircle2 className="h-5 w-5 text-[#70BFFF] mt-0.5 flex-shrink-0" />
-                  <span className="text-gray-700">Basic editing and post-production</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <CheckCircle2 className="h-5 w-5 text-[#70BFFF] mt-0.5 flex-shrink-0" />
-                  <span className="text-gray-700">Brand guideline adherence</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <CheckCircle2 className="h-5 w-5 text-[#70BFFF] mt-0.5 flex-shrink-0" />
-                  <span className="text-gray-700">Standard delivery formats</span>
-                </li>
-              </ul>
-            </div>
-
-            {/* Professional Tier */}
-            <div className="bg-gradient-to-br from-[#70BFFF]/10 to-[#BE55FF]/10 rounded-3xl p-8 border-2 border-[#70BFFF]/30 shadow-xl hover:shadow-2xl transition-all transform hover:scale-[1.02] relative">
-              <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-[#70BFFF] to-[#BE55FF] text-white px-4 py-1 rounded-full text-sm font-bold">
-                Most Popular
-              </div>
-              <div className="text-center mb-6 mt-4">
-                <div className="w-16 h-16 bg-gradient-to-br from-[#70BFFF] to-[#BE55FF] rounded-2xl flex items-center justify-center mx-auto mb-4">
-                  <TrendingUp className="h-8 w-8 text-white" />
-                </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">Professional</h3>
-                <p className="text-gray-600">Monthly Retainer</p>
-              </div>
-              <ul className="space-y-3 mb-8">
-                <li className="flex items-start gap-3">
-                  <CheckCircle2 className="h-5 w-5 text-[#70BFFF] mt-0.5 flex-shrink-0" />
-                  <span className="text-gray-700">Regular content creation (video, photo, carousels)</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <CheckCircle2 className="h-5 w-5 text-[#70BFFF] mt-0.5 flex-shrink-0" />
-                  <span className="text-gray-700">Engagement analysis and performance reports</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <CheckCircle2 className="h-5 w-5 text-[#70BFFF] mt-0.5 flex-shrink-0" />
-                  <span className="text-gray-700">Social media management and scheduling</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <CheckCircle2 className="h-5 w-5 text-[#70BFFF] mt-0.5 flex-shrink-0" />
-                  <span className="text-gray-700">Brand consistency across all content</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <CheckCircle2 className="h-5 w-5 text-[#70BFFF] mt-0.5 flex-shrink-0" />
-                  <span className="text-gray-700">Dedicated account manager</span>
-                </li>
-              </ul>
-            </div>
-
-            {/* Enterprise Tier */}
-            <div className="bg-white rounded-3xl p-8 border-2 border-gray-200 shadow-lg hover:shadow-xl transition-all">
-              <div className="text-center mb-6">
-                <div className="w-16 h-16 bg-gradient-to-br from-[#BE55FF] to-[#70BFFF] rounded-2xl flex items-center justify-center mx-auto mb-4">
-                  <Zap className="h-8 w-8 text-white" />
-                </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">Enterprise</h3>
-                <p className="text-gray-600">Long-Term Partnership</p>
-              </div>
-              <ul className="space-y-3 mb-8">
-                <li className="flex items-start gap-3">
-                  <CheckCircle2 className="h-5 w-5 text-[#BE55FF] mt-0.5 flex-shrink-0" />
-                  <span className="text-gray-700">Comprehensive content strategy and execution</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <CheckCircle2 className="h-5 w-5 text-[#BE55FF] mt-0.5 flex-shrink-0" />
-                  <span className="text-gray-700">Advanced analytics and stat analysis</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <CheckCircle2 className="h-5 w-5 text-[#BE55FF] mt-0.5 flex-shrink-0" />
-                  <span className="text-gray-700">Personal branding development</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <CheckCircle2 className="h-5 w-5 text-[#BE55FF] mt-0.5 flex-shrink-0" />
-                  <span className="text-gray-700">Full brand integration and custom hex code implementation</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <CheckCircle2 className="h-5 w-5 text-[#BE55FF] mt-0.5 flex-shrink-0" />
-                  <span className="text-gray-700">Priority support and rapid turnaround</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Detailed Services */}
-      <div className="bg-white relative overflow-hidden py-16 md:py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <span className="text-sm font-bold text-[#BE55FF] uppercase tracking-widest mb-4 block">
-              What's Included
-            </span>
-            <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-6">
-              Comprehensive <span className="bg-gradient-to-r from-[#70BFFF] to-[#BE55FF] bg-clip-text text-transparent">Service Offerings</span>
-            </h2>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-8 mb-12">
-            {/* Engagement & Analytics */}
-            <div className="bg-gradient-to-br from-[#70BFFF]/5 to-[#BE55FF]/5 rounded-3xl p-8 border border-[#70BFFF]/20">
-              <div className="flex items-center gap-4 mb-6">
-                <div className="w-14 h-14 bg-gradient-to-br from-[#70BFFF] to-[#BE55FF] rounded-xl flex items-center justify-center">
-                  <BarChart3 className="h-7 w-7 text-white" />
-                </div>
-                <h3 className="text-2xl font-bold text-gray-900">Engagement & Analytics</h3>
-              </div>
-              <p className="text-gray-700 mb-4 leading-relaxed">
-                For retainer clients, we provide comprehensive engagement analysis and statistical reporting to identify the most effective content types and posting strategies.
-              </p>
-              <ul className="space-y-2">
-                <li className="flex items-start gap-2">
-                  <CheckCircle2 className="h-5 w-5 text-[#70BFFF] mt-0.5 flex-shrink-0" />
-                  <span className="text-gray-700">Performance metrics tracking across all platforms</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <CheckCircle2 className="h-5 w-5 text-[#70BFFF] mt-0.5 flex-shrink-0" />
-                  <span className="text-gray-700">Content effectiveness analysis</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <CheckCircle2 className="h-5 w-5 text-[#70BFFF] mt-0.5 flex-shrink-0" />
-                  <span className="text-gray-700">Monthly reports with actionable insights</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <CheckCircle2 className="h-5 w-5 text-[#70BFFF] mt-0.5 flex-shrink-0" />
-                  <span className="text-gray-700">A/B testing recommendations</span>
-                </li>
-              </ul>
-            </div>
-
-            {/* Social Media Management */}
-            <div className="bg-gradient-to-br from-[#BE55FF]/5 to-[#70BFFF]/5 rounded-3xl p-8 border border-[#BE55FF]/20">
-              <div className="flex items-center gap-4 mb-6">
-                <div className="w-14 h-14 bg-gradient-to-br from-[#BE55FF] to-[#70BFFF] rounded-xl flex items-center justify-center">
-                  <Instagram className="h-7 w-7 text-white" />
-                </div>
-                <h3 className="text-2xl font-bold text-gray-900">Social Media Management</h3>
-              </div>
-              <p className="text-gray-700 mb-4 leading-relaxed">
-                Complete social media content creation and management across all major platforms.
-              </p>
-              <ul className="space-y-2">
-                <li className="flex items-start gap-2">
-                  <CheckCircle2 className="h-5 w-5 text-[#BE55FF] mt-0.5 flex-shrink-0" />
-                  <span className="text-gray-700">Video content (reels, short documentaries, promotional videos)</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <CheckCircle2 className="h-5 w-5 text-[#BE55FF] mt-0.5 flex-shrink-0" />
-                  <span className="text-gray-700">Photo content and professional photography</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <CheckCircle2 className="h-5 w-5 text-[#BE55FF] mt-0.5 flex-shrink-0" />
-                  <span className="text-gray-700">Carousel posts and multi-image content</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <CheckCircle2 className="h-5 w-5 text-[#BE55FF] mt-0.5 flex-shrink-0" />
-                  <span className="text-gray-700">Interactive polls and engagement content</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <CheckCircle2 className="h-5 w-5 text-[#BE55FF] mt-0.5 flex-shrink-0" />
-                  <span className="text-gray-700">Newsletter design and content creation</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <CheckCircle2 className="h-5 w-5 text-[#BE55FF] mt-0.5 flex-shrink-0" />
-                  <span className="text-gray-700">Content scheduling and posting</span>
-                </li>
-              </ul>
-            </div>
-
-            {/* Personal Branding */}
-            <div className="bg-gradient-to-br from-[#70BFFF]/5 to-[#BE55FF]/5 rounded-3xl p-8 border border-[#70BFFF]/20">
-              <div className="flex items-center gap-4 mb-6">
-                <div className="w-14 h-14 bg-gradient-to-br from-[#70BFFF] to-[#BE55FF] rounded-xl flex items-center justify-center">
-                  <User className="h-7 w-7 text-white" />
-                </div>
-                <h3 className="text-2xl font-bold text-gray-900">Personal Branding</h3>
-              </div>
-              <p className="text-gray-700 mb-4 leading-relaxed">
-                Develop and maintain a consistent personal brand identity across all content and platforms.
-              </p>
-              <ul className="space-y-2">
-                <li className="flex items-start gap-2">
-                  <CheckCircle2 className="h-5 w-5 text-[#70BFFF] mt-0.5 flex-shrink-0" />
-                  <span className="text-gray-700">Brand identity development</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <CheckCircle2 className="h-5 w-5 text-[#70BFFF] mt-0.5 flex-shrink-0" />
-                  <span className="text-gray-700">Visual style guide creation</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <CheckCircle2 className="h-5 w-5 text-[#70BFFF] mt-0.5 flex-shrink-0" />
-                  <span className="text-gray-700">Content that reflects your unique voice and values</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <CheckCircle2 className="h-5 w-5 text-[#70BFFF] mt-0.5 flex-shrink-0" />
-                  <span className="text-gray-700">Cross-platform consistency</span>
-                </li>
-              </ul>
-            </div>
-
-            {/* Brand Integration */}
-            <div className="bg-gradient-to-br from-[#BE55FF]/5 to-[#70BFFF]/5 rounded-3xl p-8 border border-[#BE55FF]/20">
-              <div className="flex items-center gap-4 mb-6">
-                <div className="w-14 h-14 bg-gradient-to-br from-[#BE55FF] to-[#70BFFF] rounded-xl flex items-center justify-center">
-                  <Palette className="h-7 w-7 text-white" />
-                </div>
-                <h3 className="text-2xl font-bold text-gray-900">Brand Integration</h3>
-              </div>
-              <p className="text-gray-700 mb-4 leading-relaxed">
-                Seamlessly work within your existing brand guidelines and visual identity.
-              </p>
-              <ul className="space-y-2">
-                <li className="flex items-start gap-2">
-                  <CheckCircle2 className="h-5 w-5 text-[#BE55FF] mt-0.5 flex-shrink-0" />
-                  <span className="text-gray-700">Adherence to brand guidelines and style guides</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <CheckCircle2 className="h-5 w-5 text-[#BE55FF] mt-0.5 flex-shrink-0" />
-                  <span className="text-gray-700">Custom hex code implementation across all content</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <CheckCircle2 className="h-5 w-5 text-[#BE55FF] mt-0.5 flex-shrink-0" />
-                  <span className="text-gray-700">Typography and font consistency</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <CheckCircle2 className="h-5 w-5 text-[#BE55FF] mt-0.5 flex-shrink-0" />
-                  <span className="text-gray-700">Logo placement and brand asset integration</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <CheckCircle2 className="h-5 w-5 text-[#BE55FF] mt-0.5 flex-shrink-0" />
-                  <span className="text-gray-700">Content that aligns with brand messaging and tone</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Long-Term Contracts */}
-      <div className="bg-[#E6F2FF] relative overflow-hidden py-16 md:py-24">
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-[15%] left-[15%] w-[400px] h-[400px] bg-[#BE55FF]/12 rounded-full blur-3xl animate-float-slow" style={{ animationDelay: "0.6s" }} />
-          <div className="absolute bottom-[15%] right-[15%] w-[450px] h-[450px] bg-[#70BFFF]/15 rounded-full blur-3xl animate-float-medium" style={{ animationDelay: "1.3s" }} />
-          <div className="absolute top-[50%] left-[50%] w-[370px] h-[370px] bg-[#BE55FF]/10 rounded-full blur-2xl animate-float-fast" style={{ animationDelay: "0.8s" }} />
-
-          {/* Geometric shapes - kept within bounds */}
-          <div className="absolute top-[18%] left-[12%] w-28 h-28 bg-gradient-to-br from-[#70BFFF]/25 to-[#BE55FF]/25 rounded-3xl rotate-45 animate-float-slow" style={{ animationDelay: "0.3s" }} />
-          <div className="absolute bottom-[20%] right-[12%] w-24 h-24 bg-gradient-to-br from-[#BE55FF]/25 to-[#70BFFF]/25 rounded-full animate-float-medium" style={{ animationDelay: "1.4s" }} />
-          <div className="absolute top-[40%] right-[10%] w-16 h-16 bg-[#70BFFF]/20 rounded-lg rotate-12 animate-float-fast" style={{ animationDelay: "0.7s" }} />
-          <div className="absolute bottom-[25%] left-[20%] w-20 h-20 bg-[#BE55FF]/22 rounded-2xl rotate-45 animate-float-slow" style={{ animationDelay: "1.6s" }} />
-          <div className="absolute top-[55%] right-[25%] w-26 h-26 bg-gradient-to-br from-[#70BFFF]/22 to-[#BE55FF]/22 rounded-full animate-float-medium" style={{ animationDelay: "1.0s" }} />
-          <div className="absolute bottom-[18%] left-[18%] w-22 h-22 bg-[#BE55FF]/18 rounded-xl rotate-12 animate-float-fast" style={{ animationDelay: "1.2s" }} />
-          <div className="absolute top-[22%] left-[55%] w-28 h-28 bg-gradient-to-br from-[#70BFFF]/20 to-[#BE55FF]/20 rounded-2xl rotate-45 animate-float-slow" style={{ animationDelay: "0.5s" }} />
-          <div className="absolute top-[45%] left-[8%] w-18 h-18 bg-[#70BFFF]/19 rounded-lg rotate-12 animate-float-medium" style={{ animationDelay: "1.8s" }} />
-          <div className="absolute bottom-[30%] right-[40%] w-30 h-30 bg-gradient-to-br from-[#BE55FF]/21 to-[#70BFFF]/21 rounded-full animate-float-fast" style={{ animationDelay: "0.9s" }} />
-          <div className="absolute top-[62%] left-[48%] w-24 h-24 bg-[#BE55FF]/18 rounded-xl rotate-45 animate-float-slow" style={{ animationDelay: "1.3s" }} />
-        </div>
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center mb-12">
-            <span className="text-sm font-bold text-[#70BFFF] uppercase tracking-widest mb-4 block">
-              Long-Term Partnerships
-            </span>
-            <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-6">
-              Retainer <span className="bg-gradient-to-r from-[#70BFFF] to-[#BE55FF] bg-clip-text text-transparent">Benefits</span>
-            </h2>
-            <p className="text-xl text-gray-700 max-w-3xl mx-auto">
-              When you sign longer-term contracts, we become an extension of your team with dedicated resources and strategic planning.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            <div className="bg-white/80 backdrop-blur-sm rounded-3xl p-8 border border-[#70BFFF]/20 shadow-lg">
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">Strategic Planning</h3>
-              <ul className="space-y-3">
-                <li className="flex items-start gap-3">
-                  <CheckCircle2 className="h-5 w-5 text-[#70BFFF] mt-0.5 flex-shrink-0" />
-                  <span className="text-gray-700">Quarterly content strategy sessions</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <CheckCircle2 className="h-5 w-5 text-[#70BFFF] mt-0.5 flex-shrink-0" />
-                  <span className="text-gray-700">Long-term goal alignment and planning</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <CheckCircle2 className="h-5 w-5 text-[#70BFFF] mt-0.5 flex-shrink-0" />
-                  <span className="text-gray-700">Content calendar development</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <CheckCircle2 className="h-5 w-5 text-[#70BFFF] mt-0.5 flex-shrink-0" />
-                  <span className="text-gray-700">Campaign planning and execution</span>
-                </li>
-              </ul>
-            </div>
-
-            <div className="bg-white/80 backdrop-blur-sm rounded-3xl p-8 border border-[#BE55FF]/20 shadow-lg">
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">Dedicated Resources</h3>
-              <ul className="space-y-3">
-                <li className="flex items-start gap-3">
-                  <CheckCircle2 className="h-5 w-5 text-[#BE55FF] mt-0.5 flex-shrink-0" />
-                  <span className="text-gray-700">Assigned account manager and creative team</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <CheckCircle2 className="h-5 w-5 text-[#BE55FF] mt-0.5 flex-shrink-0" />
-                  <span className="text-gray-700">Priority scheduling and faster turnaround times</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <CheckCircle2 className="h-5 w-5 text-[#BE55FF] mt-0.5 flex-shrink-0" />
-                  <span className="text-gray-700">Regular check-ins and progress reviews</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <CheckCircle2 className="h-5 w-5 text-[#BE55FF] mt-0.5 flex-shrink-0" />
-                  <span className="text-gray-700">Flexible content adjustments based on performance</span>
-                </li>
-              </ul>
-            </div>
+              );
+            })}
           </div>
         </div>
       </div>
 
       {/* CTA Section */}
-      <div className="bg-white relative overflow-hidden py-16 md:py-24">
+      <div className="bg-[#E6F2FF] relative overflow-hidden py-16 md:py-24">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-6">
             Ready to Get <span className="bg-gradient-to-r from-[#70BFFF] to-[#BE55FF] bg-clip-text text-transparent">Started?</span>
