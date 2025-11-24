@@ -106,7 +106,7 @@ export function NewsletterSlider() {
 
       {/* Swipe instruction */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 mb-6">
-        <p className="text-center text-sm text-gray-500 opacity-60">Swipe right to view older newsletters</p>
+        <p className="text-center text-sm text-gray-500 opacity-60">Swipe left to view older newsletters</p>
       </div>
 
       {/* Horizontal scroll container */}
