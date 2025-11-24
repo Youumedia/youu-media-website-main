@@ -50,7 +50,7 @@ const newsletters: Newsletter[] = [
     title: "Meta Algorithm Updates: What You Need to Know",
     description: "Breaking down the latest Meta algorithm changes affecting Instagram and Facebook content performance.",
     slug: "2025-11-03-meta-algorithm-updates",
-    previewImage: "https://images.unsplash.com/photo-1432888622747-4eb9a8f2d1b9?w=800&h=600&fit=crop&q=80",
+    previewImage: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop&q=80",
   },
   {
     id: "2025-10-27",

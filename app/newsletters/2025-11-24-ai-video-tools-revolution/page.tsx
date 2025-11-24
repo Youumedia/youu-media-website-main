@@ -11,32 +11,6 @@ import { downloadNewsletterAsPDF } from "@/components/pdf-download";
 export default function NewsletterPage() {
   const contentRef = useRef<HTMLDivElement>(null);
 
-  const handleDownloadPDF = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
-    
-    // Check if mobile first - if so, use immediate print (no async)
-    const isMobile = typeof window !== 'undefined' && (
-      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
-      (window.innerWidth <= 768 && 'ontouchstart' in window)
-    );
-    
-    if (isMobile) {
-      // For mobile, just print directly - no async operations
-      window.print();
-      return;
-    }
-    
-    // For desktop, use async PDF generation
-    if (contentRef.current) {
-      const filename = `youu-media-newsletter-ai-video-tools-2025-11-24.pdf`;
-      downloadNewsletterAsPDF(contentRef.current, filename).catch((error) => {
-        console.error('PDF download failed:', error);
-        window.print();
-      });
-    }
-  };
-
   useEffect(() => {
     const originalOverflow = document.body.style.overflow;
     return () => {
@@ -60,7 +34,7 @@ export default function NewsletterPage() {
                 Back to Our Work
               </Link>
               
-              <div className="bg-white rounded-3xl shadow-2xl p-8 md:p-12" ref={contentRef}>
+              <div className="bg-white rounded-3xl shadow-2xl p-8 md:p-12" ref={contentRef} data-newsletter-content>
                 <NewsletterContent />
                 
                 <div className="mt-8 pt-8 border-t border-gray-200 flex flex-col sm:flex-row gap-4 justify-between items-center no-print">
@@ -70,13 +44,37 @@ export default function NewsletterPage() {
                       Back to Portfolio
                     </Button>
                   </Link>
-                  <Button
-                    onClick={handleDownloadPDF}
-                    className="bg-gradient-to-r from-[#70BFFF] to-[#BE55FF] hover:from-[#70BFFF]/90 hover:to-[#BE55FF]/90 text-white"
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      
+                      // Always check window width directly - works on first load
+                      const width = window.innerWidth || screen.width;
+                      const isMobile = width <= 768;
+                      
+                      // For mobile: use print dialog immediately (users can save as PDF)
+                      if (isMobile) {
+                        window.print();
+                        return;
+                      }
+                      
+                      // For desktop: try PDF download
+                      const content = document.querySelector('[data-newsletter-content]') as HTMLElement;
+                      if (content) {
+                        downloadNewsletterAsPDF(content, `youu-media-newsletter-ai-video-tools-2025-11-24.pdf`).catch(() => {
+                          window.print();
+                        });
+                      } else {
+                        window.print();
+                      }
+                    }}
+                    className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#70BFFF] to-[#BE55FF] hover:from-[#70BFFF]/90 hover:to-[#BE55FF]/90 text-white px-6 py-3 rounded-full font-semibold shadow-lg hover:shadow-xl transition-all"
                   >
-                    <Download className="h-4 w-4 mr-2" />
+                    <Download className="h-4 w-4" />
                     Download PDF
-                  </Button>
+                  </button>
                 </div>
               </div>
             </div>
