@@ -1,18 +1,22 @@
 "use client";
 
 export async function downloadNewsletterAsPDF(contentElement: HTMLElement, filename: string) {
-  // Check if we're on mobile
-  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  // Detect mobile devices more reliably
+  const isMobile = typeof window !== 'undefined' && (
+    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
+    (window.innerWidth <= 768 && 'ontouchstart' in window)
+  );
   
+  // For mobile devices, use print API which is the most reliable
+  // Mobile browsers support "Save as PDF" option in the print dialog
   if (isMobile) {
-    // For mobile, use the print API which is well-supported
-    // Users can save as PDF from the print dialog
     window.print();
     return;
   }
 
+  // For desktop, try html2pdf.js with better error handling
   try {
-    // For desktop, try to use html2pdf.js
+    // Use dynamic import to avoid loading on mobile
     const html2pdf = (await import('html2pdf.js')).default;
     
     const opt = {
@@ -23,7 +27,9 @@ export async function downloadNewsletterAsPDF(contentElement: HTMLElement, filen
         scale: 2, 
         useCORS: true,
         backgroundColor: '#ffffff',
-        logging: false
+        logging: false,
+        windowWidth: contentElement.scrollWidth,
+        windowHeight: contentElement.scrollHeight
       },
       jsPDF: { 
         unit: 'in', 
@@ -35,8 +41,8 @@ export async function downloadNewsletterAsPDF(contentElement: HTMLElement, filen
 
     await html2pdf().set(opt).from(contentElement).save();
   } catch (error) {
-    console.error('PDF generation failed:', error);
-    // Fallback to print dialog
+    console.error('PDF generation failed, using print fallback:', error);
+    // Fallback to print dialog on any error
     window.print();
   }
 }
