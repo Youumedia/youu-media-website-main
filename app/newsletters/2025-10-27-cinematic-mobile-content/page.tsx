@@ -102,7 +102,7 @@ function NewsletterContent() {
             Modern smartphones offer 4K recording, advanced stabilisation, and professional editing apps that put cinema-quality production in everyone's pocket. Brands are leveraging this to create content faster, more flexibly, and at lower costs.
           </p>
           <p className="text-gray-700 leading-relaxed mb-4">
-            The key isn't just using mobile—it's understanding how to use it effectively. Professional techniques like proper lighting, composition, and movement translate beautifully to mobile when done correctly.
+            The key isn't just using mobile. It's understanding how to use it effectively. Professional techniques like proper lighting, composition, and movement translate beautifully to mobile when done correctly.
           </p>
         </section>
 

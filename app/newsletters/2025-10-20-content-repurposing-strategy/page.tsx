@@ -99,7 +99,7 @@ function NewsletterContent() {
             The Repurposing Framework
           </h2>
           <p className="text-gray-700 leading-relaxed mb-4">
-            Start with one high-quality piece of content—a long-form video, a comprehensive article, or a detailed presentation. From this single asset, you can create dozens of pieces of content across multiple platforms and formats.
+            Start with one high-quality piece of content: a long-form video, a comprehensive article, or a detailed presentation. From this single asset, you can create dozens of pieces of content across multiple platforms and formats.
           </p>
           <p className="text-gray-700 leading-relaxed mb-4">
             The key is planning repurposing from the creation stage. Think about how you'll extract value at each stage of production, not just after content is complete.

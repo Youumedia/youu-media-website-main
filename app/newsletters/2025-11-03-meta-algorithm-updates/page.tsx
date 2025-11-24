@@ -99,7 +99,7 @@ function NewsletterContent() {
             Key Algorithm Changes
           </h2>
           <p className="text-gray-700 leading-relaxed mb-4">
-            Meta's algorithm now prioritises content that drives meaningful engagement over passive consumption. This means likes alone aren't enough—comments, shares, saves, and time spent viewing are weighted more heavily in determining content distribution.
+            Meta's algorithm now prioritises content that drives meaningful engagement over passive consumption. This means likes alone aren't enough. Comments, shares, saves, and time spent viewing are weighted more heavily in determining content distribution.
           </p>
           <p className="text-gray-700 leading-relaxed mb-4">
             The platform is also favouring original content over reposted material, rewarding creators who produce unique, valuable content for their audience.
