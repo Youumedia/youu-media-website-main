@@ -5,10 +5,24 @@ import { Footer } from "@/components/footer";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Download, ArrowLeft } from "lucide-react";
+import { useRef } from "react";
+import { downloadNewsletterAsPDF } from "@/components/pdf-download";
 
 export default function NewsletterPage() {
-  const handleDownloadPDF = () => {
-    window.print();
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  const handleDownloadPDF = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    if (contentRef.current) {
+      try {
+        const filename = `youu-media-newsletter-meta-algorithm-2025-11-03.pdf`;
+        await downloadNewsletterAsPDF(contentRef.current, filename);
+      } catch (error) {
+        console.error('PDF download failed:', error);
+      }
+    }
   };
 
   return (
@@ -27,7 +41,7 @@ export default function NewsletterPage() {
                 Back to Our Work
               </Link>
               
-              <div className="bg-white rounded-3xl shadow-2xl p-8 md:p-12">
+              <div className="bg-white rounded-3xl shadow-2xl p-8 md:p-12" ref={contentRef}>
                 <NewsletterContent />
                 
                 <div className="mt-8 pt-8 border-t border-gray-200 flex flex-col sm:flex-row gap-4 justify-between items-center">

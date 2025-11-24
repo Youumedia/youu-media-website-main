@@ -11,10 +11,17 @@ import { downloadNewsletterAsPDF } from "@/components/pdf-download";
 export default function NewsletterPage() {
   const contentRef = useRef<HTMLDivElement>(null);
 
-  const handleDownloadPDF = async () => {
+  const handleDownloadPDF = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
     if (contentRef.current) {
-      const filename = `youu-media-newsletter-ai-video-tools-2025-11-24.pdf`;
-      await downloadNewsletterAsPDF(contentRef.current, filename);
+      try {
+        const filename = `youu-media-newsletter-ai-video-tools-2025-11-24.pdf`;
+        await downloadNewsletterAsPDF(contentRef.current, filename);
+      } catch (error) {
+        console.error('PDF download failed:', error);
+      }
     }
   };
 

@@ -75,14 +75,6 @@ const services = [
     gradient: "from-gray-400 to-gray-500",
     comingSoon: true,
   },
-  {
-    id: 8,
-    title: "Weekly WhatsApp Newsletter",
-    description: "Weekly insights, trends, platform updates, and content strategy tips delivered directly to your WhatsApp for ongoing value and support.",
-    icon: MessageSquare,
-    href: "/services/newsletter",
-    gradient: "from-[#70BFFF] to-[#BE55FF]",
-  },
 ];
 
 export default function ServicesPage() {
