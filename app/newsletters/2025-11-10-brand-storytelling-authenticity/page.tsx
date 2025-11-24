@@ -38,28 +38,31 @@ export default function NewsletterPage() {
                       Back to Portfolio
                     </Button>
                   </Link>
-                  <button
-                    type="button"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                      const width = window.innerWidth || screen.width;
-                      if (width <= 768) {
-                        window.print();
-                        return;
-                      }
-                      const content = document.querySelector('[data-newsletter-content]') as HTMLElement;
-                      if (content) {
-                        downloadNewsletterAsPDF(content, `youu-media-newsletter-brand-storytelling-2025-11-10.pdf`).catch(() => window.print());
-                      } else {
-                        window.print();
-                      }
-                    }}
-                    className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#70BFFF] to-[#BE55FF] hover:from-[#70BFFF]/90 hover:to-[#BE55FF]/90 text-white px-6 py-3 rounded-full font-semibold shadow-lg hover:shadow-xl transition-all"
-                  >
-                    <Download className="h-4 w-4" />
-                    Download PDF
-                  </button>
+                  <div className="flex flex-col items-center gap-2">
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        const width = window.innerWidth || screen.width;
+                        if (width <= 768) {
+                          window.print();
+                          return;
+                        }
+                        const content = document.querySelector('[data-newsletter-content]') as HTMLElement;
+                        if (content) {
+                          downloadNewsletterAsPDF(content, `youu-media-newsletter-brand-storytelling-2025-11-10.pdf`).catch(() => window.print());
+                        } else {
+                          window.print();
+                        }
+                      }}
+                      className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#70BFFF] to-[#BE55FF] hover:from-[#70BFFF]/90 hover:to-[#BE55FF]/90 text-white px-6 py-3 rounded-full font-semibold shadow-lg hover:shadow-xl transition-all"
+                    >
+                      <Download className="h-4 w-4" />
+                      Download PDF
+                    </button>
+                    <p className="text-xs text-gray-500 text-center">If not downloading, refresh page</p>
+                  </div>
                 </div>
               </div>
             </div>
