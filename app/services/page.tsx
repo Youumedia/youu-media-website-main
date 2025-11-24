@@ -191,7 +191,6 @@ export default function ServicesPage() {
                     {/* Learn More Button */}
                     {!isComingSoon && (
                       <Button
-                        size="lg"
                         asChild
                         className={`w-full bg-gradient-to-r ${service.gradient} hover:opacity-90 text-white font-bold rounded-full shadow-lg hover:shadow-xl transition-all transform hover:scale-105`}
                       >
@@ -219,7 +218,6 @@ export default function ServicesPage() {
             Let's discuss how we can integrate into your business and deliver results that align with your goals.
           </p>
           <Button
-            size="lg"
             asChild
             className="bg-gradient-to-r from-[#70BFFF] to-[#BE55FF] hover:from-[#70BFFF]/90 hover:to-[#BE55FF]/90 text-white px-10 py-6 text-lg font-bold rounded-full shadow-xl hover:shadow-2xl transition-all transform hover:scale-105"
           >

@@ -313,7 +313,6 @@ export default function ContentProductionPage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button
-              size="lg"
               asChild
               className="bg-gradient-to-r from-[#BE55FF] to-[#70BFFF] hover:from-[#BE55FF]/90 hover:to-[#70BFFF]/90 text-white px-10 py-6 text-lg font-bold rounded-full shadow-xl hover:shadow-2xl transition-all transform hover:scale-105"
             >
@@ -323,7 +322,6 @@ export default function ContentProductionPage() {
               </Link>
             </Button>
             <Button
-              size="lg"
               variant="outline"
               asChild
               className="border-2 border-gray-300 text-gray-900 hover:bg-[#E6F2FF] px-10 py-6 text-lg font-bold rounded-full"
