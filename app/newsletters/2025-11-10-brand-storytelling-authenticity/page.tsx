@@ -15,14 +15,17 @@ export default function NewsletterPage() {
     e.preventDefault();
     e.stopPropagation();
     
-    if (contentRef.current) {
-      try {
-        const filename = `youu-media-newsletter-brand-storytelling-2025-11-10.pdf`;
-        await downloadNewsletterAsPDF(contentRef.current, filename);
-      } catch (error) {
-        console.error('PDF download failed:', error);
+    setTimeout(async () => {
+      if (contentRef.current) {
+        try {
+          const filename = `youu-media-newsletter-brand-storytelling-2025-11-10.pdf`;
+          await downloadNewsletterAsPDF(contentRef.current, filename);
+        } catch (error) {
+          console.error('PDF download failed:', error);
+          window.print();
+        }
       }
-    }
+    }, 100);
   };
 
   return (

@@ -1,8 +1,18 @@
 "use client";
 
 export async function downloadNewsletterAsPDF(contentElement: HTMLElement, filename: string) {
+  // Check if we're on mobile
+  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  
+  if (isMobile) {
+    // For mobile, use the print API which is well-supported
+    // Users can save as PDF from the print dialog
+    window.print();
+    return;
+  }
+
   try {
-    // Dynamically import html2pdf.js
+    // For desktop, try to use html2pdf.js
     const html2pdf = (await import('html2pdf.js')).default;
     
     const opt = {
@@ -12,7 +22,8 @@ export async function downloadNewsletterAsPDF(contentElement: HTMLElement, filen
       html2canvas: { 
         scale: 2, 
         useCORS: true,
-        backgroundColor: '#ffffff'
+        backgroundColor: '#ffffff',
+        logging: false
       },
       jsPDF: { 
         unit: 'in', 

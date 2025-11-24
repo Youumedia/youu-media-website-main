@@ -56,13 +56,6 @@ const services = [
     icon: BookOpen,
     gradient: "from-[#BE55FF] to-[#70BFFF]",
   },
-  {
-    id: 7,
-    title: "Weekly WhatsApp Newsletter",
-    description: "Weekly insights, trends, platform updates, and content strategy tips delivered directly to your WhatsApp for ongoing value and support.",
-    icon: MessageSquare,
-    gradient: "from-[#70BFFF] to-[#BE55FF]",
-  },
 ];
 
 export function LandingServices() {

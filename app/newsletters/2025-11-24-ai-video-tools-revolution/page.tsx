@@ -15,14 +15,19 @@ export default function NewsletterPage() {
     e.preventDefault();
     e.stopPropagation();
     
-    if (contentRef.current) {
-      try {
-        const filename = `youu-media-newsletter-ai-video-tools-2025-11-24.pdf`;
-        await downloadNewsletterAsPDF(contentRef.current, filename);
-      } catch (error) {
-        console.error('PDF download failed:', error);
+    // Use setTimeout to prevent blocking the UI
+    setTimeout(async () => {
+      if (contentRef.current) {
+        try {
+          const filename = `youu-media-newsletter-ai-video-tools-2025-11-24.pdf`;
+          await downloadNewsletterAsPDF(contentRef.current, filename);
+        } catch (error) {
+          console.error('PDF download failed:', error);
+          // Fallback to print
+          window.print();
+        }
       }
-    }
+    }, 100);
   };
 
   useEffect(() => {
