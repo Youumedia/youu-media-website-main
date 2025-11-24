@@ -2,6 +2,7 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import { ChevronLeft, ChevronRight, Play } from "lucide-react";
+import { NewsletterSlider } from "./newsletter-slider";
 
 const portfolioItems = [
   {
@@ -298,6 +299,9 @@ export function LandingPortfolio() {
           For the best viewing experience, tap the gear icon and set video quality to the highest resolution.
         </p>
       </div>
+
+      {/* Newsletter Slider */}
+      <NewsletterSlider />
 
       <style jsx>{`
         .scrollbar-hide::-webkit-scrollbar {
