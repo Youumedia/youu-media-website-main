@@ -39,38 +39,33 @@ const portfolioImages: PortfolioImage[] = [
   },
   {
     id: "content-6",
-    imageUrl: "/images/content-management/0-63b623e5-295b-44a8-957c-b13b2adc4531.jpg",
+    imageUrl: "/images/content-management/0-6d721aac-0cab-4923-b012-29754a49b192.jpg",
     alt: "Content Management Portfolio Image 6",
   },
   {
     id: "content-7",
-    imageUrl: "/images/content-management/0-6d721aac-0cab-4923-b012-29754a49b192.jpg",
+    imageUrl: "/images/content-management/0-9eb3285c-9146-40c3-baeb-3955b42f5500.jpg",
     alt: "Content Management Portfolio Image 7",
   },
   {
     id: "content-8",
-    imageUrl: "/images/content-management/0-9eb3285c-9146-40c3-baeb-3955b42f5500.jpg",
+    imageUrl: "/images/content-management/0-c21b0987-19de-428a-ba85-dbde7d190c3b.jpg",
     alt: "Content Management Portfolio Image 8",
   },
   {
     id: "content-9",
-    imageUrl: "/images/content-management/0-c21b0987-19de-428a-ba85-dbde7d190c3b.jpg",
+    imageUrl: "/images/content-management/0-cdb04c5a-fb41-4fc7-86c1-0b5d8e436355.jpg",
     alt: "Content Management Portfolio Image 9",
   },
   {
     id: "content-10",
-    imageUrl: "/images/content-management/0-cdb04c5a-fb41-4fc7-86c1-0b5d8e436355.jpg",
+    imageUrl: "/images/content-management/0-cf4f6ee8-9e58-47f9-993f-fdfae33f3db2.jpg",
     alt: "Content Management Portfolio Image 10",
   },
   {
     id: "content-11",
-    imageUrl: "/images/content-management/0-cf4f6ee8-9e58-47f9-993f-fdfae33f3db2.jpg",
-    alt: "Content Management Portfolio Image 11",
-  },
-  {
-    id: "content-12",
     imageUrl: "/images/content-management/0-e3608e0e-a9fb-430a-8976-4942f30a1e41.jpg",
-    alt: "Content Management Portfolio Image 12",
+    alt: "Content Management Portfolio Image 11",
   },
 ];
 
@@ -100,7 +95,10 @@ export function ContentManagementSlider({
 
     const handleScroll = () => {
       const { scrollLeft } = container;
-      const singleSetWidth = portfolioImages.length * 360;
+      // Calculate width based on screen size: 280px mobile + 24px gap, 360px desktop + 24px gap
+      const isMobile = window.innerWidth < 768;
+      const itemWidth = isMobile ? 304 : 384; // 280px + 24px gap on mobile, 360px + 24px gap on desktop
+      const singleSetWidth = portfolioImages.length * itemWidth;
       const threshold = 50;
 
       // If scrolled past the second set, jump to the middle set
@@ -129,7 +127,9 @@ export function ContentManagementSlider({
 
       autoScrollIntervalRef.current = setInterval(() => {
         if (container && !isPaused && !isUserInteracting) {
-          const scrollAmount = 360; // Card width + gap
+          // Calculate width based on screen size: 280px mobile + 24px gap, 360px desktop + 24px gap
+          const isMobile = window.innerWidth < 768;
+          const scrollAmount = isMobile ? 304 : 384; // 280px + 24px gap on mobile, 360px + 24px gap on desktop
           container.scrollBy({
             left: scrollAmount,
             behavior: "smooth",
@@ -165,7 +165,10 @@ export function ContentManagementSlider({
   useEffect(() => {
     const container = scrollContainerRef.current;
     if (container) {
-      const singleSetWidth = portfolioImages.length * 360;
+      // Calculate width based on screen size: 280px mobile + 24px gap, 360px desktop + 24px gap
+      const isMobile = window.innerWidth < 768;
+      const itemWidth = isMobile ? 304 : 384; // 280px + 24px gap on mobile, 360px + 24px gap on desktop
+      const singleSetWidth = portfolioImages.length * itemWidth;
       container.scrollLeft = singleSetWidth; // Start at middle section
     }
   }, []);
@@ -173,7 +176,9 @@ export function ContentManagementSlider({
   const scroll = (direction: "left" | "right") => {
     handleInteractionStart();
     if (scrollContainerRef.current) {
-      const scrollAmount = 360;
+      // Calculate width based on screen size: 280px mobile + 24px gap, 360px desktop + 24px gap
+      const isMobile = window.innerWidth < 768;
+      const scrollAmount = isMobile ? 304 : 384; // 280px + 24px gap on mobile, 360px + 24px gap on desktop
       scrollContainerRef.current.scrollBy({
         left: direction === "left" ? -scrollAmount : scrollAmount,
         behavior: "smooth",
@@ -232,7 +237,11 @@ export function ContentManagementSlider({
         <div
           ref={scrollContainerRef}
           className="flex gap-6 overflow-x-auto scrollbar-hide pb-4 scroll-smooth pl-4 md:pl-6 lg:pl-8 pr-4 md:pr-6 lg:pr-8"
-          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+          style={{ 
+            scrollbarWidth: "none", 
+            msOverflowStyle: "none",
+            scrollSnapType: "x mandatory"
+          }}
           onScroll={handleInteractionStart}
         >
           {loopedImages.map((image, index) => (
@@ -240,7 +249,7 @@ export function ContentManagementSlider({
               key={`${image.id}-${index}`}
               src={image.imageUrl}
               alt={image.alt}
-              className="flex-shrink-0 w-[340px] md:w-[360px] h-auto object-cover rounded-lg"
+              className="flex-shrink-0 w-[280px] md:w-[360px] h-auto object-cover rounded-lg snap-center"
               loading="lazy"
               draggable={false}
             />
