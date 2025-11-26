@@ -205,7 +205,7 @@ export function ContentManagementSlider({
 
       {/* Horizontal scroll container */}
       <div 
-        className="relative w-screen overflow-hidden -ml-[50vw] left-1/2 bg-white/20 backdrop-blur-xl"
+        className="relative w-screen overflow-hidden -ml-[50vw] left-1/2"
         onMouseDown={handleInteractionStart}
         onMouseUp={handleInteractionEnd}
         onMouseLeave={handleInteractionEnd}
@@ -236,20 +236,14 @@ export function ContentManagementSlider({
           onScroll={handleInteractionStart}
         >
           {loopedImages.map((image, index) => (
-            <div
+            <img
               key={`${image.id}-${index}`}
-              className="flex-shrink-0 w-[340px] md:w-[360px] rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all hover:scale-[1.02] bg-white/80 backdrop-blur-xl border border-white/40"
-            >
-              <div className="relative h-[400px] md:h-[450px] overflow-hidden">
-                <img
-                  src={image.imageUrl}
-                  alt={image.alt}
-                  className="w-full h-full object-cover"
-                  loading="lazy"
-                  draggable={false}
-                />
-              </div>
-            </div>
+              src={image.imageUrl}
+              alt={image.alt}
+              className="flex-shrink-0 w-[340px] md:w-[360px] h-auto object-contain"
+              loading="lazy"
+              draggable={false}
+            />
           ))}
         </div>
       </div>
