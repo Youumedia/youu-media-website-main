@@ -20,6 +20,7 @@ const services = [
     description: "Strategic leadership and high-level consulting to guide your visual content ecosystem and brand storytelling architecture.",
     icon: Brain,
     gradient: "from-[#70BFFF] to-[#BE55FF]",
+    bgGradient: "from-blue-50 via-purple-50 to-pink-50",
   },
   {
     id: 2,
@@ -27,6 +28,7 @@ const services = [
     description: "Cinematic video production, photography, and post-production delivered monthly to support your brand's visual storytelling needs.",
     icon: Video,
     gradient: "from-[#BE55FF] to-[#70BFFF]",
+    bgGradient: "from-purple-50 via-blue-50 to-cyan-50",
   },
   {
     id: 3,
@@ -34,6 +36,7 @@ const services = [
     description: "Complete social media management including content planning, scheduling, community engagement, and account optimisation.",
     icon: Instagram,
     gradient: "from-[#70BFFF] to-[#BE55FF]",
+    bgGradient: "from-pink-50 via-rose-50 to-orange-50",
   },
   {
     id: 4,
@@ -41,6 +44,7 @@ const services = [
     description: "End-to-end paid advertising campaigns with Meta ads, audience building, A/B testing, and performance optimisation.",
     icon: TrendingUp,
     gradient: "from-[#BE55FF] to-[#70BFFF]",
+    bgGradient: "from-emerald-50 via-teal-50 to-cyan-50",
   },
   {
     id: 5,
@@ -48,6 +52,7 @@ const services = [
     description: "Comprehensive monthly reporting with growth insights, ROI breakdown, and strategic recommendations for continuous improvement.",
     icon: BarChart3,
     gradient: "from-[#70BFFF] to-[#BE55FF]",
+    bgGradient: "from-indigo-50 via-blue-50 to-purple-50",
   },
   {
     id: 6,
@@ -55,6 +60,7 @@ const services = [
     description: "Develop comprehensive brand guidelines, messaging frameworks, content pillars, and visual style rules for consistent brand expression.",
     icon: BookOpen,
     gradient: "from-[#BE55FF] to-[#70BFFF]",
+    bgGradient: "from-amber-50 via-yellow-50 to-orange-50",
   },
 ];
 
@@ -86,10 +92,13 @@ export function LandingServices() {
             return (
               <div
                 key={service.id}
-                className="group relative bg-white rounded-3xl p-6 md:p-8 border-2 border-gray-200 shadow-lg hover:shadow-2xl transition-all hover:border-[#70BFFF]/50 hover:scale-[1.02]"
+                className="group relative rounded-3xl p-6 md:p-8 border-2 border-gray-200 shadow-lg hover:shadow-2xl transition-all hover:border-[#70BFFF]/50 hover:scale-[1.02] overflow-hidden"
               >
-                {/* Gradient background on hover */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-500 rounded-3xl`} />
+                {/* Light gradient background */}
+                <div className={`absolute inset-0 bg-gradient-to-br ${service.bgGradient} rounded-3xl`} />
+                
+                {/* Gradient overlay on hover */}
+                <div className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-500 rounded-3xl`} />
 
                 {/* Icon */}
                 <div className={`w-14 h-14 md:w-16 md:h-16 bg-gradient-to-br ${service.gradient} rounded-2xl flex items-center justify-center mb-4 md:mb-6`}>
