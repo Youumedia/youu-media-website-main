@@ -100,13 +100,13 @@ export function LandingServices() {
                 {/* Gradient overlay on hover */}
                 <div className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-500 rounded-3xl`} />
 
-                {/* Icon */}
-                <div className={`w-14 h-14 md:w-16 md:h-16 bg-gradient-to-br ${service.gradient} rounded-2xl flex items-center justify-center mb-4 md:mb-6`}>
+                {/* Icon - positioned at top left */}
+                <div className={`absolute top-6 left-6 md:top-8 md:left-8 w-14 h-14 md:w-16 md:h-16 bg-gradient-to-br ${service.gradient} rounded-2xl flex items-center justify-center z-10`}>
                   <Icon className="h-7 w-7 md:h-8 md:w-8 text-white" />
                 </div>
 
                 {/* Content */}
-                <div className="relative z-10">
+                <div className="relative z-10 pt-16 md:pt-20">
                   <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-3 md:mb-4">
                     {service.title}
                   </h3>
