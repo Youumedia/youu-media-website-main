@@ -240,7 +240,7 @@ export function ContentManagementSlider({
               key={`${image.id}-${index}`}
               src={image.imageUrl}
               alt={image.alt}
-              className="flex-shrink-0 w-[340px] md:w-[360px] h-auto object-contain"
+              className="flex-shrink-0 w-[340px] md:w-[360px] h-auto object-cover rounded-lg"
               loading="lazy"
               draggable={false}
             />
