@@ -3,6 +3,7 @@
 import { Navigation } from "@/components/navigation";
 import { Footer } from "@/components/footer";
 import { Button } from "@/components/ui/button";
+import { ContentManagementSlider } from "@/components/content-management-slider";
 import Link from "next/link";
 import { 
   Instagram,
@@ -376,6 +377,11 @@ export default function SocialManagementPage() {
             })}
           </div>
         </div>
+      </div>
+
+      {/* Content Management Portfolio Slider */}
+      <div className="bg-[#E6F2FF] relative overflow-hidden py-16 md:py-24">
+        <ContentManagementSlider showTitle={true} showCTA={false} showDetailsText={true} />
       </div>
 
       {/* CTA Section */}
