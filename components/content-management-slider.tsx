@@ -14,117 +14,117 @@ interface PortfolioImage {
 const portfolioImages: PortfolioImage[] = [
   {
     id: "neuralfund-1",
-    imageUrl: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=800&h=800&fit=crop&q=80",
+    imageUrl: "/images/content-management/neuralfund-1.jpg",
     alt: "NEURALFUND Community Spotlight",
   },
   {
     id: "neuralfund-2",
-    imageUrl: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=800&h=800&fit=crop&q=80",
+    imageUrl: "/images/content-management/neuralfund-2.jpg",
     alt: "NEURALFUND Smart Crypto Traders",
   },
   {
     id: "neuralfund-3",
-    imageUrl: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=800&h=800&fit=crop&q=80",
+    imageUrl: "/images/content-management/neuralfund-3.jpg",
     alt: "NEURALFUND Crypto Security",
   },
   {
     id: "health-1",
-    imageUrl: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800&h=800&fit=crop&q=80",
+    imageUrl: "/images/content-management/health-1.jpg",
     alt: "Health & Wellness Content",
   },
   {
     id: "health-2",
-    imageUrl: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800&h=800&fit=crop&q=80",
+    imageUrl: "/images/content-management/health-2.jpg",
     alt: "Health & Wellness Content",
   },
   {
     id: "bluegrass-1",
-    imageUrl: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=800&h=800&fit=crop&q=80",
+    imageUrl: "/images/content-management/bluegrass-1.jpg",
     alt: "BLUEGRASS Gardening Content",
   },
   {
     id: "bluegrass-2",
-    imageUrl: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=800&h=800&fit=crop&q=80",
+    imageUrl: "/images/content-management/bluegrass-2.jpg",
     alt: "BLUEGRASS Gardening Content",
   },
   {
     id: "zytec-1",
-    imageUrl: "https://images.unsplash.com/photo-1521791136064-7986c2920216?w=800&h=800&fit=crop&q=80",
+    imageUrl: "/images/content-management/zytec-1.jpg",
     alt: "ZYTEC Solutions Content",
   },
   {
     id: "zytec-2",
-    imageUrl: "https://images.unsplash.com/photo-1521791136064-7986c2920216?w=800&h=800&fit=crop&q=80",
+    imageUrl: "/images/content-management/zytec-2.jpg",
     alt: "ZYTEC Solutions Content",
   },
   {
     id: "countach-1",
-    imageUrl: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&h=800&fit=crop&q=80",
+    imageUrl: "/images/content-management/countach-1.jpg",
     alt: "Countach Properties Content",
   },
   {
     id: "countach-2",
-    imageUrl: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&h=800&fit=crop&q=80",
+    imageUrl: "/images/content-management/countach-2.jpg",
     alt: "Countach Properties Content",
   },
   {
     id: "momartech-1",
-    imageUrl: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=800&fit=crop&q=80",
+    imageUrl: "/images/content-management/momartech-1.jpg",
     alt: "MO MarTech Content",
   },
   {
     id: "momartech-2",
-    imageUrl: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=800&fit=crop&q=80",
+    imageUrl: "/images/content-management/momartech-2.jpg",
     alt: "MO MarTech Content",
   },
   {
     id: "ai-career-1",
-    imageUrl: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=800&fit=crop&q=80",
+    imageUrl: "/images/content-management/ai-career-1.jpg",
     alt: "AI Career Makeover Content",
   },
   {
     id: "ai-career-2",
-    imageUrl: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=800&fit=crop&q=80",
+    imageUrl: "/images/content-management/ai-career-2.jpg",
     alt: "AI Career Makeover Content",
   },
   {
     id: "findable-1",
-    imageUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=800&fit=crop&q=80",
+    imageUrl: "/images/content-management/findable-1.jpg",
     alt: "Findable Content",
   },
   {
     id: "findable-2",
-    imageUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=800&fit=crop&q=80",
+    imageUrl: "/images/content-management/findable-2.jpg",
     alt: "Findable Content",
   },
   {
     id: "healhub-1",
-    imageUrl: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800&h=800&fit=crop&q=80",
+    imageUrl: "/images/content-management/healhub-1.jpg",
     alt: "HealHuB Content",
   },
   {
     id: "healhub-2",
-    imageUrl: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800&h=800&fit=crop&q=80",
+    imageUrl: "/images/content-management/healhub-2.jpg",
     alt: "HealHuB Content",
   },
   {
     id: "vh-property-1",
-    imageUrl: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&h=800&fit=crop&q=80",
+    imageUrl: "/images/content-management/vh-property-1.jpg",
     alt: "VH Property Content",
   },
   {
     id: "vh-property-2",
-    imageUrl: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&h=800&fit=crop&q=80",
+    imageUrl: "/images/content-management/vh-property-2.jpg",
     alt: "VH Property Content",
   },
   {
     id: "vagajobs-1",
-    imageUrl: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=800&fit=crop&q=80",
+    imageUrl: "/images/content-management/vagajobs-1.jpg",
     alt: "VagaJobs Content",
   },
   {
     id: "vagajobs-2",
-    imageUrl: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=800&fit=crop&q=80",
+    imageUrl: "/images/content-management/vagajobs-2.jpg",
     alt: "VagaJobs Content",
   },
 ];
@@ -318,7 +318,7 @@ export function ContentManagementSlider({
                 <Button
                   className="bg-gradient-to-r from-[#70BFFF] to-[#BE55FF] hover:from-[#70BFFF]/90 hover:to-[#BE55FF]/90 text-white px-8 md:px-10 py-4 md:py-6 text-base md:text-lg font-bold rounded-full shadow-xl hover:shadow-2xl transition-all transform hover:scale-105"
                 >
-                  Done for you social media management
+                  Learn more
                 </Button>
               </Link>
             )}
