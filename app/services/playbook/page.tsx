@@ -244,7 +244,7 @@ export default function PlaybookPage() {
           <div className="max-w-4xl mx-auto space-y-8">
             {[
               { step: 1, title: "Brand Discovery & Analysis", desc: "Deep dive into your brand identity, values, target audience, and current content approach" },
-              { step: 2, title: "Visual Identity Documentation", desc: "Document all visual elements including colors, typography, logo usage, and style guidelines" },
+              { step: 2, title: "Visual Identity Documentation", desc: "Document all visual elements including colours, typography, logo usage, and style guidelines" },
               { step: 3, title: "Messaging Framework Development", desc: "Define tone of voice, messaging pillars, and communication style guidelines" },
               { step: 4, title: "Content Pillar Definition", desc: "Establish core content themes, topics, and story structures aligned with your brand" },
               { step: 5, title: "Production Guidelines Creation", desc: "Develop shooting guidelines, visual standards, and quality benchmarks" },
@@ -334,7 +334,7 @@ export default function PlaybookPage() {
                 "Companies needing brand consistency across all content",
                 "Businesses scaling content creation with multiple team members",
                 "Brands wanting strategic content framework and guidelines",
-                "Organizations requiring clear brand identity documentation",
+                "Organisations requiring clear brand identity documentation",
                 "Companies looking to standardize content production",
                 "Brands seeking long-term content strategy foundation",
               ].map((item, index) => (

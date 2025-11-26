@@ -81,7 +81,7 @@ const services = [
       "AI video generation and enhancement",
       "Automated content creation and editing",
       "AI-powered image generation and manipulation",
-      "Smart content optimization and personalization",
+      "Smart content optimisation and personalisation",
       "AI-driven social media content creation",
       "Machine learning-based content analysis",
     ],

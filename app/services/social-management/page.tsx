@@ -114,7 +114,7 @@ export default function SocialManagementPage() {
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle2 className="h-5 w-5 text-[#BE55FF] mt-0.5 flex-shrink-0" />
-                  <span className="text-gray-700">Engagement-optimized copy</span>
+                  <span className="text-gray-700">Engagement-optimised copy</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle2 className="h-5 w-5 text-[#BE55FF] mt-0.5 flex-shrink-0" />
@@ -334,7 +334,7 @@ export default function SocialManagementPage() {
                 "Businesses wanting to outsource social media entirely",
                 "Companies needing consistent professional social presence",
                 "Brands looking to scale social media without hiring internally",
-                "Organizations requiring strategic social media management",
+                "Organisations requiring strategic social media management",
                 "Businesses wanting to focus on core operations",
                 "Companies seeking professional community engagement",
               ].map((item, index) => (
@@ -361,7 +361,7 @@ export default function SocialManagementPage() {
               { icon: TrendingUp, title: "Time Efficiency", desc: "Free your team to focus on core business while we handle all social media" },
               { icon: Users, title: "Community Growth", desc: "Build engaged community through strategic engagement and content" },
               { icon: CheckCircle2, title: "Professional Management", desc: "Access expert social media management without hiring full-time staff" },
-              { icon: Calendar, title: "Strategic Posting", desc: "Optimized posting schedules and content timing for maximum engagement" },
+              { icon: Calendar, title: "Strategic Posting", desc: "Optimised posting schedules and content timing for maximum engagement" },
               { icon: MessageSquare, title: "Brand Consistency", desc: "Ensure all social media content aligns with your brand voice and guidelines" },
             ].map((benefit, index) => {
               const Icon = benefit.icon;

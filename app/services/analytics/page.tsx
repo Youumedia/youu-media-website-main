@@ -332,7 +332,7 @@ export default function AnalyticsPage() {
                 "Businesses wanting data-driven content decisions",
                 "Companies needing clear ROI visibility",
                 "Brands seeking performance optimisation insights",
-                "Organizations requiring competitive intelligence",
+                "Organisations requiring competitive intelligence",
                 "Businesses wanting to understand what works and why",
                 "Companies looking to scale successful strategies",
               ].map((item, index) => (

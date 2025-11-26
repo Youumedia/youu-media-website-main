@@ -102,11 +102,11 @@ export function Chatbot() {
     }
 
     if (lowerMessage.includes('view portfolio') || lowerMessage.includes('portfolio') || lowerMessage.includes('work') || lowerMessage.includes('example')) {
-      return "You can view our portfolio at /portfolio to see our latest videography and photography work. We specialize in corporate films, wedding videos, commercial content, and event coverage. Would you like to know about our specific areas of expertise?"
+      return "You can view our portfolio at /portfolio to see our latest videography and photography work. We specialise in corporate films, wedding videos, commercial content, and event coverage. Would you like to know about our specific areas of expertise?"
     }
 
     if (lowerMessage.includes('get quote') || lowerMessage.includes('quote') || lowerMessage.includes('price') || lowerMessage.includes('cost') || lowerMessage.includes('pricing')) {
-      return "Pricing varies based on project scope, duration, and requirements. For a personalized quote, please contact us with your project details. We offer competitive rates for high-quality creative production services."
+      return "Pricing varies based on project scope, duration, and requirements. For a personalised quote, please contact us with your project details. We offer competitive rates for high-quality creative production services."
     }
 
     if (lowerMessage.includes('contact us') || lowerMessage.includes('contact') || lowerMessage.includes('phone') || lowerMessage.includes('email') || lowerMessage.includes('reach')) {
@@ -145,7 +145,7 @@ export function Chatbot() {
 
     // Company information
     if (lowerMessage.includes('company') || lowerMessage.includes('about') || lowerMessage.includes('who are you')) {
-      return "Youu Media is a creative production company specializing in videography, photography, and visual storytelling. We work with businesses, events, and individuals to create compelling content that tells their story. We're based in the UK and work with clients worldwide."
+      return "Youu Media is a creative production company specialising in videography, photography, and visual storytelling. We work with businesses, events, and individuals to create compelling content that tells their story. We're based in the UK and work with clients worldwide."
     }
 
     // Location questions

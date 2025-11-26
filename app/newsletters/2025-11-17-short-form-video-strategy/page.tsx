@@ -65,7 +65,7 @@ export default function NewsletterPage() {
                       className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#70BFFF] to-[#BE55FF] hover:from-[#70BFFF]/90 hover:to-[#BE55FF]/90 text-white px-6 py-3 rounded-full font-semibold shadow-lg hover:shadow-xl transition-all"
                     >
                       <Download className="h-4 w-4" />
-                      Download PDF
+                    Download PDF
                     </button>
                     <p className="text-xs text-gray-500 text-center">If not downloading, refresh page</p>
                   </div>
@@ -234,7 +234,7 @@ function NewsletterContent() {
               <div className="flex items-center gap-3 mb-4">
                 <TrendingUp className="h-6 w-6 text-[#BE55FF]" />
                 <h3 className="text-xl font-bold text-gray-900">Instagram Reels: Quality + Trend</h3>
-              </div>
+            </div>
               <p className="text-gray-700 leading-relaxed mb-3">
                 Instagram audiences expect slightly more polished content than TikTok, but trend participation remains crucial. The sweet spot is professional production (good lighting, clear audio) combined with timely trend integration. Cross-posting from Reels to your main feed doubles reach.
               </p>
@@ -256,7 +256,7 @@ function NewsletterContent() {
               <div className="flex items-center gap-3 mb-4">
                 <Target className="h-6 w-6 text-[#70BFFF]" />
                 <h3 className="text-xl font-bold text-gray-900">YouTube Shorts: Educational Content</h3>
-              </div>
+            </div>
               <p className="text-gray-700 leading-relaxed mb-3">
                 Shorts that teach, explain, or provide value see the highest performance on YouTube. The platform's audience is actively seeking knowledge and insights, so educational content aligns perfectly with user intent. Include timestamps, clear takeaways, and descriptive titles for better SEO.
               </p>

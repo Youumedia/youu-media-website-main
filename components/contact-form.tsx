@@ -139,7 +139,7 @@ export function ContactForm() {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="company" className="text-gray-900 font-semibold">Company/Organization</Label>
+              <Label htmlFor="company" className="text-gray-900 font-semibold">Company/Organisation</Label>
               <Input
                 id="company"
                 value={formData.company}

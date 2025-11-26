@@ -318,7 +318,7 @@ export default function NewsletterPage() {
                 "Businesses wanting to stay ahead of industry trends",
                 "Companies seeking ongoing strategic insights",
                 "Brands looking for convenient weekly value delivery",
-                "Organizations wanting to build thought leadership",
+                "Organisations wanting to build thought leadership",
                 "Businesses interested in community support and networking",
                 "Companies seeking lead generation through value",
               ].map((item, index) => (

@@ -398,7 +398,7 @@ export default async function DashboardPage() {
                 <CardContent className="relative z-10">
                   <div className="space-y-4">
                     <div className="p-4 bg-white/50 rounded-lg">
-                      <h4 className="font-semibold text-gray-900 mb-2">Specializations</h4>
+                      <h4 className="font-semibold text-gray-900 mb-2">Specialisations</h4>
                       <div className="flex flex-wrap gap-2">
                         <Badge className="bg-gradient-to-r from-[#BE55FF] to-[#70BFFF] text-white">Videography</Badge>
                         <Badge className="bg-gradient-to-r from-[#BE55FF] to-[#70BFFF] text-white">Photography</Badge>

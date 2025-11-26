@@ -185,7 +185,7 @@ export default function ContentProductionPage() {
               { step: 4, title: "Post-Production & Editing", desc: "Professional editing, colour grading, and enhancement to deliver cinematic quality" },
               { step: 5, title: "Review & Refinement", desc: "Client review process with revision rounds to ensure content meets brand standards" },
               { step: 6, title: "Asset Delivery & Organisation", desc: "Organised delivery of all final assets in required formats and resolutions" },
-              { step: 7, title: "Performance Integration", desc: "Content optimized for your platforms and integrated into your marketing workflow" },
+              { step: 7, title: "Performance Integration", desc: "Content optimised for your platforms and integrated into your marketing workflow" },
             ].map((item) => (
               <div key={item.step} className="flex gap-6 items-start">
                 <div className="flex-shrink-0 w-16 h-16 bg-gradient-to-br from-[#BE55FF] to-[#70BFFF] rounded-2xl flex items-center justify-center text-white font-black text-xl">
@@ -258,7 +258,7 @@ export default function ContentProductionPage() {
                 "Brands needing consistent monthly video and photo content",
                 "Companies looking to maintain professional visual presence",
                 "Businesses requiring ongoing content for marketing campaigns",
-                "Organizations wanting to outsource production entirely",
+                "Organisations wanting to outsource production entirely",
                 "Brands seeking cinematic quality on a regular schedule",
                 "Companies needing both video and photography services",
               ].map((item, index) => (

@@ -250,7 +250,7 @@ export default function FractionalVideoCMOPage() {
                 "Growing companies ready to invest in strategic brand positioning",
                 "Businesses seeking long-term marketing leadership without full-time CMO costs",
                 "Companies looking to build authority and trust through visual storytelling",
-                "Organizations needing integrated content strategy across multiple platforms",
+                "Organisations needing integrated content strategy across multiple platforms",
                 "Businesses requiring high-level marketing guidance and strategic direction",
                 "Companies ready to scale their visual content and brand presence",
               ].map((item, index) => (
@@ -277,7 +277,7 @@ export default function FractionalVideoCMOPage() {
               { icon: TrendingUp, title: "Strategic Growth", desc: "Align content strategy with business objectives for measurable growth and ROI" },
               { icon: Lightbulb, title: "Expert Guidance", desc: "Access senior-level marketing expertise without the cost of a full-time CMO" },
               { icon: Brain, title: "Integrated Strategy", desc: "Create cohesive content ecosystems that work across all platforms and channels" },
-              { icon: Users, title: "Team Alignment", desc: "Ensure your entire organization understands and executes the strategic vision" },
+              { icon: Users, title: "Team Alignment", desc: "Ensure your entire organisation understands and executes the strategic vision" },
               { icon: CheckCircle2, title: "Competitive Advantage", desc: "Stay ahead of competitors with strategic insights and market intelligence" },
             ].map((benefit, index) => {
               const Icon = benefit.icon;

@@ -91,7 +91,7 @@ export default function PaidAdsPage() {
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle2 className="h-5 w-5 text-[#BE55FF] mt-0.5 flex-shrink-0" />
-                  <span className="text-gray-700">Ad account organization</span>
+                  <span className="text-gray-700">Ad account organisation</span>
                 </li>
               </ul>
             </div>
@@ -421,7 +421,7 @@ export default function PaidAdsPage() {
                 "Businesses ready to invest in paid advertising for growth",
                 "Companies wanting professional campaign management",
                 "Brands seeking data-driven advertising strategies",
-                "Organizations needing to scale lead generation",
+                "Organisations needing to scale lead generation",
                 "Businesses wanting to maximize advertising ROI",
                 "Companies looking to outsource paid ads entirely",
               ].map((item, index) => (

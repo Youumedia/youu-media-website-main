@@ -6,8 +6,8 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { 
   Brain,
-  Video,
-  Instagram,
+  Video, 
+  Instagram, 
   TrendingUp,
   BarChart3,
   BookOpen,
@@ -123,7 +123,7 @@ export default function ServicesPage() {
               <div className="flex flex-col items-center gap-1.5 md:gap-2">
                 <div className="w-5 h-8 md:w-6 md:h-10 border-2 border-gray-400 rounded-full flex items-start justify-center p-1">
                   <div className="w-1.5 h-1.5 bg-gradient-to-b from-[#70BFFF] to-[#BE55FF] rounded-full animate-bounce" />
-                </div>
+                    </div>
                 <span className="text-[10px] md:text-xs text-gray-500 uppercase tracking-widest font-semibold">
                   Scroll
                 </span>
@@ -155,12 +155,12 @@ export default function ServicesPage() {
                       <div className="text-center px-4">
                         <div className="inline-block bg-gradient-to-r from-gray-400 to-gray-500 text-white px-4 py-2 rounded-full text-sm font-bold mb-3">
                           COMING SOON
-                        </div>
+                </div>
                         <p className="text-sm text-gray-600">
                           Launching soon — resources and training hub in development.
                         </p>
-                      </div>
-                    </div>
+            </div>
+          </div>
                   )}
 
                   {/* Gradient background on hover */}
@@ -169,7 +169,7 @@ export default function ServicesPage() {
                   {/* Icon */}
                   <div className={`w-16 h-16 bg-gradient-to-br ${service.gradient} rounded-2xl flex items-center justify-center mb-6 ${isComingSoon ? "opacity-50" : ""}`}>
                     <Icon className="h-8 w-8 text-white" />
-                  </div>
+        </div>
 
                   {/* Content */}
                   <div className="relative z-10">
@@ -192,8 +192,8 @@ export default function ServicesPage() {
                         </Link>
                       </Button>
                     )}
-                  </div>
-                </div>
+          </div>
+            </div>
               );
             })}
           </div>

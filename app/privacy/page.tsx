@@ -106,7 +106,7 @@ export default function PrivacyPolicyPage() {
                         <li>Improve our website and services</li>
                         <li>Manage freelancer applications and relationships</li>
                         <li>Send service-related communications</li>
-                        <li>Analyze website usage and performance</li>
+                        <li>Analyse website usage and performance</li>
             </ul>
                     </div>
                     
@@ -141,7 +141,7 @@ export default function PrivacyPolicyPage() {
                   <h2 className="text-2xl font-bold text-gray-900 mb-4">6. Cookies and Tracking Technologies</h2>
                   <div className="space-y-4">
                     <p className="text-gray-700 leading-relaxed">
-                      We use cookies and similar technologies to enhance your experience and analyze website performance.
+                      We use cookies and similar technologies to enhance your experience and analyse website performance.
                     </p>
                     <div>
                       <h3 className="text-xl font-semibold text-gray-900 mb-2">Types of Cookies We Use</h3>

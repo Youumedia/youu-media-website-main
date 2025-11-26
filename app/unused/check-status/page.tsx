@@ -52,7 +52,7 @@ const projectStages: ProjectStage[] = [
   {
     id: "quote_sent",
     name: "Quote Sent",
-    description: "Your personalized quote has been sent",
+    description: "Your personalised quote has been sent",
     icon: CheckCircle,
     color: "text-blue-600",
     bgColor: "bg-blue-100",
