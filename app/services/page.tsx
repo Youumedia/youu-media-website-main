@@ -14,7 +14,8 @@ import {
   GraduationCap,
   MessageSquare,
   ArrowRight,
-  Lock
+  Lock,
+  Users
 } from "lucide-react";
 
 const services = [
@@ -203,6 +204,94 @@ export default function ServicesPage() {
                 </div>
               );
             })}
+          </div>
+        </div>
+      </div>
+
+      {/* Why Choose Us Section */}
+      <div className="bg-[#E6F2FF] relative overflow-hidden py-16 md:py-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-12 text-center">
+            Why Choose <span className="bg-gradient-to-r from-[#70BFFF] to-[#BE55FF] bg-clip-text text-transparent">Youu Media</span>
+          </h2>
+          
+          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            <div className="bg-white rounded-3xl p-8 border border-gray-200 shadow-lg">
+              <div className="w-14 h-14 bg-gradient-to-br from-[#70BFFF] to-[#BE55FF] rounded-xl flex items-center justify-center mb-6">
+                <TrendingUp className="h-7 w-7 text-white" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-4">Proven Results</h3>
+              <p className="text-gray-700 leading-relaxed">
+                We deliver measurable outcomes that drive business growth and brand recognition through strategic content and media solutions.
+              </p>
+            </div>
+
+            <div className="bg-white rounded-3xl p-8 border border-gray-200 shadow-lg">
+              <div className="w-14 h-14 bg-gradient-to-br from-[#BE55FF] to-[#70BFFF] rounded-xl flex items-center justify-center mb-6">
+                <Video className="h-7 w-7 text-white" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-4">Cinematic Quality</h3>
+              <p className="text-gray-700 leading-relaxed">
+                Every project is crafted with professional-grade equipment and expertise, ensuring your content stands out in a crowded marketplace.
+              </p>
+            </div>
+
+            <div className="bg-white rounded-3xl p-8 border border-gray-200 shadow-lg">
+              <div className="w-14 h-14 bg-gradient-to-br from-[#70BFFF] to-[#BE55FF] rounded-xl flex items-center justify-center mb-6">
+                <Users className="h-7 w-7 text-white" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-4">Strategic Partnership</h3>
+              <p className="text-gray-700 leading-relaxed">
+                We work as an extension of your team, understanding your brand deeply and delivering solutions that align with your long-term vision.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Our Approach Section */}
+      <div className="bg-white relative overflow-hidden py-16 md:py-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-12 text-center">
+            Our <span className="bg-gradient-to-r from-[#BE55FF] to-[#70BFFF] bg-clip-text text-transparent">Approach</span>
+          </h2>
+          
+          <div className="max-w-4xl mx-auto space-y-8">
+            <div className="flex gap-6 items-start">
+              <div className="flex-shrink-0 w-16 h-16 bg-gradient-to-br from-[#70BFFF] to-[#BE55FF] rounded-2xl flex items-center justify-center text-white font-black text-xl">
+                1
+              </div>
+              <div className="flex-1 pt-2">
+                <h3 className="text-2xl font-bold text-gray-900 mb-2">Discovery & Strategy</h3>
+                <p className="text-gray-700 leading-relaxed">
+                  We begin by understanding your brand, goals, and target audience to develop a comprehensive strategy that drives results.
+                </p>
+              </div>
+            </div>
+
+            <div className="flex gap-6 items-start">
+              <div className="flex-shrink-0 w-16 h-16 bg-gradient-to-br from-[#BE55FF] to-[#70BFFF] rounded-2xl flex items-center justify-center text-white font-black text-xl">
+                2
+              </div>
+              <div className="flex-1 pt-2">
+                <h3 className="text-2xl font-bold text-gray-900 mb-2">Execution & Production</h3>
+                <p className="text-gray-700 leading-relaxed">
+                  Our team brings your vision to life with professional production, creative direction, and attention to detail that sets your content apart.
+                </p>
+              </div>
+            </div>
+
+            <div className="flex gap-6 items-start">
+              <div className="flex-shrink-0 w-16 h-16 bg-gradient-to-br from-[#70BFFF] to-[#BE55FF] rounded-2xl flex items-center justify-center text-white font-black text-xl">
+                3
+              </div>
+              <div className="flex-1 pt-2">
+                <h3 className="text-2xl font-bold text-gray-900 mb-2">Optimisation & Growth</h3>
+                <p className="text-gray-700 leading-relaxed">
+                  We continuously analyse performance, optimise strategies, and refine approaches to ensure your content delivers maximum impact and ROI.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </div>

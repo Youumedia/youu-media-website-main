@@ -132,8 +132,17 @@ export function VideoPortfolioCarousel({
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-20">
-          <h2 className="text-5xl md:text-6xl font-black text-gray-900 mb-4">
-            {title}
+          <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-4">
+            {title.includes("Video Production Work") ? (
+              <>
+                Examples of Our{" "}
+                <span className="bg-gradient-to-r from-[#70BFFF] to-[#BE55FF] bg-clip-text text-transparent">
+                  Video Production Work
+                </span>
+              </>
+            ) : (
+              title
+            )}
           </h2>
           {description && (
             <p className="text-xl text-gray-700 max-w-2xl mx-auto">

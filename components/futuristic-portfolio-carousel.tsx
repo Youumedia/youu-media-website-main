@@ -60,14 +60,16 @@ export function FuturisticPortfolioCarousel() {
         const container = videoContainerRef.current;
         const itemWidth = 320 + 24;
         const containerWidth = container.clientWidth;
-        const scrollLeft = (activeVideoIndex * itemWidth) - (containerWidth / 2) + (itemWidth / 2);
+        const scrollLeft =
+          activeVideoIndex * itemWidth - containerWidth / 2 + itemWidth / 2;
         container.scrollLeft = Math.max(0, scrollLeft);
       }
       if (photoContainerRef.current) {
         const container = photoContainerRef.current;
         const itemWidth = 320 + 24;
         const containerWidth = container.clientWidth;
-        const scrollLeft = (activePhotoIndex * itemWidth) - (containerWidth / 2) + (itemWidth / 2);
+        const scrollLeft =
+          activePhotoIndex * itemWidth - containerWidth / 2 + itemWidth / 2;
         container.scrollLeft = Math.max(0, scrollLeft);
       }
     };
@@ -82,7 +84,7 @@ export function FuturisticPortfolioCarousel() {
       const container = videoContainerRef.current;
       const itemWidth = 320 + 24; // 320px width + 24px gap
       const containerWidth = container.clientWidth;
-      const scrollLeft = (index * itemWidth) - (containerWidth / 2) + (itemWidth / 2);
+      const scrollLeft = index * itemWidth - containerWidth / 2 + itemWidth / 2;
       container.scrollTo({
         left: Math.max(0, scrollLeft),
         behavior: "smooth",
@@ -96,7 +98,7 @@ export function FuturisticPortfolioCarousel() {
       const container = photoContainerRef.current;
       const itemWidth = 320 + 24; // 320px width + 24px gap
       const containerWidth = container.clientWidth;
-      const scrollLeft = (index * itemWidth) - (containerWidth / 2) + (itemWidth / 2);
+      const scrollLeft = index * itemWidth - containerWidth / 2 + itemWidth / 2;
       container.scrollTo({
         left: Math.max(0, scrollLeft),
         behavior: "smooth",
@@ -189,13 +191,19 @@ export function FuturisticPortfolioCarousel() {
                                   onError={(e) => {
                                     const target = e.target as HTMLImageElement;
                                     // Try multiple fallback options
-                                    if (target.src.includes('maxresdefault')) {
+                                    if (target.src.includes("maxresdefault")) {
                                       target.src = `https://img.youtube.com/vi/${item.youtubeId}/hqdefault.jpg`;
-                                    } else if (target.src.includes('hqdefault')) {
+                                    } else if (
+                                      target.src.includes("hqdefault")
+                                    ) {
                                       target.src = `https://img.youtube.com/vi/${item.youtubeId}/mqdefault.jpg`;
-                                    } else if (target.src.includes('mqdefault')) {
+                                    } else if (
+                                      target.src.includes("mqdefault")
+                                    ) {
                                       target.src = `https://img.youtube.com/vi/${item.youtubeId}/sddefault.jpg`;
-                                    } else if (target.src.includes('sddefault')) {
+                                    } else if (
+                                      target.src.includes("sddefault")
+                                    ) {
                                       // Final fallback to 0.jpg (first frame)
                                       target.src = `https://img.youtube.com/vi/${item.youtubeId}/0.jpg`;
                                     }
