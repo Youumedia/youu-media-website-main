@@ -25,6 +25,7 @@ const services = [
     icon: Brain,
     href: "/services/fractional-video-cmo",
     gradient: "from-[#70BFFF] to-[#BE55FF]",
+    bgGradient: "from-blue-50 via-purple-50 to-pink-50",
   },
   {
     id: 2,
@@ -33,6 +34,7 @@ const services = [
     icon: Video,
     href: "/services/content-production",
     gradient: "from-[#BE55FF] to-[#70BFFF]",
+    bgGradient: "from-purple-50 via-blue-50 to-cyan-50",
   },
   {
     id: 3,
@@ -41,6 +43,7 @@ const services = [
     icon: Instagram,
     href: "/services/social-management",
     gradient: "from-[#70BFFF] to-[#BE55FF]",
+    bgGradient: "from-pink-50 via-rose-50 to-orange-50",
   },
   {
     id: 4,
@@ -49,6 +52,7 @@ const services = [
     icon: TrendingUp,
     href: "/services/paid-ads",
     gradient: "from-[#BE55FF] to-[#70BFFF]",
+    bgGradient: "from-emerald-50 via-teal-50 to-cyan-50",
   },
   {
     id: 5,
@@ -57,6 +61,7 @@ const services = [
     icon: BarChart3,
     href: "/services/analytics",
     gradient: "from-[#70BFFF] to-[#BE55FF]",
+    bgGradient: "from-indigo-50 via-blue-50 to-purple-50",
   },
   {
     id: 6,
@@ -65,6 +70,7 @@ const services = [
     icon: BookOpen,
     href: "/services/playbook",
     gradient: "from-[#BE55FF] to-[#70BFFF]",
+    bgGradient: "from-amber-50 via-yellow-50 to-orange-50",
   },
   {
     id: 7,
@@ -73,6 +79,7 @@ const services = [
     icon: GraduationCap,
     href: null, // Not clickable
     gradient: "from-gray-400 to-gray-500",
+    bgGradient: "from-gray-50 via-gray-100 to-gray-200",
     comingSoon: true,
   },
 ];
@@ -136,7 +143,7 @@ export default function ServicesPage() {
       {/* Services Grid */}
       <div className="bg-white relative overflow-hidden py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {services.map((service) => {
               const Icon = service.icon;
               const isComingSoon = service.comingSoon;
@@ -144,10 +151,16 @@ export default function ServicesPage() {
               return (
                 <div
                   key={service.id}
-                  className={`group relative bg-white rounded-3xl p-8 border-2 border-gray-200 shadow-lg hover:shadow-2xl transition-all overflow-hidden ${
+                  className={`group relative rounded-3xl p-6 md:p-8 border-2 border-gray-200 shadow-lg hover:shadow-2xl transition-all overflow-hidden ${
                     isComingSoon ? "opacity-75 cursor-not-allowed" : "hover:border-[#70BFFF]/50 hover:scale-[1.02]"
                   }`}
                 >
+                  {/* Light gradient background */}
+                  <div className={`absolute inset-0 bg-gradient-to-br ${service.bgGradient} rounded-3xl`} />
+                  
+                  {/* Gradient overlay on hover */}
+                  <div className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-500 rounded-3xl`} />
+
                   {/* Coming Soon Overlay */}
                   {isComingSoon && (
                     <div className="absolute inset-0 bg-white/90 backdrop-blur-sm z-20 flex flex-col items-center justify-center rounded-3xl">
@@ -155,30 +168,24 @@ export default function ServicesPage() {
                       <div className="text-center px-4">
                         <div className="inline-block bg-gradient-to-r from-gray-400 to-gray-500 text-white px-4 py-2 rounded-full text-sm font-bold mb-3">
                           COMING SOON
-                </div>
+                        </div>
                         <p className="text-sm text-gray-600">
                           Launching soon — resources and training hub in development.
                         </p>
-            </div>
-          </div>
+                      </div>
+                    </div>
                   )}
 
-                  {/* Gradient background on hover */}
-                  <div className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-500 rounded-3xl`} />
-
-                  {/* Icon */}
-                  <div className={`w-16 h-16 bg-gradient-to-br ${service.gradient} rounded-2xl flex items-center justify-center mb-6 ${isComingSoon ? "opacity-50" : ""}`}>
-                    <Icon className="h-8 w-8 text-white" />
-        </div>
+                  {/* Icon - positioned at top left */}
+                  <div className={`absolute top-6 left-6 md:top-8 md:left-8 w-14 h-14 md:w-16 md:h-16 bg-gradient-to-br ${service.gradient} rounded-2xl flex items-center justify-center z-10 ${isComingSoon ? "opacity-50" : ""}`}>
+                    <Icon className="h-7 w-7 md:h-8 md:w-8 text-white" />
+                  </div>
 
                   {/* Content */}
-                  <div className="relative z-10">
-                    <h3 className={`text-2xl font-bold text-gray-900 mb-4 ${isComingSoon ? "opacity-50" : ""}`}>
+                  <div className="relative z-10 pt-16 md:pt-20">
+                    <h3 className={`text-xl md:text-2xl font-bold text-gray-900 mb-4 ${isComingSoon ? "opacity-50" : ""}`}>
                       {service.title}
                     </h3>
-                    <p className={`text-gray-700 mb-6 leading-relaxed ${isComingSoon ? "opacity-50" : ""}`}>
-                      {service.description}
-                    </p>
 
                     {/* Learn More Button */}
                     {!isComingSoon && (
@@ -192,8 +199,8 @@ export default function ServicesPage() {
                         </Link>
                       </Button>
                     )}
-          </div>
-            </div>
+                  </div>
+                </div>
               );
             })}
           </div>
