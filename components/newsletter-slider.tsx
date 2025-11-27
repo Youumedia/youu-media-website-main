@@ -86,7 +86,7 @@ export function NewsletterSlider() {
   };
 
   return (
-    <div className="mt-16 md:mt-24">
+    <div id="newsletter" className="mt-16 md:mt-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 mb-8">
         <div className="text-center mb-12">
           <span className="text-sm font-bold text-[#BE55FF] uppercase tracking-widest mb-4 block">
