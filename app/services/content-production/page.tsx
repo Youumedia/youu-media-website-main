@@ -3,6 +3,7 @@
 import { Navigation } from "@/components/navigation";
 import { Footer } from "@/components/footer";
 import { Button } from "@/components/ui/button";
+import { VideoPortfolioCarousel } from "@/components/video-portfolio-carousel";
 import Link from "next/link";
 import { 
   Video,
@@ -270,6 +271,14 @@ export default function ContentProductionPage() {
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Video Portfolio Showcase */}
+      <div className="bg-white relative overflow-hidden">
+        <VideoPortfolioCarousel 
+          title="Examples of Our Video Production Work"
+          description="A selection of our cinematic video production projects showcasing the quality and style you can expect from our monthly content creation service."
+        />
       </div>
 
       {/* Key Benefits */}
