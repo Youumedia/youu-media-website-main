@@ -1,9 +1,8 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
-import { Card } from "@/components/ui/card";
-import { Play } from "lucide-react";
-import { portfolioVideos, VideoItem } from "@/lib/portfolio-videos";
+import React, { useState, useRef, useEffect } from "react";
+import { ChevronLeft, ChevronRight, Play } from "lucide-react";
+import { portfolioVideos } from "@/lib/portfolio-videos";
 
 interface VideoPortfolioCarouselProps {
   title?: string;
@@ -11,188 +10,258 @@ interface VideoPortfolioCarouselProps {
 }
 
 export function VideoPortfolioCarousel({ 
-  title = "Video Portfolio",
-  description = "Explore our cinematic video production work"
+  title = "Examples of Our Video Production Work",
+  description = "A selection of our cinematic video production projects showcasing the quality and style you can expect from our monthly content creation service."
 }: VideoPortfolioCarouselProps) {
-  const [activeVideoIndex, setActiveVideoIndex] = useState(0);
-  const videoContainerRef = useRef<HTMLDivElement>(null);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const [playingVideoId, setPlayingVideoId] = useState<number | null>(null);
+  const isScrollingRef = useRef(false);
 
-  // Center the active items on mount
+  // Create looped items (3 copies for seamless looping)
+  const loopedItems = [...portfolioVideos, ...portfolioVideos, ...portfolioVideos];
+  
+  // Calculate item width including gap
+  const getItemWidth = () => {
+    if (typeof window !== 'undefined') {
+      return window.innerWidth >= 768 ? 500 + 24 : 400 + 24; // width + gap
+    }
+    return 424;
+  };
+
   useEffect(() => {
-    const centerActiveItems = () => {
-      if (videoContainerRef.current) {
-        const container = videoContainerRef.current;
-        const itemWidth = 320 + 24;
-        const containerWidth = container.clientWidth;
-        const scrollLeft = (activeVideoIndex * itemWidth) - (containerWidth / 2) + (itemWidth / 2);
-        container.scrollLeft = Math.max(0, scrollLeft);
+    const container = scrollContainerRef.current;
+    if (!container) return;
+
+    // Calculate dimensions
+    const calculateDimensions = () => {
+      const itemWidth = getItemWidth();
+      const singleSetWidth = portfolioVideos.length * itemWidth;
+      const padding = window.innerWidth >= 768 ? 48 : 32; // pl-6/pr-6 = 48px, pl-4/pr-4 = 32px
+      return { itemWidth, singleSetWidth, padding };
+    };
+
+    // Start in the middle section
+    const { singleSetWidth } = calculateDimensions();
+    container.scrollLeft = singleSetWidth;
+
+    const handleScroll = () => {
+      if (!container || isScrollingRef.current) return;
+
+      const { scrollLeft } = container;
+      const { singleSetWidth } = calculateDimensions();
+      const threshold = 50; // Small threshold to prevent flickering
+      
+      // If scrolled past the second set (near the end), jump to the middle set
+      if (scrollLeft >= singleSetWidth * 2 - threshold) {
+        isScrollingRef.current = true;
+        const newScrollLeft = scrollLeft - singleSetWidth;
+        container.scrollLeft = newScrollLeft;
+        // Use requestAnimationFrame to ensure the scroll position is set before resetting the flag
+        requestAnimationFrame(() => {
+          isScrollingRef.current = false;
+        });
+      }
+      // If scrolled before the first set (near the beginning), jump to the middle set
+      else if (scrollLeft <= threshold) {
+        isScrollingRef.current = true;
+        const newScrollLeft = singleSetWidth + scrollLeft;
+        container.scrollLeft = newScrollLeft;
+        requestAnimationFrame(() => {
+          isScrollingRef.current = false;
+        });
       }
     };
 
-    // Delay to ensure containers are rendered
-    setTimeout(centerActiveItems, 100);
-  }, [activeVideoIndex]);
+    const handleResize = () => {
+      const { singleSetWidth } = calculateDimensions();
+      // Reset to middle section on resize
+      container.scrollLeft = singleSetWidth;
+    };
 
-  const scrollToVideo = (index: number) => {
-    setActiveVideoIndex(index);
-    if (videoContainerRef.current) {
-      const container = videoContainerRef.current;
-      const itemWidth = 320 + 24; // 320px width + 24px gap
-      const containerWidth = container.clientWidth;
-      const scrollLeft = (index * itemWidth) - (containerWidth / 2) + (itemWidth / 2);
-      container.scrollTo({
-        left: Math.max(0, scrollLeft),
+    container.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      container.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  const scroll = (direction: "left" | "right") => {
+    if (scrollContainerRef.current) {
+      const itemWidth = getItemWidth();
+      const scrollAmount = itemWidth;
+      scrollContainerRef.current.scrollBy({
+        left: direction === "left" ? -scrollAmount : scrollAmount,
         behavior: "smooth",
       });
     }
   };
 
   return (
-    <section className="py-16 md:py-24 relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="mb-12">
-          <div className="text-center mb-8">
-            <h2 className="text-3xl md:text-4xl font-bold text-balance text-gray-900 mb-4">
-              <span className="bg-gradient-to-r from-[#BE55FF] to-[#70BFFF] bg-clip-text text-transparent">
-                {title}
-              </span>
-            </h2>
-            {description && (
-              <p className="text-lg text-gray-700 max-w-2xl mx-auto">
-                {description}
-              </p>
-            )}
-          </div>
+    <section className="py-12 md:py-16 bg-[#E6F2FF] relative overflow-hidden">
+      {/* Background Shapes - kept within section bounds */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {/* Large floating orbs - positioned to stay within bounds */}
+        <div className="absolute top-[15%] left-[20%] w-[500px] h-[500px] bg-[#70BFFF]/20 rounded-full blur-3xl animate-float-slow" style={{ animationDelay: "0s" }} />
+        <div className="absolute bottom-[15%] right-[20%] w-[500px] h-[500px] bg-[#BE55FF]/20 rounded-full blur-3xl animate-float-medium" style={{ animationDelay: "0.5s" }} />
+        <div className="absolute top-[50%] left-[50%] w-[300px] h-[300px] bg-[#70BFFF]/15 rounded-full blur-2xl animate-float-fast" style={{ animationDelay: "1s" }} />
+        <div className="absolute top-[15%] right-[12%] w-[420px] h-[420px] bg-[#BE55FF]/17 rounded-full blur-3xl animate-float-slow" style={{ animationDelay: "1.5s" }} />
+        <div className="absolute bottom-[20%] left-[30%] w-[360px] h-[360px] bg-[#70BFFF]/16 rounded-full blur-2xl animate-float-medium" style={{ animationDelay: "2s" }} />
+        <div className="absolute top-[12%] left-[55%] w-[380px] h-[380px] bg-[#BE55FF]/18 rounded-full blur-3xl animate-float-fast" style={{ animationDelay: "0.3s" }} />
+        <div className="absolute bottom-[12%] right-[35%] w-[400px] h-[400px] bg-[#70BFFF]/17 rounded-full blur-3xl animate-float-slow" style={{ animationDelay: "0.8s" }} />
+        <div className="absolute top-[35%] right-[5%] w-[340px] h-[340px] bg-[#BE55FF]/16 rounded-full blur-2xl animate-float-medium" style={{ animationDelay: "1.2s" }} />
+        <div className="absolute bottom-[25%] left-[8%] w-[370px] h-[370px] bg-[#70BFFF]/18 rounded-full blur-2xl animate-float-fast" style={{ animationDelay: "1.7s" }} />
+        <div className="absolute top-[60%] left-[45%] w-[390px] h-[390px] bg-[#BE55FF]/19 rounded-full blur-3xl animate-float-slow" style={{ animationDelay: "0.6s" }} />
 
-          {/* Video Carousel Container */}
-          <div className="relative">
-            <div
-              ref={videoContainerRef}
-              className="flex gap-6 overflow-x-auto scrollbar-hide pb-4"
-              style={{ scrollSnapType: "x mandatory" }}
-            >
-              {portfolioVideos.map((item, index) => {
-                const isActive = index === activeVideoIndex;
-                const distance = Math.abs(index - activeVideoIndex);
-                const scale = distance === 0 ? 1 : 0.8 - distance * 0.1;
-                const opacity = distance === 0 ? 1 : 0.6 - distance * 0.2;
+        {/* Geometric shapes with floating animations */}
+        <div className="absolute top-[12%] right-[8%] w-32 h-32 bg-gradient-to-br from-[#70BFFF]/25 to-[#BE55FF]/25 rounded-3xl rotate-45 animate-float-slow" style={{ animationDelay: "0.2s" }} />
+        <div className="absolute bottom-[15%] left-[12%] w-24 h-24 bg-gradient-to-br from-[#BE55FF]/25 to-[#70BFFF]/25 rounded-full animate-float-medium" style={{ animationDelay: "1.1s" }} />
+        <div className="absolute top-[35%] right-[32%] w-16 h-16 bg-[#70BFFF]/20 rounded-lg rotate-12 animate-float-fast" style={{ animationDelay: "2.2s" }} />
+        <div className="absolute bottom-[25%] left-[30%] w-20 h-20 bg-[#BE55FF]/20 rounded-full animate-float-slow" style={{ animationDelay: "0.7s" }} />
+        <div className="absolute top-[60%] right-[18%] w-26 h-26 bg-gradient-to-br from-[#70BFFF]/22 to-[#BE55FF]/22 rounded-full animate-float-medium" style={{ animationDelay: "1.4s" }} />
+        <div className="absolute bottom-[20%] left-[18%] w-22 h-22 bg-[#BE55FF]/18 rounded-xl rotate-12 animate-float-fast" style={{ animationDelay: "0.9s" }} />
+        <div className="absolute top-[18%] left-[65%] w-28 h-28 bg-gradient-to-br from-[#70BFFF]/20 to-[#BE55FF]/20 rounded-2xl rotate-45 animate-float-slow" style={{ animationDelay: "1.6s" }} />
+        <div className="absolute top-[45%] left-[5%] w-18 h-18 bg-[#70BFFF]/19 rounded-lg rotate-12 animate-float-medium" style={{ animationDelay: "0.4s" }} />
+        <div className="absolute bottom-[30%] right-[45%] w-30 h-30 bg-gradient-to-br from-[#BE55FF]/21 to-[#70BFFF]/21 rounded-full animate-float-fast" style={{ animationDelay: "1.8s" }} />
+        <div className="absolute top-[55%] left-[60%] w-24 h-24 bg-[#BE55FF]/18 rounded-xl rotate-45 animate-float-slow" style={{ animationDelay: "1.0s" }} />
+        <div className="absolute top-[28%] right-[55%] w-22 h-22 bg-gradient-to-br from-[#70BFFF]/20 to-[#BE55FF]/20 rounded-2xl rotate-12 animate-float-medium" style={{ animationDelay: "1.5s" }} />
+        <div className="absolute bottom-[35%] left-[50%] w-26 h-26 bg-[#BE55FF]/19 rounded-full animate-float-fast" style={{ animationDelay: "0.5s" }} />
+        <div className="absolute top-[70%] right-[12%] w-20 h-20 bg-gradient-to-br from-[#70BFFF]/21 to-[#BE55FF]/21 rounded-xl rotate-45 animate-float-slow" style={{ animationDelay: "1.3s" }} />
+      </div>
 
-                return (
-                  <div
-                    key={item.id}
-                    className="flex-shrink-0 cursor-pointer transition-all duration-500"
-                    style={{
-                      transform: `scale(${Math.max(scale, 0.6)})`,
-                      opacity: Math.max(opacity, 0.3),
-                    }}
-                    onClick={() => scrollToVideo(index)}
-                  >
-                    <Card
-                      className={`group overflow-hidden hover:shadow-2xl transition-all duration-500 border-2 ${
-                        isActive
-                          ? "border-gradient-to-r border-[#BE55FF] shadow-2xl"
-                          : "border-transparent hover:border-[#BE55FF]/50"
-                      } relative`}
-                      style={{
-                        background: isActive
-                          ? "linear-gradient(135deg, rgba(190, 85, 255, 0.1), rgba(112, 191, 255, 0.1))"
-                          : "linear-gradient(135deg, rgba(190, 85, 255, 0.05), rgba(112, 191, 255, 0.05))",
-                      }}
-                    >
-                      {/* Glowing border effect for active item */}
-                      {isActive && (
-                        <div className="absolute inset-0 bg-gradient-to-r from-[#BE55FF] to-[#70BFFF] opacity-20 rounded-lg blur-sm"></div>
-                      )}
-
-                      <div className="relative overflow-hidden bg-gradient-to-br from-gray-900 via-gray-800 to-black">
-                        <div className="w-80 h-48 relative">
-                          {isActive ? (
-                            <iframe
-                              className="w-full h-full"
-                              src={item.embedUrl}
-                              title={item.title}
-                              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                              allowFullScreen
-                              style={{ border: "none" }}
-                            />
-                          ) : (
-                            <>
-                              {/* Thumbnail with play button overlay */}
-                              <div className="w-full h-full bg-gradient-to-br from-gray-900 via-gray-800 to-black flex items-center justify-center group-hover:from-gray-800 group-hover:via-gray-700 group-hover:to-gray-900 transition-all duration-500 relative">
-                                {/* Animated background elements */}
-                                <div className="absolute inset-0 opacity-20">
-                                  <div className="absolute top-1/4 left-1/4 w-32 h-32 bg-gradient-to-r from-[#BE55FF] to-[#70BFFF] rounded-full blur-3xl animate-pulse"></div>
-                                  <div className="absolute bottom-1/4 right-1/4 w-24 h-24 bg-gradient-to-l from-[#70BFFF] to-[#BE55FF] rounded-full blur-2xl animate-pulse"></div>
-                                </div>
-
-                                {/* YouTube thumbnail */}
-                                <img
-                                  src={`https://img.youtube.com/vi/${item.youtubeId}/maxresdefault.jpg`}
-                                  alt={item.title}
-                                  className="w-full h-full object-cover opacity-60"
-                                  onError={(e) => {
-                                    const target = e.target as HTMLImageElement;
-                                    // Try multiple fallback options
-                                    if (target.src.includes('maxresdefault')) {
-                                      target.src = `https://img.youtube.com/vi/${item.youtubeId}/hqdefault.jpg`;
-                                    } else if (target.src.includes('hqdefault')) {
-                                      target.src = `https://img.youtube.com/vi/${item.youtubeId}/mqdefault.jpg`;
-                                    } else if (target.src.includes('mqdefault')) {
-                                      target.src = `https://img.youtube.com/vi/${item.youtubeId}/sddefault.jpg`;
-                                    } else if (target.src.includes('sddefault')) {
-                                      // Final fallback to 0.jpg (first frame)
-                                      target.src = `https://img.youtube.com/vi/${item.youtubeId}/0.jpg`;
-                                    }
-                                  }}
-                                  loading="lazy"
-                                />
-
-                                {/* Play button overlay */}
-                                <div className="absolute inset-0 flex items-center justify-center">
-                                  <div className="w-16 h-16 bg-gradient-to-r from-[#BE55FF] to-[#70BFFF] rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 shadow-2xl relative cursor-pointer">
-                                    <Play className="h-8 w-8 text-white ml-1" />
-                                    <div className="absolute inset-0 bg-gradient-to-r from-[#BE55FF] to-[#70BFFF] rounded-2xl blur-lg opacity-60 group-hover:opacity-80 transition-opacity"></div>
-                                  </div>
-                                </div>
-
-                                <div className="absolute top-3 left-3 bg-gradient-to-r from-[#BE55FF] to-[#70BFFF] backdrop-blur-md px-3 py-1 rounded-full text-white text-xs font-semibold shadow-lg z-10">
-                                  {item.category}
-                                </div>
-                              </div>
-                            </>
-                          )}
-                        </div>
-                      </div>
-                    </Card>
-                  </div>
-                );
-              })}
-            </div>
-
-            {/* Video Navigation */}
-            <div className="flex justify-center mt-6 gap-2">
-              {portfolioVideos.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => scrollToVideo(index)}
-                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                    index === activeVideoIndex
-                      ? "bg-gradient-to-r from-[#BE55FF] to-[#70BFFF] scale-125"
-                      : "bg-gray-300 hover:bg-gray-400"
-                  }`}
-                />
-              ))}
-            </div>
-          </div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="text-center mb-20">
+          <h2 className="text-5xl md:text-6xl font-black text-gray-900 mb-4">
+            {title}
+          </h2>
+          {description && (
+            <p className="text-xl text-gray-700 max-w-2xl mx-auto">
+              {description}
+            </p>
+          )}
         </div>
       </div>
 
-      {/* Custom Styles */}
+      {/* Swipe instruction */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 mb-6">
+        <p className="text-center text-sm text-gray-500 opacity-60">Swipe left</p>
+      </div>
+
+      {/* Horizontal scroll container - full width edge to edge */}
+      <div className="relative w-screen overflow-hidden -ml-[50vw] left-1/2">
+        {/* Scroll buttons - always visible for infinite loop */}
+        <button
+          onClick={() => scroll("left")}
+          className="absolute left-4 md:left-6 lg:left-8 top-1/2 -translate-y-1/2 z-10 bg-white/20 backdrop-blur-xl rounded-full p-3 shadow-lg hover:shadow-xl transition-all hover:scale-110 border border-white/30 hover:border-white/50"
+          aria-label="Scroll left"
+        >
+          <ChevronLeft className="h-6 w-6 text-gray-700" />
+        </button>
+        <button
+          onClick={() => scroll("right")}
+          className="absolute right-4 md:right-6 lg:right-8 top-1/2 -translate-y-1/2 z-10 bg-white/20 backdrop-blur-xl rounded-full p-3 shadow-lg hover:shadow-xl transition-all hover:scale-110 border border-white/30 hover:border-white/50"
+          aria-label="Scroll right"
+        >
+          <ChevronRight className="h-6 w-6 text-gray-700" />
+        </button>
+
+        {/* Horizontal scroll container */}
+        <div
+          ref={scrollContainerRef}
+          className="flex gap-6 overflow-x-auto scrollbar-hide pb-4 scroll-smooth pl-4 md:pl-6 lg:pl-8 pr-4 md:pr-6 lg:pr-8"
+          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+        >
+          {loopedItems.map((item, index) => {
+            // Use a unique key that includes the index to handle duplicates
+            const uniqueKey = `${item.id}-${index}`;
+            // Track playing state by original item id, not the looped index
+            const isPlaying = playingVideoId === item.id;
+            
+            const handleVideoClick = (e: React.MouseEvent) => {
+              e.preventDefault();
+              e.stopPropagation();
+              if (!isPlaying) {
+                setPlayingVideoId(item.id);
+              }
+            };
+            
+            return (
+              <div
+                key={uniqueKey}
+                className="group flex-shrink-0 w-[400px] md:w-[500px] rounded-3xl overflow-hidden transition-all bg-transparent relative"
+              >
+                <div 
+                  className="aspect-video relative overflow-hidden bg-black rounded-t-3xl cursor-pointer"
+                  onClick={handleVideoClick}
+                >
+                  {isPlaying ? (
+                    <iframe
+                      className="w-full h-full"
+                      src={`${item.embedUrl}&autoplay=1`}
+                      title={item.title}
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      allowFullScreen
+                      style={{ border: "none" }}
+                    />
+                  ) : (
+                    <>
+                      {/* YouTube thumbnail */}
+                      <img
+                        src={`https://img.youtube.com/vi/${item.youtubeId}/maxresdefault.jpg`}
+                        alt={item.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 pointer-events-none"
+                        draggable={false}
+                        onError={(e) => {
+                          const target = e.target as HTMLImageElement;
+                          // Try multiple fallback options
+                          if (target.src.includes('maxresdefault')) {
+                            target.src = `https://img.youtube.com/vi/${item.youtubeId}/hqdefault.jpg`;
+                          } else if (target.src.includes('hqdefault')) {
+                            target.src = `https://img.youtube.com/vi/${item.youtubeId}/mqdefault.jpg`;
+                          } else if (target.src.includes('mqdefault')) {
+                            target.src = `https://img.youtube.com/vi/${item.youtubeId}/sddefault.jpg`;
+                          } else if (target.src.includes('sddefault')) {
+                            // Final fallback to 0.jpg (first frame)
+                            target.src = `https://img.youtube.com/vi/${item.youtubeId}/0.jpg`;
+                          }
+                        }}
+                        loading="lazy"
+                      />
+                      
+                      {/* Play button overlay */}
+                      <div 
+                        className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/30 transition-colors z-10"
+                      >
+                        <div className="w-20 h-20 bg-gradient-to-r from-[#70BFFF] to-[#BE55FF] rounded-full flex items-center justify-center shadow-2xl group-hover:scale-110 transition-transform duration-300 relative pointer-events-none">
+                          <Play className="h-10 w-10 text-white ml-1" />
+                          <div className="absolute inset-0 bg-gradient-to-r from-[#70BFFF] to-[#BE55FF] rounded-full blur-xl opacity-60 group-hover:opacity-80 transition-opacity"></div>
+                        </div>
+                      </div>
+                    </>
+                  )}
+                </div>
+
+                {/* Hover arrow - only show when not playing */}
+                {!isPlaying && (
+                  <div className="absolute bottom-4 right-4 z-20 text-2xl text-[#70BFFF] opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all bg-white/90 backdrop-blur-sm w-10 h-10 rounded-full flex items-center justify-center shadow-lg pointer-events-none">
+                    ↗
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Video Quality Notice */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 mt-8">
+        <p className="text-center text-sm text-gray-600 opacity-75">
+          For the best viewing experience, tap the gear icon and set video quality to the highest resolution.
+        </p>
+      </div>
+
       <style jsx>{`
-        .scrollbar-hide {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
-        }
         .scrollbar-hide::-webkit-scrollbar {
           display: none;
         }
