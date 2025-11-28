@@ -261,6 +261,11 @@ export function ContentManagementSlider({
       {(showCTA || showDetailsText) && (
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 mt-8">
           <div className="text-center space-y-4">
+            {showDetailsText && (
+              <p className="text-sm text-gray-600 opacity-75">
+                Further details can be obtained on request.
+              </p>
+            )}
             {showCTA && (
               <Link href="/services/social-management">
                 <Button
@@ -269,11 +274,6 @@ export function ContentManagementSlider({
                   Learn more
                 </Button>
               </Link>
-            )}
-            {showDetailsText && (
-              <p className="text-sm text-gray-600 opacity-75">
-                Further details can be obtained on request.
-              </p>
             )}
           </div>
         </div>

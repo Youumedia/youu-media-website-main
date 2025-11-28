@@ -247,7 +247,7 @@ export function LandingPortfolio() {
           <span className="text-sm font-bold text-[#70BFFF] uppercase tracking-widest mb-4 block">
             Portfolio
           </span>
-          <h2 className="text-6xl md:text-7xl lg:text-8xl font-black text-gray-900 mb-4">
+          <h2 className="text-7xl md:text-8xl lg:text-9xl font-black text-gray-900 mb-4">
             Our{" "}
             <span className="bg-gradient-to-r from-[#70BFFF] to-[#BE55FF] bg-clip-text text-transparent">
               Work
@@ -383,17 +383,19 @@ export function LandingPortfolio() {
       </div>
 
       {/* Video Quality Notice */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 mt-4">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 mt-2 md:mt-4">
         <div className="text-center space-y-4">
           <p className="text-sm text-gray-600 opacity-75">
             For the best viewing experience, tap the gear icon and set video
             quality to the highest resolution.
           </p>
-          <Link href="/services/content-production">
-            <Button className="bg-gradient-to-r from-[#70BFFF] to-[#BE55FF] hover:from-[#70BFFF]/90 hover:to-[#BE55FF]/90 text-white px-8 md:px-10 py-4 md:py-6 text-base md:text-lg font-bold rounded-full shadow-xl hover:shadow-2xl transition-all transform hover:scale-105">
-              Learn more
-            </Button>
-          </Link>
+          <div className="md:mt-6">
+            <Link href="/services/content-production">
+              <Button className="bg-gradient-to-r from-[#70BFFF] to-[#BE55FF] hover:from-[#70BFFF]/90 hover:to-[#BE55FF]/90 text-white px-8 md:px-10 py-4 md:py-6 text-base md:text-lg font-bold rounded-full shadow-xl hover:shadow-2xl transition-all transform hover:scale-105">
+                Learn more
+              </Button>
+            </Link>
+          </div>
         </div>
       </div>
 
