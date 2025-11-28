@@ -8,9 +8,9 @@ const navigationItems = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
   { href: "/services", label: "Our Services" },
+  { href: "/#portfolio", label: "Our Work" },
   { href: "/#newsletter", label: "Newsletter" },
   { href: "/#network", label: "The Youu Network" },
-  { href: "/#portfolio", label: "Our Work" },
   { href: "/#contact", label: "Contact Us" },
 ];
 

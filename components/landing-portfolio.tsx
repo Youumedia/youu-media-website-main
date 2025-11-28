@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useRef, useEffect } from "react";
+import Link from "next/link";
 import { ChevronLeft, ChevronRight, Play } from "lucide-react";
 import { NewsletterSlider } from "./newsletter-slider";
 import { ContentManagementSlider } from "./content-management-slider";
@@ -166,7 +167,7 @@ export function LandingPortfolio() {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center mb-20">
+        <div className="text-center mb-12">
           <span className="text-sm font-bold text-[#70BFFF] uppercase tracking-widest mb-4 block">
             Portfolio
           </span>
@@ -176,9 +177,16 @@ export function LandingPortfolio() {
               Work
             </span>
           </h2>
-          <p className="text-xl text-gray-700 max-w-2xl mx-auto">
-            A look at some of the brands and projects we have supported.
+          <p className="text-xl md:text-2xl text-gray-700 max-w-2xl mx-auto mb-6 font-medium">
+            Examples of our video production
           </p>
+          <Link
+            href="/services/content-production"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#70BFFF] to-[#BE55FF] text-white font-bold rounded-full shadow-lg hover:shadow-xl transition-all hover:scale-105"
+          >
+            Learn More
+            <ChevronRight className="h-5 w-5" />
+          </Link>
         </div>
       </div>
 
