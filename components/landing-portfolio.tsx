@@ -3,6 +3,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { ChevronLeft, ChevronRight, Play } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { NewsletterSlider } from "./newsletter-slider";
 import { ContentManagementSlider } from "./content-management-slider";
 
@@ -11,37 +12,43 @@ const portfolioItems = [
     id: 3,
     title: "Portfolio Video 3",
     youtubeId: "lErDN_bLkaI",
-    embedUrl: "https://www.youtube.com/embed/lErDN_bLkaI?rel=0&modestbranding=1&playsinline=1",
+    embedUrl:
+      "https://www.youtube.com/embed/lErDN_bLkaI?rel=0&modestbranding=1&playsinline=1",
   },
   {
     id: 6,
     title: "Portfolio Video 6",
     youtubeId: "zHHMS9D_CVQ",
-    embedUrl: "https://www.youtube.com/embed/zHHMS9D_CVQ?rel=0&modestbranding=1&playsinline=1",
+    embedUrl:
+      "https://www.youtube.com/embed/zHHMS9D_CVQ?rel=0&modestbranding=1&playsinline=1",
   },
   {
     id: 1,
     title: "Portfolio Video 1",
     youtubeId: "xkMZtQnHDOE",
-    embedUrl: "https://www.youtube.com/embed/xkMZtQnHDOE?rel=0&modestbranding=1&playsinline=1",
+    embedUrl:
+      "https://www.youtube.com/embed/xkMZtQnHDOE?rel=0&modestbranding=1&playsinline=1",
   },
   {
     id: 2,
     title: "Portfolio Video 2",
     youtubeId: "IJv94hCtnJU",
-    embedUrl: "https://www.youtube.com/embed/IJv94hCtnJU?rel=0&modestbranding=1&playsinline=1",
+    embedUrl:
+      "https://www.youtube.com/embed/IJv94hCtnJU?rel=0&modestbranding=1&playsinline=1",
   },
   {
     id: 4,
     title: "Portfolio Video 4",
     youtubeId: "pUu0xgPwOpU",
-    embedUrl: "https://www.youtube.com/embed/pUu0xgPwOpU?rel=0&modestbranding=1&playsinline=1",
+    embedUrl:
+      "https://www.youtube.com/embed/pUu0xgPwOpU?rel=0&modestbranding=1&playsinline=1",
   },
   {
     id: 5,
     title: "Portfolio Video 5",
     youtubeId: "wSpapekkDyc",
-    embedUrl: "https://www.youtube.com/embed/wSpapekkDyc?rel=0&modestbranding=1&playsinline=1",
+    embedUrl:
+      "https://www.youtube.com/embed/wSpapekkDyc?rel=0&modestbranding=1&playsinline=1",
   },
 ];
 
@@ -52,10 +59,10 @@ export function LandingPortfolio() {
 
   // Create looped items (3 copies for seamless looping)
   const loopedItems = [...portfolioItems, ...portfolioItems, ...portfolioItems];
-  
+
   // Calculate item width including gap
   const getItemWidth = () => {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
       return window.innerWidth >= 768 ? 500 + 24 : 400 + 24; // width + gap
     }
     return 424;
@@ -83,7 +90,7 @@ export function LandingPortfolio() {
       const { scrollLeft } = container;
       const { singleSetWidth } = calculateDimensions();
       const threshold = 50; // Small threshold to prevent flickering
-      
+
       // If scrolled past the second set (near the end), jump to the middle set
       if (scrollLeft >= singleSetWidth * 2 - threshold) {
         isScrollingRef.current = true;
@@ -139,35 +146,104 @@ export function LandingPortfolio() {
       {/* Background Shapes - kept within section bounds */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {/* Large floating orbs - positioned to stay within bounds */}
-        <div className="absolute top-[15%] left-[20%] w-[500px] h-[500px] bg-[#70BFFF]/20 rounded-full blur-3xl animate-float-slow" style={{ animationDelay: "0s" }} />
-        <div className="absolute bottom-[15%] right-[20%] w-[500px] h-[500px] bg-[#BE55FF]/20 rounded-full blur-3xl animate-float-medium" style={{ animationDelay: "0.5s" }} />
-        <div className="absolute top-[50%] left-[50%] w-[300px] h-[300px] bg-[#70BFFF]/15 rounded-full blur-2xl animate-float-fast" style={{ animationDelay: "1s" }} />
-        <div className="absolute top-[15%] right-[12%] w-[420px] h-[420px] bg-[#BE55FF]/17 rounded-full blur-3xl animate-float-slow" style={{ animationDelay: "1.5s" }} />
-        <div className="absolute bottom-[20%] left-[30%] w-[360px] h-[360px] bg-[#70BFFF]/16 rounded-full blur-2xl animate-float-medium" style={{ animationDelay: "2s" }} />
-        <div className="absolute top-[12%] left-[55%] w-[380px] h-[380px] bg-[#BE55FF]/18 rounded-full blur-3xl animate-float-fast" style={{ animationDelay: "0.3s" }} />
-        <div className="absolute bottom-[12%] right-[35%] w-[400px] h-[400px] bg-[#70BFFF]/17 rounded-full blur-3xl animate-float-slow" style={{ animationDelay: "0.8s" }} />
-        <div className="absolute top-[35%] right-[5%] w-[340px] h-[340px] bg-[#BE55FF]/16 rounded-full blur-2xl animate-float-medium" style={{ animationDelay: "1.2s" }} />
-        <div className="absolute bottom-[25%] left-[8%] w-[370px] h-[370px] bg-[#70BFFF]/18 rounded-full blur-2xl animate-float-fast" style={{ animationDelay: "1.7s" }} />
-        <div className="absolute top-[60%] left-[45%] w-[390px] h-[390px] bg-[#BE55FF]/19 rounded-full blur-3xl animate-float-slow" style={{ animationDelay: "0.6s" }} />
+        <div
+          className="absolute top-[15%] left-[20%] w-[500px] h-[500px] bg-[#70BFFF]/20 rounded-full blur-3xl animate-float-slow"
+          style={{ animationDelay: "0s" }}
+        />
+        <div
+          className="absolute bottom-[15%] right-[20%] w-[500px] h-[500px] bg-[#BE55FF]/20 rounded-full blur-3xl animate-float-medium"
+          style={{ animationDelay: "0.5s" }}
+        />
+        <div
+          className="absolute top-[50%] left-[50%] w-[300px] h-[300px] bg-[#70BFFF]/15 rounded-full blur-2xl animate-float-fast"
+          style={{ animationDelay: "1s" }}
+        />
+        <div
+          className="absolute top-[15%] right-[12%] w-[420px] h-[420px] bg-[#BE55FF]/17 rounded-full blur-3xl animate-float-slow"
+          style={{ animationDelay: "1.5s" }}
+        />
+        <div
+          className="absolute bottom-[20%] left-[30%] w-[360px] h-[360px] bg-[#70BFFF]/16 rounded-full blur-2xl animate-float-medium"
+          style={{ animationDelay: "2s" }}
+        />
+        <div
+          className="absolute top-[12%] left-[55%] w-[380px] h-[380px] bg-[#BE55FF]/18 rounded-full blur-3xl animate-float-fast"
+          style={{ animationDelay: "0.3s" }}
+        />
+        <div
+          className="absolute bottom-[12%] right-[35%] w-[400px] h-[400px] bg-[#70BFFF]/17 rounded-full blur-3xl animate-float-slow"
+          style={{ animationDelay: "0.8s" }}
+        />
+        <div
+          className="absolute top-[35%] right-[5%] w-[340px] h-[340px] bg-[#BE55FF]/16 rounded-full blur-2xl animate-float-medium"
+          style={{ animationDelay: "1.2s" }}
+        />
+        <div
+          className="absolute bottom-[25%] left-[8%] w-[370px] h-[370px] bg-[#70BFFF]/18 rounded-full blur-2xl animate-float-fast"
+          style={{ animationDelay: "1.7s" }}
+        />
+        <div
+          className="absolute top-[60%] left-[45%] w-[390px] h-[390px] bg-[#BE55FF]/19 rounded-full blur-3xl animate-float-slow"
+          style={{ animationDelay: "0.6s" }}
+        />
 
         {/* Geometric shapes with floating animations */}
-        <div className="absolute top-[12%] right-[8%] w-32 h-32 bg-gradient-to-br from-[#70BFFF]/25 to-[#BE55FF]/25 rounded-3xl rotate-45 animate-float-slow" style={{ animationDelay: "0.2s" }} />
-        <div className="absolute bottom-[15%] left-[12%] w-24 h-24 bg-gradient-to-br from-[#BE55FF]/25 to-[#70BFFF]/25 rounded-full animate-float-medium" style={{ animationDelay: "1.1s" }} />
-        <div className="absolute top-[35%] right-[32%] w-16 h-16 bg-[#70BFFF]/20 rounded-lg rotate-12 animate-float-fast" style={{ animationDelay: "2.2s" }} />
-        <div className="absolute bottom-[25%] left-[30%] w-20 h-20 bg-[#BE55FF]/20 rounded-full animate-float-slow" style={{ animationDelay: "0.7s" }} />
-        <div className="absolute top-[60%] right-[18%] w-26 h-26 bg-gradient-to-br from-[#70BFFF]/22 to-[#BE55FF]/22 rounded-full animate-float-medium" style={{ animationDelay: "1.4s" }} />
-        <div className="absolute bottom-[20%] left-[18%] w-22 h-22 bg-[#BE55FF]/18 rounded-xl rotate-12 animate-float-fast" style={{ animationDelay: "0.9s" }} />
-        <div className="absolute top-[18%] left-[65%] w-28 h-28 bg-gradient-to-br from-[#70BFFF]/20 to-[#BE55FF]/20 rounded-2xl rotate-45 animate-float-slow" style={{ animationDelay: "1.6s" }} />
-        <div className="absolute top-[45%] left-[5%] w-18 h-18 bg-[#70BFFF]/19 rounded-lg rotate-12 animate-float-medium" style={{ animationDelay: "0.4s" }} />
-        <div className="absolute bottom-[30%] right-[45%] w-30 h-30 bg-gradient-to-br from-[#BE55FF]/21 to-[#70BFFF]/21 rounded-full animate-float-fast" style={{ animationDelay: "1.8s" }} />
-        <div className="absolute top-[55%] left-[60%] w-24 h-24 bg-[#BE55FF]/18 rounded-xl rotate-45 animate-float-slow" style={{ animationDelay: "1.0s" }} />
-        <div className="absolute top-[28%] right-[55%] w-22 h-22 bg-gradient-to-br from-[#70BFFF]/20 to-[#BE55FF]/20 rounded-2xl rotate-12 animate-float-medium" style={{ animationDelay: "1.5s" }} />
-        <div className="absolute bottom-[35%] left-[50%] w-26 h-26 bg-[#BE55FF]/19 rounded-full animate-float-fast" style={{ animationDelay: "0.5s" }} />
-        <div className="absolute top-[70%] right-[12%] w-20 h-20 bg-gradient-to-br from-[#70BFFF]/21 to-[#BE55FF]/21 rounded-xl rotate-45 animate-float-slow" style={{ animationDelay: "1.3s" }} />
+        <div
+          className="absolute top-[12%] right-[8%] w-32 h-32 bg-gradient-to-br from-[#70BFFF]/25 to-[#BE55FF]/25 rounded-3xl rotate-45 animate-float-slow"
+          style={{ animationDelay: "0.2s" }}
+        />
+        <div
+          className="absolute bottom-[15%] left-[12%] w-24 h-24 bg-gradient-to-br from-[#BE55FF]/25 to-[#70BFFF]/25 rounded-full animate-float-medium"
+          style={{ animationDelay: "1.1s" }}
+        />
+        <div
+          className="absolute top-[35%] right-[32%] w-16 h-16 bg-[#70BFFF]/20 rounded-lg rotate-12 animate-float-fast"
+          style={{ animationDelay: "2.2s" }}
+        />
+        <div
+          className="absolute bottom-[25%] left-[30%] w-20 h-20 bg-[#BE55FF]/20 rounded-full animate-float-slow"
+          style={{ animationDelay: "0.7s" }}
+        />
+        <div
+          className="absolute top-[60%] right-[18%] w-26 h-26 bg-gradient-to-br from-[#70BFFF]/22 to-[#BE55FF]/22 rounded-full animate-float-medium"
+          style={{ animationDelay: "1.4s" }}
+        />
+        <div
+          className="absolute bottom-[20%] left-[18%] w-22 h-22 bg-[#BE55FF]/18 rounded-xl rotate-12 animate-float-fast"
+          style={{ animationDelay: "0.9s" }}
+        />
+        <div
+          className="absolute top-[18%] left-[65%] w-28 h-28 bg-gradient-to-br from-[#70BFFF]/20 to-[#BE55FF]/20 rounded-2xl rotate-45 animate-float-slow"
+          style={{ animationDelay: "1.6s" }}
+        />
+        <div
+          className="absolute top-[45%] left-[5%] w-18 h-18 bg-[#70BFFF]/19 rounded-lg rotate-12 animate-float-medium"
+          style={{ animationDelay: "0.4s" }}
+        />
+        <div
+          className="absolute bottom-[30%] right-[45%] w-30 h-30 bg-gradient-to-br from-[#BE55FF]/21 to-[#70BFFF]/21 rounded-full animate-float-fast"
+          style={{ animationDelay: "1.8s" }}
+        />
+        <div
+          className="absolute top-[55%] left-[60%] w-24 h-24 bg-[#BE55FF]/18 rounded-xl rotate-45 animate-float-slow"
+          style={{ animationDelay: "1.0s" }}
+        />
+        <div
+          className="absolute top-[28%] right-[55%] w-22 h-22 bg-gradient-to-br from-[#70BFFF]/20 to-[#BE55FF]/20 rounded-2xl rotate-12 animate-float-medium"
+          style={{ animationDelay: "1.5s" }}
+        />
+        <div
+          className="absolute bottom-[35%] left-[50%] w-26 h-26 bg-[#BE55FF]/19 rounded-full animate-float-fast"
+          style={{ animationDelay: "0.5s" }}
+        />
+        <div
+          className="absolute top-[70%] right-[12%] w-20 h-20 bg-gradient-to-br from-[#70BFFF]/21 to-[#BE55FF]/21 rounded-xl rotate-45 animate-float-slow"
+          style={{ animationDelay: "1.3s" }}
+        />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center mb-12">
+        <div className="text-center mb-20">
           <span className="text-sm font-bold text-[#70BFFF] uppercase tracking-widest mb-4 block">
             Portfolio
           </span>
@@ -177,22 +253,32 @@ export function LandingPortfolio() {
               Work
             </span>
           </h2>
-          <p className="text-xl md:text-2xl text-gray-700 max-w-2xl mx-auto mb-6 font-medium">
+          <p className="text-xl text-gray-700 max-w-2xl mx-auto">
+            A look at some of the brands and projects we have supported.
+          </p>
+        </div>
+      </div>
+
+      {/* Video Production Portfolio Title */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 mb-8">
+        <div className="text-center mb-12">
+          <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-4">
+            Video Production{" "}
+            <span className="bg-gradient-to-r from-[#70BFFF] to-[#BE55FF] bg-clip-text text-transparent">
+              Portfolio
+            </span>
+          </h2>
+          <p className="text-lg text-gray-700 max-w-2xl mx-auto">
             Examples of our video production
           </p>
-          <Link
-            href="/services/content-production"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#70BFFF] to-[#BE55FF] text-white font-bold rounded-full shadow-lg hover:shadow-xl transition-all hover:scale-105"
-          >
-            Learn More
-            <ChevronRight className="h-5 w-5" />
-          </Link>
         </div>
       </div>
 
       {/* Swipe instruction */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 mb-6">
-        <p className="text-center text-sm text-gray-500 opacity-60">Swipe left</p>
+        <p className="text-center text-sm text-gray-500 opacity-60">
+          Swipe left
+        </p>
       </div>
 
       {/* Horizontal scroll container - full width edge to edge */}
@@ -224,7 +310,7 @@ export function LandingPortfolio() {
             const uniqueKey = `${item.id}-${index}`;
             // Track playing state by original item id, not the looped index
             const isPlaying = playingVideoId === item.id;
-            
+
             const handleVideoClick = (e: React.MouseEvent) => {
               e.preventDefault();
               e.stopPropagation();
@@ -232,14 +318,13 @@ export function LandingPortfolio() {
                 setPlayingVideoId(item.id);
               }
             };
-            
+
             return (
               <div
                 key={uniqueKey}
                 className="group flex-shrink-0 w-[400px] md:w-[500px] rounded-3xl overflow-hidden transition-all bg-transparent relative"
               >
-
-                <div 
+                <div
                   className="aspect-video relative overflow-hidden bg-black rounded-t-3xl cursor-pointer"
                   onClick={handleVideoClick}
                 >
@@ -263,24 +348,22 @@ export function LandingPortfolio() {
                         onError={(e) => {
                           const target = e.target as HTMLImageElement;
                           // Try multiple fallback options
-                          if (target.src.includes('maxresdefault')) {
+                          if (target.src.includes("maxresdefault")) {
                             target.src = `https://img.youtube.com/vi/${item.youtubeId}/hqdefault.jpg`;
-                          } else if (target.src.includes('hqdefault')) {
+                          } else if (target.src.includes("hqdefault")) {
                             target.src = `https://img.youtube.com/vi/${item.youtubeId}/mqdefault.jpg`;
-                          } else if (target.src.includes('mqdefault')) {
+                          } else if (target.src.includes("mqdefault")) {
                             target.src = `https://img.youtube.com/vi/${item.youtubeId}/sddefault.jpg`;
-                          } else if (target.src.includes('sddefault')) {
+                          } else if (target.src.includes("sddefault")) {
                             // Final fallback to 0.jpg (first frame)
                             target.src = `https://img.youtube.com/vi/${item.youtubeId}/0.jpg`;
                           }
                         }}
                         loading="lazy"
                       />
-                      
+
                       {/* Play button overlay */}
-                      <div 
-                        className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/30 transition-colors z-10"
-                      >
+                      <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/30 transition-colors z-10">
                         <div className="w-20 h-20 bg-gradient-to-r from-[#70BFFF] to-[#BE55FF] rounded-full flex items-center justify-center shadow-2xl group-hover:scale-110 transition-transform duration-300 relative pointer-events-none">
                           <Play className="h-10 w-10 text-white ml-1" />
                           <div className="absolute inset-0 bg-gradient-to-r from-[#70BFFF] to-[#BE55FF] rounded-full blur-xl opacity-60 group-hover:opacity-80 transition-opacity"></div>
@@ -304,13 +387,27 @@ export function LandingPortfolio() {
 
       {/* Video Quality Notice */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 mt-8">
-        <p className="text-center text-sm text-gray-600 opacity-75">
-          For the best viewing experience, tap the gear icon and set video quality to the highest resolution.
-        </p>
+        <div className="text-center space-y-4">
+          <p className="text-sm text-gray-600 opacity-75">
+            For the best viewing experience, tap the gear icon and set video
+            quality to the highest resolution.
+          </p>
+          <Link href="/services/content-production">
+            <Button
+              className="bg-gradient-to-r from-[#70BFFF] to-[#BE55FF] hover:from-[#70BFFF]/90 hover:to-[#BE55FF]/90 text-white px-8 md:px-10 py-4 md:py-6 text-base md:text-lg font-bold rounded-full shadow-xl hover:shadow-2xl transition-all transform hover:scale-105"
+            >
+              Learn more
+            </Button>
+          </Link>
+        </div>
       </div>
 
       {/* Content Management Portfolio Slider */}
-      <ContentManagementSlider showTitle={true} showCTA={true} showDetailsText={true} />
+      <ContentManagementSlider
+        showTitle={true}
+        showCTA={true}
+        showDetailsText={true}
+      />
 
       {/* Newsletter Slider */}
       <NewsletterSlider />
