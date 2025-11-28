@@ -14,57 +14,68 @@ interface PortfolioImage {
 const portfolioImages: PortfolioImage[] = [
   {
     id: "content-1",
-    imageUrl: "/images/content-management/0-0d1ca1ce-38b7-44fa-a2d6-418d1a7c9c29.jpg",
+    imageUrl:
+      "/images/content-management/0-0d1ca1ce-38b7-44fa-a2d6-418d1a7c9c29.jpg",
     alt: "Content Management Portfolio Image 1",
   },
   {
     id: "content-2",
-    imageUrl: "/images/content-management/0-11f5eb58-760f-4bdb-a362-24b6a4571c92.jpg",
+    imageUrl:
+      "/images/content-management/0-11f5eb58-760f-4bdb-a362-24b6a4571c92.jpg",
     alt: "Content Management Portfolio Image 2",
   },
   {
     id: "content-3",
-    imageUrl: "/images/content-management/0-2f7d5201-8137-46d2-bae4-8b47ba747ae5.jpg",
+    imageUrl:
+      "/images/content-management/0-2f7d5201-8137-46d2-bae4-8b47ba747ae5.jpg",
     alt: "Content Management Portfolio Image 3",
   },
   {
     id: "content-4",
-    imageUrl: "/images/content-management/0-41406a98-a308-4f98-ab1d-cd2ecd8787fd.jpg",
+    imageUrl:
+      "/images/content-management/0-41406a98-a308-4f98-ab1d-cd2ecd8787fd.jpg",
     alt: "Content Management Portfolio Image 4",
   },
   {
     id: "content-5",
-    imageUrl: "/images/content-management/0-63b623e5-295b-44a8-957c-b13b2adc4531-3a59ce8f-e9bf-4586-8714-6c5f1915e152.jpg",
+    imageUrl:
+      "/images/content-management/0-63b623e5-295b-44a8-957c-b13b2adc4531-3a59ce8f-e9bf-4586-8714-6c5f1915e152.jpg",
     alt: "Content Management Portfolio Image 5",
   },
   {
     id: "content-6",
-    imageUrl: "/images/content-management/0-6d721aac-0cab-4923-b012-29754a49b192.jpg",
+    imageUrl:
+      "/images/content-management/0-6d721aac-0cab-4923-b012-29754a49b192.jpg",
     alt: "Content Management Portfolio Image 6",
   },
   {
     id: "content-7",
-    imageUrl: "/images/content-management/0-9eb3285c-9146-40c3-baeb-3955b42f5500.jpg",
+    imageUrl:
+      "/images/content-management/0-9eb3285c-9146-40c3-baeb-3955b42f5500.jpg",
     alt: "Content Management Portfolio Image 7",
   },
   {
     id: "content-8",
-    imageUrl: "/images/content-management/0-c21b0987-19de-428a-ba85-dbde7d190c3b.jpg",
+    imageUrl:
+      "/images/content-management/0-c21b0987-19de-428a-ba85-dbde7d190c3b.jpg",
     alt: "Content Management Portfolio Image 8",
   },
   {
     id: "content-9",
-    imageUrl: "/images/content-management/0-cdb04c5a-fb41-4fc7-86c1-0b5d8e436355.jpg",
+    imageUrl:
+      "/images/content-management/0-cdb04c5a-fb41-4fc7-86c1-0b5d8e436355.jpg",
     alt: "Content Management Portfolio Image 9",
   },
   {
     id: "content-10",
-    imageUrl: "/images/content-management/0-cf4f6ee8-9e58-47f9-993f-fdfae33f3db2.jpg",
+    imageUrl:
+      "/images/content-management/0-cf4f6ee8-9e58-47f9-993f-fdfae33f3db2.jpg",
     alt: "Content Management Portfolio Image 10",
   },
   {
     id: "content-11",
-    imageUrl: "/images/content-management/0-e3608e0e-a9fb-430a-8976-4942f30a1e41.jpg",
+    imageUrl:
+      "/images/content-management/0-e3608e0e-a9fb-430a-8976-4942f30a1e41.jpg",
     alt: "Content Management Portfolio Image 11",
   },
 ];
@@ -75,10 +86,10 @@ interface ContentManagementSliderProps {
   showDetailsText?: boolean;
 }
 
-export function ContentManagementSlider({ 
-  showTitle = true, 
+export function ContentManagementSlider({
+  showTitle = true,
   showCTA = false,
-  showDetailsText = true 
+  showDetailsText = true,
 }: ContentManagementSliderProps) {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const autoScrollIntervalRef = useRef<NodeJS.Timeout | null>(null);
@@ -86,7 +97,11 @@ export function ContentManagementSlider({
   const [isPaused, setIsPaused] = useState(false);
 
   // Create looped items for seamless infinite scroll
-  const loopedImages = [...portfolioImages, ...portfolioImages, ...portfolioImages];
+  const loopedImages = [
+    ...portfolioImages,
+    ...portfolioImages,
+    ...portfolioImages,
+  ];
 
   // Handle seamless loop on scroll
   useEffect(() => {
@@ -209,7 +224,7 @@ export function ContentManagementSlider({
       )}
 
       {/* Horizontal scroll container */}
-      <div 
+      <div
         className="relative w-screen overflow-hidden -ml-[50vw] left-1/2"
         onMouseDown={handleInteractionStart}
         onMouseUp={handleInteractionEnd}
@@ -237,10 +252,10 @@ export function ContentManagementSlider({
         <div
           ref={scrollContainerRef}
           className="flex gap-6 overflow-x-auto scrollbar-hide pb-4 scroll-smooth pl-4 md:pl-6 lg:pl-8 pr-4 md:pr-6 lg:pr-8"
-          style={{ 
-            scrollbarWidth: "none", 
+          style={{
+            scrollbarWidth: "none",
             msOverflowStyle: "none",
-            scrollSnapType: "x mandatory"
+            scrollSnapType: "x mandatory",
           }}
           onScroll={handleInteractionStart}
         >
@@ -259,18 +274,16 @@ export function ContentManagementSlider({
 
       {/* CTA and details text */}
       {(showCTA || showDetailsText) && (
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 mt-8">
-          <div className="text-center space-y-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 mt-4">
+          <div className="text-center">
             {showDetailsText && (
-              <p className="text-sm text-gray-600 opacity-75">
+              <p className="text-sm text-gray-600 opacity-75 mb-6">
                 Further details can be obtained on request.
               </p>
             )}
             {showCTA && (
               <Link href="/services/social-management">
-                <Button
-                  className="bg-gradient-to-r from-[#70BFFF] to-[#BE55FF] hover:from-[#70BFFF]/90 hover:to-[#BE55FF]/90 text-white px-8 md:px-10 py-4 md:py-6 text-base md:text-lg font-bold rounded-full shadow-xl hover:shadow-2xl transition-all transform hover:scale-105"
-                >
+                <Button className="bg-gradient-to-r from-[#70BFFF] to-[#BE55FF] hover:from-[#70BFFF]/90 hover:to-[#BE55FF]/90 text-white px-8 md:px-10 py-4 md:py-6 text-base md:text-lg font-bold rounded-full shadow-xl hover:shadow-2xl transition-all transform hover:scale-105">
                   Learn more
                 </Button>
               </Link>
@@ -287,4 +300,3 @@ export function ContentManagementSlider({
     </div>
   );
 }
-
