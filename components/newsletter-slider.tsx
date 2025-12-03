@@ -20,7 +20,7 @@ const newsletters: Newsletter[] = [
     id: "2025-12-01",
     date: "2025-12-01",
     dateFormatted: "1st December 2025",
-    title: "Year-End Content Strategy: Maximizing Q4 Impact and Planning for 2026",
+    title: "Year-End Content Strategy: Maximising Q4 Impact and Planning for 2026",
     description: "Strategic approaches to finishing the year strong while building the foundation for 2026 success through content planning and analysis.",
     slug: "2025-12-01-year-end-content-strategy",
     previewImage: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&h=600&fit=crop&q=80",
