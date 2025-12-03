@@ -164,7 +164,7 @@ function NewsletterContent() {
           Weekly Newsletter
         </div>
         <h1 className="text-4xl md:text-5xl font-black text-gray-900 mb-4">
-          Year-End Content Strategy: Maximizing Q4 Impact and Planning for 2026
+          Year-End Content Strategy: Maximising Q4 Impact and Planning for 2026
         </h1>
         <p className="text-lg text-gray-600">
           Monday, 1st December 2025
@@ -176,17 +176,17 @@ function NewsletterContent() {
         <div className="bg-gradient-to-br from-[#70BFFF]/10 to-[#BE55FF]/10 rounded-2xl p-8 mb-10 print:mb-8 print:p-6 print:bg-gray-50">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">This Week's Insight</h2>
           <p className="text-gray-700 leading-relaxed mb-4 text-lg">
-            December marks a critical transition point for content strategy. While many brands slow down content production during the holidays, strategic brands use this period to maximize Q4 impact and set the foundation for 2026 success. This week, we explore how to finish the year strong while building momentum for the year ahead.
+            December marks a critical transition point for content strategy. While many brands slow down content production during the holidays, strategic brands use this period to maximise Q4 impact and set the foundation for 2026 success. This week, we explore how to finish the year strong while building momentum for the year ahead.
           </p>
           <p className="text-gray-700 leading-relaxed">
-            The most successful brands don't wait until January to plan. They use December to analyze what worked, identify opportunities, and create a strategic roadmap that positions them for growth from day one of the new year.
+            The most successful brands don't wait until January to plan. They use December to analyse what worked, identify opportunities, and create a strategic roadmap that positions them for growth from day one of the new year.
           </p>
         </div>
 
         <section className="mb-10 print:mb-8">
           <h2 className="text-3xl font-bold text-gray-900 mb-6 flex items-center gap-3 print:mb-4">
             <span className="w-1 h-10 bg-gradient-to-b from-[#70BFFF] to-[#BE55FF] rounded-full print:h-8"></span>
-            Maximizing Q4: Strategic Content Moves for December
+            Maximising Q4: Strategic Content Moves for December
           </h2>
           <p className="text-gray-700 leading-relaxed mb-4 text-base">
             December presents unique opportunities that many brands overlook. While competitors reduce content output, strategic brands can capture attention with thoughtful, value-driven content. The key is understanding what your audience needs during this period: reflection, planning, and authentic connection.
@@ -214,7 +214,7 @@ function NewsletterContent() {
                 <h3 className="text-xl font-bold text-gray-900">1. Content Audit & Analysis</h3>
               </div>
               <p className="text-gray-700 leading-relaxed mb-3">
-                Before planning 2026, analyze what worked in 2025. Review your top-performing content across all platforms. Identify patterns: what topics resonated, which formats drove engagement, and when your audience was most active. This data becomes the foundation for your 2026 strategy.
+                Before planning 2026, analyse what worked in 2025. Review your top-performing content across all platforms. Identify patterns: what topics resonated, which formats drove engagement, and when your audience was most active. This data becomes the foundation for your 2026 strategy.
               </p>
               <p className="text-sm text-gray-600 italic">
                 Action: Create a spreadsheet tracking your top 20 pieces of content from 2025. Note the topic, format, posting time, and engagement metrics. Look for patterns that reveal what your audience truly values.
@@ -240,7 +240,7 @@ function NewsletterContent() {
                 <h3 className="text-xl font-bold text-gray-900">3. Plan Quarterly Themes</h3>
               </div>
               <p className="text-gray-700 leading-relaxed mb-3">
-                Break your year into quarterly themes that build on each other. Q1 might focus on foundation-building and education. Q2 could emphasize growth and expansion. Q3 might highlight community and partnerships. Q4 could focus on reflection and planning. This approach creates narrative continuity and strategic progression.
+                Break your year into quarterly themes that build on each other. Q1 might focus on foundation-building and education. Q2 could emphasise growth and expansion. Q3 might highlight community and partnerships. Q4 could focus on reflection and planning. This approach creates narrative continuity and strategic progression.
               </p>
               <p className="text-sm text-gray-600 italic">
                 Strategic benefit: Quarterly themes help you maintain focus, create cohesive content series, and make it easier to repurpose content across platforms while maintaining strategic alignment.
@@ -260,7 +260,7 @@ function NewsletterContent() {
               <div>
                 <h3 className="font-bold text-gray-900 mb-2 text-lg">Instagram & Facebook</h3>
                 <p className="text-gray-700 text-sm leading-relaxed">
-                  Meta is prioritizing year-end recap content and forward-looking planning posts. Content that reflects on 2025 achievements and sets 2026 goals is seeing 2x higher reach. Use Instagram Stories highlights and Facebook Groups to create year-end engagement campaigns that build community momentum.
+                  Meta is prioritising year-end recap content and forward-looking planning posts. Content that reflects on 2025 achievements and sets 2026 goals is seeing 2x higher reach. Use Instagram Stories highlights and Facebook Groups to create year-end engagement campaigns that build community momentum.
                 </p>
               </div>
             </div>
