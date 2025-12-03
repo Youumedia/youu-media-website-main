@@ -315,7 +315,7 @@ function NewsletterContent() {
               </div>
               <div>
                 <p className="text-gray-900 font-semibold mb-1">Create Your 2026 Content Calendar Framework</p>
-                <p className="text-gray-700">Set up your content calendar structure for 2026. Define your content pillars, plan quarterly themes, and create a template that makes content planning efficient. Don't fill it in yet—just create the framework that will guide your planning.</p>
+                <p className="text-gray-700">Set up your content calendar structure for 2026. Define your content pillars, plan quarterly themes, and create a template that makes content planning efficient. Don't fill it in yet; just create the framework that will guide your planning.</p>
               </div>
             </li>
             <li className="flex items-start gap-4 bg-gray-50 rounded-xl p-5 print:p-3">
@@ -337,7 +337,7 @@ function NewsletterContent() {
           </h2>
           <div className="bg-gradient-to-br from-[#70BFFF]/10 via-[#BE55FF]/10 to-[#70BFFF]/10 rounded-2xl p-8 print:p-6 print:bg-gray-50 border-2 border-[#70BFFF]/20">
             <p className="text-gray-800 leading-relaxed mb-4 text-base font-medium">
-              Brands that use December strategically don't just finish the year strong—they start the new year ahead. While competitors are scrambling to create strategies in January, you'll already have a clear roadmap, content framework, and momentum built from year-end engagement.
+              Brands that use December strategically don't just finish the year strong; they start the new year ahead. While competitors are scrambling to create strategies in January, you'll already have a clear roadmap, content framework, and momentum built from year-end engagement.
             </p>
             <p className="text-gray-700 leading-relaxed text-base">
               The most successful content strategies aren't created in January. They're built in December through careful analysis, strategic planning, and thoughtful execution. Use this month to position yourself for a year of consistent, strategic content that drives real business results.

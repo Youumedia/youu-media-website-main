@@ -82,7 +82,7 @@ const services = [
   {
     id: 7,
     title: "Executive Workshops & Training Days",
-    description: "Launching soon — full educational hub in development.",
+    description: "Launching soon. Full educational hub in development.",
     icon: GraduationCap,
     href: null, // Not clickable
     gradient: "from-gray-400 to-gray-500",
@@ -227,7 +227,7 @@ export default function ServicesPage() {
                           COMING SOON
                         </div>
                         <p className="text-sm text-gray-600">
-                          Launching soon — resources and training hub in
+                          Launching soon with resources and a training hub in
                           development.
                         </p>
                       </div>

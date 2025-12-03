@@ -53,7 +53,7 @@ export default function NewsletterPage() {
               What This Service <span className="bg-gradient-to-r from-[#70BFFF] to-[#BE55FF] bg-clip-text text-transparent">Includes</span>
             </h2>
             <p className="text-xl text-gray-700 leading-relaxed text-center mb-12">
-              Our weekly WhatsApp newsletter provides ongoing value, insights, and support. Each week, you receive curated content including industry trends, platform updates, content strategy tips, and community support—all delivered directly to your WhatsApp for maximum convenience and engagement.
+              Our weekly WhatsApp newsletter provides ongoing value, insights, and support. Each week, you receive curated content including industry trends, platform updates, content strategy tips, and community support, all delivered directly to your WhatsApp for maximum convenience and engagement.
             </p>
           </div>
         </div>
