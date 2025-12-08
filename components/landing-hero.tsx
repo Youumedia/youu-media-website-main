@@ -24,7 +24,7 @@ export function LandingHero() {
       className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden pb-4 md:pb-6"
     >
       {/* Content */}
-      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex-1 flex flex-col items-center justify-center pt-32 md:pt-40">
+      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex-1 flex flex-col items-center justify-center pt-20">
         {/* Creative headline with animated gradient */}
         <div className="mb-6 md:mb-8">
           <div className="inline-block mb-3 md:mb-4">

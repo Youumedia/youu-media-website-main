@@ -369,13 +369,6 @@ export function LandingPortfolio() {
                     </>
                   )}
                 </div>
-
-                {/* Hover arrow - only show when not playing */}
-                {!isPlaying && (
-                  <div className="absolute bottom-4 right-4 z-20 text-2xl text-[#70BFFF] opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all bg-white/90 backdrop-blur-sm w-10 h-10 rounded-full flex items-center justify-center shadow-lg pointer-events-none">
-                    ↗
-                  </div>
-                )}
               </div>
             );
           })}

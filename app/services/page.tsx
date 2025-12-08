@@ -97,7 +97,7 @@ export default function ServicesPage() {
       <Navigation />
 
       {/* Hero Section */}
-      <div className="bg-[#E6F2FF] relative overflow-hidden pt-24 pb-8 md:pt-32 md:pb-12">
+      <div className="min-h-screen flex items-center justify-center bg-[#E6F2FF] relative overflow-hidden pt-24 pb-8 md:pt-32 md:pb-12">
         {/* Background Shapes */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div
