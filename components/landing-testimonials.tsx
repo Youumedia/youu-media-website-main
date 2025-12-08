@@ -5,11 +5,12 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const testimonials = [
   {
-    id: 1,
+    id: 4,
     type: "text",
-    name: "Christian N Jr.",
-    role: "FT100 Most Influential BAME Leaders in UK Tech",
-    content: "Very good video. Very, very good.",
+    name: "Agatha Howes",
+    role: "Founder, Claudia Fabian Media Ltd",
+    content:
+      "Great piece of work Youu Media 👏 – you captured the event in a way that gives us an insight into what we've missed out on (those who did not attend) and what the main themes and atmosphere was like for those who were there. Engaging and informative – well done.",
   },
   {
     id: 2,
@@ -28,12 +29,11 @@ const testimonials = [
       "It was a pleasure having Youu Media with us, and your work truly captured the spirit of The Business Minds community. The energy, the conversations, and the connections that night were special, and your team brought it all to life perfectly. Huge thanks again for your professionalism, creativity, and for being such a great partner. Looking forward to creating even more impactful moments together!",
   },
   {
-    id: 4,
+    id: 1,
     type: "text",
-    name: "Agatha Howes",
-    role: "Founder, Claudia Fabian Media Ltd",
-    content:
-      "Great piece of work Youu Media 👏 – you captured the event in a way that gives us an insight into what we've missed out on (those who did not attend) and what the main themes and atmosphere was like for those who were there. Engaging and informative – well done.",
+    name: "Christian N Jr.",
+    role: "FT100 Most Influential BAME Leaders in UK Tech",
+    content: "Very good video. Very, very good.",
   },
   {
     id: 5,
@@ -187,7 +187,7 @@ export function LandingTestimonials() {
 
           {/* Testimonial Card */}
           <div
-            className="relative rounded-3xl p-8 md:p-12 min-h-[300px] flex flex-col justify-center transition-all overflow-hidden group bg-white/20 backdrop-blur-xl border border-white/30 shadow-[0_8px_32px_0_rgba(31,38,135,0.37)] hover:shadow-[0_12px_40px_0_rgba(31,38,135,0.5)] hover:bg-white/25 hover:border-white/40 transform hover:scale-[1.02] hover:-translate-y-1"
+            className="relative rounded-3xl p-8 md:p-12 h-[480px] flex flex-col transition-all overflow-hidden group bg-white/20 backdrop-blur-xl border border-white/30 shadow-[0_8px_32px_0_rgba(31,38,135,0.37)] hover:shadow-[0_12px_40px_0_rgba(31,38,135,0.5)] hover:bg-white/25 hover:border-white/40 transform hover:scale-[1.02] hover:-translate-y-1"
           >
             {/* 3D Glass effect layers */}
             <>
@@ -198,31 +198,33 @@ export function LandingTestimonials() {
               <div className="absolute inset-[1px] bg-gradient-to-br from-[#70BFFF]/5 via-transparent to-[#BE55FF]/5 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity" />
             </>
 
-            <div className="relative z-10">
+            <div className="relative z-10 flex flex-col h-full">
               {currentTestimonial.type === "video" ? (
                 /* Video Testimonial */
-                <div className="w-full flex flex-col justify-center">
-                  <div className="aspect-video rounded-xl overflow-hidden mb-8 flex items-center justify-center">
-                    {currentTestimonial.videoUrl ? (
-                      <video className="w-full h-full object-cover" controls>
-                        <source
-                          src={currentTestimonial.videoUrl}
-                          type="video/mp4"
-                        />
-                        Your browser does not support the video tag.
-                      </video>
-                    ) : (
-                      <div className="text-center text-white p-8">
-                        <p className="text-lg font-semibold mb-2">
-                          Video Testimonial
-                        </p>
-                        <p className="text-sm text-gray-300">
-                          Add video URL to the testimonials array
-                        </p>
-                      </div>
-                    )}
+                <div className="w-full flex flex-col h-full justify-between">
+                  <div className="flex-1 flex items-center justify-center min-h-0 mb-6">
+                    <div className="w-full max-w-[600px] aspect-video rounded-xl overflow-hidden flex items-center justify-center">
+                      {currentTestimonial.videoUrl ? (
+                        <video className="w-full h-full object-cover" controls>
+                          <source
+                            src={currentTestimonial.videoUrl}
+                            type="video/mp4"
+                          />
+                          Your browser does not support the video tag.
+                        </video>
+                      ) : (
+                        <div className="text-center text-white p-8">
+                          <p className="text-lg font-semibold mb-2">
+                            Video Testimonial
+                          </p>
+                          <p className="text-sm text-gray-300">
+                            Add video URL to the testimonials array
+                          </p>
+                        </div>
+                      )}
+                    </div>
                   </div>
-                  <div className="flex items-center gap-4">
+                  <div className="flex items-center gap-4 flex-shrink-0">
                     <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#70BFFF] to-[#BE55FF] flex items-center justify-center text-white font-bold text-lg">
                       {currentTestimonial.name.charAt(0)}
                     </div>
@@ -240,9 +242,9 @@ export function LandingTestimonials() {
                 </div>
               ) : (
                 /* Text Testimonial */
-                <>
+                <div className="flex flex-col h-full justify-center items-center">
                   <p
-                    className="text-xl md:text-2xl text-gray-900 mb-8 leading-relaxed italic relative"
+                    className="text-xl md:text-2xl text-gray-900 mb-8 leading-relaxed italic relative text-center"
                     style={{
                       fontFamily:
                         "var(--font-playfair), 'Playfair Display', 'Georgia', serif",
@@ -256,7 +258,7 @@ export function LandingTestimonials() {
                       "
                     </span>
                   </p>
-                  <div className="flex items-center gap-4">
+                  <div className="flex items-center justify-center gap-4">
                     <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#70BFFF] to-[#BE55FF] flex items-center justify-center text-white font-bold text-lg shadow-lg">
                       {currentTestimonial.name.charAt(0)}
                     </div>
@@ -267,7 +269,7 @@ export function LandingTestimonials() {
                       <p className="text-gray-700">{currentTestimonial.role}</p>
                     </div>
                   </div>
-                </>
+                </div>
               )}
             </div>
           </div>
