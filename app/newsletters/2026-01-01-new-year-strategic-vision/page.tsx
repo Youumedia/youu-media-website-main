@@ -260,7 +260,7 @@ function NewsletterContent() {
               <div>
                 <h3 className="font-bold text-gray-900 mb-2 text-lg">Instagram & Facebook</h3>
                 <p className="text-gray-700 text-sm leading-relaxed">
-                  Meta is prioritizing authentic, value-driven content in 2026. Brands that share their vision, goals, and journey are seeing increased reach. New Year vision posts and goal-setting content perform exceptionally well. Instagram Reels that show behind-the-scenes planning and strategic thinking are gaining traction. Use Stories to share your 2026 vision and build anticipation for what's coming.
+                  Meta is prioritising authentic, value-driven content in 2026. Brands that share their vision, goals, and journey are seeing increased reach. New Year vision posts and goal-setting content perform exceptionally well. Instagram Reels that show behind-the-scenes planning and strategic thinking are gaining traction. Use Stories to share your 2026 vision and build anticipation for what's coming.
                 </p>
               </div>
             </div>
