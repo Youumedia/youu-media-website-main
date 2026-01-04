@@ -270,10 +270,16 @@ export function VideoPortfolioCarousel({
               }
             };
 
+            // Determine border styling based on serviceType
+            const isCinematography = item.serviceType === "cinematography";
+            const borderClass = isCinematography
+              ? "border border-[1px] border-[#D4AF37] shadow-[0_0_12px_rgba(212,175,55,0.35)]"
+              : "border border-[1px] border-[#C0C0C0] shadow-sm";
+
             return (
               <div
                 key={uniqueKey}
-                className="group flex-shrink-0 w-[400px] md:w-[500px] rounded-3xl overflow-hidden transition-all bg-transparent relative"
+                className={`group flex-shrink-0 w-[400px] md:w-[500px] rounded-3xl overflow-hidden transition-all bg-transparent relative ${borderClass}`}
               >
                 <div
                   className="aspect-video relative overflow-hidden bg-black rounded-t-3xl cursor-pointer"
@@ -336,8 +342,30 @@ export function VideoPortfolioCarousel({
         </div>
       </div>
 
-      {/* Video Quality Notice */}
+      {/* Legend */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 mt-8">
+        <div className="flex flex-col items-center gap-3 mb-4">
+          <div className="flex items-center gap-2">
+            <div className="w-3 h-3 bg-[#D4AF37] rounded-sm"></div>
+            <span className="text-sm text-gray-700">Cinematography service</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="w-3 h-3 bg-[#C0C0C0] rounded-sm"></div>
+            <span className="text-sm text-gray-700">Videography service</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Credits */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 mb-8">
+        <div className="flex flex-col items-center gap-2 text-sm text-gray-600">
+          <p>Youu Media&apos;s Cinematographer: Darius Shu</p>
+          <p>Youu Media&apos;s Videographer: Khai Phillips</p>
+        </div>
+      </div>
+
+      {/* Video Quality Notice */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 mt-4">
         <p className="text-center text-sm text-gray-600 opacity-75">
           For the best viewing experience, tap the gear icon and set video
           quality to the highest resolution.

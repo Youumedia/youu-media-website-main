@@ -1,48 +1,91 @@
+// Helper function to extract YouTube ID from various URL formats
+function extractYouTubeId(url: string): string {
+  // Handle youtu.be format: https://youtu.be/VIDEO_ID
+  const youtuBeMatch = url.match(/youtu\.be\/([^?&#]+)/);
+  if (youtuBeMatch) return youtuBeMatch[1];
+
+  // Handle youtube.com/watch?v= format: https://www.youtube.com/watch?v=VIDEO_ID
+  const youtubeMatch = url.match(/[?&]v=([^?&#]+)/);
+  if (youtubeMatch) return youtubeMatch[1];
+
+  // If no match, assume the URL itself is the ID
+  return url;
+}
+
 export interface VideoItem {
   id: number;
   title: string;
   category: string;
   youtubeId: string;
+  youtubeUrl: string;
   embedUrl: string;
+  serviceType: "cinematography" | "videography";
 }
 
-export const portfolioVideos: VideoItem[] = [
+// Cinematography videos (positions 1-5, gold outline)
+const cinematographyVideos = [
   {
-    id: 1,
-    title: "Portfolio Video 1",
+    youtubeUrl: "https://youtu.be/mq-EOODs_YQ",
+  },
+  {
+    youtubeUrl: "https://youtu.be/Ykx2mNN2v_Y",
+  },
+  {
+    youtubeUrl: "https://youtu.be/TD2hwGCfGjA",
+  },
+  {
+    youtubeUrl: "https://youtu.be/5P0HWOI7Vtk",
+  },
+  {
+    youtubeUrl: "https://youtu.be/4KwW5yBC10k",
+  },
+].map((video, index) => {
+  const youtubeId = extractYouTubeId(video.youtubeUrl);
+  return {
+    id: index + 1,
+    title: `Portfolio Video ${index + 1}`,
     category: "Portfolio",
+    youtubeId,
+    youtubeUrl: video.youtubeUrl,
+    embedUrl: `https://www.youtube.com/embed/${youtubeId}?rel=0&modestbranding=1&playsinline=1`,
+    serviceType: "cinematography" as const,
+  };
+});
+
+// Videography videos (silver outline)
+const videographyVideos = [
+  {
     youtubeId: "xkMZtQnHDOE",
-    embedUrl: "https://www.youtube.com/embed/xkMZtQnHDOE?rel=0&modestbranding=1&playsinline=1",
+    youtubeUrl: "https://www.youtube.com/watch?v=xkMZtQnHDOE",
   },
   {
-    id: 2,
-    title: "Portfolio Video 2",
-    category: "Portfolio",
     youtubeId: "IJv94hCtnJU",
-    embedUrl: "https://www.youtube.com/embed/IJv94hCtnJU?rel=0&modestbranding=1&playsinline=1",
+    youtubeUrl: "https://www.youtube.com/watch?v=IJv94hCtnJU",
   },
   {
-    id: 3,
-    title: "Portfolio Video 3",
-    category: "Portfolio",
     youtubeId: "lErDN_bLkaI",
-    embedUrl: "https://www.youtube.com/embed/lErDN_bLkaI?rel=0&modestbranding=1&playsinline=1",
+    youtubeUrl: "https://www.youtube.com/watch?v=lErDN_bLkaI",
   },
   {
-    id: 4,
-    title: "Portfolio Video 4",
-    category: "Portfolio",
     youtubeId: "pUu0xgPwOpU",
-    embedUrl: "https://www.youtube.com/embed/pUu0xgPwOpU?rel=0&modestbranding=1&playsinline=1",
+    youtubeUrl: "https://www.youtube.com/watch?v=pUu0xgPwOpU",
   },
   {
-    id: 5,
-    title: "Portfolio Video 5",
-    category: "Portfolio",
     youtubeId: "wSpapekkDyc",
-    embedUrl: "https://www.youtube.com/embed/wSpapekkDyc?rel=0&modestbranding=1&playsinline=1",
+    youtubeUrl: "https://www.youtube.com/watch?v=wSpapekkDyc",
   },
+].map((video, index) => ({
+  id: cinematographyVideos.length + index + 1,
+  title: `Portfolio Video ${cinematographyVideos.length + index + 1}`,
+  category: "Portfolio",
+  youtubeId: video.youtubeId,
+  youtubeUrl: video.youtubeUrl,
+  embedUrl: `https://www.youtube.com/embed/${video.youtubeId}?rel=0&modestbranding=1&playsinline=1`,
+  serviceType: "videography" as const,
+}));
+
+// Combine: cinematography first (positions 1-5), then videography
+export const portfolioVideos: VideoItem[] = [
+  ...cinematographyVideos,
+  ...videographyVideos,
 ];
-
-
-

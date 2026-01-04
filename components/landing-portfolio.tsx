@@ -6,51 +6,7 @@ import { ChevronLeft, ChevronRight, Play } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { NewsletterSlider } from "./newsletter-slider";
 import { ContentManagementSlider } from "./content-management-slider";
-
-const portfolioItems = [
-  {
-    id: 3,
-    title: "Portfolio Video 3",
-    youtubeId: "lErDN_bLkaI",
-    embedUrl:
-      "https://www.youtube.com/embed/lErDN_bLkaI?rel=0&modestbranding=1&playsinline=1",
-  },
-  {
-    id: 6,
-    title: "Portfolio Video 6",
-    youtubeId: "zHHMS9D_CVQ",
-    embedUrl:
-      "https://www.youtube.com/embed/zHHMS9D_CVQ?rel=0&modestbranding=1&playsinline=1",
-  },
-  {
-    id: 1,
-    title: "Portfolio Video 1",
-    youtubeId: "xkMZtQnHDOE",
-    embedUrl:
-      "https://www.youtube.com/embed/xkMZtQnHDOE?rel=0&modestbranding=1&playsinline=1",
-  },
-  {
-    id: 2,
-    title: "Portfolio Video 2",
-    youtubeId: "IJv94hCtnJU",
-    embedUrl:
-      "https://www.youtube.com/embed/IJv94hCtnJU?rel=0&modestbranding=1&playsinline=1",
-  },
-  {
-    id: 4,
-    title: "Portfolio Video 4",
-    youtubeId: "pUu0xgPwOpU",
-    embedUrl:
-      "https://www.youtube.com/embed/pUu0xgPwOpU?rel=0&modestbranding=1&playsinline=1",
-  },
-  {
-    id: 5,
-    title: "Portfolio Video 5",
-    youtubeId: "wSpapekkDyc",
-    embedUrl:
-      "https://www.youtube.com/embed/wSpapekkDyc?rel=0&modestbranding=1&playsinline=1",
-  },
-];
+import { portfolioVideos } from "@/lib/portfolio-videos";
 
 export function LandingPortfolio() {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -58,7 +14,11 @@ export function LandingPortfolio() {
   const isScrollingRef = useRef(false);
 
   // Create looped items (3 copies for seamless looping)
-  const loopedItems = [...portfolioItems, ...portfolioItems, ...portfolioItems];
+  const loopedItems = [
+    ...portfolioVideos,
+    ...portfolioVideos,
+    ...portfolioVideos,
+  ];
 
   // Calculate item width including gap
   const getItemWidth = () => {
@@ -75,7 +35,7 @@ export function LandingPortfolio() {
     // Calculate dimensions
     const calculateDimensions = () => {
       const itemWidth = getItemWidth();
-      const singleSetWidth = portfolioItems.length * itemWidth;
+      const singleSetWidth = portfolioVideos.length * itemWidth;
       const padding = window.innerWidth >= 768 ? 48 : 32; // pl-6/pr-6 = 48px, pl-4/pr-4 = 32px
       return { itemWidth, singleSetWidth, padding };
     };
@@ -316,10 +276,16 @@ export function LandingPortfolio() {
               }
             };
 
+            // Determine border styling based on serviceType
+            const isCinematography = item.serviceType === "cinematography";
+            const borderClass = isCinematography
+              ? "border border-[#D4AF37] shadow-[0_0_8px_rgba(212,175,55,0.4)]"
+              : "border border-[#C0C0C0]";
+
             return (
               <div
                 key={uniqueKey}
-                className="group flex-shrink-0 w-[400px] md:w-[500px] rounded-3xl overflow-hidden transition-all bg-transparent relative"
+                className={`group flex-shrink-0 w-[400px] md:w-[500px] rounded-3xl overflow-hidden transition-all bg-transparent relative ${borderClass}`}
               >
                 <div
                   className="aspect-video relative overflow-hidden bg-black rounded-t-3xl cursor-pointer"
@@ -372,6 +338,30 @@ export function LandingPortfolio() {
               </div>
             );
           })}
+        </div>
+      </div>
+
+      {/* Legend */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 mt-8">
+        <div className="flex items-center justify-center gap-6 mb-4">
+          <div className="flex items-center gap-2">
+            <div className="w-3 h-3 bg-[#D4AF37] rounded-sm"></div>
+            <span className="text-sm text-gray-700">
+              Cinematography service
+            </span>
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="w-3 h-3 bg-[#C0C0C0] rounded-sm"></div>
+            <span className="text-sm text-gray-700">Videography service</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Credits */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 mb-8">
+        <div className="flex flex-col items-center gap-2 text-sm text-gray-600">
+          <p>Youu Media&apos;s Cinematographer: Darius Shu</p>
+          <p>Youu Media&apos;s Videographer: Khai Phillips</p>
         </div>
       </div>
 
