@@ -279,8 +279,8 @@ export function LandingPortfolio() {
             // Determine border styling based on serviceType
             const isCinematography = item.serviceType === "cinematography";
             const borderClass = isCinematography
-              ? "border border-[#D4AF37] shadow-[0_0_8px_rgba(212,175,55,0.4)]"
-              : "border border-[#C0C0C0]";
+              ? "border-2 border-[#D4AF37] shadow-[0_0_8px_rgba(212,175,55,0.4)]"
+              : "border-2 border-[#C0C0C0]";
 
             return (
               <div

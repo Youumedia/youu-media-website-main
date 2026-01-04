@@ -273,8 +273,8 @@ export function VideoPortfolioCarousel({
             // Determine border styling based on serviceType
             const isCinematography = item.serviceType === "cinematography";
             const borderClass = isCinematography
-              ? "border border-[1px] border-[#D4AF37] shadow-[0_0_12px_rgba(212,175,55,0.35)]"
-              : "border border-[1px] border-[#C0C0C0] shadow-sm";
+              ? "border-2 border-[#D4AF37] shadow-[0_0_8px_rgba(212,175,55,0.4)]"
+              : "border-2 border-[#C0C0C0]";
 
             return (
               <div
@@ -344,10 +344,12 @@ export function VideoPortfolioCarousel({
 
       {/* Legend */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 mt-8">
-        <div className="flex flex-col items-center gap-3 mb-4">
+        <div className="flex items-center justify-center gap-6 mb-4">
           <div className="flex items-center gap-2">
             <div className="w-3 h-3 bg-[#D4AF37] rounded-sm"></div>
-            <span className="text-sm text-gray-700">Cinematography service</span>
+            <span className="text-sm text-gray-700">
+              Cinematography service
+            </span>
           </div>
           <div className="flex items-center gap-2">
             <div className="w-3 h-3 bg-[#C0C0C0] rounded-sm"></div>
