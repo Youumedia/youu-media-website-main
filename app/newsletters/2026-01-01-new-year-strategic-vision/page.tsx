@@ -176,10 +176,10 @@ function NewsletterContent() {
         <div className="bg-gradient-to-br from-[#70BFFF]/10 to-[#BE55FF]/10 rounded-2xl p-8 mb-10 print:mb-8 print:p-6 print:bg-gray-50">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">This Week's Insight</h2>
           <p className="text-gray-700 leading-relaxed mb-4 text-lg">
-            January 1st marks more than just a calendar change—it's a strategic opportunity to set the tone for the entire year. While many brands rush into content production without a clear plan, strategic brands use this moment to establish their vision, define their goals, and create a roadmap that drives meaningful results.
+            January 1st marks more than just a calendar change - it's a strategic opportunity to set the tone for the entire year. While many brands rush into content production without a clear plan, strategic brands use this moment to establish their vision, define their goals, and create a roadmap that drives meaningful results.
           </p>
           <p className="text-gray-700 leading-relaxed">
-            The most successful content strategies start with clarity. New Year's Day is the perfect time to articulate your brand vision, set strategic goals, and create the foundation that will guide every piece of content you create in 2026. This isn't about resolutions—it's about strategic vision.
+            The most successful content strategies start with clarity. New Year's Day is the perfect time to articulate your brand vision, set strategic goals, and create the foundation that will guide every piece of content you create in 2026. This isn't about resolutions - it's about strategic vision.
           </p>
         </div>
 
@@ -196,7 +196,7 @@ function NewsletterContent() {
           </p>
           <div className="bg-white border-l-4 border-[#70BFFF] pl-6 py-4 my-6 print:my-4 print:border-l-2">
             <p className="text-gray-800 font-semibold italic">
-              "A clear vision at the start of the year isn't just motivating—it's strategically essential. It guides every decision, every piece of content, and every interaction with your audience."
+              "A clear vision at the start of the year isn't just motivating - it's strategically essential. It guides every decision, every piece of content, and every interaction with your audience."
             </p>
           </div>
         </section>
@@ -306,7 +306,7 @@ function NewsletterContent() {
               </div>
               <div>
                 <p className="text-gray-900 font-semibold mb-1">Articulate Your 2026 Strategic Vision</p>
-                <p className="text-gray-700">Write your brand's vision statement for 2026. Include your goals, values, and the impact you want to create. This doesn't need to be perfect—it needs to be clear. Use this vision as your north star for all content decisions throughout the year.</p>
+                <p className="text-gray-700">Write your brand's vision statement for 2026. Include your goals, values, and the impact you want to create. This doesn't need to be perfect - it needs to be clear. Use this vision as your north star for all content decisions throughout the year.</p>
               </div>
             </li>
             <li className="flex items-start gap-4 bg-gray-50 rounded-xl p-5 print:p-3">
@@ -337,10 +337,10 @@ function NewsletterContent() {
           </h2>
           <div className="bg-gradient-to-br from-[#70BFFF]/10 via-[#BE55FF]/10 to-[#70BFFF]/10 rounded-2xl p-8 print:p-6 print:bg-gray-50 border-2 border-[#70BFFF]/20">
             <p className="text-gray-800 leading-relaxed mb-4 text-base font-medium">
-              Brands that start the year with a clear strategic vision don't just create better content—they build stronger connections, make smarter decisions, and achieve better results. While competitors are creating content reactively, you'll have a clear roadmap that guides every piece of content you create.
+              Brands that start the year with a clear strategic vision don't just create better content - they build stronger connections, make smarter decisions, and achieve better results. While competitors are creating content reactively, you'll have a clear roadmap that guides every piece of content you create.
             </p>
             <p className="text-gray-700 leading-relaxed text-base">
-              The most successful content strategies aren't created throughout the year—they're launched on day one with clarity, purpose, and strategic vision. Use January 1st to set the foundation that will guide your entire year of content creation. Your future self will thank you.
+              The most successful content strategies aren't created throughout the year - they're launched on day one with clarity, purpose, and strategic vision. Use January 1st to set the foundation that will guide your entire year of content creation. Your future self will thank you.
             </p>
           </div>
         </section>
