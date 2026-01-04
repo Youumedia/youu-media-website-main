@@ -17,6 +17,17 @@ interface Newsletter {
 
 const newsletters: Newsletter[] = [
   {
+    id: "2026-01-01",
+    date: "2026-01-01",
+    dateFormatted: "1st January 2026",
+    title: "New Year, New Strategic Vision: Setting Up 2026 for Success",
+    description:
+      "Start the year with clarity and purpose. Learn how to establish your strategic vision, set measurable goals, and create a content framework that drives meaningful results throughout 2026.",
+    slug: "2026-01-01-new-year-strategic-vision",
+    previewImage:
+      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=600&fit=crop&q=80",
+  },
+  {
     id: "2025-12-01",
     date: "2025-12-01",
     dateFormatted: "1st December 2025",
