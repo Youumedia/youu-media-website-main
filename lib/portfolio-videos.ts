@@ -53,19 +53,22 @@ const cinematographyVideos = [
 });
 
 // Videography videos (silver outline)
-// Note: Removed "startup croydon shoot" and "the business minds shoot" videos
 const videographyVideos = [
   {
     youtubeId: "xkMZtQnHDOE",
     youtubeUrl: "https://www.youtube.com/watch?v=xkMZtQnHDOE",
   },
   {
-    youtubeId: "IJv94hCtnJU",
-    youtubeUrl: "https://www.youtube.com/watch?v=IJv94hCtnJU",
-  },
-  {
     youtubeId: "lErDN_bLkaI",
     youtubeUrl: "https://www.youtube.com/watch?v=lErDN_bLkaI",
+  },
+  {
+    youtubeId: "zHHMS9D_CVQ",
+    youtubeUrl: "https://www.youtube.com/watch?v=zHHMS9D_CVQ",
+  },
+  {
+    youtubeId: "wSpapekkDyc",
+    youtubeUrl: "https://www.youtube.com/watch?v=wSpapekkDyc",
   },
 ].map((video, index) => ({
   id: cinematographyVideos.length + index + 1,
