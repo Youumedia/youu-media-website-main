@@ -10,7 +10,8 @@ import { portfolioVideos } from "@/lib/portfolio-videos";
 
 export function LandingPortfolio() {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const [playingVideoId, setPlayingVideoId] = useState<number | null>(null);
+  const [playingVideoIndex, setPlayingVideoIndex] = useState<number | null>(null);
+  const iframeRefs = useRef<{ [key: number]: HTMLIFrameElement | null }>({});
   const isScrollingRef = useRef(false);
 
   // Create looped items (3 copies for seamless looping)
@@ -46,6 +47,11 @@ export function LandingPortfolio() {
 
     const handleScroll = () => {
       if (!container || isScrollingRef.current) return;
+
+      // Pause any playing video when scrolling
+      if (playingVideoIndex !== null) {
+        setPlayingVideoIndex(null);
+      }
 
       const { scrollLeft } = container;
       const { singleSetWidth } = calculateDimensions();
@@ -265,14 +271,36 @@ export function LandingPortfolio() {
           {loopedItems.map((item, index) => {
             // Use a unique key that includes the index to handle duplicates
             const uniqueKey = `${item.id}-${index}`;
-            // Track playing state by original item id, not the looped index
-            const isPlaying = playingVideoId === item.id;
+            // Track playing state by specific index to ensure only one instance plays
+            const isPlaying = playingVideoIndex === index;
 
             const handleVideoClick = (e: React.MouseEvent) => {
               e.preventDefault();
               e.stopPropagation();
-              if (!isPlaying) {
-                setPlayingVideoId(item.id);
+              if (isPlaying) {
+                // Pause the video by clearing the playing state
+                setPlayingVideoIndex(null);
+                // Send pause command to YouTube iframe
+                const iframe = iframeRefs.current[index];
+                if (iframe?.contentWindow) {
+                  iframe.contentWindow.postMessage(
+                    '{"event":"command","func":"pauseVideo","args":""}',
+                    "*"
+                  );
+                }
+              } else {
+                // Stop any currently playing video first
+                if (playingVideoIndex !== null) {
+                  const prevIframe = iframeRefs.current[playingVideoIndex];
+                  if (prevIframe?.contentWindow) {
+                    prevIframe.contentWindow.postMessage(
+                      '{"event":"command","func":"pauseVideo","args":""}',
+                      "*"
+                    );
+                  }
+                }
+                // Start playing this video
+                setPlayingVideoIndex(index);
               }
             };
 
@@ -293,8 +321,11 @@ export function LandingPortfolio() {
                 >
                   {isPlaying ? (
                     <iframe
+                      ref={(el) => {
+                        iframeRefs.current[index] = el;
+                      }}
                       className="w-full h-full"
-                      src={`${item.embedUrl}&autoplay=1`}
+                      src={`${item.embedUrl}&autoplay=1&enablejsapi=1`}
                       title={item.title}
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                       allowFullScreen
