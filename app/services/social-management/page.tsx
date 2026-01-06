@@ -4,6 +4,7 @@ import { Navigation } from "@/components/navigation";
 import { Footer } from "@/components/footer";
 import { Button } from "@/components/ui/button";
 import { ContentManagementSlider } from "@/components/content-management-slider";
+import { ServiceVideoCard } from "@/components/service-video-card";
 import Link from "next/link";
 import { 
   Instagram,
@@ -40,6 +41,10 @@ export default function SocialManagementPage() {
             <p className="text-xl md:text-2xl text-gray-700 max-w-3xl mx-auto mb-4">
               Complete social media management including content planning, scheduling, and community engagement.
             </p>
+            <ServiceVideoCard
+              videoUrl="https://youtu.be/qn80WKO3gQs?si=XeNN6a2RlAYYlAOe"
+              title="You Media: Social Media"
+            />
             <p className="text-lg text-gray-600 max-w-3xl mx-auto">
               We handle every aspect of your social media presence, from content creation and copywriting to scheduling, engagement, and account optimisation. You focus on your business while we manage your social media presence professionally.
             </p>

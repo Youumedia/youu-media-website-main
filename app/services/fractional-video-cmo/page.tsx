@@ -3,6 +3,7 @@
 import { Navigation } from "@/components/navigation";
 import { Footer } from "@/components/footer";
 import { Button } from "@/components/ui/button";
+import { ServiceVideoCard } from "@/components/service-video-card";
 import Link from "next/link";
 import { 
   Brain,
@@ -37,6 +38,10 @@ export default function FractionalVideoCMOPage() {
             <p className="text-xl md:text-2xl text-gray-700 max-w-3xl mx-auto mb-4">
               Strategic leadership and high-level consulting to guide your visual content ecosystem.
             </p>
+            <ServiceVideoCard
+              videoUrl="https://youtu.be/IRY7yBs5u20?si=KlIV8n6z_I-B7X3s"
+              title="Fractional Video CMO Strategy"
+            />
             <p className="text-lg text-gray-600 max-w-3xl mx-auto">
               We act as your fractional Chief Marketing Officer, providing strategic direction, campaign planning, and brand storytelling architecture to position your brand for long-term growth and authority in your market.
             </p>

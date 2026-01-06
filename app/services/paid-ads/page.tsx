@@ -3,6 +3,7 @@
 import { Navigation } from "@/components/navigation";
 import { Footer } from "@/components/footer";
 import { Button } from "@/components/ui/button";
+import { ServiceVideoCard } from "@/components/service-video-card";
 import Link from "next/link";
 import { 
   TrendingUp,
@@ -40,6 +41,10 @@ export default function PaidAdsPage() {
             <p className="text-xl md:text-2xl text-gray-700 max-w-3xl mx-auto mb-4">
               End-to-end paid advertising campaigns with Meta ads, audience building, and performance optimisation.
             </p>
+            <ServiceVideoCard
+              videoUrl="https://youtu.be/5ZJU-W4K4zQ?si=Bg_PbYu1EXZFjB4c"
+              title="Paid Ad Campaign Management"
+            />
             <p className="text-lg text-gray-600 max-w-3xl mx-auto">
               We manage your entire paid advertising ecosystem, from campaign setup and creative planning to execution, optimisation, and scaling. Our data-driven approach ensures maximum ROI on your advertising investment.
             </p>

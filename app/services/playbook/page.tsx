@@ -3,6 +3,7 @@
 import { Navigation } from "@/components/navigation";
 import { Footer } from "@/components/footer";
 import { Button } from "@/components/ui/button";
+import { ServiceVideoCard } from "@/components/service-video-card";
 import Link from "next/link";
 import { 
   BookOpen,
@@ -40,6 +41,10 @@ export default function PlaybookPage() {
             <p className="text-xl md:text-2xl text-gray-700 max-w-3xl mx-auto mb-4">
               Develop comprehensive brand guidelines, messaging frameworks, and content pillars for consistent brand expression.
             </p>
+            <ServiceVideoCard
+              videoUrl="https://youtu.be/RM2O6hx-OTE?si=RfHqS_EaKcxyp2kr"
+              title="Brand Playbook & Framework"
+            />
             <p className="text-lg text-gray-600 max-w-3xl mx-auto">
               We create a complete brand playbook that serves as your content creation blueprint. This framework ensures every piece of content aligns with your brand identity, messaging, and visual style, creating consistency across all platforms and touchpoints.
             </p>

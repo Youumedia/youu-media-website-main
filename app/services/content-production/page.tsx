@@ -4,6 +4,7 @@ import { Navigation } from "@/components/navigation";
 import { Footer } from "@/components/footer";
 import { Button } from "@/components/ui/button";
 import { VideoPortfolioCarousel } from "@/components/video-portfolio-carousel";
+import { ServiceVideoCard } from "@/components/service-video-card";
 import Link from "next/link";
 import {
   Video,
@@ -46,6 +47,10 @@ export default function ContentProductionPage() {
               Cinematic video production, photography, and post-production
               delivered monthly.
             </p>
+            <ServiceVideoCard
+              videoUrl="https://youtu.be/EwNJ9lw93Nc?si=VbfVB1UQ-2cZIAKG"
+              title="You Media: Content Creation"
+            />
             <p className="text-lg text-gray-600 max-w-3xl mx-auto">
               We produce premium visual content on a consistent monthly basis,
               ensuring your brand maintains a steady stream of high-quality

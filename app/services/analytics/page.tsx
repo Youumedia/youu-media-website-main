@@ -3,6 +3,7 @@
 import { Navigation } from "@/components/navigation";
 import { Footer } from "@/components/footer";
 import { Button } from "@/components/ui/button";
+import { ServiceVideoCard } from "@/components/service-video-card";
 import Link from "next/link";
 import { 
   BarChart3,
@@ -38,6 +39,10 @@ export default function AnalyticsPage() {
             <p className="text-xl md:text-2xl text-gray-700 max-w-3xl mx-auto mb-4">
               Comprehensive monthly reporting with growth insights, ROI breakdown, and strategic recommendations.
             </p>
+            <ServiceVideoCard
+              videoUrl="https://youtu.be/4eAcD8Qa6MY?si=6x7hpR9cFMnr8azY"
+              title="Content Performance Reporting"
+            />
             <p className="text-lg text-gray-600 max-w-3xl mx-auto">
               We transform your content performance data into actionable insights. Our monthly reporting provides clear visibility into what's working, what's not, and how to optimise your content strategy for maximum impact and ROI.
             </p>
