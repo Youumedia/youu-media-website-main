@@ -373,6 +373,14 @@ export function VideoPortfolioCarousel({
         </div>
       </div>
 
+      {/* Video Quality Notice */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 mt-4">
+        <p className="text-center text-sm text-gray-600 opacity-75">
+          For the best viewing experience, tap the gear icon and set video
+          quality to the highest resolution.
+        </p>
+      </div>
+
       {/* Legend */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 mt-8">
         <div className="flex items-center justify-center gap-6 mb-4">
@@ -395,14 +403,6 @@ export function VideoPortfolioCarousel({
           <p>Youu Media&apos;s Cinematographer: Darius Shu</p>
           <p>Youu Media&apos;s Videographer: Khai Phillips</p>
         </div>
-      </div>
-
-      {/* Video Quality Notice */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 mt-4">
-        <p className="text-center text-sm text-gray-600 opacity-75">
-          For the best viewing experience, tap the gear icon and set video
-          quality to the highest resolution.
-        </p>
       </div>
 
       <style jsx>{`
